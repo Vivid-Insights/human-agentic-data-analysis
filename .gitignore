@@ -1,0 +1,29 @@
+# Obsidian: keep shared vault settings, exclude local UI state and vendored plugins
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/plugins/
+
+# Claudian local session state
+.claudian/
+
+# Python environment (rebuild with Code/setup_env.sh — uv.lock IS tracked)
+Code/.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+
+# macOS
+.DS_Store
+
+# Obsidian local trash
+.trash/
+
+# Downloaded articles: licensed material, cited but not redistributed
+Sample Report/Attachments/literature/
+
+# WHR/Gallup data: redistribution terms unclear, so the sample's source file and
+# its row-level derivatives are not committed. See Sample Report/Attachments/SOURCE.md.
+Sample Report/Attachments/DataForTable2.1.xls
+Sample Report/Code/outputs/*.csv
