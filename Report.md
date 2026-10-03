@@ -8,7 +8,19 @@
 
 ## Introduction
 
-*Background written in step 6; the research questions go in at the end of step 2, before anything is tested.*
+*Background and prior literature to be added later.*
+
+Forest loss isn't one thing. A satellite records that tree cover has gone, but the land underneath may have been cleared for soy and fenced, burned in a wildfire that will grow back within a decade, or harvested on a forestry rotation and replanted the next season. Only the first is deforestation in the sense that a question about development needs, and the difference is not a detail: of all the tree cover lost across the world since 2001, about a third is land that changed use permanently, and most of the rest is fire and logging. We use the Global Forest Watch record of tree cover loss, in which each loss is classified by its direct cause, and count as permanent only what is attributed to agriculture, to mining and other hard commodities, and to settlements and infrastructure. For each country we measure the share of the forest it had in 2000 that it permanently converted between 2001 and 2024, and set that against GDP per person at purchasing power parity, averaged over the same years.
+
+The environmental Kuznets curve holds that environmental damage rises while a country is industrialising and falls once it is rich enough to afford something cleaner. Applied to forests, it implies a particular shape: the poorest countries clear little, middle-income countries clear most, and the richest clear least. We test that shape across the 135 countries that have enough forest to lose and a published income figure. We ask how clearing and income are associated rather than trying to show that one causes the other, and we say in the methods what that comparison rests on.
+
+Two further questions follow. Counting only permanent conversion is a judgement, and it rests on a model that classifies each loss by its cause rather than on the satellite record itself, so we run the same comparison again using all tree cover loss however it was caused. A comparison between countries also describes how countries differ rather than how any of them changed, so we fit a trend to the annual rate of permanent clearing in eight countries chosen in advance to span the income range, and compare them.
+
+The questions we set out to answer are:
+
+1. Across countries, does the share of forest permanently converted between 2001 and 2024 follow an inverted U in average income over those years, rising among poorer countries, peaking at middle income, and falling among the richest?
+2. Does that shape still hold when the measure of degradation is all tree cover loss, however caused, rather than permanent conversion alone?
+3. How has the rate of permanent forest loss changed since 2001 in countries at different income levels?
 
 ## Methods
 
