@@ -64,6 +64,17 @@ When the user prefixes a message with **FRAMEWORK**, they are changing this docu
 - Keep the edit to `instructions.md` in its own commit, touching no analysis content, so it can be promoted to the template branch cleanly.
 - If the change conflicts with something already written here, say so rather than leaving the contract self-contradictory.
 
+### Promoting template changes to `main`
+
+`main` is the template branch and each analysis lives on its own branch beside it. A change to the template made while working on an analysis belongs in both places, and getting it into only one is the failure this section exists to prevent.
+
+- **Promote the commit to `main` in the same sitting, and push both branches.** Cherry-pick it onto `main`, push `main`, then push the project branch. Do not leave it for later.
+- **A rule that exists only on the project branch is not in force.** The next analysis branches from `main` and will never see it. Worse, the next time `main` is merged down into this project, the merge can quietly revert it — so the change is lost from the place it was made as well as from the place it was going.
+- **This covers every template-level change, not only `instructions.md`.** `CLAUDE.md`, `Setup.md`, `README.md`, `.gitignore`, `.claude/settings.json`, `Code/viz_style.py`, `Code/setup_env.sh`, `Code/check_env.py`, the environment lockfile, and the empty section templates of `Report.md` and `Appendix.md` all belong to the template.
+- **Analysis content is never promoted.** `Attachments/`, the analysis scripts, `Code/outputs/`, and the filled-in body of `Report.md` and `Appendix.md` stay on the project branch. `Sample Report/` is template content, but it is not edited as part of a new analysis, so in practice it should never be in a commit that needs promoting.
+- **Keep the two kinds of change in separate commits**, so a template commit can be cherry-picked without dragging analysis content onto `main`. If a change has already been committed with analysis content mixed in, say so and propose splitting it rather than promoting the whole commit.
+- **Say what was promoted.** Name the commit, say which branches it now exists on, and confirm both were pushed. If the push fails or the network is unavailable, say that too — an unpushed promotion is not a promotion, and silence reads as success.
+
 ## The Eight Steps
 
 Work proceeds through these steps in order. Each is one or more separate exchanges. **Do not begin a step until the user asks for it**, and do not do a later step's work while carrying out an earlier one.
