@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "skillOverrides": {
+    "init": "off",
+    "simplify": "off",
+    "dataviz": "user-invocable-only",
+    "code-review": "user-invocable-only",
+    "security-review": "user-invocable-only",
+    "run": "user-invocable-only",
+    "claude-api": "user-invocable-only",
+    "loop": "user-invocable-only",
+    "schedule": "user-invocable-only",
+    "keybindings-help": "user-invocable-only",
+    "fewer-permission-prompts": "user-invocable-only",
+    "update-config": "user-invocable-only"
+  }
+}
