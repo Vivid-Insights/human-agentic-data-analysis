@@ -27,3 +27,7 @@ Sample Report/Attachments/literature/
 # its row-level derivatives are not committed. See Sample Report/Attachments/SOURCE.md.
 Sample Report/Attachments/DataForTable2.1.xls
 Sample Report/Code/outputs/*.csv
+
+# Literature PDFs: licensed material, not redistributable. Citations live in the
+# documents; the files stay local.
+Attachments/literature/
