@@ -8,13 +8,13 @@
 
 ## Introduction
 
-*Background and prior literature to be added later.*
+Forests hold and release carbon on a scale that matters for the climate. Over 2001 to 2019 emissions from deforestation and other forest disturbance ran at about 8 billion tonnes of carbon dioxide equivalent a year, against gross removals roughly twice that (Harris et al., 2021). Where forest is cleared, and why, therefore matters well beyond the places it happens. One long-standing question is whether clearing is a stage a country passes through rather than a settled feature of it. The environmental Kuznets curve proposes that indicators of environmental degradation first rise and then fall as income per capita increases (Stern, 2004). The evidence usually cited for it comes from air and water rather than forests. Grossman and Krueger (1995) examined urban air pollution and river contamination across countries and found, for most of their indicators, a phase of deterioration followed by a phase of improvement, with the turn in most cases coming below a per capita income of about 8,000 dollars. Whether the pattern generalises is disputed. Stern's review of the literature concludes that the results have a very flimsy statistical foundation, and that some developing countries have adopted developed-country standards with only a short lag instead of passing through a dirty phase first.
 
-There are different ways in which forest can be lost. A satellite records that tree cover has gone, but the land underneath may have been cleared for soy and fenced, burned in a wildfire that will grow back within a decade, or harvested on a forestry rotation and replanted the next season. Only the first is deforestation, and the difference is not a detail: of all the tree cover lost across the world since 2001, about a third is land that changed use permanently, and most of the rest is fire and logging. We use the Global Forest Watch record of tree cover loss, in which each loss is classified by its direct cause, and count as permanent only what is attributed to agriculture, to mining and other hard commodities, and to settlements and infrastructure. For each country we measure the share of the forest it had in 2000 that it permanently converted between 2001 and 2024, and ask whether that share passed a threshold. We set that against GDP per person at purchasing power parity, averaged over the same years. 
+This report tests that shape on forest loss over the period 2001 to 2024. We don't attempt a review of the question and we don't try to settle it. The analysis is a worked example, and the forest data is here as much to illustrate the method as for its own sake: how a model is specified, what would count as evidence for it either way, and what a test of it can and cannot establish.
 
-The environmental Kuznets curve holds that environmental damage rises while a country is industrialising and falls once it is rich enough to afford something cleaner. Applied to forests, it implies a particular shape: the poorest countries clear little, middle-income countries clear most, and the richest clear least. We test that shape across the 135 countries that have enough forest to lose and a published income figure. We ask how clearing and income are associated rather than trying to show that one causes the other, and we say in the methods what that comparison rests on.
+There are different ways in which forest can be lost. A satellite records that tree cover has gone, but the land underneath may have been cleared for soy and fenced, burned in a wildfire that will grow back, or harvested on a forestry rotation and replanted the next season. Only the first is deforestation (Curtis et al., 2018). Of all the tree cover lost across the world since 2001, about a third is land that changed use permanently, and most of the rest is fire and logging (Global Forest Watch, 2026). We measure the share of each country's year-2000 forest that it permanently converted, and set that against GDP per person over the same years.
 
-Two further questions follow. Counting only permanent conversion is a judgement, and it rests on a model that classifies each loss by its cause rather than on the satellite record itself, so we run the same comparison again using all tree cover loss however it was caused. A comparison between countries also describes how countries differ rather than how any of them changed, so we fit a trend to the annual rate of permanent clearing in eight countries chosen in advance to span the income range, and compare them.
+Applied to forests, the Kuznets curve implies that the poorest countries clear little, middle-income countries clear most, and the richest clear least. We test that shape across the 135 countries with enough forest to lose and a published income figure, asking how clearing and income are associated rather than trying to show that one causes the other. Two further questions follow. Counting only permanent conversion rests on a model that classifies each loss by its cause, so we run the same comparison on all tree cover loss however it was caused. And a comparison between countries describes how countries differ rather than how any of them changed, so we also look at the annual rate of clearing in eight countries chosen in advance to span the income range.
 
 The questions we set out to answer are:
 
@@ -119,13 +119,21 @@ This report was written with the help of agentic AI at every stage: importing an
 
 ## References
 
+Curtis, P. G., Slay, C. M., Harris, N. L., Tyukavina, A. and Hansen, M. C. (2018) '[Classifying drivers of global forest loss](https://doi.org/10.1126/science.aau3445)', *Science*, 361(6407), pp. 1108–1111.
+
 Global Forest Watch (2026) *[Tree cover loss by driver, country level](https://data-api.globalforestwatch.org/dataset/gadm__tcl__iso_change)*, dataset `gadm__tcl__iso_change` version `v20260424`. World Resources Institute. Accessed 25 September 2026.
 
+Grossman, G. M. and Krueger, A. B. (1995) '[Economic Growth and the Environment](https://doi.org/10.2307/2118443)', *The Quarterly Journal of Economics*, 110(2), pp. 353–377.
+
 Hansen, M. C., Potapov, P. V., Moore, R., Hancher, M., Turubanova, S. A., Tyukavina, A., Thau, D., Stehman, S. V., Goetz, S. J., Loveland, T. R., Kommareddy, A., Egorov, A., Chini, L., Justice, C. O. and Townshend, J. R. G. (2013) '[High-resolution global maps of 21st-century forest cover change](https://doi.org/10.1126/science.1244693)', *Science*, 342(6160), pp. 850–853.
+
+Harris, N. L., Gibbs, D. A., Baccini, A., Birdsey, R. A., de Bruin, S., Farina, M., Fatoyinbo, L., Hansen, M. C., Herold, M., Houghton, R. A., Potapov, P. V., Suarez, D. R., Roman-Cuesta, R. M., Saatchi, S. S., Slay, C. M., Turubanova, S. A. and Tyukavina, A. (2021) '[Global maps of twenty-first century forest carbon fluxes](https://doi.org/10.1038/s41558-020-00976-6)', *Nature Climate Change*, 11(3), pp. 234–240.
 
 Lind, J. T. and Mehlum, H. (2010) '[With or Without U? The Appropriate Test for a U-Shaped Relationship](https://doi.org/10.1111/j.1468-0084.2009.00569.x)', *Oxford Bulletin of Economics and Statistics*, 72(1), pp. 109–118.
 
 Sims, M. J., Stanimirova, R., Raichuk, A., Neumann, M., Richter, J., Follett, F., MacCarty, J., Lister, K., Randle, C., Sloat, L., Esipova, E., Jupiter, J., Stanton, C., Morris, D., Slay, C. M., Purves, D. and Harris, N. (2025) '[Global drivers of forest loss at 1 km resolution](https://doi.org/10.1088/1748-9326/add606)', *Environmental Research Letters*, 20(7), 074027.
+
+Stern, D. I. (2004) '[The Rise and Fall of the Environmental Kuznets Curve](https://doi.org/10.1016/j.worlddev.2004.03.004)', *World Development*, 32(8), pp. 1419–1439.
 
 World Bank (2026) *[GDP per capita, PPP (constant 2021 international $)](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)*, indicator `NY.GDP.PCAP.PP.KD`, World Development Indicators. Series last updated 13 July 2026; accessed 25 September 2026.
 
