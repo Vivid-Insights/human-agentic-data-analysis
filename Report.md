@@ -19,7 +19,7 @@ Two further questions follow. Counting only permanent conversion is a judgement,
 The questions we set out to answer are:
 
 1. Across countries, does the chance that a country permanently converted more than 2 percent of its year-2000 forest between 2001 and 2024 follow an inverted U in average income over those years, rising among poorer countries, peaking at middle income, and falling among the richest?
-2. Does that shape still hold when the measure of degradation is all tree cover loss however caused, with the threshold set at 10 percent?
+2. What relationship do we see when we measure of degradation is all tree cover loss however caused, with the threshold set at 10 percent?
 3. How has the rate of permanent forest loss changed since 2001 in countries at different income levels?
 
 ## Methods
@@ -56,7 +56,7 @@ In order for there say there is an inverted U, we require two things of the fit.
 
 $$s_{\text{lo}} = \beta_1 + 2\beta_2 x_{\text{lo}} > 0 \qquad\text{and}\qquad s_{\text{hi}} = \beta_1 + 2\beta_2 x_{\text{hi}} < 0$$
 
-The two conditions have to hold together, so the test only rejects if both of the one-sided tests do, which makes the joint p-value the larger of the two rather than the smaller (Lind and Mehlum, 2010). These conditions are illustrated in figure 1.
+The two conditions have to hold together, so the test only rejects if both of the one-sided tests do, which makes the joint p-value the larger of the two rather than the smaller (Lind and Mehlum, 2010). These conditions are illustrated in Figure 1.
 
 ![Figure 1](Code/outputs/figures/fig_ushape_test.png)
 
@@ -97,13 +97,17 @@ Figure 3 shows changes in forest conversion across the world. The two poorest co
 
 <small><b>Figure 4.</b> Tree cover loss from all eight driver classes in each year, as a share of each country's year-2000 tree cover. The panels share a scale to 0.04; a break across a bar marks a year that runs past it. No trend is fitted.</small>
 
-
-
 Figure 4 shows annual tree cover loss (including temporary loss) has tended to increase in the four countries. Germany changes most: there is little loss before 2018 and its heaviest year is 2021. Spain drifts upward across the whole period. Sweden is the steadiest of the four, but still increases year on year. Portugal sits above the other three throughout and is dominated by 2016 to 2018, when three consecutive years that run off the top of the scale. 
 
 ## Discussion
 
-*Written in step 5, organised by theme rather than by sub-question.*
+We set out to test whether heavy forest clearing follows an inverted U in income, and it doesn't. What we found instead is a decline across the whole income range. The odds that a country permanently converted more than 2 percent of its year-2000 forest halve for each doubling of average income. This result does not depend critically on the choice of 2 percent as a threshold: other thresholds gave the same result and the rank correlation on permanent forest clearance and GDP shows the same pattern. When we count all tree cover loss, however it was caused, income predicts nothing. Richer countries lose about as much of their forest as poorer ones do, and convert much less of it to another use. Sweden is one of the clearest cases: it lost 22 percent of its year-2000 forest over the period and permanently converted only 0.24 percent of it. 
+
+Loss is rising in several of the countries we looked at, and not for the same reason in each. Among the eight we looked at in Figure 3, the two poorest clear more now than they did at the start: Chad's permanent conversion over its last six years runs about six times its first six, and Guinea-Bissau's about three times. Cambodia has also cleared more in recent years, while Benin, Malaysia and Costa Rica end lower than they started. The four European countries in Figure 4 are also losing more tree cover than they were, but almost none of what they lose is conversion. Between about 1 and 5 percent of their loss over the whole period was permanent, and the rest is forestry, fire, shifting cultivation and natural disturbance. 
+
+## Limitations
+
+There are three things we'd be careful about in reading this. We have compared countries rather than followed them, so nothing here establishes that a country clears less as it grows richer. The split between permanent conversion and temporary loss comes from a model that labels each loss by its cause rather than from the satellite record itself. The second result doesn't rest on that model, but the contrast between the two does. And the eight countries shown in Figure 3 were picked to span the income range, while the four in Figure 4 were picked by name, so neither set is a sample of anything and care should be taken interpreting these results. 
 
 ## Disclaimer
 
