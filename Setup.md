@@ -81,7 +81,13 @@ Record this output in [Appendix.md](Appendix.md) whenever package versions could
 
 ## Exporting the report (step 8 only)
 
-Nothing before step 8 needs these, so they are not installed as part of the setup above. Install them when you actually want a file to send someone, and only for the format you want.
+The workspace ships with `Code/16_export_report.py`, which does the conversion and then checks the result. It does not ship with the tools that script drives, because nothing before step 8 needs them. Install those when you actually want a file to send someone, and only for the format you want — check what is already on the machine first.
+
+```bash
+cd Code && uv run python 16_export_report.py
+```
+
+It reads `Report.md`, writes `Report.pdf` to the project root beside it, and leaves the pre-processed intermediate in `Code/outputs/` so the transformations can be inspected. It fails rather than warns if the typesetter drops a character.
 
 **Word (`.docx`)** needs a converter. [Pandoc](https://pandoc.org/installing.html) is the usual one:
 
@@ -93,14 +99,14 @@ sudo apt install pandoc        # Debian / Ubuntu
 Then, from the vault root, so the figure paths in the document resolve:
 
 ```bash
-pandoc Report.md --from markdown -o Code/outputs/report.docx
+pandoc Report.md --from markdown -o Report.docx
 ```
 
 **PDF** needs a LaTeX engine as well as the converter, which is a considerably larger install. [Tectonic](https://tectonic-typesetting.github.io/) is a single self-contained binary and downloads only the packages a document actually uses:
 
 ```bash
 brew install tectonic
-pandoc Report.md --from markdown --pdf-engine=tectonic -o Code/outputs/report.pdf
+pandoc Report.md --from markdown --pdf-engine=tectonic -o Report.pdf
 ```
 
 A full TeX distribution (MacTeX, TeX Live) works too and is several gigabytes.
@@ -111,7 +117,7 @@ Three things to check in the output rather than trust:
 - **Unusual characters.** A default LaTeX font has no Greek letters or superscript signs. They are dropped silently, the exit code is zero, and a p-value written `1 × 10⁻¹³` can come out as `1 × 1013` — a different number rather than a visible gap. Search the PDF for every non-ASCII character the source contains.
 - **Figures drifting away from their captions.** Pandoc turns a lone image into a LaTeX `figure`, which is a float: LaTeX moves it to wherever it fits on the page, while the caption below it is an ordinary paragraph and stays where it was. The two then land pages apart, and the conversion reports nothing. Emit the graphic directly instead — `\begin{center}\includegraphics[width=0.95\linewidth]{…}\end{center}` — and add `\usepackage{graphicx}` through `header-includes`, since pandoc only loads it when it is managing the images itself. Then check which page each image and each caption actually landed on.
 
-Record whatever you install in the version table above, so the export can be reproduced.
+Reading the output back needs a library for the target format; `pypdf` is in the environment for PDF. Record whatever you install in the version table above, so the export can be reproduced.
 
 ## Troubleshooting
 

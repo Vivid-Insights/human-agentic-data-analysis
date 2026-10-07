@@ -7,8 +7,14 @@ against its own working directory.
     cd Code && uv run python 16_export_report.py
 
 Reads  : Report.md (never modified)
-Writes : Code/outputs/Report.pdf, and Code/outputs/report_export.tex.md as the
-         pre-processed intermediate, kept so the transformations are inspectable.
+Writes : Report.pdf in the project root, beside the source it was made from, so
+         it is where someone looking for the report expects to find it. The
+         pre-processed intermediate goes to Code/outputs/report_export.tex.md,
+         kept so the transformations are inspectable, because it is a build
+         artefact rather than the thing being sent to anyone.
+
+Never edit the exported file and never convert it back: Report.md is the source
+of truth, and the export is reproducible from it by re-running this script.
 
 Four things break silently in Markdown-to-PDF conversion and a fifth is
 specific to this report. Each is handled here and then verified:
@@ -36,7 +42,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "Report.md"
 OUT_DIR = ROOT / "Code" / "outputs"
 INTERMEDIATE = OUT_DIR / "report_export.tex.md"
-PDF = OUT_DIR / "Report.pdf"
+PDF = ROOT / "Report.pdf"
 
 SUPERSCRIPT = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
 
