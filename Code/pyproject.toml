@@ -28,6 +28,7 @@ dependencies = [
     # Notebooks
     "jupyterlab>=4.2",
     "ipykernel>=6.29",
+    "pypdf>=6.19.0",
 ]
 
 [tool.uv]
