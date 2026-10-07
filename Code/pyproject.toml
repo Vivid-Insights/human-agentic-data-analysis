@@ -28,6 +28,7 @@ dependencies = [
     # Notebooks
     "jupyterlab>=4.2",
     "ipykernel>=6.29",
+    # Reads an exported PDF back so step 8 can check it; see 16_export_report.py
     "pypdf>=6.19.0",
 ]
 
