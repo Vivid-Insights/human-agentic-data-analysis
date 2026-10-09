@@ -27,14 +27,14 @@ If you want to see where this ends up before you start, read [Sample Report/Happ
 | 2 | Frame the research question | `Research Question` in the appendix; the questions go into the report |
 | 3 | Visualisation | Figures into the report's `Results` |
 | 4 | Statistical tests | `Methods` and `Results` in the report |
-| 5 | Conclusions and limitations | `Discussion` in the report |
+| 5 | Conclusions and limitations | `Discussion` and `Limitations` in the report |
 | 6 | Background and abstract | `Introduction` background and `Abstract` |
 | 7 | Read through | A list of what is still wrong |
-| 8 | Export | A Word file or a PDF for someone without the vault |
+| 8 | Export | A Word file or a PDF beside the report, for someone without the vault |
 
 Nothing enters a section before the step that owns it. The report is built up as the work proceeds rather than written at the end, so by step 7 there is no write-up left to do — only a read-through, and then an export if you need one.
 
-The report also carries a standing disclaimer, between `Discussion` and `Appendix`, saying it was written with the help of agentic AI at every stage. It is in the template from the outset rather than added at the end, and the agent will not remove it.
+The report also carries a standing disclaimer, between `Limitations` and `Appendix`, saying it was written with the help of agentic AI at every stage. It is in the template from the outset rather than added at the end, and the agent will not remove it.
 
 ## What is in the folder
 
