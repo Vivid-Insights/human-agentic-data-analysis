@@ -164,6 +164,7 @@ The eight parts of `The Standard Analysis` for this replication. Departures from
 | 6 | Step 1. Contract changes from what this step taught: scan for missing-value codes; join and aggregate checks; fixed-constant scaling; zero checks with inverse-term removal; flag interpolated series; default panel rule. Applied here: the panel rule, dropping the unmatched units, and accepting the coverage dips. | `instructions.md` (`The Standard Analysis`, step 1) |
 | 7 | Step 1 closed by the user on 2026-11-18. Everything in its checklist is settled. The prior's $\lambda$ is left to step 4. | — |
 | 8 | Step 2. Framed the question from the introduction of Ranganathan, Spaiser and Sumpter (2013), as the user asked. Recorded the question, the paper's equations converted to $G = \ln(\text{GDP})/12$, three sub-questions with what counts as reproducing the paper, and the standard analysis proposal with its departures. Wrote the framing and sub-questions into the report's `Introduction`. Nothing was computed from the data. | `Appendix.md` `Research Question`; `Report.md` `Introduction` |
+| 9 | Step 2. At the user's request, rewrote the `Introduction` to stand alone as an investigation of the problem. It now opens by saying the work is a replication of Ranganathan, Spaiser and Sumpter (2013). The paragraph about replicating and the "is it the dependence they selected" clauses were removed from the sub-questions. The criteria for reproducing the paper stay here in `Research Question`. | `Report.md` `Introduction` |
 
 ## Code Summary
 

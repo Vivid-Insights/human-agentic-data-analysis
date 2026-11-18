@@ -10,15 +10,15 @@
 
 *Background and prior literature to be added later.*
 
-We look at two country-level variables between 1981 and 2006. The first is GDP per capita, from the World Bank, in constant 2015 US dollars. We take its natural logarithm and divide by 12, so that it runs from about 0.4 to 1. The second is the citizen rights index of Welzel (2013). It combines Freedom House ratings of political rights and civil liberties with Cingranelli–Richards scores of how far rights are respected in practice, and runs from 0, no citizen rights, to 1. It's one way of measuring democracy, and it is built from expert codings, not measured directly.
+This is a replication of Ranganathan, Spaiser and Sumpter (2013).
 
-Rather than relating the level of one variable to the level of the other, we model the yearly change in each as a function of the current levels of both. The two equations together describe a dynamical system. Following Ranganathan, Spaiser and Sumpter (2013), each change is written as a sum of terms from a fixed set of polynomials in the two variables. The data choose which terms enter: the best-fitting model is found for each number of terms, and models with different numbers of terms are compared by their Bayesian evidence. All countries are pooled, so we assume that every country follows the same dynamics from wherever it starts. The questions we look at are of association rather than cause. A term in the equation for the change in democracy says how that change varies with income, not that income drives it.
+We look at how democracy and national income change together, using two country-level variables between 1981 and 2006. The first is GDP per capita, from the World Bank, in constant 2015 US dollars. We take its natural logarithm and divide by 12, so that it runs from about 0.4 to 1. The second is the citizen rights index of Welzel (2013). It combines Freedom House ratings of political rights and civil liberties with Cingranelli–Richards scores of how far rights are respected in practice, and runs from 0, no citizen rights, to 1. It's one way of measuring democracy, and it is built from expert codings, not measured directly.
 
-This is a replication. Ranganathan, Spaiser and Sumpter (2013) fitted this kind of model to the same democracy index and to World Bank GDP, and selected one equation for each variable. We ask whether the same equations are selected with current World Bank data, and whether they imply the same dynamics. Where our data and candidate terms differ from theirs, the methods say how.
+Rather than relating the level of one variable to the level of the other, we model the yearly change in each as a function of the current levels of both. The two equations together describe a dynamical system. Each change is written as a sum of terms from a fixed set of polynomials in the two variables. The data choose which terms enter: the best-fitting model is found for each number of terms, and models with different numbers of terms are compared by their Bayesian evidence. All countries are pooled, so we assume that every country follows the same dynamics from wherever it starts. The questions we look at are of association rather than cause. A term in the equation for the change in democracy says how that change varies with income, not that income drives it.
 
-1. How does the yearly change in democracy depend on the current levels of democracy and GDP per capita, and is it the dependence that Ranganathan, Spaiser and Sumpter (2013) selected?
-2. How does the yearly change in GDP per capita depend on the current levels of democracy and GDP per capita, and is it the dependence they selected?
-3. What do the two equations imply together: where does change stop, which way do countries move, and do their trajectories converge onto a common path, as that paper reports?
+1. How does the yearly change in democracy depend on the current levels of democracy and GDP per capita?
+2. How does the yearly change in GDP per capita depend on the current levels of democracy and GDP per capita?
+3. What do the two equations imply together: where does change stop, which way do countries move, and do their trajectories converge onto a common path?
 
 ## Methods
 
