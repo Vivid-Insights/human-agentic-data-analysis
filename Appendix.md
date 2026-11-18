@@ -212,6 +212,7 @@ Fitted by `Code/06_fit_change_model.py D`. Full output in `Code/outputs/06_fit_D
   - **The paper's model on our data.** Imposed on our data, it gives $G^2$ +0.0383 [+0.0293, +0.0473] and $D/G$ −0.0297 [−0.0362, −0.0231]. The paper's coefficients converted to our scale (+0.0432 and −0.0336) lie inside both intervals.
   - **How it ranks.** Its log-evidence is 4184.02, against 4200.69 for the selected model, a log Bayes factor of 16.7. It is also below our best two-term model ($DG$, $D^2$, 4186.94).
   - **So** the paper's equation describes our data with almost the same coefficients, but our search, with its larger data and different vintage, prefers a model with more terms in democracy.
+- **Re-derived independently** (`Code/outputs/06_fit_D_rederive.txt`). The selected model's log-evidence, computed directly from the full 3,423 × 3,423 covariance matrix, is 4200.6944. The script's shortcut gives the same value. The posterior means are 0.93 to 1.01 times the least-squares estimates (OLS: +0.28789, −0.15404, −0.12707, +0.00299), the expected shrinkage from a prior as wide as the noise.
 
 ## Analysis Log
 
