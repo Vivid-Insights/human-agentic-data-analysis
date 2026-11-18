@@ -65,6 +65,14 @@ When the user prefixes a message with **FRAMEWORK**, they are changing this docu
 - Keep the edit to `instructions.md` in its own commit, touching no analysis content, so it can be promoted to the template branch cleanly.
 - If the change conflicts with something already written here, say so rather than leaving the contract self-contradictory.
 
+### The `socio-dynamical-systems` template branch
+
+`socio-dynamical-systems` is a second template, branched from `main`, for analyses that read in World Bank data, fit a dynamical system to describe change in it, and write a short summarising report with a fixed set of methods. Analyses of that kind branch from `socio-dynamical-systems`, not from `main`.
+
+- **Changes specific to this framework stay on this branch.** Its instruction set, its methods and anything that only makes sense for World Bank dynamical-systems work are never promoted to `main`.
+- **General improvements are still promoted to `main`**, under the rules below. A change counts as general if it would apply equally to an analysis branched from `main`.
+- **Ask before changing `main`.** Say which commit you propose to promote and why it is general rather than framework-specific, and wait for the user's agreement before cherry-picking or pushing.
+
 ### Promoting template changes to `main`
 
 `main` is the template branch and each analysis lives on its own branch beside it. A change to the template made while working on an analysis belongs in both places, and getting it into only one is the failure this section exists to prevent.
