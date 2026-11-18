@@ -88,6 +88,15 @@ When the user prefixes a message with **FRAMEWORK**, they are changing this docu
 
 This is what makes the branch different from `main`. The user names a question, or just a set of variables, and the agent proposes the model and the method. The model is always the same kind: a dynamical system in which the yearly change of each variable is a polynomial function of the current state of all of them. It is fitted and selected as set out in `Statistical Framework`. What changes from one analysis to the next is the variables and the data decisions, not the kind of model.
 
+The usual analysis on this branch is new. It asks how a chosen set of variables drive each other's change over time, using variables that have not been modelled this way before. Replicating a published model is the exception. It is done to check the method against a known result, as the first analysis on this branch does with Ranganathan, Spaiser and Sumpter (2013). The replication bullets in this document apply only when a replication is under way. Everything else is written for the usual case.
+
+- **Default sub-questions for two variables $X$ and $Y$.** Unless the user frames them differently, propose these three:
+  1. How does the change in $X$ depend on the current levels of $X$ and $Y$?
+  2. How does the change in $Y$ depend on the current levels of $X$ and $Y$?
+  3. What do the two equations imply together? For example: where change stops (fixed points), which directions countries move in, and whether trajectories converge.
+
+  Each names what would count as an answer either way. For the first two, an answer either way includes the other variable entering the selected model or not entering it. For the third, it includes fixed points or curves where change stops existing within the observed range, or not.
+
 - **From a question or a list of variables, propose the standard analysis straight away.** Do not ask what model to use. Write the proposal in the conversation, and once agreed record it in `Appendix.md` under `Research Question`. It covers:
   1. **Variables.** Each one named, with its World Bank indicator code or other source, its unit, and whether it is a measurement, an estimate or a constructed index.
   2. **Transformations.** Logs where a variable spans orders of magnitude, such as GDP. Rescaling to roughly 0–1 by a fixed, documented constant; see the scaling rule under step 1.
@@ -99,7 +108,7 @@ This is what makes the branch different from `main`. The user names a question, 
   8. **The figures.** The four standard figures in `Report Format`.
 - **Two variables is the default.** A third variable uses the three-variable library, searched only up to 5 terms (Ranganathan et al., 2014), and needs the user's agreement because the search is far larger. Lagged variables, as in Ranganathan et al. (2014), are an extension, not part of the default, and also need agreement.
 - **The user agrees the proposal, or changes parts of it.** What they change is recorded as a departure from the standard analysis. Nothing outside this section and `Statistical Framework` is introduced without their agreement.
-- **A replication is the same analysis with the paper's choices filled in.** The variables, years and library are the paper's. Departures, such as a different data vintage or a reduced library, are recorded before anything is fitted.
+- **When the analysis is a replication, it is the same analysis with the paper's choices filled in.** The variables, years and library are the paper's. Departures, such as a different data vintage or a reduced library, are recorded before anything is fitted.
 
 ## Statistical Framework
 
@@ -140,7 +149,7 @@ Get the data in and establish what will be used.
 - **The World Bank is the standard source.** Take every variable the World Bank publishes from its [World Development Indicators](https://databank.worldbank.org/source/world-development-indicators), by indicator code (for example `NY.GDP.PCAP.KD`), not from a republication of it.
   - **Record the indicator code, its units and base year, and the date of download.** World Development Indicators series are revised, so the download date identifies the vintage.
   - **Go elsewhere only for a variable the World Bank does not publish.** Use the original publisher, or an archived copy where the series has been withdrawn, and say why the World Bank could not supply it.
-  - **A replication may need the paper's vintage rather than today's.** If the current World Development Indicators series differs from the one the paper used, for example in base year, units or years covered, say so. Agree with the user whether to use the current series or an archived one.
+  - **In the usual case, use the current release.** Only a replication may need the paper's vintage rather than today's. If the current World Development Indicators series differs from the one the paper used, for example in base year, units or years covered, say so. Agree with the user whether to use the current series or an archived one.
   - **Record which source was used for each variable, and why.**
 - **Scan for missing-value codes before summarising anything.** Look for sentinel values such as −99, −999, −9 or 9999, and for values outside the documented range. Count them, by year and by unit, and set them to missing. A single summary statistic computed with them left in is wrong, and it is wrong silently.
 - **Join sources on ISO 3166 alpha-3 codes, and check the join.**
@@ -183,6 +192,7 @@ Agree what is being asked, before looking at what the answer might be.
 - Brainstorm with the user. If they have no clear idea, suggest candidate questions — still without looking at the numbers, so suggestions come from what the variables *mean*, not from what they happen to show.
 - Assess feasibility: is the needed variable present, is coverage adequate, would the data structure undermine the answer, is the question answerable with this file at all.
 - Keep it at that level. Do not design specific visualisations or choose statistical tests yet — steps 3 and 4 exist for that. On this branch, step 2 ends with the proposal from `The Standard Analysis` agreed. That proposal names the model and the figures, which is allowed because they are fixed by the branch, not chosen after seeing the data.
+- **In the usual case, the user names the variables or the question, and the default sub-questions in `The Standard Analysis` are the starting point.** The bias rule above applies in full. The variables and sub-questions are fixed from what the variables mean before any relationship between them is looked at.
 - **In a replication, the research question is the original paper's.** Record it in the paper's terms, with the equations it reports, and list every departure from its method and data before anything is fitted. The bias rule above still applies to anything the paper did not ask. A question added because of what the replication shows is a new question, and is framed as one.
 - Record the outcome in the `Research Question` section of `Appendix.md`, which has three parts: `Discussion` — how the question was arrived at, what was considered and ruled out, and what the data can support; `Question` — the single main thing being asked, specific enough to have a definite answer, phrased as a question or as a hypothesis, whichever the user chose; `Sub-questions` — the separately answerable parts, each naming the variables involved and what would count as an answer either way.
 - Write it before anything is tested, so it is on the record that the question preceded the result.
