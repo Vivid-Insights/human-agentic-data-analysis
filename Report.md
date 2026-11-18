@@ -24,15 +24,14 @@ Rather than relating the level of one variable to the level of the other, we mod
 
 ## Results
 
-Figures 1 and 2 show the same data in two ways. Figure 1 plots each variable against time. Figure 2 plots the two variables against each other, so that a country's path through the figure is the sequence of states it passed through between 1981 and 2006. In Figure 2, a line moving up is a country becoming more democratic, and a line moving right is a country becoming richer. GDP is on a logarithmic scale, so equal distances are equal proportional changes: moving from \$1,000 to \$2,000 is the same distance as moving from \$10,000 to \$20,000. The thick line in both figures is the mean of the 84 countries that have both variables in every year from 1981 to 2006. For GDP it is the mean of the logarithm, which is the geometric mean in dollars.
-
+Figures 1 and 2 show the same data in two ways. Figure 1 plots each variable against time. Figure 2 plots the two variables against each other, so that a country's path through the figure is the sequence of states it passed through between 1981 and 2006. In Figure 2, a line moving up is a country becoming more democratic, and a line moving right is a country becoming richer. GDP is on a logarithmic scale, so equal distances are equal proportional changes: moving from \$1,000 to \$2,000 is the same distance as moving from \$10,000 to \$20,000.
 ![Figure 1](Code/outputs/figures/fig1_trajectories_time.png)
 
-<small><b>Figure 1.</b> Democracy, <em>D</em> (left), and GDP per capita in constant 2015 US dollars on a logarithmic scale (right), from 1981 to 2006. Thin lines are six countries: Italy, Sweden, India, Chile, Albania and Nigeria. The thick line is the mean of the 84 countries with both variables in all 26 years. Albania has no observations for 1985–1989, shown as a gap.</small>
+<small><b>Figure 1.</b> Democracy, <em>D</em> (left), and GDP per capita in constant 2015 US dollars on a logarithmic scale (right), from 1981 to 2006. Lines are six countries: Italy, Sweden, India, Chile, Albania and Nigeria. Albania has no observations for 1985–1989, shown as a gap.</small>
 
 ![Figure 2](Code/outputs/figures/fig2_trajectories_plane.png)
 
-<small><b>Figure 2.</b> Democracy, <em>D</em>, against GDP per capita in constant 2015 US dollars on a logarithmic scale. Grey points are the 181 countries with both variables in 2006. Coloured lines are the paths of the six countries in Figure 1 from 1981 to 2006, with a filled circle at 1981. The thick line is the path of the mean of the 84 countries with both variables in all 26 years, with a filled circle at 1981.</small>
+<small><b>Figure 2.</b> Democracy, <em>D</em>, against GDP per capita in constant 2015 US dollars on a logarithmic scale. Grey points are the 181 countries with both variables in 2006. Coloured lines are the paths of the six countries in Figure 1 from 1981 to 2006, with a filled circle at 1981.</small>
 
 ## Discussion
 

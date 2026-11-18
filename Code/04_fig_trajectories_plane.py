@@ -3,9 +3,8 @@
 GDP per capita (constant 2015 US$, log axis) across, democracy up: the same axes
 as the phase portraits. All countries with both variables in the last year as faint
 points; the six representative countries' paths over the whole period as lines
-(gaps left where a year is missing), each start marked with a filled circle; the
-path of the mean over the balanced countries as a thick line. The GDP mean is the
-mean of G mapped back to dollars (the geometric mean of GDP per capita).
+(gaps left where a year is missing), each start marked with a filled circle.
+No mean path (locked format).
 
 Reads Code/outputs/panel.csv. Writes outputs/figures/fig2_trajectories_plane.png
 and outputs/figures/dark/fig2_trajectories_plane.png.
@@ -14,14 +13,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from sds_common import (CM, D_LABEL, G_SCALE, GDP_LABEL, REP, REP_COLOUR, YEARS,
-                        dollar_axis, load_panel, mean_colour, save, style)
+                        dollar_axis, load_panel, save, style)
 
 p = load_panel()
 p["gdp_usd"] = np.exp(G_SCALE * p["G"])
 years = np.arange(YEARS[0], YEARS[1] + 1)
-mean = p[p.balanced].groupby("year")[["D", "G"]].mean().reindex(years)
-mean["gdp_usd"] = np.exp(G_SCALE * mean["G"])
-n_bal = p.loc[p.balanced, "iso3"].nunique()
 last = p[p.year == YEARS[1]]
 
 for theme_name in ("light", "dark"):
@@ -36,11 +32,6 @@ for theme_name in ("light", "dark"):
         first = s.dropna().iloc[0]
         ax.scatter(first.gdp_usd, first.D, s=28, color=c, zorder=4,
                    edgecolors=t.surface, linewidths=0.6)
-    ax.plot(mean.gdp_usd.values, mean.D.values, color=mean_colour(t), lw=3.2,
-            label=f"Mean of {n_bal} countries", zorder=5)
-    m0 = mean.iloc[0]
-    ax.scatter(m0.gdp_usd, m0.D, s=40, color=mean_colour(t), zorder=6,
-               edgecolors=t.surface, linewidths=0.6)
     dollar_axis(ax, "x")
     ax.set_xlabel(GDP_LABEL)
     ax.set_ylabel(D_LABEL)
