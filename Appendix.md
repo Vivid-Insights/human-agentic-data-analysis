@@ -342,6 +342,7 @@ Run by `Code/10_uniform_prior_check.py`; output in `Code/outputs/10_uniform_prio
 | 27 | Step 4. The user chose to keep the normal prior. A contract change fixes it for every analysis: RMS-scaled terms, $\lambda = \sigma = \text{sd}(\Delta x)$, closed-form evidence, and $\lambda$ ×0.1 and ×10 recorded in the appendix. The uniform-prior check stays in the appendix only; the report is unchanged. | `instructions.md` |
 | 28 | Contract tidied at the user's request to dynamical systems on social data, from about 15,600 to 4,500 words (commit `b045975`). Checked against this analysis: it already follows the tidied rules (`Methods` with `Data`, `Model`, `Model selection and uncertainty`, `Dynamics`; one `Results` section; locked figures), so no report change was needed. | `instructions.md`, `CLAUDE.md` |
 | 29 | Step 4. Added to `Methods`, at the user's request after the comparison with the sample: why changes are pooled, in `Model`; and why resampling is by country, in `Model selection and uncertainty`. The latter states the within-country residual correlations, +0.26 for GDP and −0.14 for democracy, taken from `06_fit_G.txt` and `06_fit_D.txt`. `Dynamics` now uses "democracy nullcline", as `Results` does. | `Report.md` |
+| 30 | Step 4 closed by the user on 2026-11-18. The report's length (about 1,650 words before the discussion, limitations, background and abstract) is left for steps 5 and 6. | — |
 
 ## Code Summary
 
