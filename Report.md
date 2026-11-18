@@ -8,11 +8,13 @@
 
 ## Introduction
 
-*Background and prior literature to be added later.*
+Richer countries tend to be more democratic, and the correlation between income and democracy across countries is strong (Acemoglu et al., 2008). What lies behind it is less clear. Barro (1999) found that rises in the standard of living predict rises in democracy, but Acemoglu et al. (2008) found that the association disappears when each country is compared only with itself over time. The relationship in the other direction is contested too. Barro (1996) found the overall effect of democracy on growth to be weakly negative once the rule of law, markets and initial income are held constant, while Acemoglu et al. (2019) report that democratisation raises GDP per capita by about a fifth in the long run.
 
-We look at how democracy and national income change together, using two country-level variables between 1981 and 2006. The first is GDP per capita, from the World Bank, in constant 2015 US dollars. It runs from about \$160 to \$140,000 per person. For the model we take its natural logarithm and divide by 12, so that it runs from about 0.4 to 1. Figures show it in dollars on a logarithmic scale. The second is the citizen rights index of Welzel (2013). It combines Freedom House ratings of political rights and civil liberties with Cingranelli–Richards scores of how far rights are respected in practice, and runs from 0, no citizen rights, to 1. It's one way of measuring democracy, and it is built from expert codings, not measured directly.
+Growth also depends on where a country starts: poorer countries tend to grow faster once differences in schooling are allowed for (Barro, 1991). Most studies estimate one direction of the relationship at a time, with a functional form fixed in advance. Ranganathan, Spaiser and Sumpter (2013) instead model the yearly change in each variable as a function of the current levels of both, and let the data choose the form. The approach has since been applied to democracy and human development (Spaiser et al., 2014). It allows relationships in both directions, and non-linear ones, to appear in the same model.
 
-Rather than relating the level of one variable to the level of the other, we model the yearly change in each as a function of the current levels of both. The two equations together describe a dynamical system. Following Ranganathan, Spaiser and Sumpter (2013), each change is written as a sum of terms from a fixed set of polynomials in the two variables. The data choose which terms enter: the best-fitting model is found for each number of terms, and models with different numbers of terms are compared by their Bayesian evidence. All countries are pooled, so we assume that every country follows the same dynamics from wherever it starts. The questions we look at are of association rather than cause. A term in the equation for the change in democracy says how that change varies with income, not that income drives it.
+We look at how democracy and national income change together across countries between 1981 and 2006. Income is GDP per capita from the World Bank, in constant 2015 US dollars, shown on a logarithmic scale. Democracy is the citizen rights index of Welzel (2013). It runs from 0 to 1 and combines expert ratings of political rights and civil liberties with scores of how far those rights are respected in practice. It is one way of measuring democracy, built from expert codings rather than measured directly.
+
+We model the yearly change in each variable as a function of the current levels of both, so that the two equations together describe a dynamical system. Each change is a sum of terms from a fixed set of polynomials in the two variables, and the data choose which terms enter. All countries are pooled, so we assume that every country follows the same dynamics from wherever it starts. The questions we look at are of association rather than cause. A term in the equation for the change in democracy says how that change varies with income, not that income drives it.
 
 Our question is: what model best describes the yearly changes in democracy and GDP per capita, and what dynamics does it imply?
 
@@ -20,7 +22,7 @@ Our question is: what model best describes the yearly changes in democracy and G
 
 ### Data
 
-GDP per capita is World Bank indicator NY.GDP.PCAP.KD, in constant 2015 US dollars (World Bank, 2026). Democracy is the citizen rights index of Welzel (2013), taken from the January 2015 release of the Quality of Government dataset (Teorell et al., 2015), where values coded −99 are missing. The two are joined by country and year for 1981 to 2006. A yearly change is the difference between consecutive years in which a country has both variables, so a country with gaps contributes fewer changes rather than none. This gives 3,423 yearly changes from 183 countries. In the model, GDP enters as $G = \ln(\text{GDP per capita})/12$, which runs from 0.43 to 0.99. Coefficients are on this scale. A yearly change of $x$ in $G$ is growth in GDP per capita of $e^{12x} - 1$, about $12x$ for small changes, so a change of 0.001 in $G$ is growth of about 1.2%.
+GDP per capita comes from the World Bank (2026), in constant 2015 US dollars. Democracy is the citizen rights index of Welzel (2013), from the Quality of Government dataset (Teorell et al., 2015). It combines Freedom House ratings of political rights and civil liberties with Cingranelli–Richards scores of how far those rights are respected in practice. A yearly change is the difference between consecutive years in which a country has both variables, which gives 3,423 changes from 183 countries between 1981 and 2006. In the model, GDP enters as $G = \ln(\text{GDP per capita})/12$, so a yearly change of $x$ in $G$ is growth of about $12x$, or exactly $e^{12x} - 1$.
 
 ### Model
 
@@ -90,9 +92,21 @@ This report was written with the help of agentic AI at every stage: importing an
 
 ## References
 
+Acemoglu, D., Johnson, S., Robinson, J. A. and Yared, P. (2008). [Income and democracy](https://doi.org/10.1257/aer.98.3.808). *American Economic Review*, 98(3), 808–842.
+
+Acemoglu, D., Naidu, S., Restrepo, P. and Robinson, J. A. (2019). [Democracy does cause growth](https://doi.org/10.1086/700936). *Journal of Political Economy*, 127(1), 47–100.
+
+Barro, R. J. (1991). [Economic growth in a cross section of countries](https://doi.org/10.2307/2937943). *Quarterly Journal of Economics*, 106(2), 407–443.
+
+Barro, R. J. (1996). [Democracy and growth](https://doi.org/10.1007/BF00163340). *Journal of Economic Growth*, 1(1), 1–27.
+
+Barro, R. J. (1999). [Determinants of democracy](https://doi.org/10.1086/250107). *Journal of Political Economy*, 107(S6), S158–S183.
+
 Ranganathan, S., Spaiser, V., Mann, R. P. and Sumpter, D. J. T. (2014). [Bayesian dynamical systems modelling in the social sciences](https://doi.org/10.1371/journal.pone.0086468). *PLOS ONE*, 9(1), e86468.
 
 Ranganathan, S., Spaiser, V. and Sumpter, D. J. T. (2013). [A Bayesian approach to modeling dynamical systems in the social sciences](https://doi.org/10.5220/0004480901250131). In *Proceedings of the 3rd International Conference on Simulation and Modeling Methodologies, Technologies and Applications (SIMULTECH 2013)*, pp. 125–131. SCITEPRESS.
+
+Spaiser, V., Ranganathan, S., Mann, R. P. and Sumpter, D. J. T. (2014). [The dynamics of democracy, development and cultural values](https://doi.org/10.1371/journal.pone.0097856). *PLOS ONE*, 9(6), e97856.
 
 Teorell, J., Dahlberg, S., Holmberg, S., Rothstein, B., Hartmann, F. and Svensson, R. (2015). [The Quality of Government Standard Dataset, version Jan15](https://www.qogdata.pol.gu.se/dataarchive/qog_std_ts_jan15.csv). University of Gothenburg: The Quality of Government Institute.
 
