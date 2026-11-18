@@ -204,6 +204,7 @@ Made by `Code/05_fig_data_phase_portrait.py`. Counts from `Code/outputs/05_phase
 | 16 | Step 3. Made Figure 3, the data phase portrait: cell-average yearly changes on a 14 × 10 grid, arrows scaled to 2 years, cells with at least 10 changes (83 cells, 3,289 of 3,423 changes). It was redrawn once after inspection (first draft: 5 years, at least 5 changes). Figures 2 and 3 now share a fixed GDP range. Added to `Results` with a reading paragraph and caption. | `Code/05_fig_data_phase_portrait.py`; `Report.md` `Results` |
 | 17 | Step 3. At the user's request, made the arrows in Figure 3 longer, with a cap: 5 years, capped at 0.7 cm on the page with direction kept; 33 of 83 capped. Caption and reading paragraph updated. | `Code/05_fig_data_phase_portrait.py`; `Report.md` |
 | 18 | Step 3. Arrows set to two thirds of that length (3⅓ years, capped at 0.47 cm; 33 of 83 capped), and the arrow format locked in the contract for both phase portraits. | `instructions.md`; `Code/05_fig_data_phase_portrait.py`; `Report.md` |
+| 19 | Step 3 closed by the user on 2026-11-18. Figures 1–3 are in the report in the locked format. Offered and declined: a grid-sensitivity check of Figure 3, and data ranges in the captions. Figure 4, the model phase portrait, is deferred to step 4. | — |
 
 ## Code Summary
 
