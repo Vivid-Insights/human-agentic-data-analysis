@@ -23,7 +23,9 @@ from matplotlib.lines import Line2D
 from sds_common import (CM, D_LABEL, G_SCALE, GDP_LABEL, OUT, REP, REP_COLOUR,
                         YEARS, USD_XLIM, dollar_axis, load_panel, save, style)
 
-K = 2          # arrow = average yearly change x K years (90th pct |dD| x K ~ one cell)
+K = 5          # arrow = average yearly change x K years
+CAP_CM = 0.7   # maximum drawn arrow length, cm on the page (~ one grid cell); longer
+               # arrows are shortened to this length with their direction unchanged
 MIN_N = 10     # minimum observed changes for a cell to get an arrow
 G_EDGES = np.arange(0.42, 1.00 + 1e-9, 0.04)   # G = ln(GDP)/12; 0.04 in G = x1.62 in GDP
 D_EDGES = np.linspace(0.0, 1.0, 11)            # 0.1 in democracy
@@ -63,13 +65,6 @@ for theme_name in ("light", "dark"):
         ax.plot(usd(s.G.values), s.D.values, color=REP_COLOUR[iso], lw=1.0,
                 alpha=0.55, label=name, zorder=2)
     arrow_col = t.text_primary
-    for r in shown.itertuples():
-        x0, y0 = usd(r.G), r.D
-        x1, y1 = usd(r.G + K * r.dG), r.D + K * r.dD
-        ax.annotate("", xy=(x1, y1), xytext=(x0, y0), zorder=4,
-                    arrowprops=dict(arrowstyle="-|>", color=arrow_col, lw=1.1,
-                                    mutation_scale=7, shrinkA=0, shrinkB=0))
-        ax.scatter([x0], [y0], s=6, color=arrow_col, zorder=5, lw=0)
     dollar_axis(ax, "x")
     ax.set_xlim(*USD_XLIM)
     ax.set_ylim(-0.05, 1.05)
@@ -77,9 +72,35 @@ for theme_name in ("light", "dark"):
     ax.set_ylabel(D_LABEL)
     handles, labels = ax.get_legend_handles_labels()
     handles = [Line2D([0], [0], color=arrow_col, lw=1.1)] + handles
-    labels = [f"Mean change, {K} years"] + labels
+    labels = [f"Mean change,\n{K} years (capped)"] + labels
     ax.legend(handles, labels, loc="upper left", bbox_to_anchor=(1.02, 1.0),
               frameon=False, handlelength=1.4, borderaxespad=0.0)
     fig.tight_layout()
+
+    # Arrows are drawn after layout so the cap can be applied in cm on the page.
+    # The x axis is linear in G (log dollars), so scaling (dG, dD) by one factor
+    # leaves the direction on the page unchanged.
+    bb = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+    w_cm, h_cm = bb.width / CM, bb.height / CM
+    gx0, gx1 = np.log(USD_XLIM) / G_SCALE
+    (dy0, dy1) = ax.get_ylim()
+    n_capped = 0
+    for r in shown.itertuples():
+        vx_cm = K * r.dG / (gx1 - gx0) * w_cm
+        vy_cm = K * r.dD / (dy1 - dy0) * h_cm
+        length = np.hypot(vx_cm, vy_cm)
+        f = min(1.0, CAP_CM / length) if length > 0 else 1.0
+        n_capped += f < 1.0
+        x0, y0 = usd(r.G), r.D
+        x1, y1 = usd(r.G + f * K * r.dG), r.D + f * K * r.dD
+        ax.annotate("", xy=(x1, y1), xytext=(x0, y0), zorder=4,
+                    arrowprops=dict(arrowstyle="-|>", color=arrow_col, lw=1.1,
+                                    mutation_scale=7, shrinkA=0, shrinkB=0))
+        ax.scatter([x0], [y0], s=6, color=arrow_col, zorder=5, lw=0)
+    if theme_name == "light":
+        with open(OUT / "05_phase_portrait_counts.txt", "a") as fh:
+            fh.write(f"arrow cap: {CAP_CM} cm on the page; arrows shortened to the cap: "
+                     f"{int(n_capped)} of {len(shown)}\n")
+        print(f"capped: {int(n_capped)} of {len(shown)}")
     path = save(fig, "fig3_data_phase_portrait", theme_name)
     print(f"figure: {path}")

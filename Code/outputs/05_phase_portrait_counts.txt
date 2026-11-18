@@ -2,5 +2,6 @@ changes used: 3423
 grid: 14 G bins of 0.04 x 10 D bins of 0.1
 occupied cells: 114; cells with >= 10 changes (arrows): 83
 changes in cells with arrows: 3289 of 3423
-arrow scale K = 2 years
+arrow scale K = 5 years
 mean yearly dD over all changes: 0.0023; mean yearly dG: 0.00141 (= 1.70% GDP growth per year)
+arrow cap: 0.7 cm on the page; arrows shortened to the cap: 33 of 83
