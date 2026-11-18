@@ -152,6 +152,13 @@ Every report on this branch is a short article in the same format, so that repor
   - **Axes:** the outcome variables on their own scales, with units as above. A logged money variable is on a dollar log axis with ticks written \$1k, \$10k. Each axis label names the variable and its unit, for example "GDP per capita (2015 US\$)" or "Democracy (index, 0 to 1)".
   - **Legend:** outside or below the axes, never over data, with no frame.
   - **Nothing else on the figure.** No title or note inside the frame; the caption carries what is shown.
+  - **Phase-portrait arrows are locked too.** Figure 3 of the first analysis (`Code/05_fig_data_phase_portrait.py`) is the reference for the data phase portrait, and the model phase portrait's vector field uses the same arrows:
+    - **Cells.** The observed yearly changes are averaged within a grid over the state, about 14 cells across and 10 up. For log GDP divided by 12 that is 0.04 per cell, a factor of about 1.6 in GDP. For a 0-to-1 index it is 0.1. A cell gets an arrow only if it holds at least 10 changes.
+    - **Arrows.** Each arrow starts at the cell's mean state, marked with a dot, and points along its mean change, drawn at 3⅓ times the yearly change. Any arrow longer than 0.47 cm on the page, about two thirds of a cell, is shortened to 0.47 cm. One factor is applied to both components, so the direction is exactly as observed. The cap is measured after layout. Arrows are in the theme's ink.
+    - **Context.** The representative countries' paths are drawn faintly (thin, semi-transparent) in their fixed colours.
+    - **Legend.** "Mean change, 3⅓ years (capped)", split over two lines so the axes keep their width.
+    - **Axes.** The same fixed range as the plane figure (Figure 2), so the two can be laid over each other.
+    - **Caption.** It says how long the arrows are, how many were shortened, the minimum count per cell, and how many changes the arrows cover.
 - **At most five figures** in a two-variable report. Log-likelihood and evidence plots against the number of terms go in `Appendix.md`, unless the choice of model size is itself a finding.
 - **Higher dimensions may need more figures.** With three or more variables, a single plane cannot show the state. The trajectory and phase-portrait figures may then be repeated for each pair of variables, or for chosen slices. Agree which with the user. The five-figure limit is relaxed to what the agreed set needs.
 
