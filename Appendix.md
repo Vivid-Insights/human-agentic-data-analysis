@@ -91,6 +91,7 @@ From `Code/01_describe_data.py`; full output in `Code/outputs/01_describe_data.t
 | 4 | Step 1. Described both files. Found the −99 missing-value code in `wel_citrig` (840 values in 1981–2006) and 141 zeros. Duplicate ISO codes in the Quality of Government file don't produce duplicate country-years. | `Code/01_describe_data.py`, `Code/outputs/01_describe_data.txt` |
 | 5 | Step 1. Zeros in democracy. The user first proposed replacing $D$ by $D+\tfrac12$ in denominators, then chose to remove the four inverse-$D$ terms instead. The library is now 9 terms, 512 models per equation. Before deciding, checked all six papers: none says how zeros were handled, and no selected democracy equation in any of them has an inverse-$D$ term. Rescaling settled as $\ln(\text{GDP per capita})/12$, from Spaiser et al. (2014, File S1). | `Appendix.md` `Data Summary`, decisions table |
 | 6 | Step 1. Contract changes from what this step taught: scan for missing-value codes; join and aggregate checks; fixed-constant scaling; zero checks with inverse-term removal; flag interpolated series; default panel rule. Applied here: the panel rule, dropping the unmatched units, and accepting the coverage dips. | `instructions.md` (`The Standard Analysis`, step 1) |
+| 7 | Step 1 closed by the user on 2026-11-18. Everything in its checklist is settled. The prior's $\lambda$ is left to step 4. | — |
 
 ## Code Summary
 
