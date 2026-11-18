@@ -22,7 +22,7 @@ Our question is: what model best describes the yearly changes in democracy and G
 
 ### Data
 
-GDP per capita comes from the World Bank (2026), in constant 2015 US dollars. Democracy is the citizen rights index of Welzel (2013), from the Quality of Government dataset (Teorell et al., 2015). It combines Freedom House ratings of political rights and civil liberties with Cingranelli–Richards scores of how far those rights are respected in practice. A yearly change is the difference between consecutive years in which a country has both variables, which gives 3,423 changes from 183 countries between 1981 and 2006. In the model, GDP enters as $G = \ln(\text{GDP per capita})/12$, so a yearly change of $x$ in $G$ is growth of about $12x$, or exactly $e^{12x} - 1$.
+GDP per capita comes from the World Bank (2026; indicator NY.GDP.PCAP.KD), in constant 2015 US dollars. Democracy is the citizen rights index of Welzel (2013), from the Quality of Government dataset (Teorell et al., 2015). It combines Freedom House ratings of political rights and civil liberties with Cingranelli–Richards scores of how far those rights are respected in practice. A yearly change is the difference between consecutive years in which a country has both variables, which gives 3,423 changes from 183 countries between 1981 and 2006. In the model, GDP enters as $G = \ln(\text{GDP per capita})/12$, so a yearly change of $x$ in $G$ is growth of about $12x$, or exactly $e^{12x} - 1$.
 
 ### Model
 
