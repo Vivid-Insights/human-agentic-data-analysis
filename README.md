@@ -26,7 +26,7 @@ If you want to see where this ends up before you start, read [Sample Report/Happ
 | 1 | Import and scope the data | `Data Summary` in the appendix |
 | 2 | Frame the research question | `Research Question` in the appendix; the questions go into the report |
 | 3 | Visualisation | Figures into the report's `Results` |
-| 4 | Statistical tests | `Methods` and `Results` in the report |
+| 4 | Model fitting | `Methods` and `Results` in the report |
 | 5 | Conclusions and limitations | `Discussion` and `Limitations` in the report |
 | 6 | Background and abstract | `Introduction` background and `Abstract` |
 | 7 | Read through | A list of what is still wrong |
