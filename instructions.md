@@ -102,7 +102,7 @@ The usual analysis on this branch is new. It asks how a chosen set of variables 
   3. **The system.** One change equation per variable, $\Delta x_i(t) = x_i(t+1) - x_i(t) = f_i(x_1(t), \dots, x_N(t))$, pooled over countries and years.
   4. **The term library.** For two variables, the 13 terms of Ranganathan, Spaiser and Sumpter (2013). Remove the inverse terms in any variable that can be zero, and say which were removed.
   5. **The search.** Every model of every size, best by likelihood within each size, then compared across sizes by evidence.
-  6. **The prior.** Normal, $N(0, \lambda^2 I)$ on the coefficients, with $\lambda$ stated.
+  6. **The prior.** The normal prior set out in `Statistical Framework`, the same in every analysis.
   7. **The checks.** Within-country correlation of residuals, correlation of errors between the equations, and refits on resampled countries.
   8. **The figures.** The standard figures in `Report Format`, with the six representative countries named.
 - **Two variables is the default.** A third variable uses the three-variable library, searched only up to 5 terms (Ranganathan et al., 2014), and needs the user's agreement because the search is far larger. Lagged variables, as in Ranganathan et al. (2014), are an extension, not part of the default, and also need agreement.
@@ -119,7 +119,13 @@ Analyses on this branch use likelihood and Bayesian inference, following Rangana
 
 - **Models are fitted by maximum likelihood.** Under the Gaussian error model this is least squares, and the log-likelihood is what ranks models of the same size.
 - **Models of different size are compared by marginal likelihood (the evidence).** Report the posterior probability of each candidate model size, as well as which one wins, so the reader can see how firmly the data choose it.
-- **Uncertainty in a coefficient is its posterior credible interval**, from the same prior and likelihood used for the evidence. State the prior, its range, and how the integral was computed (for example, the number of Monte Carlo draws).
+- **The prior is normal, always.** It is the same in every analysis on this branch, and it is not swapped for a uniform or any other prior, including as the reported result of a check.
+  - **Prior.** Each term is divided by its root-mean-square value over the data. The rescaled coefficients are independent, normal and centred on zero, with standard deviation $\lambda = \text{sd}(\Delta x)$, the spread of the observed yearly changes in that equation.
+  - **Noise.** The noise standard deviation $\sigma$ is fixed at the same $\text{sd}(\Delta x)$ (Ranganathan et al., 2014).
+  - **Computation.** The evidence is computed in closed form, $\Delta x \sim N(0, \sigma^2 I + \lambda^2 X X^\top)$, through $m \times m$ matrices. The posterior is Gaussian, and coefficients and intervals are reported on the original scale.
+  - **Sensitivity.** Record the selection with $\lambda$ ten times smaller and ten times larger in `Appendix.md`.
+  - The first analysis also tested a uniform prior (`Code/10_uniform_prior_check.py`). With it the evidence depends on an arbitrary range, and the selected democracy model changed at the widest range tried. That is the reason the normal prior is fixed.
+- **Uncertainty in a coefficient is its posterior credible interval**, from the same prior and likelihood used for the evidence. State the prior and $\lambda$ in `Methods`.
 - **The likelihood treats each observation as independent, and that is checked, not assumed.** In panel data each unit appears many times, so test whether residuals are correlated within units, both from one year to the next and across the equations of the system. Then refit on resampled whole units to see how far the intervals widen and how often the same terms are selected. The check is recorded in `Appendix.md`. It enters the report only if it changes what is reported.
 - **There are no clustered or robust standard errors on this branch.** The within-unit check above takes their place.
 
