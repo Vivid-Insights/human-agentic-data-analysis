@@ -72,11 +72,13 @@ Figure 4 is read like Figure 3, but the arrows now show the change predicted by 
 
 ## Discussion
 
-*Written in step 5, organised by theme rather than by sub-question.*
+The clearest relationship in growth is between democracy and income. Countries with more democracy grew faster: a country at democracy 1 grows about 2.2% a year faster than a country at democracy 0 with the same income, and a democracy term enters the GDP equation in almost every resample of the countries. Poorer countries also grew faster. At democracy 0 the model predicts growth of about 1.8% a year at the lowest incomes in the data and 0.3% at the highest. Together the two terms put the fastest growth, about 4.1% a year, in poor countries with high democracy, and the slowest in rich countries with none.
+
+These are associations between the level of democracy and the growth that followed, not evidence that democracy causes growth. The model accounts for about 1% of the variance in yearly growth, so most of what makes one country grow faster than another in a given year lies outside it. Growth also persists within countries from one year to the next in a way the model does not describe. The presence of democracy in the GDP equation is one of the most stable parts of the fit. The form the income term takes is not: $1/G^2$, $G$ and $G^2$ trade places across resamples.
 
 ## Limitations
 
-*Written in step 5, alongside the discussion. What qualifies the findings taken together, collected in one place.*
+The model pools all countries into one system, so it assumes that two countries in the same state can expect the same change. Differences in institutions, region or natural resources are outside it. Democracy is measured by an index built from expert ratings and human-rights scores, and a different measure could select different terms. Which terms are selected is not stable across samples of countries, especially among the terms in income, which are nearly interchangeable over the observed range. The equations describe how changes have varied with levels between 1981 and 2006. They do not establish what drives what, and they say nothing outside that period or outside the observed range of income and democracy.
 
 ## Disclaimer
 
