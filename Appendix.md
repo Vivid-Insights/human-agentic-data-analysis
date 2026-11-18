@@ -252,6 +252,7 @@ Fitted by `Code/06_fit_change_model.py G`. Joint checks by `Code/07_joint_checks
   - **The paper's model on our data.** Imposed on our data, it gives $D$ +0.00194 [+0.00130, +0.00257], $G$ +0.00393 [+0.00248, +0.00537] and $G^2$ −0.00430 [−0.00645, −0.00215]. The converted published values are $D$ +0.00205, inside its interval, and $G$ +0.0017 and $G^2$ −0.0024, both outside theirs.
   - **How it ranks.** Its log-evidence is 13341.48 against 13343.28 for the selected model, a log Bayes factor of only 1.80.
   - **So** the paper's GDP model is a close competitor on our data, and its democracy coefficient is reproduced almost exactly. The GDP terms differ, as expected given how interchangeable they are.
+- **Re-derived independently** (`Code/outputs/06_fit_G_rederive.txt`): the evidence computed from the full 3,423 × 3,423 covariance matrix matches the script's value.
 
 ## Analysis Log
 
