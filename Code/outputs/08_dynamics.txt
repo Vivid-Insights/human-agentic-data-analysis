@@ -3,6 +3,8 @@ dG = +0.00185*D +0.00027*1/G^2
 
 democracy curve: grid root vs exact quadratic root, max |diff| = 4.33e-07
   slope d f_D / dD on the curve: max -0.0677 (negative = attracting)
+  D* first exceeds 1 at G=0.945, usd=84142
+  observed range usd 165-132253
   at $   500: democracy stops changing at D* = 0.267
   at $ 1,000: democracy stops changing at D* = 0.360
   at $ 2,000: democracy stops changing at D* = 0.473
@@ -26,5 +28,3 @@ trajectories: 183 countries, from each first observed year to 2006
   Chile    start D 0.08 at $4,866; simulated 2006 D 0.42 at $6,495; observed 2006 D 0.87 at $10,612
   Albania  start D 0.00 at $1,890; simulated 2006 D 0.25 at $2,462; observed 2006 D 0.51 at $2,894
   Nigeria  start D 0.57 at $1,834; simulated 2006 D 0.52 at $2,990; observed 2006 D 0.19 at $1,949
-D* first exceeds 1 at G=0.945, usd=84142
-observed range usd 169-130590

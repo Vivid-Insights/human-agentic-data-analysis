@@ -1,0 +1,14 @@
+1. Democracy in the dG equation
+  selected model log-evidence 14731.82 (D^2, 1/G^2)
+  best model with no democracy term: G, log-evidence 14718.86
+  log Bayes factor for including democracy: 12.96
+
+2. Cross-equation errors (selected models)
+  residual correlation dD vs dG: +0.006
+  iterated SUR converged after 3 iterations; coefficients OLS -> SUR:
+    dD 1      +0.00727 -> +0.00727  (-0.0%)
+    dD DG     +0.06541 -> +0.06543  (+0.0%)
+    dD D^2    -0.07327 -> -0.07329  (-0.0%)
+    dG D^2    +0.00226 -> +0.00226  (-0.0%)
+    dG 1/G^2  +0.00025 -> +0.00025  (+0.0%)
+

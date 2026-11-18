@@ -14,8 +14,9 @@
   - checks (appendix): lambda x0.1 and x10; sigma from residuals; within-country
     lag-1 residual correlation; 500 country-resamples (seed 20261118)
 
-Usage: uv run python 06_fit_change_model.py D   (or G)
-Writes Code/outputs/06_fit_<outcome>.txt and 06_fit_<outcome>.json
+Usage: uv run python 06_fit_change_model.py D [vdem]   (or G)
+Writes Code/outputs/06_fit_<outcome>[_vdem].txt and .json. With "vdem", democracy is the
+V-Dem electoral democracy index and only the 1981-2006 fit window is used (question 2).
 """
 import itertools
 import json
@@ -26,6 +27,9 @@ import numpy as np
 from sds_common import OUT, load_panel
 
 OUTCOME = sys.argv[1] if len(sys.argv) > 1 else "D"
+MEASURE = sys.argv[2] if len(sys.argv) > 2 else "welzel"   # "welzel" (main) or "vdem" (question 2)
+assert MEASURE in ("welzel", "vdem")
+TAG = "" if MEASURE == "welzel" else "_vdem"
 assert OUTCOME in ("D", "G")
 SEED = 20261118
 N_BOOT = 500
@@ -84,8 +88,13 @@ def size_posterior(res):
     return dict(zip(ms, p))
 
 
-p = load_panel()
-ch = p.dropna(subset=["dD", "dG"]).reset_index(drop=True)
+if MEASURE == "welzel":
+    p = load_panel()
+    ch = p.dropna(subset=["dD", "dG"]).reset_index(drop=True)
+else:  # V-Dem: fit window only (changes ending by 2006)
+    import pandas as pd
+    p = pd.read_csv(OUT / "panel_vdem.csv")
+    ch = p[p.period == "fit"].dropna(subset=["dD", "dG"]).reset_index(drop=True)
 D, G = ch.D.values, ch.G.values
 y = ch["d" + OUTCOME].values
 X = design(D, G)
@@ -149,6 +158,14 @@ coefs = np.array(coefs)
 lines.append(f"  country resampling ({N_BOOT} draws, seed {SEED}); selected term sets:")
 for k, v in sorted(sel_sets.items(), key=lambda kv: -kv[1])[:6]:
     lines.append(f"    {v:>4}  {k}")
+lines.append("  term frequency across resamples (of %d):" % N_BOOT)
+for t_ in TERMS:
+    k_ = sum(v for s_, v in sel_sets.items() if t_ in [x.strip() for x in s_.split(",")])
+    lines.append(f"    {t_:<6} {k_}")
+other = "G" if OUTCOME == "D" else "D"
+k_other = sum(v for s_, v in sel_sets.items()
+              if any(other in x for x in s_.split(",")))
+lines.append(f"    any term containing {other}: {k_other}")
 lines.append("  selected model's coefficients across resamples (2.5-97.5 percentile) "
              "vs posterior interval width:")
 for j, t in enumerate(sel["terms"]):
@@ -158,7 +175,7 @@ for j, t in enumerate(sel["terms"]):
 
 text = "\n".join(lines)
 print(text)
-(OUT / f"06_fit_{OUTCOME}.txt").write_text(text + "\n")
+(OUT / f"06_fit_{OUTCOME}{TAG}.txt").write_text(text + "\n")
 json.dump({"outcome": OUTCOME, "n": int(n), "countries": int(n_c), "sigma": sig,
            "lambda": lam, "selected_size": int(m_sel),
            "sizes": {int(m): {"terms": r["terms"], "loglik": r["loglik"],
@@ -167,4 +184,4 @@ json.dump({"outcome": OUTCOME, "n": int(n), "countries": int(n_c), "sigma": sig,
                               "sd": list(map(float, r["sd"])), "r2": r["r2"]}
                      for m, r in res.items()},
            "lag1_resid_corr": rho, "boot_sets": sel_sets},
-          open(OUT / f"06_fit_{OUTCOME}.json", "w"), indent=1, default=float)
+          open(OUT / f"06_fit_{OUTCOME}{TAG}.json", "w"), indent=1, default=float)

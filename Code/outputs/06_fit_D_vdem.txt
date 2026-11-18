@@ -1,0 +1,49 @@
+Outcome: dD   changes: 3955   countries: 171
+sigma (fixed, sd of dD): 0.04448   lambda: 0.04448 (on RMS-scaled terms)
+
+Best model per size:
+ m    log-lik  log-evidence  P(size)      R2  terms
+ 1    6702.20       6698.04   0.0000  0.0013  1/G
+ 2    6724.50       6716.60   0.0232  0.0126  G, D^2
+ 3    6730.25       6720.04   0.7187  0.0155  1, DG, D^2
+ 4    6731.72       6718.41   0.1407  0.0163  D, 1/G, D/G, D^2
+ 5    6732.84       6717.87   0.0825  0.0168  D, G, D/G, D^2, G^2
+ 6    6734.29       6716.45   0.0199  0.0176  1, G, 1/G, DG, D^2, G^2
+ 7    6736.08       6715.44   0.0072  0.0185  1, G, 1/G, DG, D^2, G^2, 1/G^2
+ 8    6737.77       6715.08   0.0050  0.0193  1, D, G, 1/G, DG, D^2, G^2, 1/G^2
+ 9    6738.23       6714.46   0.0027  0.0195  1, D, G, 1/G, D/G, DG, D^2, G^2, 1/G^2
+
+Selected: size 3, P = 0.7187; next best size 4, P = 0.1407; log Bayes factor selected vs next = 1.63
+
+Selected model, posterior mean and 95% credible interval (original scale):
+  1      +0.00748  [+0.00421, +0.01075]
+  DG     +0.06256  [+0.02994, +0.09519]
+  D^2    -0.07078  [-0.09924, -0.04233]
+
+Checks (appendix only unless they change the answer)
+  lambda x0.1: selected size 6: 1, G, 1/G, DG, D^2, G^2
+  lambda x10: selected size 3: 1, DG, D^2
+  sigma from residuals (0.04414 vs 0.04448): selected size 3: 1, DG, D^2
+  within-country lag-1 residual correlation: +0.213 over 3784 pairs
+  country resampling (500 draws, seed 20261118); selected term sets:
+     178  1, DG, D^2
+      70  G, DG, D^2
+      49  1/G, DG, D^2
+      37  G, D^2
+      29  D, G, D/G, D^2, G^2
+      24  D, D/G, D^2, 1/G^2
+  term frequency across resamples (of 500):
+    1      226
+    D      94
+    G      160
+    1/G    85
+    D/G    123
+    DG     332
+    D^2    466
+    G^2    57
+    1/G^2  43
+    any term containing G: 498
+  selected model's coefficients across resamples (2.5-97.5 percentile) vs posterior interval width:
+    1      [+0.00435, +0.01035]  width 0.00600 vs posterior 0.00654
+    DG     [+0.03293, +0.10427]  width 0.07134 vs posterior 0.06526
+    D^2    [-0.10829, -0.04371]  width 0.06458 vs posterior 0.05691

@@ -12,18 +12,26 @@ Writes outputs/07_joint_checks.txt.
 """
 import itertools
 import json
+import sys
 
 import numpy as np
 
 from sds_common import OUT, load_panel
 
 TERMS = ["1", "D", "G", "1/G", "D/G", "DG", "D^2", "G^2", "1/G^2"]
-p = load_panel()
-ch = p.dropna(subset=["dD", "dG"]).reset_index(drop=True)
+import pandas as pd
+MEASURE = sys.argv[1] if len(sys.argv) > 1 else "welzel"   # "welzel" (main) or "vdem" (question 2)
+TAG = "" if MEASURE == "welzel" else "_vdem"
+if MEASURE == "welzel":
+    p = load_panel()
+    ch = p.dropna(subset=["dD", "dG"]).reset_index(drop=True)
+else:
+    p = pd.read_csv(OUT / "panel_vdem.csv")
+    ch = p[p.period == "fit"].dropna(subset=["dD", "dG"]).reset_index(drop=True)
 D, G = ch.D.values, ch.G.values
 X = np.column_stack([np.ones_like(D), D, G, 1 / G, D / G, D * G, D ** 2, G ** 2, 1 / G ** 2])
 rms = np.sqrt((X ** 2).mean(axis=0))
-fits = {o: json.load(open(OUT / f"06_fit_{o}.json")) for o in ("D", "G")}
+fits = {o: json.load(open(OUT / f"06_fit_{o}{TAG}.json")) for o in ("D", "G")}
 lines = []
 
 
@@ -85,7 +93,10 @@ for o in ("D", "G"):
         lines.append(f"    d{o} {t:<6} {a:+.5f} -> {c:+.5f}  ({100 * (c - a) / abs(a):+.1f}%)")
 lines.append("")
 
-# 3. paper's dG model
+# 3. paper's dG model (main analysis only)
+if MEASURE != "welzel":
+    text = "\n".join(lines); print(text)
+    (OUT / f"07_joint_checks{TAG}.txt").write_text(text + "\n"); sys.exit(0)
 pidx = [TERMS.index(t) for t in ["D", "G", "G^2"]]
 le, mu, sd = evidence(pidx, yG)
 lines += ["3. Ranganathan, Spaiser and Sumpter (2013) dG model (D, G, G^2) on our data",

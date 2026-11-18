@@ -15,3 +15,17 @@ curl -o qog_std_ts_jan15.csv https://www.qogdata.pol.gu.se/dataarchive/qog_std_t
 curl -o qog_std_jan15_codebook.pdf https://www.qogdata.pol.gu.se/dataarchive/qog_std_jan15.pdf
 shasum -a 256 qog_std_ts_jan15.csv qog_std_jan15_codebook.pdf
 ```
+
+## V-Dem (question 2)
+
+Not committed (204 MB unzipped). V-Dem Country-Year Core dataset, version 15 (Coppedge et al., 2025), downloaded 18 November 2026:
+
+| File | URL | SHA-256 |
+| --- | --- | --- |
+| `vdem/V-Dem-CY-Core-v15_csv.zip` | https://v-dem.net/media/datasets/V-Dem-CY-Core-v15_csv.zip | `bd6430d6b78785c7422acee7d75bef1b852f2ce1baa5f673ae40ffca64ffe51b` |
+
+```sh
+mkdir -p Attachments/vdem && cd Attachments/vdem
+curl -L -o V-Dem-CY-Core-v15_csv.zip https://v-dem.net/media/datasets/V-Dem-CY-Core-v15_csv.zip
+unzip V-Dem-CY-Core-v15_csv.zip V-Dem-CY-Core-v15.csv codebook.pdf suggested_citation.pdf
+```

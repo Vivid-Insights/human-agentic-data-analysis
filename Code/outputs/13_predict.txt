@@ -1,0 +1,25 @@
+dD: model 1, DG, D^2; 3088 test changes from 174 countries
+  mean log predictive density per change: model 1.8391, average-change baseline 1.8402, refit on 2007-2024 1.9020
+  total log predictive density, model minus baseline: -3.3; refit minus model: +194.2
+  model better than baseline for 42.9% of test changes
+  variance explained: in 1981-2006 (in sample) 1.6%, in 2007-2024 (out of sample) -7.1%
+  refit coefficients on 2007-2024: 1 -0.00161, DG +0.02429, D^2 -0.02809   (1981-2006: +0.00748, +0.06256, -0.07078)
+
+dG: model D^2, 1/G^2; 3088 test changes from 174 countries
+  mean log predictive density per change: model 3.9050, average-change baseline 3.9087, refit on 2007-2024 3.9570
+  total log predictive density, model minus baseline: -11.3; refit minus model: +160.4
+  model better than baseline for 44.4% of test changes
+  variance explained: in 1981-2006 (in sample) 0.9%, in 2007-2024 (out of sample) -1.2%
+  refit coefficients on 2007-2024: D^2 +0.00069, 1/G^2 +0.00050   (1981-2006: +0.00226, +0.00025)
+
+Whole period: 168 countries with both variables in 2006 and 2024, stepped 18 years
+  democracy, |error| in 2024: model median 0.146 (mean 0.166); average-change baseline median 0.171 (mean 0.192); model closer for 106 of 168
+  GDP, |error| in 2024: model median 27.0% (mean 33.2%); baseline median 22.0% (mean 30.2%); model closer for 74 of 168
+  observed distance to the 1981-2006 democracy nullcline: median 0.171 in 2006, 0.257 in 2024; closer in 2024 for 48 of 168
+  simulated distance in 2024: median 0.076
+  Italy    2006 D 0.85; 2024 simulated 0.89, observed 0.80; GDP simulated $52,586, observed $34,508
+  Sweden   2006 D 0.91; 2024 simulated 0.92, observed 0.88; GDP simulated $77,113, observed $54,316
+  India    2006 D 0.72; 2024 simulated 0.69, observed 0.40; GDP simulated $1,496, observed $2,367
+  Chile    2006 D 0.89; 2024 simulated 0.85, observed 0.84; GDP simulated $16,632, observed $14,617
+  Albania  2006 D 0.55; 2024 simulated 0.67, observed 0.51; GDP simulated $3,919, observed $6,549
+  Nigeria  2006 D 0.42; 2024 simulated 0.59, observed 0.50; GDP simulated $2,517, observed $2,325

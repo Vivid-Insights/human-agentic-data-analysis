@@ -1,0 +1,30 @@
+dD = +0.00748*1 +0.06256*DG -0.07078*D^2
+dG = +0.00226*D^2 +0.00025*1/G^2
+
+democracy curve: grid root vs exact quadratic root, max |diff| = 3.29e-07
+  slope d f_D / dD on the curve: max -0.0529 (negative = attracting)
+  D* stays at or below 1 over the observed range
+  observed range usd 165-113153
+  at $   500: democracy stops changing at D* = 0.626
+  at $ 1,000: democracy stops changing at D* = 0.667
+  at $ 2,000: democracy stops changing at D* = 0.709
+  at $ 5,000: democracy stops changing at D* = 0.765
+  at $10,000: democracy stops changing at D* = 0.809
+  at $20,000: democracy stops changing at D* = 0.853
+  at $50,000: democracy stops changing at D* = 0.913
+GDP equation over observed range, D in [0,1]: min dG = +0.00026, max = +0.00362 -> zero-change curve in range: False
+  minimum yearly growth in range: 0.32% (at D = 0, richest G); at D = 0 and the poorest G: 1.64%
+
+95% band on D*, median width over observed GDP range: posterior 0.096, country resampling 0.066 (ratio 0.69)
+
+trajectories: 171 countries, from each first observed year to 2006
+  simulated |D - D*(G)|: median start 0.475, end 0.220; closer at end for 158 of 171
+  observed  |D - D*(G)|: median first year 0.475, last year 0.171; closer at end for 119 of 171
+  simulated D outside [0,1] at any step: 0 country-years
+  simulated 2006 GDP range: $283 to $125,768
+  Italy    start D 0.81 at $22,060; simulated 2006 D 0.87 at $39,465; observed 2006 D 0.85 at $33,873
+  Sweden   start D 0.91 at $29,028; simulated 2006 D 0.90 at $55,381; observed 2006 D 0.91 at $48,078
+  India    start D 0.65 at $408; simulated 2006 D 0.64 at $706; observed 2006 D 0.72 at $1,008
+  Chile    start D 0.07 at $4,866; simulated 2006 D 0.41 at $5,866; observed 2006 D 0.89 at $10,612
+  Albania  start D 0.17 at $1,890; simulated 2006 D 0.48 at $2,451; observed 2006 D 0.55 at $2,894
+  Nigeria  start D 0.38 at $1,834; simulated 2006 D 0.61 at $2,627; observed 2006 D 0.42 at $1,949

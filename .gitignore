@@ -38,3 +38,7 @@ Attachments/qog_std_jan15_codebook.pdf
 
 # Row-level panel built from the QoG file (same terms as the source)
 Code/outputs/panel.csv
+
+# V-Dem: 204 MB; see Attachments/SOURCE.md
+Attachments/vdem/
+Code/outputs/panel_vdem.csv

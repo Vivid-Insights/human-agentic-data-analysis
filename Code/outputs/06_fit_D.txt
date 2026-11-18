@@ -33,16 +33,19 @@ Checks (appendix only unless they change the answer)
       43  D/G, DG, D^2, 1/G^2
       32  D, 1/G, D/G, D^2
       26  D, D/G, D^2
+  term frequency across resamples (of 500):
+    1      33
+    D      327
+    G      110
+    1/G    50
+    D/G    488
+    DG     233
+    D^2    500
+    G^2    113
+    1/G^2  253
+    any term containing G: 500
   selected model's coefficients across resamples (2.5-97.5 percentile) vs posterior interval width:
     D      [+0.20637, +0.38654]  width 0.18017 vs posterior 0.11604
     D/G    [-0.20204, -0.11621]  width 0.08582 vs posterior 0.06073
     D^2    [-0.18177, -0.08247]  width 0.09930 vs posterior 0.06573
     1/G^2  [+0.00167, +0.00447]  width 0.00280 vs posterior 0.00323
-D 327 of 500
-D/G 488 of 500
-D^2 500 of 500
-1/G^2 253 of 500
-DG 233 of 500
-G^2 113 of 500
-D/G and D^2 together 488
-sizes {'1': 0.0, '2': 0.0, '3': 0.1882, '4': 0.6816, '5': 0.0584, '6': 0.017, '7': 0.0152, '8': 0.0057, '9': 0.034}

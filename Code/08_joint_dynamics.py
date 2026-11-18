@@ -16,6 +16,7 @@ Writes outputs/08_dynamics.txt, 08_nullcline.csv, 08_simulated_paths.csv,
 08_model_field.csv (model change at the Figure 3 cell positions).
 """
 import json
+import sys
 
 import numpy as np
 import pandas as pd
@@ -32,11 +33,19 @@ def design(D, G):
                             D ** 2, G ** 2, 1 / G ** 2])
 
 
-p = load_panel()
-ch = p.dropna(subset=["dD", "dG"]).reset_index(drop=True)
+MEASURE = sys.argv[1] if len(sys.argv) > 1 else "welzel"   # "welzel" (main) or "vdem" (question 2)
+assert MEASURE in ("welzel", "vdem")
+TAG = "" if MEASURE == "welzel" else "_vdem"
+if MEASURE == "welzel":
+    p = load_panel()
+    ch = p.dropna(subset=["dD", "dG"]).reset_index(drop=True)
+else:  # V-Dem fit window: levels to 2006, changes ending by 2006
+    p = pd.read_csv(OUT / "panel_vdem.csv")
+    p = p[p.year <= YEARS[1]].copy()
+    ch = p[p.period == "fit"].dropna(subset=["dD", "dG"]).reset_index(drop=True)
 Xfull = design(ch.D, ch.G)
 rms = np.sqrt((Xfull ** 2).mean(axis=0))
-fits = {o: json.load(open(OUT / f"06_fit_{o}.json")) for o in ("D", "G")}
+fits = {o: json.load(open(OUT / f"06_fit_{o}{TAG}.json")) for o in ("D", "G")}
 model = {}
 for o in ("D", "G"):
     sz = fits[o]["sizes"][str(fits[o]["selected_size"])]
@@ -81,10 +90,15 @@ lines.append("")
 # 1. zero-change curves
 Ggrid = np.linspace(np.log(150) / G_SCALE, np.log(170000) / G_SCALE, 241)
 Dstar = d_star(Ggrid, model["D"]["mean"])
-# exact check from the quadratic (valid for the selected term set D, D/G, D^2, 1/G^2)
-if model["D"]["terms"] == ["D", "D/G", "D^2", "1/G^2"]:
-    a, b, c, e = model["D"]["mean"]
-    A2, B1, C0 = c, a + b / Ggrid, e / Ggrid ** 2
+# exact check: every equation in this library is quadratic in D,
+# f_D = A2 D^2 + B1(G) D + C0(G), so the attracting root has a closed form
+wD = dict(zip(model["D"]["terms"], model["D"]["mean"]))
+c = wD.get("D^2", 0.0)
+A2 = c
+B1 = wD.get("D", 0) + wD.get("D/G", 0) / Ggrid + wD.get("DG", 0) * Ggrid
+C0 = (wD.get("1", 0) + wD.get("G", 0) * Ggrid + wD.get("1/G", 0) / Ggrid
+      + wD.get("G^2", 0) * Ggrid ** 2 + wD.get("1/G^2", 0) / Ggrid ** 2)
+if A2 < 0:
     exact = (-B1 - np.sqrt(B1 ** 2 - 4 * A2 * C0)) / (2 * A2)
     lines.append(f"democracy curve: grid root vs exact quadratic root, max |diff| = "
                  f"{np.nanmax(np.abs(exact - Dstar)):.2e}")
@@ -92,6 +106,10 @@ if model["D"]["terms"] == ["D", "D/G", "D^2", "1/G^2"]:
     lines.append(f"  slope d f_D / dD on the curve: max {slope.max():+.4f} (negative = attracting)")
 gobs = ch.G.values
 in_range = (Ggrid >= gobs.min()) & (Ggrid <= gobs.max())
+over1 = np.flatnonzero(in_range & (Dstar > 1))
+lines.append(f"  D* first exceeds 1 at G={Ggrid[over1[0]]:.3f}, usd={np.exp(G_SCALE * Ggrid[over1[0]]):.0f}"
+             if len(over1) else "  D* stays at or below 1 over the observed range")
+lines.append(f"  observed range usd {np.exp(G_SCALE * gobs.min()):.0f}-{np.exp(G_SCALE * gobs.max()):.0f}")
 for usd in (500, 1000, 2000, 5000, 10000, 20000, 50000):
     g = np.log(usd) / G_SCALE
     lines.append(f"  at ${usd:>6,}: democracy stops changing at D* = {d_star([g], model['D']['mean'])[0]:.3f}")
@@ -124,7 +142,7 @@ lines.append(f"95% band on D*, median width over observed GDP range: posterior {
              f"country resampling {w_boot:.3f} (ratio {w_boot / w_post:.2f})")
 pd.DataFrame({"G": Ggrid, "usd": np.exp(G_SCALE * Ggrid), "D_star": Dstar, "lo": lo, "hi": hi,
               "lo_boot": lo_b, "hi_boot": hi_b, "in_range": in_range}) \
-  .to_csv(OUT / "08_nullcline.csv", index=False)
+  .to_csv(OUT / f"08_nullcline{TAG}.csv", index=False)
 lines.append("")
 
 # 3. trajectories and convergence
@@ -142,7 +160,7 @@ for r in first.itertuples():
         dD_, dG_ = f("D", [D_], [G_])[0], f("G", [D_], [G_])[0]
         D_, G_ = D_ + dD_, G_ + dG_
 sim = pd.DataFrame(sims, columns=["iso3", "year", "D", "G"])
-sim.to_csv(OUT / "08_simulated_paths.csv", index=False)
+sim.to_csv(OUT / f"08_simulated_paths{TAG}.csv", index=False)
 s0 = sim.groupby("iso3").first(); s1 = sim.groupby("iso3").last()
 dist = lambda D_, G_: np.abs(D_ - d_star(G_, model["D"]["mean"]))
 sim_start, sim_end = dist(s0.D.values, s0.G.values), dist(s1.D.values, s1.G.values)
@@ -161,12 +179,13 @@ for iso, name in REP.items():
     lines.append(f"  {name:<8} start D {a0.D:.2f} at ${np.exp(G_SCALE * a0.G):,.0f}; simulated 2006 D {a1.D:.2f} "
                  f"at ${np.exp(G_SCALE * a1.G):,.0f}; observed {int(o1.year)} D {o1.D:.2f} at ${o1.gdppc:,.0f}")
 
-# model field at the Figure 3 cell positions
-cells = pd.read_csv(OUT / "05_phase_cells.csv")
-cells["mdD"] = f("D", cells.D, cells.G)
-cells["mdG"] = f("G", cells.D, cells.G)
-cells[["G", "D", "n", "mdG", "mdD"]].to_csv(OUT / "08_model_field.csv", index=False)
+# model field at the Figure 3 cell positions (main analysis only)
+if MEASURE == "welzel":
+    cells = pd.read_csv(OUT / "05_phase_cells.csv")
+    cells["mdD"] = f("D", cells.D, cells.G)
+    cells["mdG"] = f("G", cells.D, cells.G)
+    cells[["G", "D", "n", "mdG", "mdD"]].to_csv(OUT / "08_model_field.csv", index=False)
 
 text = "\n".join(lines)
 print(text)
-(OUT / "08_dynamics.txt").write_text(text + "\n")
+(OUT / f"08_dynamics{TAG}.txt").write_text(text + "\n")
