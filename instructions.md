@@ -1,512 +1,265 @@
-# Data Analysis Collaboration Instructions
+# Dynamical Systems of Social Data: Collaboration Instructions
 
-## Workspace Contract
+This branch, `socio-dynamical-systems`, is for one kind of analysis: country-level social and economic indicators, a dynamical system fitted to how they change from year to year, and a short article reporting it. The user names the variables or a question; the agent proposes the standard analysis below; the two work through it one step at a time. Everything in this document serves that purpose. Rules that would apply to any data analysis are kept only where this kind of work depends on them.
 
-Use this folder as the single source of truth for the analysis. Keep work in the locations below.
+## Workspace
 
 | Location | Purpose |
 | --- | --- |
-| `Attachments/` | Source data, reference files, exports, and other inputs supplied for analysis. Do not modify originals. |
-| `Code/` | All executable analysis code, notebooks and generated outputs. Arrives with the environment (`setup_env.sh`, `pyproject.toml`, `uv.lock`, `check_env.py`) and `viz_style.py`, which carries the figure conventions. Analysis scripts and `outputs/` are yours to add. |
-| `Setup.md` | How to install and run the workspace: Obsidian, `uv`, the Python environment, and the everyday commands. |
-| `Report.md` | The final report, built up across the steps rather than written at the end: research questions into the `Introduction` in step 2, figures into `Results` in step 3, the `Methods` and `Results` paragraphs in step 4, the `Discussion` and `Limitations` in step 5, and the background and `Abstract` in step 6. Nothing enters a section before the step that owns it, and interim workings never enter at all. |
-| `Appendix.md` | The running record of the work, written as you go from the first step. Six sections in this order: `Data Summary` (the data actually used), `Research Question` (what is being asked and how that was arrived at), `Analysis` (the workings, one sub-heading per sub-question), `Analysis Log` (a numbered row per step taken), `Code Summary` (a guide to the analysis code), and `References` last. Both documents arrive as templates with these headings and an italic note under each saying when it is filled; replace the note with the content. |
-| `Sample Report/` | A finished analysis, kept as an illustration of what the documents look like when complete. Self-contained: its own `Code/` and `Attachments/` beside the two documents. Its source data is not committed, since the publisher gives no redistribution terms; `Sample Report/Attachments/SOURCE.md` says how to download it. Never edited as part of a new analysis. |
-| `Sample Report/Analysis Steps.md` | A walkthrough of the sample analysis with the prompts used, for showing someone how the folder works. Not part of a new analysis. |
-
-## Step-by-Step Working
-
-This workspace is for working through a data analysis **one step at a time, with the user directing each step**. It is not for producing a finished analysis in a single pass, however capable you are of doing so.
-
-- **Do one step per request.** When it is done, say what changed and say what you found. Then ask whether the step is finished, and stop and wait for direction.
-- **Do not run ahead.** Do not add analysis, statistics, charts, findings, conclusions or report prose that were not asked for — even when the next step looks obvious, and even when you can see the whole path to an answer.
-- **Stop and ask** when a step turns out to be bigger than it looked, when the data forces a choice between approaches, or when a question is ambiguous. A question is cheaper than unpicking unwanted work.
-- **Prefer the smallest honest step.** If asked to load a file, load the file. Describe what is actually there; do not start interpreting it.
-- **Say which step you are on, and announce every transition.** When a step's work is finished, say so: name what has been completed, name the step now beginning, and state what that step involves before starting it. Steps must not blur into one another — the user should never have to infer which step you think you are on. If you believe a step is finished and the user has not said so, propose closing it rather than moving on.
-- **Ask whether the step is complete; do not propose the next one.** When the work asked for is done, the question to put to the user is whether anything is missing from the step just worked on — *"have we thought of everything in step 2?"* — not *"shall we move on to step 3?"*. The second question invites a yes. A step closed on a nod is a step whose gaps surface three steps later, when fixing them means undoing work.
-  - **Give the user something to answer.** *"Is step 2 done?"* asks them to audit the contract from memory. Name what the step covers, say which parts have been settled and which have not been discussed at all, and ask about those. *"We have the main question and three sub-questions. We have not discussed whether coverage is adequate for the third, or whether the second is answerable with this file — is there anything else to settle before we close step 2?"*
-  - **Name the next step only after the user has closed the current one.** Then say what it involves, and wait again before starting it.
-  - **Being ready to move on is not a reason to move on.** Seeing the whole path to the answer is the condition this rule exists for, not an exception to it.
-  - **Put the check in writing, and wait for an answer rather than an absence of objection.** List what the step covered, which parts are settled, which were never discussed, and anything the comparison below turned up. Then stop. A user who says nothing has not closed the step, and a user who replies about one item on the list has not closed the others — ask again about the rest.
-  - **From step 3 onwards, read the sample before putting the question.** Open the part of `Sample Report/Happiness.md` that corresponds to the step just finished — the figures and captions in `Results` for step 3, the `Methods` and `Results` paragraphs for step 4, the `Discussion` and `Limitations` for step 5, the `Introduction` background and the `Abstract` for step 6, the whole report read in order for step 7 — and compare it with what this analysis now has. Say what the comparison found: what the sample does that this report does not, what this report does that the sample had no need of, and which of those differences are worth acting on. Then put that list to the user along with the completeness question, so they are judging something concrete instead of auditing the contract from memory.
-    - **Compare the shape, not the content.** How much of a caption explains the way to read the figure, how much of a method paragraph is choices rather than procedure, where a limitation sits relative to the conclusion it qualifies, what was left in the appendix rather than lifted into the report. Never the numbers, the prose or the subject matter: those belong to a different analysis and copying them is already forbidden.
-    - **A difference is not a fault.** The sample is an example and not a specification. This analysis may rightly have fewer sub-questions, no phase portrait, or a structure the sample does not have at all. Propose the improvement, say what it would buy, and leave the decision to the user.
-    - **Say so when the comparison finds nothing.** *"The sample's result paragraphs each name the sub-question, give the estimate with its interval, and stop; ours do the same"* is worth the user's time. A comparison that reports nothing has to be distinguishable from one that was never made.
-    - **Step 8 compares the export rather than a section.** `Sample Report/Code/outputs/Happiness.docx` is what a finished conversion of one of these reports looks like; check the four things that break in conversion against it.
-- **Answer sub-questions one at a time.** Work through the sub-questions agreed in step 2 in order, and finish one before starting the next. Do not batch them, and do not answer a later one because it happens to fall out of the same code.
-- **Agree the method before applying it.** For each sub-question, say what you propose to do and why, name the assumptions it rests on, and get the user's agreement before producing the result. If a method turns out to be unsound once started, stop and say so rather than quietly switching to another. On this branch the method is fixed by `The Standard Analysis`, so what is agreed is the proposal it produces and any departures from it.
-- **`Report.md` is built up as the work proceeds, not written at the end.** Each step adds only its own part: the research questions in step 2, the figures in step 3, the `Methods` and `Results` paragraphs in step 4, the `Discussion` and `Limitations` in step 5, the background and `Abstract` in step 6. Nothing enters a section ahead of the step that owns it, and interim results, workings and observations always go in `Appendix.md` instead.
-- **The `Disclaimer` section is already written, and it stays.** `Report.md` arrives with a disclaimer between `Limitations` and `Appendix` saying the report was written with the help of agentic AI at every stage. It is not a placeholder and no step fills it in.
-  - **Step 8 will not export until the user has confirmed they have read it.** That is the point at which the report is published, and publishing it is what turns the disclaimer into a disclosure the user is making.
-  - Do not remove it, do not soften it, and do not move it further down. If the user rewrites the wording, keep theirs.
-  - It is in the template from the start rather than added at the end for the same reason the research questions go in early: a fact about how the document was produced should not depend on anyone remembering to disclose it once the work is done.
-- **Do not leave markers in the report for work that was not done.** If a sub-question is dropped, a test abandoned, or a method considered and rejected, take it out of `Report.md` completely. Do not replace it with a note saying it was set aside. *"A fourth question was framed and then set aside without being tested"* reports on the process rather than the findings, and leaves the reader wondering what the answer would have been.
-  - This includes the `Introduction`. When a question is dropped after step 2, remove it, renumber the rest, and do not annotate the gap.
-  - A sentence or two in `Appendix.md` is the right record, in the `Analysis Log`. That is where a reader who wants to know what was tried and abandoned should look, and it is enough.
-- **At the stages where a document is yours to write, write it — do not ask first.** Then say what you changed and invite the user to edit it or to ask you for changes.
-- **Never undo the user's changes.** They edit these documents directly, often while you are working.
-  - Re-read a file from disk immediately before editing it. Never write from a copy held earlier in the conversation.
-  - Never revert, overwrite, reformat or "tidy" text the user wrote. Add alongside it.
-  - If what you need to write conflicts with something they have written, keep theirs and raise the conflict.
-  - Never restore a document from another branch or an earlier commit without asking — that silently discards whatever they had done since.
-  - Stage named files rather than everything, so an unfinished edit of theirs is not swept into your commit.
-- **Check what the user has written, and tell them if anything is wrong.** Leaving their text alone is not the same as letting an error stand. When they write or rewrite a section, read it and check it: every number against the generated output, every claim against what was actually tested, every citation against the source.
-  - **Report the error; do not quietly correct it.** Quote the sentence, say what is wrong, give the right value or phrasing, and leave the change to them. Silently fixing their prose is a form of undoing it.
-  - **Separate an error from a disagreement.** A number that does not match the output is wrong. A claim the analysis does not support is wrong. A phrasing you would not have chosen is theirs, and saying so is noise.
-  - **Say plainly when it is all correct.** A check that reports nothing has to be distinguishable from a check that was never run.
-- The steps below are the agreed order of work. Announce which step you are on when it is not obvious.
-
-## Changing This Contract
-
-When the user prefixes a message with **FRAMEWORK**, they are changing this document.
-
-- Apply the change to `instructions.md` immediately.
-- Apply it to the analysis in progress at the same time, including retrospectively where it affects work already done. A rule that only takes effect next time is not in force.
-- Keep the edit to `instructions.md` in its own commit, touching no analysis content, so it can be promoted to the template branch cleanly.
-- If the change conflicts with something already written here, say so rather than leaving the contract self-contradictory.
-
-### The `socio-dynamical-systems` template branch
-
-`socio-dynamical-systems` is a second template, branched from `main`, for analyses that read in World Bank data, fit a dynamical system to describe change in it, and write a short summarising report with a fixed set of methods. Analyses of that kind branch from `socio-dynamical-systems`, not from `main`.
-
-- **Every change stays on this branch. Nothing is promoted to `main`, and `main` is not touched at all.** That includes changes that would apply equally to a general analysis. There is no cherry-picking, no committing and no pushing to `main` from work on this branch.
-- **The promotion rules below do not apply here.** They govern analyses branched from `main`, and are kept only because this branch started as a copy of it.
-- **If a change here looks useful for `main`, say so and leave it there.** Whether to carry it across is the user's decision, made outside this branch.
-
-### Promoting template changes to `main`
-
-`main` is the template branch and each analysis lives on its own branch beside it. A change to the template made while working on an analysis belongs in both places, and getting it into only one is the failure this section exists to prevent.
-
-- **Promote the commit to `main` in the same sitting, and push both branches.** Cherry-pick it onto `main`, push `main`, then push the project branch. Do not leave it for later.
-- **A rule that exists only on the project branch is not in force.** The next analysis branches from `main` and will never see it. Worse, the next time `main` is merged down into this project, the merge can quietly revert it — so the change is lost from the place it was made as well as from the place it was going.
-- **This covers every template-level change, not only `instructions.md`.** `CLAUDE.md`, `Setup.md`, `README.md`, `.gitignore`, `.claude/settings.json`, `Code/viz_style.py`, `Code/setup_env.sh`, `Code/check_env.py`, the environment lockfile, and the empty section templates of `Report.md` and `Appendix.md` all belong to the template.
-- **Analysis content is never promoted.** `Attachments/`, the analysis scripts, `Code/outputs/`, and the filled-in body of `Report.md` and `Appendix.md` stay on the project branch. `Sample Report/` is template content, but it is not edited as part of a new analysis, so in practice it should never be in a commit that needs promoting.
-- **Keep the two kinds of change in separate commits**, so a template commit can be cherry-picked without dragging analysis content onto `main`. If a change has already been committed with analysis content mixed in, say so and propose splitting it rather than promoting the whole commit.
-- **Say what was promoted.** Name the commit, say which branches it now exists on, and confirm both were pushed. If the push fails or the network is unavailable, say that too — an unpushed promotion is not a promotion, and silence reads as success.
-
-## The Standard Analysis
-
-This is what makes the branch different from `main`. The user names a question, or just a set of variables, and the agent proposes the model and the method. The model is always the same kind: a dynamical system in which the yearly change of each variable is a polynomial function of the current state of all of them. It is fitted and selected as set out in `Statistical Framework`. What changes from one analysis to the next is the variables and the data decisions, not the kind of model.
-
-The usual analysis on this branch is new. It asks how a chosen set of variables drive each other's change over time, using variables that have not been modelled this way before. Replicating a published model is the exception. It is done to check the method against a known result, as the first analysis on this branch does with Ranganathan, Spaiser and Sumpter (2013). The replication bullets in this document apply only when a replication is under way. Everything else is written for the usual case.
-
-- **One to four questions about the variables.** An analysis asks between one and four questions, and one is the default. For two variables $X$ and $Y$, propose: *"What model best describes the yearly changes in $X$ and $Y$, and what dynamics does it imply?"*
-  - Add a question only where the user wants a separate answer about the variables. Examples: whether $Y$ enters the equation for $X$ at all, or where the system settles for a given level of $X$.
-  - Each question names what would count as an answer either way. For example: whether the other variable enters each selected equation, and whether curves or points where change stops exist within the observed range.
-  - The report answers each question by fitting the model and looking at its dynamics. It does not split the fit into separate sections per equation.
-  - **Terminology.** Wherever the general rules in this document say "sub-question", on this branch they mean these one to four questions.
-
-- **From a question or a list of variables, propose the standard analysis straight away.** Do not ask what model to use. Write the proposal in the conversation, and once agreed record it in `Appendix.md` under `Research Question`. It covers:
-  1. **Variables.** Each one named, with its World Bank indicator code or other source, its unit, and whether it is a measurement, an estimate or a constructed index.
-  2. **Transformations.** Logs where a variable spans orders of magnitude, such as GDP. Rescaling to roughly 0–1 by a fixed, documented constant; see the scaling rule under step 1.
-  3. **The system.** One change equation per variable, $\Delta x_i(t) = x_i(t+1) - x_i(t) = f_i(x_1(t), \dots, x_N(t))$, pooled over countries and years.
-  4. **The term library.** For two variables, the 13 terms of Ranganathan, Spaiser and Sumpter (2013). Remove the inverse terms in any variable that can be zero, and say which were removed.
-  5. **The search.** Every model of every size, best by likelihood within each size, then compared across sizes by evidence.
-  6. **The prior.** The normal prior set out in `Statistical Framework`, the same in every analysis.
-  7. **The checks.** Within-country correlation of residuals, correlation of errors between the equations, and refits on resampled countries.
-  8. **The figures.** The standard figures in `Report Format`, with the six representative countries named.
-- **Two variables is the default.** A third variable uses the three-variable library, searched only up to 5 terms (Ranganathan et al., 2014), and needs the user's agreement because the search is far larger. Lagged variables, as in Ranganathan et al. (2014), are an extension, not part of the default, and also need agreement.
-- **The user agrees the proposal, or changes parts of it.** What they change is recorded as a departure from the standard analysis. Nothing outside this section and `Statistical Framework` is introduced without their agreement.
-- **When the analysis is a replication, it is the same analysis with the paper's choices filled in.** The variables, years and library are the paper's. Departures, such as a different data vintage or a reduced library, are recorded before anything is fitted.
-- **The report of a replication never mentions replication.** `Report.md` is written as a standalone investigation of the problem, in exactly the form a new analysis would take. That means no statement that it is a replication, no comparison with the published equations, and no account of how accurate the replication was, in any section, `Discussion` included.
-  - The reason is that a finished report on this branch is used as a template for later analyses. A report that talks about replicating would teach the agent to frame new questions as replications.
-  - The paper is still cited where its method is used, as the source of the approach, like any other method citation.
-  - Everything about the replication goes in `Appendix.md`: the paper's equations, what counts as reproducing them (in `Research Question`), and the comparison once results exist (in `Analysis`).
-
-## Statistical Framework
-
-Analyses on this branch use likelihood and Bayesian inference, following Ranganathan, Spaiser and Sumpter (2013) and, where that paper leaves a detail unstated, Ranganathan, Spaiser, Mann and Sumpter (2014, PLOS ONE). This is fixed. Other inference frameworks are not substituted for it, either quietly or as a "check". Examples are null-hypothesis significance tests and p-values as the basis for a claim, selection by information criteria alone, and cross-validated machine-learning fits. Bringing any of them in needs the user's explicit agreement.
-
-- **Models are fitted by maximum likelihood.** Under the Gaussian error model this is least squares, and the log-likelihood is what ranks models of the same size.
-- **Models of different size are compared by marginal likelihood (the evidence).** Report the posterior probability of each candidate model size, as well as which one wins, so the reader can see how firmly the data choose it.
-- **The prior is normal, always.** It is the same in every analysis on this branch, and it is not swapped for a uniform or any other prior, including as the reported result of a check.
-  - **Prior.** Each term is divided by its root-mean-square value over the data. The rescaled coefficients are independent, normal and centred on zero, with standard deviation $\lambda = \text{sd}(\Delta x)$, the spread of the observed yearly changes in that equation.
-  - **Noise.** The noise standard deviation $\sigma$ is fixed at the same $\text{sd}(\Delta x)$ (Ranganathan et al., 2014).
-  - **Computation.** The evidence is computed in closed form, $\Delta x \sim N(0, \sigma^2 I + \lambda^2 X X^\top)$, through $m \times m$ matrices. The posterior is Gaussian, and coefficients and intervals are reported on the original scale.
-  - **Sensitivity.** Record the selection with $\lambda$ ten times smaller and ten times larger in `Appendix.md`.
-  - The first analysis also tested a uniform prior (`Code/10_uniform_prior_check.py`). With it the evidence depends on an arbitrary range, and the selected democracy model changed at the widest range tried. That is the reason the normal prior is fixed.
-- **Uncertainty in a coefficient is its posterior credible interval**, from the same prior and likelihood used for the evidence. State the prior and $\lambda$ in `Methods`.
-- **The likelihood treats each observation as independent, and that is checked, not assumed.** In panel data each unit appears many times, so test whether residuals are correlated within units, both from one year to the next and across the equations of the system. Then refit on resampled whole units to see how far the intervals widen and how often the same terms are selected. The check is recorded in `Appendix.md`. It enters the report only if it changes what is reported.
-- **There are no clustered or robust standard errors on this branch.** The within-unit check above takes their place.
-
-## Report Format
-
-Every report on this branch is a short article in the same format, so that reports on different questions can be read side by side. All eight steps are kept; what is shorter is the report, not the process. Everything that does not fit goes in `Appendix.md`.
-
-- **Fixed sections, in this order:** Title, `Abstract`, `Introduction`, `Methods`, `Results`, `Discussion`, `Limitations`, `Disclaimer`, `Appendix`, `References`. This is the template order. No section is added, and none is dropped.
-- **Length.** About 2,000 words from `Abstract` to `Limitations`, not counting captions, equations and references. The `Abstract` is one paragraph of at most 200 words. The `Introduction` background is at most two paragraphs.
-- **`Methods` has fixed sub-headings:** `Data` (sources, indicator codes, years, countries, any transformation such as logs or rescaling), `Model` (the change equations and the term library), `Model selection and uncertainty` (the procedure in `Statistical Framework`, stated briefly, with the prior). It then has one sub-heading per sub-question only where that sub-question needs a choice of its own. The general method is described once, not repeated per sub-question.
-- **`Results` has one sub-heading per question.** With the default single question, that is one section, "The fitted model and its dynamics". It covers the selected equations, then what they imply together. Where a question is answered by a fitted model, report the selected equation with credible intervals on its coefficients, the posterior probability of the chosen model size against its nearest rival, and the number of countries and country-years.
-- **Every variable is shown in units a reader can interpret, always, wherever units are available.** This covers figures, captions, text, tables and the abstract. If a source documents a unit, the reader sees that unit. A log-transformed or rescaled variable is a convenience for fitting, not a unit.
-  - In figures, plot a logged variable on a logarithmic axis labelled in its original units. For GDP per capita, that is constant US dollars of the stated base year, with ticks such as \$1,000, \$10,000 and \$100,000. The axis is never labelled "log GDP ÷ 12". A point's position is the same either way, since the axis is linear in the log, so the figure loses nothing.
-  - An index keeps its own scale, labelled with its range, for example "index, 0 to 1".
-  - In the text, give levels and thresholds in original units, such as "about \$5,000 per person". The model's scale is used where a coefficient is reported, with the conversion stated once in `Methods`.
-  - This applies even when a source paper reported its variables without units.
-- **Standard figures.** These are the standard set for two variables. Add others only where a sub-question needs them. In this order:
-  1. **Trajectories over time.** One panel per variable, against year, with the representative countries as lines. There is no mean line.
-  2. **Trajectories in the plane of the two variables.** All countries in the last year as faint points. The representative countries' paths over the whole period as lines, with their starting points marked by a filled circle. There is no mean path. The axes are the same as in the phase portraits.
-  3. **The data phase portrait:** observed changes against state.
-  4. **The fitted model's phase portrait:** the model only. It shows the vector field, the nullcline or nullclines, and trajectories simulated from the representative countries' first observed states. No data is drawn, because the observed paths are already in figure 2.
-- **Representative countries.** Six by default.
-  - Fix them before the trajectory figures are drawn, from metadata and coverage, not from how their paths look. Aim for good coverage and starting points spread across the range of both variables. In a replication, use the paper's own choice. Record the reasons in `Appendix.md`.
-  - Use the same countries, in the same colours, in every figure.
-  - Leave years with missing data as gaps, not joined lines.
-- **The figure format is locked.** Figures 1 and 2 of the first analysis on this branch (democracy and GDP) are the reference: `Code/03_fig_trajectories_time.py`, `Code/04_fig_trajectories_plane.py`, and the shared style in `Code/sds_common.py`. Later figures follow the same format, and only the user changes it.
-  - **Style:** the user's graph style inside the workspace themes. Sizes are in centimetres. Text is 11 pt, legends 10 pt. Output is 300 dpi, with light and dark versions on opaque backgrounds and a fixed canvas, checked after saving. There are no top or right spines and no background grid (`axes.grid` off).
-  - **Colours:** the six-colour palette, one fixed colour per representative country, in the order the countries are listed.
-  - **Axes:** the outcome variables on their own scales, with units as above. A logged money variable is on a dollar log axis with ticks written \$1k, \$10k. Each axis label names the variable and its unit, for example "GDP per capita (2015 US\$)" or "Democracy (index, 0 to 1)".
-  - **Legend:** outside or below the axes, never over data, with no frame.
-  - **Nothing else on the figure.** No title or note inside the frame; the caption carries what is shown.
-  - **Phase-portrait arrows are locked too.** Figure 3 of the first analysis (`Code/05_fig_data_phase_portrait.py`) is the reference for the data phase portrait, and the model phase portrait's vector field uses the same arrows:
-    - **Cells.** The observed yearly changes are averaged within a grid over the state, about 14 cells across and 10 up. For log GDP divided by 12 that is 0.04 per cell, a factor of about 1.6 in GDP. For a 0-to-1 index it is 0.1. A cell gets an arrow only if it holds at least 10 changes.
-    - **Arrows.** Each arrow starts at the cell's mean state, marked with a dot, and points along its mean change, drawn at 3⅓ times the yearly change. Any arrow longer than 0.47 cm on the page, about two thirds of a cell, is shortened to 0.47 cm. One factor is applied to both components, so the direction is exactly as observed. The cap is measured after layout. Arrows are in the theme's ink.
-    - **Context.** The representative countries' paths are drawn faintly (thin, semi-transparent) in their fixed colours.
-    - **Legend.** "Mean change, 3⅓ years (capped)", split over two lines so the axes keep their width.
-    - **Axes.** The same fixed range as the plane figure (Figure 2), so the two can be laid over each other.
-    - **Caption.** It says how long the arrows are, how many were shortened, the minimum count per cell, and how many changes the arrows cover.
-  - **The model phase portrait is locked as well.** Figure 4 of the first analysis (`Code/09_fig_model_phase_portrait.py`) is the reference:
-    - **Arrows.** The model's predicted change at the same cell positions as the data phase portrait, in the locked arrow format, with the legend "Model change, 3⅓ years (capped)".
-    - **Nullclines.** Each nullcline is drawn as a light grey line (the theme's muted grey, 2 pt) with its 95% posterior band in a lighter grey. It is named in the legend and text as "<Variable> nullcline", for example "Democracy nullcline". It is drawn only where it lies within the observed range of the other variable and inside the variable's own scale. A nullcline that does not exist in that range is reported in the text, not drawn.
-    - **Simulated paths.** Solid lines in the representative countries' fixed colours, each with a filled circle at its start, stepped yearly from the first observed state to the last year of the data.
-    - **No data.** No observed paths and no data points. The text points to figure 2 for where countries actually went.
-- **At most five figures** in a two-variable report. Log-likelihood and evidence plots against the number of terms go in `Appendix.md`, unless the choice of model size is itself a finding.
-- **Higher dimensions may need more figures.** With three or more variables, a single plane cannot show the state. The trajectory and phase-portrait figures may then be repeated for each pair of variables, or for chosen slices. Agree which with the user. The five-figure limit is relaxed to what the agreed set needs.
-
-## The Eight Steps
-
-Work proceeds through these steps in order. Each is one or more separate exchanges. **Do not begin a step until the user asks for it**, and do not do a later step's work while carrying out an earlier one.
-
-### Step 1 — Import and scope the data
-
-Get the data in and establish what will be used.
-
-- Put source files in `Attachments/`. Never modify them.
-- Record provenance: where the file came from, when, and a checksum. Say why this file and not another, if that was a choice.
-- **Ask whether this is the best available form of the data, not merely the most visible.** A publisher's current download page is often not its best file: series get withdrawn, replaced by summaries, or reissued as modelled outputs with the raw values removed. Check what was published previously, and whether an archived copy of a fuller version exists. Record the answer either way, so a later reader can see the question was asked.
-- **The World Bank is the standard source.** Take every variable the World Bank publishes from its [World Development Indicators](https://databank.worldbank.org/source/world-development-indicators), by indicator code (for example `NY.GDP.PCAP.KD`), not from a republication of it.
-  - **Record the indicator code, its units and base year, and the date of download.** World Development Indicators series are revised, so the download date identifies the vintage.
-  - **Go elsewhere only for a variable the World Bank does not publish.** Use the original publisher, or an archived copy where the series has been withdrawn, and say why the World Bank could not supply it.
-  - **In the usual case, use the current release.** Only a replication may need the paper's vintage rather than today's. If the current World Development Indicators series differs from the one the paper used, for example in base year, units or years covered, say so. Agree with the user whether to use the current series or an archived one.
-  - **Record which source was used for each variable, and why.**
-- **Scan for missing-value codes before summarising anything.** Look for sentinel values such as −99, −999, −9 or 9999, and for values outside the documented range. Count them, by year and by unit, and set them to missing. A single summary statistic computed with them left in is wrong, and it is wrong silently.
-- **Join sources on ISO 3166 alpha-3 codes, and check the join.**
-  - Exclude World Bank aggregates (regions, income groups, the world), which sit in the same file as countries; the country metadata file marks them by a blank region.
-  - Check for historical units (East and West Germany, Ethiopia before 1993, Czechoslovakia) and for codes appearing twice in a year.
-  - List the units on each side that do not match.
-- **Scaling convention.** Rescale every variable to roughly 0–1 by a fixed, documented constant: divide by a stated maximum, such as 12 for the natural log of a per-capita dollar income, or 100 for a percentage or for life expectancy in years. Never use the data's own minimum and maximum. Min–max scaling makes coefficients incomparable between analyses, and it puts the lowest observation at exactly zero, where the inverse terms are undefined.
-- **Count zeros and near-zeros in every variable before fitting.** For a variable that reaches zero, remove from the library every term with that variable in the denominator, and record which ones. The papers this branch follows never report a selected model with an inverse term in a variable that reaches zero.
-- **Flag interpolated series.** A series the source publishes only every few years, then filled in by linear interpolation (for example, education indices before 2000), has year-to-year changes that are constructed, not observed. Use it only with the user's agreement, and flag it in `Data Summary` beside the variable. The step 4 rule on constructed outcomes applies in full when it is a variable whose change is modelled.
-- **Default panel rule.** A change needs both of its years. Use every pair of consecutive years present for a country, not only countries observed throughout, and report how many changes each country contributes.
-- **Describe the file before judging it.** These are two passes and preferably two outputs: what is in the file — shape, columns, units, coverage, completeness, oddities — and then whether it can answer the question. The describing pass draws no conclusions by design. Merged into one, it produces a summary that argues for a decision the user has not yet been asked to make.
-- Write the `Data Summary` section of `Appendix.md`: shape, columns and what they mean, coverage, completeness, and anything unexpected.
-- **Do not touch `Report.md` at this stage.**
-- When the user decides which subset to use, record the decision and its reasoning — then **delete the description of the data that will not be used**. The `Data Summary` documents only the data the analysis will actually use. A brief note of what was excluded and what that costs belongs with the decision; a full description of discarded data does not.
-
-**Every decision taken in step 1 goes in `Data Summary`**, each with its reasoning and what it cost. The test is simple: *could a later step be misled by not knowing this?* If so, record it. At minimum:
-
-| Decision | What to record |
-| --- | --- |
-| **Provenance** | Where the file came from, when, its checksum, and why this file rather than another. Note it explicitly if the source is not the publisher's live one. |
-| **Units** | The unit of every column, and whether it is a **measurement or model output**. A plausible column name is not a unit — check the documentation. |
-| **Scope** | Which rows are used, why, what was excluded, and what that exclusion costs. |
-| **Missing data** | Whether values are imputed or left missing, and the evidence for the choice. Check whether gaps are systematic before deciding. |
-| **Panel structure** | Whether analyses need the same units observed throughout, and what requiring that would cost. |
-| **Cleaning** | Every value altered or set to missing, with the reason and the count. Prefer setting known-wrong values to missing over correcting them. |
-| **Accepted as-is** | Problems found and deliberately *not* fixed, and why. A known flaw left in place is a decision and must be visible. |
-
-A decision that is later reversed **stays in the record, marked superseded**. The `Analysis Log` should show what was tried and abandoned, not only what survived — a reader cannot judge a choice without knowing the alternatives that were rejected.
-
-### Step 2 — Frame the research question
-
-Agree what is being asked, before looking at what the answer might be.
-
-- **Ask the user what the research question is.** That is the framing to ask for.
-- They may well answer with a hypothesis, a hunch, or a claim they expect to hold — that is welcome, and often sharper than a question. Record it in their own terms rather than translating it. "Research question" names the section and the prompt, not a required grammatical form for the answer.
-- Discuss how it might be answered, and whether the data can support it.
-- **Do not test anything.** No statistics, no plots, no correlations, no group comparisons, no "just to check" calculations.
-- **Work from metadata only**: column names, their documented meanings, and the `Data Summary` already written in step 1. Do not look at relationships between variables or compute anything new.
-- The reason is bias. This is exploratory work, but a question chosen after seeing which patterns happen to be present is not really being tested — the answer was already known when the question was picked. Committing to the question first is what keeps the later steps honest.
-- Brainstorm with the user. If they have no clear idea, suggest candidate questions — still without looking at the numbers, so suggestions come from what the variables *mean*, not from what they happen to show.
-- Assess feasibility: is the needed variable present, is coverage adequate, would the data structure undermine the answer, is the question answerable with this file at all.
-- Keep it at that level. Do not design specific visualisations or choose statistical tests yet — steps 3 and 4 exist for that. On this branch, step 2 ends with the proposal from `The Standard Analysis` agreed. That proposal names the model and the figures, which is allowed because they are fixed by the branch, not chosen after seeing the data.
-- **In the usual case, the user names the variables or the question, and the default question in `The Standard Analysis` is the starting point.** There are one to four questions. The bias rule above applies in full. The variables and questions are fixed from what the variables mean before any relationship between them is looked at.
-- **In a replication, the research question is the original paper's.** Record it in the paper's terms, with the equations it reports, and list every departure from its method and data before anything is fitted. The bias rule above still applies to anything the paper did not ask. A question added because of what the replication shows is a new question, and is framed as one. All of this goes in `Appendix.md`. The questions written into the report's `Introduction` are stated as questions about the problem, with no reference to the paper's answers.
-- Record the outcome in the `Research Question` section of `Appendix.md`, which has three parts: `Discussion` — how the question was arrived at, what was considered and ruled out, and what the data can support; `Question` — the single main thing being asked, specific enough to have a definite answer, phrased as a question or as a hypothesis, whichever the user chose; `Sub-questions` — the separately answerable parts, each naming the variables involved and what would count as an answer either way.
-- Write it before anything is tested, so it is on the record that the question preceded the result.
-- **Then, before any analysis starts, write the research questions into the `Introduction` of `Report.md`.** Insert a brief text setting out the questions — do not ask permission first. Then tell the user it is there, that they can edit it themselves, and that they can ask you to change it. This is the one thing that enters `Report.md` early: it fixes in the report itself what was asked, before any result is known, so the write-up cannot quietly become a report of whatever turned out to be interesting.
-- **The `Introduction` never anticipates its conclusions.** It says what is being examined and how it will be approached. It does not say what was found, and it does not say what the analysis will turn out not to support. Two sentences of this kind were written into an introduction and had to come out: *"Neither approach settles the direction of cause."* and *"As we discuss later, the way the data is constructed limits how far the first question can be taken."* Both are results, moved early.
-  - **This holds even when the motive is honesty.** A pointer forward to a limitation feels like candour — it stops the introduction promising more than the report delivers. It is still a finding stated before the reader has seen any evidence for it, and it pre-empts the judgement the reader is entitled to make on reaching the discussion.
-  - **Every limitation has a proper place, and it is not here.** In `Methods`, beside the model whose defect it is, or in `Limitations`, where what qualifies the findings as a whole is collected. Step 5 fills the second of those.
-  - **Naming the approach is not anticipating the result.** *"We ask whether a change in one variable follows the level of the other"* is method, and belongs. *"This cannot establish which came first"* is a conclusion, and does not. The test is whether the sentence would have to change if the numbers came out differently.
-- **The `Introduction` has a fixed shape.** In order:
-  1. **Background** — one or two paragraphs setting the scene: what is already known about the problem, what is unresolved, and why it is worth asking about, with references. This comes first, because a reader needs the problem before they need the method. Written in step 6, since it needs the literature rather than the data.
-  2. **Framing the problem** — two or three paragraphs: what the variables are and how they are measured, whether the question is one of association or of cause, and what approach is taken. Written in step 2, from the framing already agreed.
-  3. **The sub-questions**, as a numbered list. On this branch: the question, or the one to four questions numbered if there is more than one.
-- **Do not open with a sentence about the report.** *"This report examines whether X is associated with Y"* describes the document rather than the problem, and tells a reader nothing they will not get from the sub-questions a few lines later. Open on the question itself — what is unresolved, and why anyone should care that it is.
-- **Put the background placeholder in the opening position**, so that the gap sits where the background will go. Use exactly: `*Background and prior literature to be added later.*` Step 6 replaces it.
-
-### Step 3 — Visualisation
-
-Show what the data looks like for each sub-question, before testing it. One sub-question at a time.
-
-- **Propose the chart before making it.** Say what it would plot, on which axes, over which rows, and what a reader would be able to see in it. Get the user's agreement before producing it. A chart is cheap to describe and expensive to argue about once it exists.
-- **The figures are the standard ones in `Report Format`.** Propose a further figure only where a sub-question needs something they don't show, and then choose its form by what it has to show: a bar chart to compare magnitudes, a scatter for two continuous measures, a line for change over time, a histogram for a distribution.
-- **Plot the observations before the model.** The data goes in first and the fitted line or curve on top. A figure showing only a fit hides how well it describes anything.
-- **When the orientation is genuinely open, produce both and let the user choose.** If it is not obvious which variable belongs on which axis, or which should define the contour lines, make each version rather than arguing for one. Say which you would keep and why. The test is which version makes the claim in the accompanying paragraph visible: a figure whose axes hide the effect the text asserts is the wrong figure, however correct its numbers.
-- **One script per figure**, writing to `Code/outputs/figures/`, reading only from the cleaned data or from exported model coefficients. A figure must never refit a model that is reported elsewhere, or it can drift from the numbers in the text.
-- **Once the data the plot will use is settled, add the plot to `Results` in `Report.md`.** Do not ask first. Number the figures, give each a caption saying what it shows, and put it in the report as soon as it exists.
-- Then tell the user it is there and that they can decide whether to keep it. A plot is easier to judge in the report, at the size and in the place a reader will meet it, than as a file in `Code/outputs/`.
-- **Number figures in the order they appear.** If one is dropped or inserted, renumber the rest and update every reference to them in both documents.
-- Caption what the figure shows, not what it means. Interpretation is step 5.
-- **Set captions in a smaller font than the body text**, so a reader distinguishes figure legend from argument at a glance. Wrap the caption in `<small>…</small>`.
-- **Do not put Markdown inside inline HTML.** Obsidian does not parse it, so `<small>**Figure 1.**</small>` renders with the asterisks visible. Use HTML tags inside the HTML: `<small><b>Figure 1.</b> …</small>`, and `<em>` where italics are wanted.
-- **Explain how to read the figure in the text where it is not self-evident.** A reader who cannot tell what one point represents, or what the difference between the lines is, cannot check the claim being made from it. Say what a single point is, what each line is, and what feature of the picture carries the result.
-- **Make the type big enough to read at the size the figure appears in the note.** Obsidian scales an embedded image down to the width of the pane, so labels that look right in the raw file are often unreadable in the report. Size axis labels, tick labels and legends generously relative to the figure, and judge them in the rendered note rather than in the file.
-- **Assign a colour to a variable, not to a rank.** A variable keeps its colour across every figure in the report, and a series never takes the colour of the position it happens to occupy. Otherwise adding or dropping one series silently repaints the others, and two figures side by side contradict each other about what blue means. Keep a neutral grey for residual and "other" terms.
-- **Give figures an opaque background, and generate a variant for each theme the documents are read in.** A transparent background inverts with the reader's theme and takes the labels with it; a light-only image is unreadable in a dark vault. Produce both and embed the one matching the document's default.
-- **Put nothing on the figure but its title, axes, legend and data.** No subtitle, no description block, no explanatory note inside the frame. The caption below carries what the figure shows and the surrounding text carries the argument; repeating that inside the image duplicates it and crowds the plot.
-- **Tie every label to the thing it names.** A label sitting near a point but not joined to it floats free, and the reader cannot tell which point it belongs to. Use a leader line, and mark the labelled point so the target is visible. Keep labels inside the axes.
-- **Watch for the figure growing to fit its own text.** Saving to a tight bounding box expands the canvas around anything that overruns it, so a long note or a label near the edge silently widens the image — and everything in it then renders smaller once the image is scaled to the pane. Check the output's dimensions are what you asked for.
-- **Take every number in the text from the computed output, never from the figure.** Reading a value off a plot is the most reliable way to get a wrong number into prose, and it is invisible to a reader who trusts the figure.
-- **When a figure is regenerated, remind the user that Obsidian may still show the old image.** It caches the rendered file, so clicking away to another note and back refreshes it. Without that they may judge a figure they have already asked you to change.
-- If the user drops a figure, remove it from `Results` but leave the script and the generated file in place — the working stays in `Appendix.md` and `Code/outputs/` regardless.
-
-### Step 4 — Model fitting
-
-Answer each sub-question with a fitted model: the selected equation, credible intervals on its coefficients, and how firmly the evidence chooses it. One sub-question at a time.
-
-- **Confirm the fit before running it.** The method is the one in `The Standard Analysis`. Before running it, restate what is being fitted, with the prior's $\lambda$ and any departures agreed in step 2, and check that nothing has changed since. If the method turns out to be unsound for this data once started, stop and say so rather than quietly switching to another.
-- **Check the assumptions against the data rather than asserting them.** An assumption named and not checked is worse than one not mentioned, because it reads as though it were verified. If a test assumes independent samples and the observations are paired, it is the wrong test: say so and name the paired equivalent.
-- **Establish that the outcome is a measurement before interpreting any coefficient on it.** A series the source has interpolated, extrapolated, forecast or modelled is not an observation. Differencing such a series returns the gradient of the construction, not a measured change. Check this before the fit rather than after, because it determines what a coefficient could mean: a null on a constructed outcome follows from how the series was built and says nothing about the world.
-- **Report the estimate, its uncertainty, and the sample it came from.** A coefficient without an interval is not a result, and an interval without the number of observations behind it cannot be judged.
-- **Where a variable does not enter the selected model, say how firmly it was left out.** Give the evidence for the best model that includes it against the selected one, and how much the outcome varies and over how many observations. Let the reader weigh it. Do not characterise the absence itself.
-- **Re-derive the number that carries the claim, independently, wherever that is cheap.** Solve the equation from the coefficients rather than reading the value out of a generated table. Two routes to the same figure catch both arithmetic slips and stale output; one route catches neither.
-- **Every number in the report comes from the generated output.** Never from memory, never read off a figure, never carried over from an earlier version of the analysis.
-- **Write the finding as a short paragraph in `Results`.** One paragraph per sub-question, added as soon as the numbers exist.
-- **Keep `Methods` in step with `Results`, using the same sub-headings in the same order.** When a sub-question gets a paragraph in `Results`, it gets one in `Methods` at the same time. The two sections are written in parallel, so a reader can move between what was done and what was found without hunting. On this branch, `Report Format` fixes the first `Methods` sub-headings instead. A sub-question gets its own `Methods` sub-heading only where it needs a choice of its own, and that sub-heading uses the same name as in `Results`.
-- `Methods` says what was done and why that choice; `Results` says what came out. Sample definition, model, and the choices a reader needs to reproduce or challenge the number belong in `Methods`, not in the result paragraph.
-- **`Methods` describes only what `Results` reports.** If a diagnostic, statistic or robustness check does not appear in `Results`, it does not appear in `Methods` either — it goes in `Appendix.md`. Naming a test in `Methods` and never reporting its outcome leaves the reader hunting for a result that is not there.
-- **Keep the report clean.** It should read as an argument, not a technical log. Diagnostic values, alternative specifications, and anything computed but not used belong in the appendix, however much work they took. A test may produce a page of statistics; the report takes the one number that answers the question.
-- **Do not write up a check that changed nothing.** If something was queried, investigated, and the method and result stayed as they were, record it in the appendix and leave it out of the report entirely — not even in `Methods`. The report explains the choices that shape the reported numbers, not every alternative that was examined and found equivalent. A user asking a question in conversation is not a request for a paragraph in the report.
-- **Keep it short and to the point, and tie it to the sub-question it answers.** Name the sub-question, give the estimate with its uncertainty, and stop. Do not restate the method, do not narrate the process, and do not interpret — step 5 does that.
-- Full workings, diagnostics and anything that did not make the paragraph go in `Appendix.md`.
-- **Do not grade the evidence.** Report what was found and what it cannot support; do not tell the reader how to weigh it. *"This null is uninformative rather than reassuring"* is a judgement. *"The outcome varies little within units, so the test has little power to detect an effect of this size"* is a fact the reader can judge for themselves. Avoid words that score evidence — reassuring, striking, worrying, encouraging, damning, impressive, remarkable.
-  - Statements about what an analysis *can and cannot establish* are different, and belong: they are claims about inference, not about how to feel. "This cannot distinguish the direction of causation" stays.
-  - The user makes the normative calls. Give them the magnitudes, the intervals and the limitations.
-- **No emphasis in `Results`** — see the document-wide rule under `Writing`. Emphasis tells the reader which numbers matter, which is the reader's judgement to make.
-
-### Step 5 — Conclusions and limitations
-
-Write the `Discussion` and `Limitations` sections of `Report.md`. Both belong to this step, and both are in the template from the start so that the gap sits where the content will go.
-
-- Interpret what the results support, and state plainly what they do not. Keep the two distinguishable in the reader's mind.
-- **Organise the `Discussion` by theme, not by sub-question.** Results are reported sub-question by sub-question; a discussion earns its place by drawing them together. Agree the paragraph structure with the user before writing.
-- **`Limitations` is its own section and comes after `Discussion`.** It collects what qualifies the findings taken together: what the comparison cannot establish, what the data was not able to see, and what a result rests on that is a model rather than a measurement. A reader deciding how far to trust the conclusions finds them in one place instead of assembling them from the argument.
-- **A defect of one model stays in `Methods`, beside the model.** `Methods` qualifies a specification; `Limitations` qualifies the findings. The same caveat must not appear in both — lifting limitations out of the argument produces that duplication immediately, and the `Methods` copy is the one to keep, since it sits next to the thing it is about.
-- **Count the items and say the number, or do not give a number at all.** A section of this shape opens naturally with "there are three things", and an item added afterwards leaves the count wrong while every sentence in it stays true.
-- **No new analysis.** If a question arises that needs computing, say so and stop — that is a new step, not part of this one.
-- Interpretation belongs here; that is what the section is for. Grading the evidence still does not. Say what the data supports and what it cannot; do not tell the reader how much to be impressed.
-- Nothing enters the `Discussion` or `Limitations` that is not already established in `Results` or `Appendix.md`.
-
-### Step 6 — Background and abstract
-
-By this point `Report.md` holds everything but these two. Steps 2 to 5 have put in the research questions, the figures, the `Methods` and `Results` paragraphs, the `Discussion` and the `Limitations`. Step 6 adds the background and the `Abstract`, and nothing else — if a section still looks unfinished, that is the earlier step's work to complete, not this one's.
-
-**Help the user write the background.** It replaces the `*Background and prior literature to be added later.*` placeholder, and it is the one part of the report that does not come out of the analysis, so it cannot be written from the data.
-
-- **Do not write it alone from memory.** Everything else in the report is checkable against the generated output. A background is checkable only against the literature, and a plausible-sounding sentence about what a field has found is the easiest thing in the document to get wrong.
-- **Propose the structure first and agree it.** Say which claims the background needs to establish for the research question to make sense, and in what order. Usually a handful: what the outcome measure is and why it is taken seriously, what is already known about the relationship being tested, and what remains open — the gap the report addresses.
-- **Then find the sources and read them.** Search, open what the search returns, and take the claim from the source rather than from the abstract or from what you expected it to say. The rules in `References and Citation` apply in full: verify every bibliographic detail, check every link resolves, and never cite a work you have not opened.
-- **Bring the user the sources before the prose.** Say what each one establishes and let them judge whether it belongs, whether it is the right authority, and whether they know a better one. They may well know the literature better than the search does.
-- **Choose the references for their relevance to the findings; write the text as though the findings were not yet in.** These pull in opposite directions and both matter. Knowing how the analysis came out is what tells you which literature is worth citing — a background assembled before the results is padded with work that turned out to be beside the point. But the prose must not carry the results, by statement or by implication.
-  - Cite the paper whose question the analysis ended up answering. Do not write a sentence that only makes sense to someone who already knows the answer.
-  - *"Whether the association survives adjustment for the main confounder has been contested (…)"* frames the question. *"The confounder accounts for much of the apparent effect (…)"* announces the result and does not belong, even with a citation attached to it.
-  - The test from step 2 applies here too: would the sentence have to change if the numbers had come out the other way? If so it is a finding, not background.
-- **The background explains why the questions were worth asking**, and the questions were fixed in step 2 so that the report could not drift toward whatever turned out to be interesting. Keep that protection: the background motivates the questions as asked, it does not quietly restate them to fit the answers.
-- **Mark what could not be supported.** If a claim the structure needs turns out to have no source behind it, say so and leave it out rather than softening it into something vague enough to pass. A gap the user can see is worth more than a sentence they cannot check.
-
-**Write the `Abstract` last**, once the background is settled and every other section is final.
-
-- **It is the one place that states the findings up front.** The rule against anticipating conclusions governs the `Introduction`; the abstract exists to give the answer before the argument, so the two are not in conflict.
-- **Follow this order, roughly a sentence to each.** One paragraph.
-  1. The field in general — what kind of question this is.
-  2. Narrowing to the specific question, and what is unresolved about it.
-  3–4. The research questions, and the data and method that answered them.
-  5–6. The results. A limitation belongs here too, attached to the result it qualifies rather than held back — a null that follows from the data rather than from the world is reported alongside the null, not after it.
-  7. A closing summary: what the reader should take away, in one sentence.
-- **Short sentences, to the point, no fluff.** Every sentence carries a fact, a finding or a limitation. A sentence that only announces what the next one will say comes out. So does any adjective that would survive the results being different.
-- **Avoid numbers.** State the direction and the rough size of what was found in words — *"about half the association remains once income is accounted for"* — and leave the estimates and intervals to `Results`. An abstract is read to decide whether to read the report, and a reader deciding that does not need three decimal places. Sample sizes, test statistics and confidence intervals do not belong here at all.
-- **Suggest a title once the abstract is written.** By then the report's argument is settled, which is the first point at which a title can describe it. Offer two or three, say what each puts first, and let the user choose — a title is the most visible authorial choice in the document and it is theirs. Keep them plain and literal; a title that states the subject is more use than one that is memorable.
-- **Nothing in it is new.** No figure reference, no finding that is not in `Results`, no caveat that is not in `Discussion`. If writing the abstract turns up something the report should have said, put it in the section it belongs to and then summarise it.
-- **Name the prior work you refer to.** *"Earlier work has found that…"* leaves the reader unable to check it or to know which literature is being disputed. Cite it: `Deaton (2008)` or `(Deaton, 2008)`. This is the one place a citation belongs in an abstract, and it comes with the usual obligation to state what that work actually found — including which measure was the outcome and which the predictor, since those are easy to swap round.
-- **No method plumbing.** Which section answers which question, what the source file is called, whether a model was fitted on a cross-section or a panel: all trivial, and all removed by a reader's eye before it reaches the findings. *"The data is the underlying panel of the World Happiness Report 2024; the first two questions are answered on a cross-section of countries and the third on a model of the year-on-year change in happiness"* was cut in full for this reason.
-- **Give the big picture, not the statistical detail.** The abstract says what was learned about the subject. Sample definitions, specifications, diagnostics and how a null came about belong further down. If a sentence would only interest someone who intends to reproduce the work, it is in the wrong section.
-- **Write it last for the obvious reason:** it is the only section that has to be true of every other one.
-
-### Step 7 — Read through
-
-Read the finished report from beginning to end and list what is wrong with it. This is a separate step because the faults it catches are invisible to every check made while writing: those are made section by section, and these faults only exist in sequence.
-
-- **Read it in order, in one pass, as a reader would.** Not section by section, and not searching for anything in particular. A term defined twice, a claim made in `Results` and contradicted in `Discussion`, a figure discussed before it appears — none of these are visible from inside the section that contains half of them.
-- **Check the argument runs end to end.** Each sub-question should be asked in the `Introduction`, its method given in `Methods`, its answer in `Results`, and its meaning in `Discussion`. One missing from any of the four is the commonest structural fault, and the easiest to miss once every section looks complete on its own.
-- **Re-check everything that goes stale.** Every number against the generated output, every figure reference against the figure it now points to, every cross-reference to another section. `When Something Changes` lists how these break.
-- **Re-derive the numbers that describe the data, not only the ones a model produced.** Counts of rows kept and dropped, coverage, the span of a predictor, a share of some total: these are written in the first two steps, they read like background rather than results, and nothing later recomputes them. One read-through found four of them wrong in a single paragraph — how many units the sample rule excluded, what share of the quantity they accounted for, how many were lost to missing data, and the range of the predictor — every one standing since step 1 or 2. Recompute each from the pipeline, and check that the counts add up to the sample actually used.
-- **Check nothing is orphaned.** A figure never referred to in the text. A reference never cited. A citation with no reference. A heading with nothing under it. A defined term used once and never again.
-- **Check the `Abstract` against the report.** Every claim in it should be traceable to a section, and the emphasis it gives should match the emphasis the report gives.
-- **Check the references properly, not just that they exist.** Each one cited where it is used, each detail verified against the source, each link resolving, and the list in order. This is the last chance to catch a citation that says something the source does not.
-- **Report the list; do not fix as you go.** The point of the step is the list. Fixing while reading loses the thread of the argument, and it takes the decisions away from the user, who may want a fault left alone or handled differently.
-- **Record the outcome in the `Analysis Log`**, including when nothing was found. A read-through that reports nothing has to be distinguishable from one that never happened.
-
-### Step 8 — Export
-
-Turn the finished report into a file that can be sent to someone who does not have the vault.
-
-- **Before anything else, have the user confirm they have read the `Disclaimer`.** Quote the section back to them in full, ask them to confirm they have read it, and wait for them to say so. Produce no export until they have.
-  - **Nothing earlier in the conversation counts.** Not a general instruction to go ahead, not agreement given before the wording was last changed, not silence. The confirmation is for this wording, now, and it has to be given in answer to being asked.
-  - **The reason is that publishing is the act of disclosing.** The `Disclaimer` says the report was written with the help of agentic AI at every stage. Up to this point that statement has only been read by the person who directed the work; the moment the report goes to anyone else, they are the one making the disclosure, under their own name. They are entitled to see exactly what it says before that happens, and the wording may have moved since they last looked at it.
-  - **If they want it changed, change it and ask again.** Keep their wording, as everywhere else. A disclaimer they have rewritten and confirmed is worth more than one they accepted because it was already there.
-  - **If they decline to confirm, do not export.** Say that the export is blocked on it and leave the decision with them. This is the one place in the contract where the work stops rather than proceeding with a recorded caveat.
-  - **Record the confirmation in the `Analysis Log`**, with what they were shown and what they said.
-- **Ask which format.** Word for a reader who will comment on it, PDF through LaTeX for something to print or submit, or both. Do not assume, and do not produce every format because it is cheap to do so.
-- **`Report.md` remains the source of truth.** Never edit an exported file and never convert one back.
-- **Run the conversion from the vault root**, so the figure paths inside the document resolve, and record the exact command in the `Code Summary`. An export that cannot be repeated is not much better than a screenshot.
-- **Write the export to the project root, beside `Report.md`.** That is where someone looking for the finished report expects to find it, and burying it under `Code/outputs/` among the figures and the model output makes the one file the work exists to produce the hardest one to locate. Working files from the conversion — a pre-processed intermediate, a log — are build artefacts and do belong under `Code/outputs/`.
-  - The risk this creates is that the export becomes the file somebody edits. The rule above is what guards against it: `Report.md` is the source of truth, the export is never edited and never converted back, and it can be reproduced at any time by re-running the export script. An export that has been edited is discarded and made again.
-- **Five things break in conversion, and none of them stops it.** The exporter returns success and writes a plausible file in every case below, so each has to be checked by looking at the output.
-  - **Captions stop looking like captions.** They are wrapped in `<small>` and `<b>` because Obsidian will not parse Markdown inside HTML. Converting to Word or LaTeX keeps the words and discards the tags, so the caption arrives in body text at body size and a reader can no longer tell legend from argument. Convert captions to the target's own emphasis before exporting.
-  - **Characters the target's font cannot render are dropped in silence.** A default LaTeX font will not have Greek letters or superscript signs, so `ρ` and `⁻` vanish from the PDF — which matters, because that turns `p = 1 × 10⁻¹³` into `p = 1 × 1013`, a different number rather than a missing symbol. The exit code is still zero. Use an engine and font that cover the characters actually in the document, and search the output for every non-ASCII character the source contains.
-  - **Links to other documents survive as dead links.** Relative links to `Appendix.md` or `Setup.md` point into a vault the reader does not have. Strip them, or point them somewhere published.
-  - **The reference list is prose, not a bibliography.** It converts as ordinary paragraphs. That is usually what is wanted, but the target's citation machinery is not involved and will not renumber or reformat anything.
-  - **Figures drift away from their captions.** A converter turns a lone image into a float, which the typesetter moves to wherever it fits, while the caption below it is an ordinary paragraph and stays where it was. The two land pages apart and nothing is reported. Emit the graphic directly instead of letting it float, and note that the graphics package is only loaded automatically while the converter is managing the images itself. Then check which page each image and each caption landed on, rather than that both exist.
-- **Open the exported file and look at it.** Figures present and in the right order, captions attached to the right figures, tables not collapsed, equations legible, no numbers altered by a missing character.
-- **Read the output back and check it mechanically; do not trust the exit code.** Every failure above returns success. Extract the text from the converted file and confirm against it that every section is present and in order, that each figure is on the page of its caption, that no markup from the source survives as literal text, and that every non-ASCII character in the source is still there. A tool that reads the target format back is part of the export, not an extra.
-- **Make the export a script rather than a command typed once.** The pre-processing that fixes the failures above is several transformations, and an export that cannot be re-run after the next edit to the report is not reproducible. Keep the intermediate the converter actually consumed, so the transformations can be inspected. Have the script fail on a dropped character rather than report one, since a warning in a long log is the same as no warning at all.
-- **The workspace ships with the export script but not with the tools it drives.** `Code/16_export_report.py` is part of the template, because the pre-processing that fixes the five failures above is worth having written down once rather than rediscovered every time. The converter and typesetting engine are not: nothing in steps 1 to 7 needs them. Word needs only a converter; PDF needs a typesetting engine as well, which is a much larger install. Ask which format they want, then install what that format needs and nothing else, and check what is already on the machine before downloading anything.
-- **The tools are not fixed by this contract.** `pandoc` is the usual converter. Whatever is used, record it in `Setup.md` with its version, so the export can be reproduced.
-
-## When Something Changes
-
-A refit, a re-cleaned value, a dropped figure or a renumbering makes some sentences in the documents false. Making the change is the easy part; finding what it falsified is the work.
-
-- **Re-run the whole pipeline, not just the script that was edited.** Later scripts read earlier outputs. One that is not re-run leaves the documents describing two different versions of the data.
-- **Sweep every document for the old values, including prose that quotes a table.** Correcting a table and missing the sentence citing it is the commonest way a document goes internally inconsistent, and every local check still passes while it is wrong.
-- **Search for the formatted number as well as the raw one.** A p-value written `7.65e-14` in the output may appear as `8 × 10⁻¹⁴` in the report. Searching for one will not find the other.
-- **Re-read every paragraph that mentions a changed figure, not only the nearest one.** Reorienting a chart can falsify the paragraph explaining how to read it while the caption and the paragraph above it both stay correct.
-- **Check for numbers hardcoded in scripts.** A value asserted in a string rather than computed survives a refit unchanged and unnoticed. Compute it instead, so it cannot go stale.
-- **Re-verify the numbers that survive, not only the ones that moved.** A figure that happens to be unchanged still has to be confirmed against the new output rather than assumed.
-- **Record what moved in the `Analysis Log`**, with the before and after values. That is what lets a reader see which conclusions are sensitive to the decision.
-
-## Working Method
-
-1. Inspect the relevant files in `Attachments/` before making claims about their contents.
-2. Put all analysis logic in `Code/`. Use clear, descriptive filenames and preserve a reproducible path from source data to results.
-3. Record the work in `Appendix.md` as it progresses — from the first step, not at the end. What the data contains, the research question and how it was reached, then each step's decisions, assumptions and outputs in the `Analysis Log`.
-4. Write `Report.md` only as the steps above direct: each step adds its own part without being asked, and nothing else enters it. Write it for the intended audience, keep it concise, distinguish facts from interpretations, and link each material conclusion to supporting appendix evidence.
-5. Update the `Code Summary` section of `Appendix.md` whenever code is added or materially changed. State what each important file does, how to run it, what it reads and produces, and any parameters or seeds that affect results. Keep installation and environment instructions in `Setup.md`.
-
-## Python Environment
-
-Run all Python through the workspace environment so results are reproducible. Full instructions live in `Setup.md`; the rules that bind this work are:
-
-- Create or update the environment with `cd Code && ./setup_env.sh`. This resolves `uv.lock` and builds `Code/.venv`. Never install packages into the system Python.
-- Run code with `cd Code && uv run python <script>.py`, notebooks with `cd Code && uv run jupyter lab`.
-- Add a dependency with `cd Code && uv add <package>`, which updates `uv.lock`. Commit the changed lockfile, list the package in the `Code Summary` section of `Appendix.md` alongside the code that needs it, and update the version table in `Setup.md`.
-- `Code/check_env.py` prints the exact interpreter and package versions. Record that output in `Appendix.md` when environment versions could affect results.
-
-## Analysis Standards
-
-- Preserve original attachment files. Write derived datasets, charts, tables, and exports under `Code/` unless a task specifically requires another location.
-- Never invent data, results, file contents, citations, or successful execution. Mark missing information and unverified assumptions clearly.
-- Prefer reproducible scripts or notebooks over manual calculations. Include commands, parameters, random seeds, and environment requirements when they affect results.
-- Check row counts, missing values, types, ranges, duplicates, joins, and outliers as appropriate for each dataset. Document meaningful issues in the appendix.
-- Separate observed results, methodological assumptions, and recommendations. Quantify uncertainty and limitations where possible.
-- Do not expose credentials, access tokens, personal data, or other sensitive material in code or Markdown files.
-
-## Markdown Formatting
-
-These documents are read and edited in Obsidian, which soft-wraps text to the width of the pane.
-
-- **Do not hard-wrap prose.** Write each paragraph as a single line, however long. Breaking lines at a fixed column looks ragged in the editor, and it makes the text painful to edit, because changing one sentence means rewrapping the whole paragraph by hand.
-- One line per paragraph, list item, table row, heading, and blockquote paragraph. A bare `>` still separates paragraphs inside a blockquote.
-- Code blocks are exempt: wrap those as the language needs.
-- The same applies to Markdown written by scripts in `Code/`. Build each line as one string rather than emitting a wrapped block.
+| `Attachments/` | Source data and the papers the method comes from. Never modified. Literature PDFs go in `Attachments/literature/`, which is gitignored. Large or third-party files are gitignored too, with `Attachments/SOURCE.md` saying how to download them and their checksums. |
+| `Code/` | Analysis scripts, numbered in run order, and `outputs/`. `sds_common.py` holds the locked figure style, the representative countries and the phase-portrait arrows. The environment files (`setup_env.sh`, `pyproject.toml`, `uv.lock`, `check_env.py`) and `16_export_report.py` arrive with the template. |
+| `Report.md` | The short article, built up step by step. |
+| `Appendix.md` | The running record: `Data Summary`, `Research Question`, `Analysis` (the workings), `Analysis Log` (a numbered row per step), `Code Summary`, `References`. |
+| `Setup.md` | Installing and running the workspace. |
+| `Sample Report/` | An earlier finished analysis of another kind, kept to show what complete documents look like. Never edited. |
+
+## Working step by step
+
+The work goes one step at a time, with the user directing each step.
+
+- **One step per request.** Do the step, say what changed and what was found, then stop. Do not run ahead into analysis, figures, findings or prose that were not asked for, even when the next step is obvious.
+- **Announce every step.** Say which step is starting and what it involves. When its work is done, do not propose the next one. Ask whether anything is missing from this one, and make the question concrete: list what the step covered, what is settled, what was never discussed, and what the comparison with the sample turned up. Wait for an answer, not an absence of objection. A user who answers one item has not closed the others.
+- **From step 3 onwards, compare with a finished example before asking.** Compare the shape, not the content, of the matching part of `Sample Report/Happiness.md`: how captions explain the figure, how much of `Methods` is choices rather than procedure, where a limitation sits. Once this branch has a finished analysis of its own, compare with that instead. Say what the comparison found, including when it found nothing. A difference is not a fault; propose and let the user decide.
+- **Stop and ask** when a step turns out bigger than it looked, when the data forces a choice, or when a request is ambiguous.
+- **Where a document is yours to write, write it, then say so.** Do not ask first. Tell the user what changed and that they can edit it or ask for changes.
+- **Never undo the user's changes.** Re-read a file from disk immediately before editing it. Never revert, reformat or tidy their text. If what you need conflicts with what they wrote, keep theirs and raise the conflict. Stage named files, never everything, and check a commit if a file changed under you.
+- **Check what the user writes.** Check each number against the output, each claim against what was tested, and each citation against its source. Quote any error and give the correct value, but leave the change to them. Say plainly when everything is correct.
+- **When the user says they are rewriting a document, leave it alone until they say `done`.** Then read the `git diff` as a whole, turn the edits into checkable style rules with before and after examples, add them under `Writing`, and apply them to the rest of the work.
+- **The `Disclaimer` is already written and stays.** It says the report was written with agentic AI at every stage. Never remove it, soften it or move it down. If the user rewrites it, keep their wording.
+- **No markers for work not done.** A dropped question, an abandoned test or a rejected method leaves the report completely. Record it in the `Analysis Log`.
+
+## Changing this contract
+
+A message beginning **FRAMEWORK** changes this document.
+
+- Apply the change here at once, in a commit of its own that touches no analysis content.
+- Apply it to the analysis in progress at the same time, retrospectively where it affects work already done.
+- If it conflicts with something already here, say so rather than leaving the contract contradicting itself.
+- **Everything stays on this branch.** Nothing is promoted to `main`, and `main` is not touched. One rule (scanning for missing-value codes) went to `main` before this rule was made, and stays there. If a change looks useful for `main`, say so; carrying it across is the user's decision.
+
+## The standard analysis
+
+The user names a question or just a set of variables, and the agent proposes the analysis without asking which model to use. The model is always the same kind: the yearly change in each variable is a polynomial function of the current levels of all of them, pooled over countries and years, selected and fitted as in `Statistical framework`. What changes between analyses is the variables and the data decisions.
+
+The usual analysis asks how a chosen set of variables drive each other's change, using variables not modelled this way before. Replicating a published model is the exception, used to check the method against a known result. The first analysis on this branch replicated Ranganathan, Spaiser and Sumpter (2013) on democracy and GDP per capita.
+
+- **One to four questions.** One is the default. For two variables $X$ and $Y$: *"What model best describes the yearly changes in $X$ and $Y$, and what dynamics does it imply?"*
+  - Add a question only where the user wants a separate answer, for example whether $Y$ enters the equation for $X$ at all.
+  - Each question says what would count as an answer either way, such as whether the other variable enters each selected equation, and whether nullclines or fixed points exist within the observed range.
+- **The proposal, made straight away and recorded in `Research Question` once agreed:**
+  1. **Variables.** Each with its World Bank indicator code or other source, its unit, and whether it is a measurement, an estimate or a constructed index.
+  2. **Transformations.** Logs for variables spanning orders of magnitude, such as GDP. Rescaling to roughly 0–1 by a fixed constant (see step 1).
+  3. **The system.** One equation per variable, $\Delta x_i(t) = x_i(t+1) - x_i(t) = f_i(x_1(t), \dots, x_N(t))$, pooled over countries and years.
+  4. **The term library.** For two variables, the 13 terms of Ranganathan, Spaiser and Sumpter (2013): $1, 1/X, 1/Y, X, Y, 1/(XY), Y/X, X/Y, XY, X^2, Y^2, 1/X^2, 1/Y^2$. Remove every term with a variable in the denominator if that variable reaches zero, and say which.
+  5. **The search.** Every subset; the best of each size by likelihood; sizes compared by evidence.
+  6. **The prior.** The normal prior in `Statistical framework`.
+  7. **The checks.** Residual correlation within countries, residual correlation between the equations, and refits on resampled countries.
+  8. **The figures.** The standard figures in `Report format`, with the six representative countries named.
+- **Two variables is the default.** A third variable uses the 33-term three-variable library, searched up to five terms (Ranganathan et al., 2014). Lagged variables are an extension. Both need the user's agreement.
+- **The user agrees the proposal or changes parts of it.** Changes are recorded as departures. Nothing outside this section and `Statistical framework` comes in without agreement.
+- **Replications.** The variables, years and library are the paper's, and every departure (data vintage, library, prior) is recorded before anything is fitted.
+  - **The report never mentions replication.** It reads as a standalone investigation, because finished reports serve as templates and must show the usual case. The paper is cited only as the source of the method.
+  - The paper's equations, what counts as reproducing them, and the comparison all go in `Appendix.md`. Convert the published equations to this analysis's scale before fitting, so the comparison is defined in advance.
+
+## Statistical framework
+
+Inference is by likelihood and Bayesian evidence, following Ranganathan, Spaiser and Sumpter (2013), with unstated details from Ranganathan, Spaiser, Mann and Sumpter (2014). This is fixed. P-values, selection by information criteria alone and machine-learning fits are not used, not even as a check, without the user's explicit agreement.
+
+- **Within a size, models are ranked by likelihood.** Under Gaussian noise this is least squares.
+- **Across sizes, models are compared by evidence.** Report the posterior probability of each size, not only the winner, with every size equally likely beforehand.
+- **The prior is normal, always,** and the same in every analysis.
+  - Each term is divided by its root-mean-square value. The rescaled coefficients are independent normals centred on zero, with standard deviation $\lambda = \text{sd}(\Delta x)$.
+  - The noise standard deviation $\sigma$ is fixed at the same $\text{sd}(\Delta x)$ (Ranganathan et al., 2014).
+  - The evidence is closed-form, $\Delta x \sim N(0, \sigma^2 I + \lambda^2 X X^\top)$, computed through $m \times m$ matrices. The posterior is Gaussian. Coefficients and 95% credible intervals are reported on the original scale.
+  - Record the selection with $\lambda$ ten times smaller and larger, and with $\sigma$ from the residuals, in `Appendix.md`.
+  - A uniform prior was tested in the first analysis (`Code/10_uniform_prior_check.py`). Its evidence depends on an arbitrary range, and the selected democracy model changed at the widest range tried. That is why the prior is fixed.
+- **Independence is checked, not assumed.** Each country appears many times.
+  - Test the lag-1 correlation of residuals within countries, and the correlation of residuals between the equations. For the latter, an iterated seemingly-unrelated-regressions re-estimate shows whether it matters.
+  - Refit on 500 resamples of whole countries, with a fixed seed, to see how often the same terms are selected and how far the coefficient ranges exceed the credible intervals.
+  - These go in `Appendix.md`, and in the report only if they change how a result should be read. There are no clustered or robust standard errors on this branch.
+- **The dynamics are computed, not read off figures.**
+  - Solve each nullcline from the fitted equations, exactly where possible, and check by a second route.
+  - Determine stability from the sign of the derivative of the change in each variable with respect to that variable, along its nullcline.
+  - Give nullclines a 95% band from 1,000 posterior draws.
+  - Step trajectories forward a year at a time, $x_{t+1} = x_t + f(x_t)$, from each country's first observed state.
+  - Measure convergence for all countries: the distance to the nullcline at the start against the end, simulated and observed.
+
+## Report format
+
+Every report is a short article in the same format, so reports on different variables can be read side by side.
+
+- **Sections, in order:** Title, `Abstract`, `Introduction`, `Methods`, `Results`, `Discussion`, `Limitations`, `Disclaimer`, `Appendix`, `References`.
+- **Length.** About 2,000 words from `Abstract` to `Limitations`, excluding captions, equations and references. The `Abstract` is one paragraph of at most 200 words, and the background at most two paragraphs.
+- **`Introduction`.**
+  1. The background placeholder, `*Background and prior literature to be added later.*`, replaced in step 6.
+  2. Two or three paragraphs on the variables and how they are measured, that the question is one of association, and the approach.
+  3. The question, or the questions numbered.
+
+  It never anticipates a result: would the sentence change if the numbers came out differently? Do not open with a sentence about the report.
+- **`Methods`** has the sub-headings `Data`, `Model`, `Model selection and uncertainty` and `Dynamics`. The method is described once. Choices get a reason. A weakness of one model goes beside that model. `Methods` describes only what `Results` reports.
+- **`Results`** opens with the figures of the data and how to read them, then one section per question. With one question that section is "The fitted model and its dynamics", which gives:
+  - the selected equations, with credible intervals
+  - the posterior probability of each chosen size against its rival
+  - the number of countries and yearly changes
+  - whether each variable enters the other's equation, and how firmly
+  - the nullclines in the variables' units
+  - where change stops, or that it does not within range
+  - convergence as numbers.
+- **Units, always, wherever available,** in figures, captions, text, tables and the abstract. A log or a rescaling is for fitting, not a unit.
+  - Plot a logged variable on a log axis labelled in its original units: constant US dollars of the stated base year, with ticks such as \$1k and \$10k.
+  - Label an index with its range, for example "index, 0 to 1".
+  - In text, give levels in original units, for example "about \$5,000 per person". Coefficients are on the model's scale, with the conversion stated once in `Methods`. For GDP, a yearly change $x$ in $\ln(\text{GDP})/12$ is growth of $e^{12x} - 1$.
+- **The standard figures for two variables, in order:**
+  1. **Trajectories over time.** One panel per variable against year, with the representative countries as lines. No mean.
+  2. **Trajectories in the plane.** All countries in the last year as faint points, and the representative countries' paths with a filled circle at the start. No mean. Same axes as the phase portraits.
+  3. **The data phase portrait.**
+  4. **The model phase portrait.**
+
+  At most five figures. Evidence and likelihood plots go in the appendix. With three or more variables, the figures may be repeated per pair of variables or per slice, as agreed with the user.
+- **Representative countries.** Six, fixed before plotting from metadata and coverage, not from how their paths look. A replication uses the paper's. Each keeps one colour in every figure, and missing years are left as gaps.
+- **The figure format is locked,** with the first analysis as the reference: `Code/03_…`, `04_…`, `05_…` and `09_…`, and `Code/sds_common.py`. Only the user changes it.
+  - **Style.** Sizes in cm, text 11 pt, legends 10 pt, 300 dpi. Light and dark versions on opaque backgrounds, with a fixed canvas checked after saving. No top or right spines and no background grid.
+  - **Colours.** The six-colour palette, one colour per country, in list order.
+  - **Axes.** Each axis label names the variable and its unit, for example "GDP per capita (2015 US\$)" or "Democracy (index, 0 to 1)". Figures 2–4 share one fixed range.
+  - **Legend.** Off the data, with no frame.
+  - **Nothing else in the frame.** The caption carries what is shown.
+  - **Phase-portrait arrows.**
+    - Changes are averaged over a grid of about 14 by 10 cells over the state (0.04 in log GDP ÷ 12; 0.1 in a 0-to-1 index), and a cell needs at least 10 changes.
+    - Each arrow starts at the cell's mean state, marked with a dot, and points along its mean change, drawn at 3⅓ times the yearly change.
+    - Any arrow longer than 0.47 cm on the page is shortened to that, with one factor on both components so the direction is exact. Arrows are in the theme's ink.
+    - Legend: "Mean change, 3⅓ years (capped)", or "Model change …", on two lines.
+  - **Data phase portrait.** It also shows the representative countries' paths, faint.
+  - **Model phase portrait.** The model only:
+    - model arrows at the same cells
+    - each nullcline as a light grey line named "<Variable> nullcline", with a lighter 95% band, drawn only within the observed range and the variable's own scale
+    - simulated paths, solid, in the countries' colours.
+
+    No data: the text points to figure 2 for where countries actually went. A nullcline that does not exist in range is reported in the text.
+- **Captions** say what is shown, not what it means. Use `<small><b>Figure n.</b> …</small>`, with HTML (not Markdown) inside. A phase-portrait caption states the arrow length, how many arrows were capped, the minimum per cell, and how many changes are covered. Text before each figure says how to read it.
+
+## The eight steps
+
+Each step is begun only when the user asks for it.
+
+### Step 1: Import and scope the data
+
+- **The World Bank is the standard source.** Take each variable it publishes from the World Development Indicators by indicator code, recording the code, units, base year and download date (which fixes the vintage).
+  - Go elsewhere only for a variable the World Bank does not publish. Use the original publisher, or an archived copy if it has been withdrawn, and say why.
+  - Use the current release, except in a replication, which may need the paper's vintage, by agreement.
+- **Record provenance.** Give the source, date and SHA-256 checksum for every file. Ask whether a fuller or earlier version exists, and record the answer.
+- **Describe before judging.** First what the files contain (shape, coverage by year, ranges, oddities), with no conclusions; then whether they can answer the question.
+- **Scan for missing-value codes** such as −99, −999 or 9999, and for values outside the documented range. Count them by year and country, and set them to missing.
+- **Join on ISO 3166 alpha-3 codes.** Exclude World Bank aggregates; the metadata gives them a blank region. Check historical units (West Germany, Ethiopia before 1993, Czechoslovakia) and duplicate country-years, and list the countries on each side that do not match.
+- **Scaling.** Rescale to roughly 0–1 by a fixed, stated constant: 12 for the natural log of a per-capita dollar income, 100 for a percentage or for life expectancy in years. Never use min–max scaling, which makes coefficients incomparable and puts an observation at zero, where inverse terms are undefined.
+- **Zeros.** Count zeros and near-zeros in every variable. Where a variable reaches zero, remove the terms with it in the denominator.
+- **Interpolated series.** A series published every few years and filled in by interpolation has constructed year-to-year changes. Use it only by agreement, flagged beside the variable. Its modelled changes say nothing about the world.
+- **Panel rule.** A change needs both of its years. Use every consecutive pair present, and report how many changes each country contributes.
+- **`Data Summary`.** Record provenance, units (a measurement, an estimate or a constructed index), years and countries, missing data and its pattern, every cleaning step with counts, problems accepted as they are, and the transformations. Keep superseded decisions, marked as such. Describe only the data actually used.
+- Do not touch `Report.md` in this step.
+
+### Step 2: Frame the question
+
+- **Fix the variables and questions from what the variables mean,** before looking at any relationship between them. No statistics, plots or "just to check" calculations. A question chosen after seeing the data is not tested by it.
+- **Agree the proposal** from `The standard analysis`, including the questions and what would count as an answer either way.
+- **Record it in `Research Question`:** `Discussion` (how the question was reached, what was set aside, feasibility from the `Data Summary`), `Question`, and the proposal with any departures.
+- **Then write the `Introduction`'s framing paragraphs and the question into `Report.md`** without asking first, and tell the user it is there.
+- In a replication, the question is the paper's. Its equations, converted to this scale, and the criteria for reproducing them go in the appendix only.
+
+### Step 3: Figures of the data
+
+- **Build the panel first.** One script applies every step 1 decision and writes the counts the captions use, and these must match step 1.
+- **Make the standard figures 1–3 in the locked format,** each from its own script that reads the panel and refits nothing. Propose any extra figure before making it.
+- **Look at every figure after rendering, and check its size.** Fix overlapping labels, data hidden by the legend, and lines leaving the meaningful range before showing the user.
+- **Add each figure to `Results`** with a caption and a sentence on how to read it, without asking first. Remind the user that Obsidian may show the old image until they click away and back.
+- **Take every number in the text from the output,** never from a figure.
+
+### Step 4: Fit the model and compute the dynamics
+
+- **Confirm before fitting.** Restate the library, prior and departures, and run only once the user agrees.
+- **One script fits any outcome** (`Code/06_fit_change_model.py`), and its checks run alongside: the prior ×0.1 and ×10, $\sigma$ from the residuals, lag-1 residual correlation, and country resampling.
+- **Check that each modelled change is measured,** not interpolated or modelled by the source, before interpreting a coefficient on it.
+- **Then the joint checks and the dynamics,** as in `Statistical framework`. Draw figure 4 from exported results only.
+- **Re-derive the number that carries each claim by a second route:** for example, the evidence from the full $n \times n$ covariance matrix, or a nullcline both exactly and on a grid.
+- **Where a variable is left out of an equation, say how firmly,** from the evidence of the best model including it.
+- **`Methods` and `Results` are written as the numbers arrive.** Results state the estimate, interval and sample, then stop. No interpretation, and no words that grade the evidence (striking, reassuring, worrying). Statements of what the analysis can and cannot establish do belong.
+- **Appendix only:** a check that changed nothing; diagnostics; alternative specifications; and, in a replication, the comparison with the paper.
+
+### Step 5: Discussion and limitations
+
+- **The `Discussion` interprets the results,** organised by theme. Agree its paragraphs first. Keep what the results support distinct from what they do not.
+- **`Limitations` collects what qualifies the findings as a whole.** Examples: pooling all countries into one system, democracy as an expert-coded index, how little of the yearly variance is explained, and selection that varies across resamples. A weakness of one model stays in `Methods` and is not repeated here.
+- **No new analysis.** Nothing enters that is not already in `Results` or the appendix. If a count is given ("three limitations"), keep it right.
+
+### Step 6: Background, abstract and title
+
+- **The background replaces the placeholder.**
+  - Agree its structure first.
+  - Find the sources, read them, and bring them to the user before writing prose.
+  - Choose references for their relevance to the findings, but write as if the findings were not yet known. A sentence that would change if the numbers had differed is a result, not background.
+  - Leave out a claim that has no source.
+- **The abstract is one paragraph, in this order:** the field; the specific question and what is unresolved; the variables, data and method; the results, with any limitation attached to the result it qualifies; one sentence of conclusion.
+  - Use words rather than numbers, give the big picture, and cite named prior work.
+  - Nothing in it is new, and it contains no method detail.
+- **Suggest two or three plain titles** once the abstract is written. The user chooses.
+
+### Step 7: Read through
+
+- **Read the report in one pass, in order, and list what is wrong.** Do not fix as you go.
+- **Check:**
+  - the question is asked, done, answered and discussed
+  - every number against the output, including the descriptive counts from steps 1–2
+  - the figure references, and that nothing is orphaned
+  - the abstract against the body
+  - the references against their sources.
+- **Record the outcome in the `Analysis Log`,** even if nothing was found.
+
+### Step 8: Export
+
+- **Before anything, quote the `Disclaimer` in full and wait for the user to confirm they have read it.** Nothing earlier counts. Without confirmation there is no export. Record the confirmation in the log.
+- **Ask which format:** Word, PDF, or both. Install only what that format needs.
+- **Run `Code/16_export_report.py` from the vault root.** Write the export beside `Report.md`. `Report.md` stays the source of truth; never edit an export.
+- **Check the output by reading it back:**
+  - captions styled as captions
+  - no dropped characters ($\lambda$, ⅓, minus signs)
+  - no links into the vault
+  - figures on the same page as their captions
+  - every section present.
+
+  Do not trust the exit code. Record the tool versions in `Setup.md`.
+
+## When something changes
+
+- **Re-run the pipeline from the changed script onward,** and redraw the figures that depend on it.
+- **Sweep both documents** for every number, figure reference and count that depended on the change, in its formatted form as well as its raw one. Re-verify the numbers that did not move.
+- **Never hardcode a number in a script's text.** Compute it.
+- **Record what moved in the `Analysis Log`,** before and after.
+
+## Code and environment
+
+- **Run Python through the workspace environment:** `cd Code && uv run python <script>.py`. Add a package with `uv add`, and record it in the `Code Summary` and `Setup.md`.
+- **Number scripts in run order.** Shared choices live in `sds_common.py`. Figures read exported results and never refit. Fix seeds and record them.
+- **Keep the `Code Summary` current:** what each script does, what it reads and writes, and its parameters and seeds.
+- **Never invent data, results or citations,** and never put credentials in files.
 
 ## Writing
 
-The report is prose that a reader has to get information out of. **Aim for simple, plain text that brings the main points to the front.** Three faults recur and are worth naming.
+Plain, short, first person plural. Contractions are fine.
 
-- **Say it plainly; no figures of speech.** *"The association is not simply the control variable wearing another name"* should be *"the association holds even when the control variable is accounted for."* Metaphor makes the reader decode a sentence instead of reading it, and it adds nothing a plain phrasing would not carry.
-- **No throat-clearing.** Do not announce what a sentence or paragraph is about to do and then do it. *"The panel model adds something a cross-section cannot"* is a promise, and the sentence after it is the content — keep the content and delete the promise. If a sentence could be removed without losing information, remove it.
-- **No abstract gesturing.** Sentences assembled from methodological abstractions sound like an argument without making one. *"Temporal precedence is not identification, though, and here it is weaker than it looks"* says nothing a reader can check. Name the concrete problem instead: which variable, what is wrong with it, and what follows. Prefer *"a predictor built partly from later observations cannot establish which came first."*
+- **Say it plainly.** No metaphor and no figurative names for models ("the mirror model" → "a further model").
+- **No throat-clearing.** No sentence announcing the next one.
+- **No abstract gesturing.** Name the variable and the concrete problem.
+- **Split long sentences. Merge one-sentence paragraphs into their neighbours.** No short sentences for emphasis.
+- **Nothing bold in `Report.md`** except the figure label in captions.
+- **Keep reasoning about alternatives out of the report.** Cut the defence of the road not taken, and asides that no reported number rests on. Both go in `Appendix.md`. Refer back to `Methods` rather than repeating a caveat.
+- **A measurement is a choice,** not a definition: "one way of measuring democracy is …".
+- **Write each paragraph, list item and table row on one line.** No hard wrapping, and the same for Markdown written by scripts.
 
-A working test for all three: could a reader disagree with this sentence? If not, it is decoration.
+A test for any sentence: could a reader disagree with it? If not, cut it.
 
-### Learning the user's style from their own rewrite
+## References
 
-The user may take a document away and rewrite it in the style they want, then hand it back. This is the most direct instruction about style available, and it is worth more than any adjective they could give instead.
-
-- **When they say they are starting a pass, stop editing that document until they say `done`.** They are working in it directly. Editing underneath them risks a conflict, and staging their half-finished sentences risks committing work they had not settled. Answer questions and work elsewhere, but leave the file alone.
-- **When they say `done`, read what they changed before writing anything.** `git diff` against the last commit is the record of the pass. Read it as a whole rather than sentence by sentence, because the pattern is the point.
-- **Derive rules from the edits and add them to this section.** State each as something checkable — a rule that can be applied or breached — not as an adjective. *"Give the number before the qualification"* is usable. *"Write more clearly"* is not.
-- **Cite the sentence each rule came from, before and after.** A rule without its example is unusable once the memory of the pass has gone, and the before/after is what makes the intent unambiguous.
-- **Say what was inferred from a single instance.** One changed sentence may be a preference or may be that sentence; distinguish the rules that recur from the ones observed once.
-- **Ask about anything that reads as deliberate but might be an accident.** A dropped qualifier can be a style choice or an oversight, and the difference matters when the sentence carries a result.
-- **Then apply the rules to the rest of the work**, including the documents the user did not rewrite by hand. The point of extracting the rules is that the user should not have to make the same edit twice.
-
-### Sentence and paragraph style
-
-These are the defaults. They came from watching a user rewrite a report by hand, and each is quoted before → after. The mechanism above is how they get changed.
-
-- **Write in the first person plural.** *"The question is one of association rather than cause"* → *"The questions we look at here are primarily of association rather than cause."* Then "we have investigated", "we found that", "what we can say is". The report is an account of work people did, not a description of results that arrived unattended.
-- **Contractions are fine.** *"so no analysis of this data can establish which direction a relationship runs"* → *"so we can't say which direction the relationship runs."*
-- **Split long sentences.** A sentence carrying three clauses joined by "and … so" reads better as two. Prefer two plain sentences to one balanced one.
-- **Merge one-sentence paragraphs into their neighbours.** A methods section went from three paragraphs to two, and another from four to two, with almost no words cut. It was the paragraph breaks that were wrong, not the content.
-- **Nothing in `Report.md` is bold unless the user asks for it.** Not a sentence, not a phrase, not a run-in heading, in any section. *"**The reverse direction.** The mirror model was fitted"* → *"A further model was fitted"*; *"**The second model.** Taken together"* → *"Taken together"*; *"consecutive **calendar** years"* → *"consecutive calendar years"*.
-  - The bold figure number that labels a caption — `<small><b>Figure 1.</b> …</small>` — is a label rather than emphasis, and stays.
-  - This applies to `Report.md` only. `Appendix.md` and the other working documents get scanned rather than read, and their bold lead-ins stay as they are.
-  - The reason is not consistency, it is that bold makes the argument for the reader. A report has to earn its emphasis through sentence order and word choice; typography is a shortcut around the writing.
-- **Cut the defence of the road not taken.** Deleted in full: *"Rebuilding the sample as 'most recent period with every variable present' was rejected: a unit whose latest period lacks one variable would have shifted to an earlier one…"* The reasoning belongs in `Appendix.md`. This is the same instinct as the rule against markers for work not done.
-- **Cut technical asides that no reported number rests on.** Deleted in full: *"The model is pooled, with no unit fixed effects. Adding them to a specification carrying the lagged outcome on the right-hand side would introduce dynamic panel bias and require a different estimator, not merely more dummies."*
-- **Refer back to the methods rather than restating a caveat.** *"The power of that test is limited by the outcome. Because the source interpolates…"* → *"However, as discussed in the methods, because the source interpolates…"*
-- **Do not state a measurement as though it were the definition.** *"Productivity is measured as output per hour"* → *"One way of measuring productivity is output per hour."* It turns a claim about the world into a statement about a choice, which is what it is.
-- **No figurative shorthand for a model or a method.** *"The mirror model"* → *"A further model."*
-- **No short sentence dropped in for emphasis.** *"Nothing comes to rest there."* was deleted, and nothing was lost with it.
-
-## References and Citation
-
-- **Cite in author–date style.** `(Smith et al., 2020)` in parentheses, or `Smith (2020)` when the author is part of the sentence. Disambiguate same-author-same-year works as `2020a`, `2020b`. Where two works share a first author and year but have different co-authors, name enough surnames to tell them apart rather than lettering them.
-- **Every document that cites anything carries a `## References` section as its last section.** That includes `Appendix.md`, which cites the sources behind the data.
-- **Every reference is a link.** Hyperlink the title, or the DOI where one exists, to a URL that resolves. Check it resolves before writing it — a dead reference is worse than none.
-- List alphabetically by first author. Use the corporate author for databases and reports without named authors.
-- **Cite the specific edition or version actually used**, not the series in general. Data sources are revised, and a claim traceable to the wrong vintage is not traceable at all.
-- **Verify the bibliographic details rather than writing them from memory** — volume, issue, pages, publisher, year. Never cite a work you have not opened.
-- **Give a quantity taken from another work the units it was measured in.** A money figure needs its base year, a rate needs its denominator, an index needs its reference period. The reader will compare it with the numbers in this report, which are in different units and often from a different decade, and a bare figure invites a comparison that is wrong by a large factor. If the units cannot be established from what has actually been read, drop the figure and keep the finding — the magnitude is rarely what the citation is there for.
-
-### Getting hold of paywalled sources
-
-Publishers block scripted requests. A `403` from a journal site is not a dead link — the same article opens normally in the user's browser, often through an institutional subscription. Ask them to fetch it.
-
-- **Ask for the download; do not work around the block.** Substituting a preprint, a working paper or an abstract for the article you mean to cite is not a workaround, it is citing a different document. Working-paper and published versions differ in title, wording, tables and sometimes in the specific claim being cited.
-- **Send a short list, not everything found.** Only the sources the argument actually rests on. For each, give the title, a DOI link and one line on what the citation needs from it, so the user can judge whether it is worth their time. Three or four is a reasonable ask; a dozen is not.
-- **Say where to put them.** Ask the user to save the files to their `Downloads` folder and to say when they are there. Move them into `Attachments/literature/` yourself, keeping the publisher's filename or renaming to first author and year.
-- **Keep the PDFs out of version control.** They are usually licensed material and the repository may be public. Add the folder to `.gitignore`, and record the citation in the documents rather than the file.
-- **Then read them and cite from the text.** Note in the `Analysis Log` which sources were read in full and which rest on an abstract, so a reader knows how far each citation was checked.
-- **An abstract is enough only for what the abstract states.** If the claim being cited appears verbatim there, say so and move on. If it needs a number, a caveat or a passage from the body, the article has to be opened.
-
-## The Sample Report
-
-`Sample Report/` holds one finished analysis — a question about World Happiness Report data, worked through the eight steps. It is there for one purpose: so a user who has not seen a report of this kind come together can look at what the documents contain when they are done.
-
-- **Offer it when it would help, and not otherwise.** If the user is unsure what a section is for, what a figure caption should say, or how much detail belongs in the appendix rather than the report, point them at the corresponding part of `Sample Report/Happiness.md` or `Sample Report/Happiness Appendix.md`. That is more use than describing it.
-- **Read it yourself before closing a step, from step 3 onwards.** This is a different use from offering it, and it is not optional — the rule is under `Step-by-Step Working`. Offering the sample is for when the user is unsure what a section is for; reading it is how you check your own work against a finished example before asking whether a step is done. Neither use licenses editing it.
-- **It is an example, not a specification.** The section headings in the templates are a sensible default, not a requirement. A different question may want different sub-headings, a different number of sub-questions, no phase portrait, no growth model, or a structure the sample does not have at all. Follow the user's analysis, not the sample's shape.
-- **Never edit it as part of a new analysis**, and never copy numbers, prose or figures out of it. Its scripts, outputs and (once downloaded) data are self-contained inside that folder so a new analysis has no reason to touch it.
-- **The rules in this document take precedence over anything the sample does.** The sample was written while these rules were still being worked out, so it may not follow all of them perfectly. Where they disagree, the rule is right and the sample is a historical artefact.
-
-## Agent Operating Rules
-
-- Before changing analysis artifacts, inspect the relevant source data and existing documentation.
-- Make focused changes and do not overwrite unrelated user work.
-- After running or changing code, perform the narrowest useful validation and record the outcome in `Appendix.md` when it affects conclusions.
-- Keep Markdown headings stable and update existing sections rather than creating competing versions of the same analysis.
-- When evidence is insufficient, ask a targeted question or document the gap instead of filling it with speculation.
+- **Author–date citations.** Every document that cites anything ends with `## References`, in alphabetical order.
+- **Every reference is a link,** to a DOI or URL that resolves. A `403` from a publisher is bot-blocking, not a dead link.
+- **Cite the version used:** the data release and download date, and the edition. Verify every detail from the source itself, and never cite a work that has not been opened.
+- **A quantity taken from another work keeps its units** (base year, denominator). If the units are unknown, drop the number.
+- **Paywalled papers.** Ask the user for a short list of PDFs, save them to `Attachments/literature/` (gitignored), and note in the log which were read in full.
