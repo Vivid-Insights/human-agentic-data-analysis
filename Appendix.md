@@ -305,7 +305,7 @@ Run by `Code/10_uniform_prior_check.py`; output in `Code/outputs/10_uniform_prio
   - At the variance-matched width, only 5% of the four-term model's likelihood lies inside the box. Its coefficient on $D$, about 0.14 on the scaled axis, is beyond the box's edge of 0.125. So the three-term model comes close (0.42 against 0.46).
   - At 100 times the width, the $-m\log 2a$ penalty for each extra term dominates, and the three-term model $D/G, DG, D^2$ is selected. It was the runner-up under the agreed normal prior (P 0.19).
   - $D/G$ and $D^2$ are in the selected model under every prior.
-- **What the alternative would change.** The three-term model has no $1/G^2$ term, so $\Delta D = 0$ whenever $D = 0$. A country at zero democracy would stay there, which the selected four-term model does not imply. Not yet computed: the nullcline and simulated paths under the three-term model.
+- **What the alternative would change.** The three-term model has no $1/G^2$ term, so $\Delta D = 0$ whenever $D = 0$. A country at zero democracy would stay there, which the selected four-term model does not imply. The nullcline and simulated paths under the three-term model were not computed. The user chose the normal prior throughout (log row 27), so this check stays in the appendix and is not mentioned in the report.
 
 ## Analysis Log
 
@@ -339,6 +339,7 @@ Run by `Code/10_uniform_prior_check.py`; output in `Code/outputs/10_uniform_prio
 | 24 | Step 4. At the user's request, the three `Results` sub-sections were combined into one, "The fitted model and its dynamics", and simplified to fitting the model and looking at the dynamics. Removed from the report: the share of variance explained, the term sets of the next most probable sizes, and per-term resampling counts. All stay in this appendix under the sub-question headings. The `Methods` sub-heading "Sub-question 3" was renamed "Dynamics". The `Introduction` still lists three sub-questions. | `Report.md` |
 | 25 | Step 4. At the user's request, the `Introduction` now asks one question in place of three sub-questions. The contract now allows one to four questions, with one as the default, and locks the model phase portrait: model only, light grey "<Variable> nullcline" with its band, simulated paths, no data. The background grid was removed from all figures, and Figures 1–4 were redrawn and checked (sizes unchanged; 33 and 14 arrows capped, as before). | `instructions.md`; `Code/sds_common.py`; Figures 1–4; `Report.md` |
 | 26 | Step 4. At the user's request, a check of a uniform prior against the agreed normal prior, at three widths. The GDP equation is unchanged under all of them. The democracy equation is unchanged at the variance-matched and 10× widths, but at 100× it switches to the runner-up three-term model ($D/G$, $DG$, $D^2$), which has no $1/G^2$ term. The answer can change, so this goes to the user to decide how to report. | `Code/10_uniform_prior_check.py`; `Code/outputs/10_uniform_prior_check.txt` |
+| 27 | Step 4. The user chose to keep the normal prior. A contract change fixes it for every analysis: RMS-scaled terms, $\lambda = \sigma = \text{sd}(\Delta x)$, closed-form evidence, and $\lambda$ ×0.1 and ×10 recorded in the appendix. The uniform-prior check stays in the appendix only; the report is unchanged. | `instructions.md` |
 
 ## Code Summary
 
