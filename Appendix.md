@@ -167,6 +167,18 @@ Built by `Code/02_build_panel.py` from the step 1 decisions. Counts from `Code/o
 - **Units (contract rule added after the first render).** GDP is now plotted in constant 2015 US dollars on a logarithmic axis, with ticks from \$500 to \$100k. Democracy is labelled "index, 0 to 1". Positions are unchanged, because the axis is linear in $\ln(\text{GDP})$ and so in $G$. The plotted dollars are computed as $e^{12G}$, which matches the source's GDP per capita to within $4 \times 10^{-10}$. The GDP mean is $e^{12\bar G}$, the geometric mean of GDP per capita over the 84 countries. Two layout fixes followed: the first dollar labels overlapped in Figure 2, so ticks are written \$1k, \$10k and so on; and the long axis label was cut off in Figure 1, so it reads "GDP per capita (2015 US\$)", with "constant" stated in the captions. Superseded: the "Log GDP per capita ÷ 12" axis label above.
 - **Orientation.** GDP across and democracy up, as proposed and agreed, so the phase portraits can share these axes. The 2013 paper's phase portrait has democracy across and GDP up.
 
+### Figure 3: the data phase portrait (step 3)
+
+Made by `Code/05_fig_data_phase_portrait.py`. Counts from `Code/outputs/05_phase_portrait_counts.txt`; cell values in `Code/outputs/05_phase_cells.csv`.
+
+- **Design.** The 3,423 yearly changes are averaged within a grid over the state.
+  - Cells are 0.04 wide in $G$, a factor of $e^{0.48} \approx 1.62$ in GDP per capita, and 0.1 high in democracy. That gives 14 by 10 cells, 114 of them occupied.
+  - Each arrow starts at the mean $(G, D)$ of the cell's country-years and points along their mean $(\Delta G, \Delta D)$ times $K$.
+  - Both components are scaled by the same $K$ in model units, so directions are true on these axes. On the dollar axis the horizontal length is proportional GDP growth.
+- **Choices after the first render.** The first draft used $K = 5$ years and at least 5 changes per cell. Arrows ran through neighbouring cells, and cells with few changes gave erratic averages (for example near \$100k). The cell-average $|\Delta D|$ has median 0.013 and 90th percentile 0.044. With $K = 2$, the 90th percentile arrow is about one cell high (0.09). Raising the minimum from 5 to 10 changes per cell drops 15 cells: from 98 to 83 arrows, and from 3,397 to 3,289 changes represented. Superseded: $K = 5$, at least 5 changes.
+- **Shared axis range.** Figures 2 and 3 now share a fixed GDP range, \$150 to \$170,000 (`USD_XLIM` in `sds_common.py`), so the two can be laid over each other. The first draft of Figure 3 was cut at the grid edges, and with its longer legend label the \$50k and \$100k ticks collided.
+- **Not used in the report.** Over all changes, the mean yearly change is 0.0023 in democracy and 0.00141 in $G$, which is 1.70% growth in GDP per capita a year.
+
 ## Analysis Log
 
 *A numbered row per step taken, added as the work happens. What was done, what it changed, and where the output is. Superseded decisions stay, marked as such — a reader cannot judge a choice without seeing the alternatives.*
@@ -188,6 +200,7 @@ Built by `Code/02_build_panel.py` from the step 1 decisions. Counts from `Code/o
 | 13 | Step 3. Built the analysis panel: 3,679 country-years, 3,423 changes. Drew Figures 1 (trajectories over time) and 2 (trajectories in the $(G, D)$ plane) and added them to `Results` with captions and a paragraph saying how to read them. They sit above the sub-question sub-headings, because they describe the data for all three sub-questions. |
 | 14 | Step 3. A contract rule says every variable is shown in interpretable units, so we see GDP in money. Figures 1 and 2 were redrawn with GDP in constant 2015 US dollars on a log axis. The captions and the `Results` paragraph were updated, and the `Introduction` now gives GDP's range in dollars (about \$160 to \$140,000 per person, from `panel.csv`: 164.7 to 140,615). | `instructions.md`; `Code/sds_common.py`; Figures 1–2; `Report.md` | `Code/02_build_panel.py`, `Code/03_fig_trajectories_time.py`, `Code/04_fig_trajectories_plane.py`; `Report.md` `Results` |
 | 15 | Step 3. At the user's request, dropped the mean from Figures 1 and 2: "We don't need it". A contract change locks the figure format: no mean, the user's style in the workspace themes, dollar log axes, axis labels with units, the legend off the data. Figures 1 and 2 and their scripts are the reference. It also adds "always use units when available". Figures redrawn; the `Results` paragraph and captions updated. | `instructions.md`; Figures 1–2; `Report.md` |
+| 16 | Step 3. Made Figure 3, the data phase portrait: cell-average yearly changes on a 14 × 10 grid, arrows scaled to 2 years, cells with at least 10 changes (83 cells, 3,289 of 3,423 changes). It was redrawn once after inspection (first draft: 5 years, at least 5 changes). Figures 2 and 3 now share a fixed GDP range. Added to `Results` with a reading paragraph and caption. | `Code/05_fig_data_phase_portrait.py`; `Report.md` `Results` |
 
 ## Code Summary
 
@@ -198,6 +211,7 @@ Built by `Code/02_build_panel.py` from the step 1 decisions. Counts from `Code/o
 | `Code/02_build_panel.py` | Applies the step 1 decisions and builds the panel: countries only, −99 set to missing, join on ISO3, $G = \ln(\text{GDP})/12$, 1981–2006, consecutive-year changes, and the balanced-country flag. Fits nothing. Run with `cd Code && uv run python 02_build_panel.py`. | Both source files, as above | `Code/outputs/panel.csv` (gitignored: row-level QoG data); `Code/outputs/02_panel_counts.txt` |
 | `Code/03_fig_trajectories_time.py` | Figure 1: democracy and GDP per capita (dollars, log axis) against year for the six countries. Light and dark. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig1_trajectories_time.png`, `…/dark/…` |
 | `Code/04_fig_trajectories_plane.py` | Figure 2: the six countries' paths in the GDP–democracy plane (dollars, log axis), over all countries in 2006. Light and dark. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig2_trajectories_plane.png`, `…/dark/…` |
+| `Code/05_fig_data_phase_portrait.py` | Figure 3: cell-average observed yearly changes as arrows on the GDP–democracy plane, with the six countries' paths faint. Parameters: `K = 2` (arrow years), `MIN_N = 10` (minimum changes per cell), $G$ bins of 0.04 from 0.42 to 1.00, $D$ bins of 0.1. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig3_data_phase_portrait.png`, `…/dark/…`; `Code/outputs/05_phase_cells.csv`; `Code/outputs/05_phase_portrait_counts.txt` |
 
 Run order: `01_describe_data.py` (description only), then `02_build_panel.py`, then the figure scripts in any order. The scripts in `Code/` import `sds_common.py` from their own directory, so they are run without Python's isolated mode (`-I`). No downloaded file is on the import path.
 

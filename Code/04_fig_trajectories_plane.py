@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from sds_common import (CM, D_LABEL, G_SCALE, GDP_LABEL, REP, REP_COLOUR, YEARS,
-                        dollar_axis, load_panel, save, style)
+                        USD_XLIM, dollar_axis, load_panel, save, style)
 
 p = load_panel()
 p["gdp_usd"] = np.exp(G_SCALE * p["G"])
@@ -33,6 +33,7 @@ for theme_name in ("light", "dark"):
         ax.scatter(first.gdp_usd, first.D, s=28, color=c, zorder=4,
                    edgecolors=t.surface, linewidths=0.6)
     dollar_axis(ax, "x")
+    ax.set_xlim(*USD_XLIM)
     ax.set_xlabel(GDP_LABEL)
     ax.set_ylabel(D_LABEL)
     ax.set_ylim(-0.03, 1.03)

@@ -66,6 +66,8 @@ def save(fig, name: str, theme_name: str) -> Path:
 GDP_LABEL = "GDP per capita (2015 US$)"
 D_LABEL = "Democracy (index, 0 to 1)"
 GDP_TICKS = [500, 1000, 2000, 5000, 10000, 20000, 50000, 100000]
+# Shared GDP range for the plane figures and phase portraits, so their axes match.
+USD_XLIM = (150, 170000)
 
 
 def dollar_axis(ax, which: str = "x") -> None:
