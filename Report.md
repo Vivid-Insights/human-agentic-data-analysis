@@ -1,6 +1,4 @@
-# [Title]
-
-*Suggested at the end of step 6, once the argument is settled.*
+# How democracy and national income change together
 
 ## Abstract
 
