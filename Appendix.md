@@ -254,6 +254,40 @@ Fitted by `Code/06_fit_change_model.py G`. Joint checks by `Code/07_joint_checks
   - **So** the paper's GDP model is a close competitor on our data, and its democracy coefficient is reproduced almost exactly. The GDP terms differ, as expected given how interchangeable they are.
 - **Re-derived independently** (`Code/outputs/06_fit_G_rederive.txt`): the evidence computed from the full 3,423 × 3,423 covariance matrix matches the script's value.
 
+### Sub-question 3: the two equations together (step 4)
+
+Computed by `Code/08_joint_dynamics.py`; drawn by `Code/09_fig_model_phase_portrait.py` from exported results only. Output in `Code/outputs/08_dynamics.txt`, `08_nullcline.csv`, `08_simulated_paths.csv`, `08_model_field.csv` and `09_model_portrait_counts.txt`.
+
+- **Posterior.** Mean and covariance are recomputed from the 06 formulas, and an assertion checks them against the exported means.
+- **Democracy zero-change curve.** Solved on a fine grid (sign change from + to −) and, for the selected term set, exactly from the quadratic $-0.1176D^2 + (0.2665 - 0.1437/G)D + 0.00303/G^2 = 0$. The two routes agree to $4.3 \times 10^{-7}$.
+  - Values on the curve: 0.267 at \$500, 0.360 at \$1,000, 0.473 at \$2,000, 0.627 at \$5,000, 0.734 at \$10,000, 0.832 at \$20,000, 0.945 at \$50,000. It passes 1 at about \$84,000 ($G$ = 0.945); the observed range is \$169 to \$130,590.
+  - The slope of $f_D$ in $D$ on the curve is at most −0.068 over the grid, so the curve attracts everywhere.
+- **GDP.** Over the observed range of $G$, with $D$ in [0, 1], the predicted $\Delta G$ runs from +0.00028 to +0.00335, which is 0.34% to 4.10% growth a year. It is never zero, so there is no fixed point of the system in range. The lowest growth is at $D = 0$ and the richest $G$; at $D = 0$ and the poorest $G$ it is 1.81%.
+- **Bands.** The median width over the observed GDP range is 0.113 from 1,000 posterior draws and 0.106 from 500 country resamples (ratio 0.94). The resampled band is not wider, so the report uses the posterior band and does not mention the resampling.
+- **Trajectories.** 183 countries, each stepped yearly from its first observed state to 2006.
+  - Distance to the curve, $|D - D^*(G)|$: simulated median 0.225 at the start and 0.082 at the end, closer at the end for 168 of 183. Observed median 0.225 at the first year and 0.151 at the last, closer for 104 of 183.
+  - 6 simulated country-years leave [0, 1]. They are left as computed, not clipped.
+  - Simulated 2006 GDP runs from \$302 to \$170,562.
+- **The six countries,** simulated 2006 against observed 2006:
+
+| Country | Simulated | Observed |
+| --- | --- | --- |
+| Italy | $D$ 0.89 at \$39,898 | $D$ 0.81 at \$33,873 |
+| Sweden | 0.94 at \$54,315 | 0.90 at \$48,078 |
+| India | 0.30 at \$670 | 0.25 at \$1,008 |
+| Chile | 0.42 at \$6,495 | 0.87 at \$10,612 |
+| Albania | 0.25 at \$2,462 | 0.51 at \$2,894 |
+| Nigeria | 0.52 at \$2,990 | 0.19 at \$1,949 |
+
+- **Figure 4.**
+  - Arrows are model changes at the 83 cell positions of Figure 3, in the locked format; 14 are capped (`09_model_portrait_counts.txt`).
+  - The arrow-drawing code moved into `sds_common.draw_capped_arrows` so Figures 3 and 4 share one implementation. Figure 3 was redrawn with it and is unchanged (33 of 83 capped).
+  - The first render drew the curve over the whole observed GDP range, so it rose past the index's maximum of 1. It is now drawn only where it is between 0 and 1. Superseded: the curve drawn over the full GDP range.
+- **Comparison with Ranganathan, Spaiser and Sumpter (2013)** (replication only, not in the report).
+  - The paper reports a stable curve from low democracy and low GDP to high democracy and high GDP, onto which countries converge. Countries high in democracy and low in GDP lose democracy until they reach it.
+  - **Reproduced on the agreed criterion.** The fitted curve rises from low–low to high–high, attracts everywhere in range, and lies below countries that are high in democracy and low in GDP, so their democracy falls towards it. The simulated paths converge on it: 168 of 183 end closer.
+  - **One difference.** In our fit GDP grows everywhere in range, so movement along the curve never stops. The paper's $\Delta G$ has a $-G^2$ term that limits growth at high GDP.
+
 ## Analysis Log
 
 *A numbered row per step taken, added as the work happens. What was done, what it changed, and where the output is. Superseded decisions stay, marked as such — a reader cannot judge a choice without seeing the alternatives.*
@@ -281,19 +315,22 @@ Fitted by `Code/06_fit_change_model.py G`. Joint checks by `Code/07_joint_checks
 | 19 | Step 3 closed by the user on 2026-11-18. Figures 1–3 are in the report in the locked format. Offered and declined: a grid-sensitivity check of Figure 3, and data ranges in the captions. Figure 4, the model phase portrait, is deferred to step 4. | — |
 | 20 | Step 4, sub-question 1. Agreed: $\sigma$ fixed at sd($\Delta D$) and a normal prior with $\lambda$ = sd($\Delta D$) on RMS-scaled terms. Selected four terms: $D$, $D/G$, $D^2$, $1/G^2$, P(size) = 0.68. Checks run: prior ×0.1 and ×10, $\sigma$ from residuals, lag-1 residual correlation, 500 country resamples. Comparison with the paper in the appendix only. Wrote `Methods` (`Data`, `Model`, `Model selection and uncertainty`) and the sub-question 1 paragraph in `Results`. | `Code/06_fit_change_model.py`; `Code/outputs/06_fit_D.*`; `Report.md` |
 | 21 | Step 4, sub-question 2. Same method on $\Delta G$. Selected two terms: $D$, $1/G^2$, P(size) = 0.75. Democracy is included with a log Bayes factor of 14.9 over the best model without it. Lag-1 residual correlation +0.26, absorbed by the country resampling, which is reported. Cross-equation correlation +0.011; SUR changes nothing (appendix only). Comparison with the paper in the appendix only. Added the sub-question 2 paragraph to `Results`, and to `Methods` one sentence converting changes in $G$ to GDP growth. | `Code/06_fit_change_model.py`; `Code/07_joint_checks.py`; `Report.md` |
+| 22 | Step 4, sub-question 3. Agreed: zero-change curves from posterior means; a 95% band from 1,000 posterior draws, with the resampled band in the appendix; yearly stepping from first observed states; a distance-to-curve convergence measure. Democracy's zero-change curve rises with GDP and attracts everywhere; GDP grows everywhere in range; 168 of 183 simulated and 104 of 183 observed countries end closer to the curve. Figure 4 made in the locked format, with the zero-change curve, its band and the simulated paths added; the curve is clipped to the range of the index after the first render. Added a `Methods` sub-heading and a `Results` paragraph with a reading paragraph. | `Code/08_joint_dynamics.py`, `Code/09_fig_model_phase_portrait.py`; `Report.md` |
 
 ## Code Summary
 
 | File | What it does | Reads | Writes |
 | --- | --- | --- | --- |
 | `Code/01_describe_data.py` | Describes the two source files: shape, coverage per year, ranges, the −99 code, zeros, duplicate codes, and the overlap. It changes no data and draws no conclusions. Run with `cd Code && uv run python 01_describe_data.py`. | `Attachments/worldbank/API_NY.GDP.PCAP.KD_DS2_en_csv_v2_71952.csv` and its country metadata; `Attachments/qog_std_ts_jan15.csv` (columns `ccode`, `cname`, `year`, `ccodealp`, `wel_citrig`) | `Code/outputs/01_describe_data.txt` |
-| `Code/sds_common.py` | Shared constants and style: years, the GDP scale (12), the six representative countries and their fixed colours, figure sizing and saving. Imported by the scripts below. | — | — |
+| `Code/sds_common.py` | Shared constants and style: years, the GDP scale (12), the six representative countries and their fixed colours, figure sizing and saving, the dollar log axis, and the locked phase-portrait arrows (`ARROW_K`, `ARROW_CAP_CM`, `draw_capped_arrows`). Imported by the scripts below. | — | — |
 | `Code/02_build_panel.py` | Applies the step 1 decisions and builds the panel: countries only, −99 set to missing, join on ISO3, $G = \ln(\text{GDP})/12$, 1981–2006, consecutive-year changes, and the balanced-country flag. Fits nothing. Run with `cd Code && uv run python 02_build_panel.py`. | Both source files, as above | `Code/outputs/panel.csv` (gitignored: row-level QoG data); `Code/outputs/02_panel_counts.txt` |
 | `Code/03_fig_trajectories_time.py` | Figure 1: democracy and GDP per capita (dollars, log axis) against year for the six countries. Light and dark. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig1_trajectories_time.png`, `…/dark/…` |
 | `Code/04_fig_trajectories_plane.py` | Figure 2: the six countries' paths in the GDP–democracy plane (dollars, log axis), over all countries in 2006. Light and dark. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig2_trajectories_plane.png`, `…/dark/…` |
 | `Code/05_fig_data_phase_portrait.py` | Figure 3: cell-average observed yearly changes as arrows on the GDP–democracy plane, with the six countries' paths faint. Parameters: `LENGTH = 2/3`, giving `K = 5 × 2/3 = 3⅓` (arrow years) and `CAP_CM = 0.7 × 2/3 ≈ 0.467` (maximum arrow length on the page, direction kept), `MIN_N = 10` (minimum changes per cell), $G$ bins of 0.04 from 0.42 to 1.00, $D$ bins of 0.1. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig3_data_phase_portrait.png`, `…/dark/…`; `Code/outputs/05_phase_cells.csv`; `Code/outputs/05_phase_portrait_counts.txt` |
 | `Code/06_fit_change_model.py` | Fits the change model for one outcome (`D` or `G`, given as the argument). Runs all 512 term subsets, finds the best of each size by least squares, computes closed-form evidence and the Gaussian posterior with $\sigma$ = sd($\Delta x$) and $\lambda$ = sd($\Delta x$) on RMS-scaled terms, then runs the checks: $\lambda$ ×0.1 and ×10, $\sigma$ from residuals, lag-1 residual correlation, and 500 country resamples. Seed 20261118. Run with `cd Code && uv run python 06_fit_change_model.py D`. | `Code/outputs/panel.csv` | `Code/outputs/06_fit_<outcome>.txt`, `.json` |
 | `Code/07_joint_checks.py` | The checks that need both equations: how firmly democracy enters $\Delta G$ (best model without a democracy term, by evidence); the residual correlation between the two selected models and the iterated SUR re-estimate; the 2013 paper's $\Delta G$ model on our data (replication only). Run after both `06_…` fits. | `Code/outputs/panel.csv`, `06_fit_D.json`, `06_fit_G.json` | `Code/outputs/07_joint_checks.txt` |
+| `Code/08_joint_dynamics.py` | Sub-question 3 computations. Democracy's zero-change curve: grid root plus an exact quadratic check, and its stability. Whether $\Delta G$ is zero anywhere in range. A 95% band from 1,000 posterior draws and from 500 country resamples. Yearly simulation from each country's first state to 2006. Distance to the curve at the start and end, simulated and observed. The model field at the Figure 3 cells. Seed 20261118. | `Code/outputs/panel.csv`, `06_fit_D.json`, `06_fit_G.json`, `05_phase_cells.csv` | `Code/outputs/08_dynamics.txt`, `08_nullcline.csv`, `08_simulated_paths.csv`, `08_model_field.csv` |
+| `Code/09_fig_model_phase_portrait.py` | Figure 4 from the `08_…` exports only, in the locked format: model arrows, the zero-change curve with its band (only where it is between 0 and 1), simulated paths solid, observed paths faint. Light and dark. | `08_model_field.csv`, `08_nullcline.csv`, `08_simulated_paths.csv`, `panel.csv` | `Code/outputs/figures/fig4_model_phase_portrait.png`, `…/dark/…`; `09_model_portrait_counts.txt` |
 
 Run order: `01_describe_data.py` (description only), then `02_build_panel.py`, then the figure scripts in any order. The scripts in `Code/` import `sds_common.py` from their own directory, so they are run without Python's isolated mode (`-I`). No downloaded file is on the import path.
 

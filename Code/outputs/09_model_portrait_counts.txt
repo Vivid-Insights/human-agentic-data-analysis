@@ -1,0 +1,1 @@
+model arrows: 83 cells; shortened to the cap: 14

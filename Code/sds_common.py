@@ -81,5 +81,39 @@ def dollar_axis(ax, which: str = "x") -> None:
     axis.set_minor_locator(NullLocator())
 
 
+# Locked phase-portrait arrow format (instructions.md, Report Format).
+ARROW_K = 5 * 2 / 3              # arrow = yearly change x 3 1/3 years
+ARROW_CAP_CM = 0.7 * 2 / 3       # longest drawn arrow, cm on the page (direction kept)
+ARROW_LEGEND = "Mean change,\n3⅓ years (capped)"
+
+
+def draw_capped_arrows(fig, ax, G, D, dG, dD, colour) -> int:
+    """Draw locked-format arrows from (G, D) along (dG, dD); returns number capped.
+
+    Call after the axes limits and fig.tight_layout() are final: the cap is in cm on
+    the page. The x axis is linear in G (log dollars), so scaling (dG, dD) by one
+    factor leaves the direction on the page unchanged.
+    """
+    import numpy as np
+    usd = lambda g: np.exp(G_SCALE * g)
+    bb = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+    w_cm, h_cm = bb.width / CM, bb.height / CM
+    gx0, gx1 = np.log(ax.get_xlim()) / G_SCALE
+    dy0, dy1 = ax.get_ylim()
+    n_capped = 0
+    for g, d, vg, vd in zip(G, D, dG, dD):
+        vx_cm = ARROW_K * vg / (gx1 - gx0) * w_cm
+        vy_cm = ARROW_K * vd / (dy1 - dy0) * h_cm
+        length = np.hypot(vx_cm, vy_cm)
+        f = min(1.0, ARROW_CAP_CM / length) if length > 0 else 1.0
+        n_capped += f < 1.0
+        ax.annotate("", xy=(usd(g + f * ARROW_K * vg), d + f * ARROW_K * vd),
+                    xytext=(usd(g), d), zorder=4,
+                    arrowprops=dict(arrowstyle="-|>", color=colour, lw=1.1,
+                                    mutation_scale=7, shrinkA=0, shrinkB=0))
+        ax.scatter([usd(g)], [d], s=6, color=colour, zorder=5, lw=0)
+    return int(n_capped)
+
+
 def load_panel() -> pd.DataFrame:
     return pd.read_csv(PANEL)
