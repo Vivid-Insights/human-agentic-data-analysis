@@ -84,6 +84,16 @@ When the user prefixes a message with **FRAMEWORK**, they are changing this docu
 - **Keep the two kinds of change in separate commits**, so a template commit can be cherry-picked without dragging analysis content onto `main`. If a change has already been committed with analysis content mixed in, say so and propose splitting it rather than promoting the whole commit.
 - **Say what was promoted.** Name the commit, say which branches it now exists on, and confirm both were pushed. If the push fails or the network is unavailable, say that too — an unpushed promotion is not a promotion, and silence reads as success.
 
+## Statistical Framework
+
+Analyses on this branch use likelihood and Bayesian inference, following Ranganathan, Spaiser and Sumpter (2013). This is fixed. Other inference frameworks are not substituted for it, either quietly or as a "check". Examples are null-hypothesis significance tests and p-values as the basis for a claim, selection by information criteria alone, and cross-validated machine-learning fits. Bringing any of them in needs the user's explicit agreement.
+
+- **Models are fitted by maximum likelihood.** Under the Gaussian error model this is least squares, and the log-likelihood is what ranks models of the same size.
+- **Models of different size are compared by marginal likelihood (the evidence).** Report the posterior probability of each candidate model size, as well as which one wins, so the reader can see how firmly the data choose it.
+- **Uncertainty in a coefficient is its posterior credible interval**, from the same prior and likelihood used for the evidence. State the prior, its range, and how the integral was computed (for example, the number of Monte Carlo draws).
+- **The likelihood treats each observation as independent, and that is checked, not assumed.** In panel data each unit appears many times, so test whether residuals are correlated within units, both from one year to the next and across the equations of the system. Then refit on resampled whole units to see how far the intervals widen and how often the same terms are selected. The check is recorded in `Appendix.md`. It enters the report only if it changes what is reported.
+- **This section replaces step 4's rule on standard errors** for analyses on this branch. The within-unit check above is its counterpart.
+
 ## The Eight Steps
 
 Work proceeds through these steps in order. Each is one or more separate exchanges. **Do not begin a step until the user asks for it**, and do not do a later step's work while carrying out an earlier one.
@@ -179,7 +189,7 @@ Answer each sub-question with a number and an interval. One sub-question at a ti
 - **Propose the test before running it.** Name what it estimates, the assumptions it rests on, and whether this data meets them. Get the user's agreement, then run it. If a method turns out to be unsound once started, stop and say so rather than quietly switching to another.
 - **Check the assumptions against the data rather than asserting them.** An assumption named and not checked is worse than one not mentioned, because it reads as though it were verified. If a test assumes independent samples and the observations are paired, it is the wrong test: say so and name the paired equivalent.
 - **Establish that the outcome is a measurement before interpreting any coefficient on it.** A series the source has interpolated, extrapolated, forecast or modelled is not an observation. Differencing such a series returns the gradient of the construction, not a measured change. Check this before the fit rather than after, because it determines what a coefficient could mean: a null on a constructed outcome follows from how the series was built and says nothing about the world.
-- **Use standard errors that match the structure of the data.** Cluster them where observations repeat within a unit; use heteroscedasticity-robust errors where the spread varies with the predictor. Say which was used and why.
+- **Use standard errors that match the structure of the data.** On this branch, `Statistical Framework` replaces this rule with posterior intervals and the within-unit check. Cluster them where observations repeat within a unit; use heteroscedasticity-robust errors where the spread varies with the predictor. Say which was used and why.
 - **Report the estimate, its uncertainty, and the sample it came from.** A coefficient without an interval is not a result, and an interval without the number of observations behind it cannot be judged.
 - **Where the answer is a null, say what the test was able to detect.** Report that as a fact about the data — how much the outcome varies, and over how many observations — and let the reader weigh it. Do not characterise the null itself.
 - **Re-derive the number that carries the claim, independently, wherever that is cheap.** Solve the equation from the coefficients rather than reading the value out of a generated table. Two routes to the same figure catch both arithmetic slips and stale output; one route catches neither.
