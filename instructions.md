@@ -90,12 +90,11 @@ This is what makes the branch different from `main`. The user names a question, 
 
 The usual analysis on this branch is new. It asks how a chosen set of variables drive each other's change over time, using variables that have not been modelled this way before. Replicating a published model is the exception. It is done to check the method against a known result, as the first analysis on this branch does with Ranganathan, Spaiser and Sumpter (2013). The replication bullets in this document apply only when a replication is under way. Everything else is written for the usual case.
 
-- **Default sub-questions for two variables $X$ and $Y$.** Unless the user frames them differently, propose these three:
-  1. How does the change in $X$ depend on the current levels of $X$ and $Y$?
-  2. How does the change in $Y$ depend on the current levels of $X$ and $Y$?
-  3. What do the two equations imply together? For example: where change stops (fixed points), which directions countries move in, and whether trajectories converge.
-
-  Each names what would count as an answer either way. For the first two, an answer either way includes the other variable entering the selected model or not entering it. For the third, it includes fixed points or curves where change stops existing within the observed range, or not.
+- **One to four questions about the variables.** An analysis asks between one and four questions, and one is the default. For two variables $X$ and $Y$, propose: *"What model best describes the yearly changes in $X$ and $Y$, and what dynamics does it imply?"*
+  - Add a question only where the user wants a separate answer about the variables. Examples: whether $Y$ enters the equation for $X$ at all, or where the system settles for a given level of $X$.
+  - Each question names what would count as an answer either way. For example: whether the other variable enters each selected equation, and whether curves or points where change stops exist within the observed range.
+  - The report answers each question by fitting the model and looking at its dynamics. It does not split the fit into separate sections per equation.
+  - **Terminology.** Wherever the general rules in this document say "sub-question", on this branch they mean these one to four questions.
 
 - **From a question or a list of variables, propose the standard analysis straight away.** Do not ask what model to use. Write the proposal in the conversation, and once agreed record it in `Appendix.md` under `Research Question`. It covers:
   1. **Variables.** Each one named, with its World Bank indicator code or other source, its unit, and whether it is a measurement, an estimate or a constructed index.
@@ -131,7 +130,7 @@ Every report on this branch is a short article in the same format, so that repor
 - **Fixed sections, in this order:** Title, `Abstract`, `Introduction`, `Methods`, `Results`, `Discussion`, `Limitations`, `Disclaimer`, `Appendix`, `References`. This is the template order. No section is added, and none is dropped.
 - **Length.** About 2,000 words from `Abstract` to `Limitations`, not counting captions, equations and references. The `Abstract` is one paragraph of at most 200 words. The `Introduction` background is at most two paragraphs.
 - **`Methods` has fixed sub-headings:** `Data` (sources, indicator codes, years, countries, any transformation such as logs or rescaling), `Model` (the change equations and the term library), `Model selection and uncertainty` (the procedure in `Statistical Framework`, stated briefly, with the prior). It then has one sub-heading per sub-question only where that sub-question needs a choice of its own. The general method is described once, not repeated per sub-question.
-- **`Results` has one sub-heading per sub-question.** Where a sub-question is answered by a fitted model, report the selected equation with credible intervals on its coefficients, the posterior probability of the chosen model size against its nearest rival, and the number of countries and country-years.
+- **`Results` has one sub-heading per question.** With the default single question, that is one section, "The fitted model and its dynamics". It covers the selected equations, then what they imply together. Where a question is answered by a fitted model, report the selected equation with credible intervals on its coefficients, the posterior probability of the chosen model size against its nearest rival, and the number of countries and country-years.
 - **Every variable is shown in units a reader can interpret, always, wherever units are available.** This covers figures, captions, text, tables and the abstract. If a source documents a unit, the reader sees that unit. A log-transformed or rescaled variable is a convenience for fitting, not a unit.
   - In figures, plot a logged variable on a logarithmic axis labelled in its original units. For GDP per capita, that is constant US dollars of the stated base year, with ticks such as \$1,000, \$10,000 and \$100,000. The axis is never labelled "log GDP ÷ 12". A point's position is the same either way, since the axis is linear in the log, so the figure loses nothing.
   - An index keeps its own scale, labelled with its range, for example "index, 0 to 1".
@@ -141,13 +140,13 @@ Every report on this branch is a short article in the same format, so that repor
   1. **Trajectories over time.** One panel per variable, against year, with the representative countries as lines. There is no mean line.
   2. **Trajectories in the plane of the two variables.** All countries in the last year as faint points. The representative countries' paths over the whole period as lines, with their starting points marked by a filled circle. There is no mean path. The axes are the same as in the phase portraits.
   3. **The data phase portrait:** observed changes against state.
-  4. **The fitted model's phase portrait:** its vector field, with trajectories integrated from observed starting points beside the observed ones.
+  4. **The fitted model's phase portrait:** the model only. It shows the vector field, the nullcline or nullclines, and trajectories simulated from the representative countries' first observed states. No data is drawn, because the observed paths are already in figure 2.
 - **Representative countries.** Six by default.
   - Fix them before the trajectory figures are drawn, from metadata and coverage, not from how their paths look. Aim for good coverage and starting points spread across the range of both variables. In a replication, use the paper's own choice. Record the reasons in `Appendix.md`.
   - Use the same countries, in the same colours, in every figure.
   - Leave years with missing data as gaps, not joined lines.
 - **The figure format is locked.** Figures 1 and 2 of the first analysis on this branch (democracy and GDP) are the reference: `Code/03_fig_trajectories_time.py`, `Code/04_fig_trajectories_plane.py`, and the shared style in `Code/sds_common.py`. Later figures follow the same format, and only the user changes it.
-  - **Style:** the user's graph style inside the workspace themes. Sizes are in centimetres. Text is 11 pt, legends 10 pt. Output is 300 dpi, with light and dark versions on opaque backgrounds and a fixed canvas, checked after saving. There are no top or right spines.
+  - **Style:** the user's graph style inside the workspace themes. Sizes are in centimetres. Text is 11 pt, legends 10 pt. Output is 300 dpi, with light and dark versions on opaque backgrounds and a fixed canvas, checked after saving. There are no top or right spines and no background grid (`axes.grid` off).
   - **Colours:** the six-colour palette, one fixed colour per representative country, in the order the countries are listed.
   - **Axes:** the outcome variables on their own scales, with units as above. A logged money variable is on a dollar log axis with ticks written \$1k, \$10k. Each axis label names the variable and its unit, for example "GDP per capita (2015 US\$)" or "Democracy (index, 0 to 1)".
   - **Legend:** outside or below the axes, never over data, with no frame.
@@ -159,6 +158,11 @@ Every report on this branch is a short article in the same format, so that repor
     - **Legend.** "Mean change, 3⅓ years (capped)", split over two lines so the axes keep their width.
     - **Axes.** The same fixed range as the plane figure (Figure 2), so the two can be laid over each other.
     - **Caption.** It says how long the arrows are, how many were shortened, the minimum count per cell, and how many changes the arrows cover.
+  - **The model phase portrait is locked as well.** Figure 4 of the first analysis (`Code/09_fig_model_phase_portrait.py`) is the reference:
+    - **Arrows.** The model's predicted change at the same cell positions as the data phase portrait, in the locked arrow format, with the legend "Model change, 3⅓ years (capped)".
+    - **Nullclines.** Each nullcline is drawn as a light grey line (the theme's muted grey, 2 pt) with its 95% posterior band in a lighter grey. It is named in the legend and text as "<Variable> nullcline", for example "Democracy nullcline". It is drawn only where it lies within the observed range of the other variable and inside the variable's own scale. A nullcline that does not exist in that range is reported in the text, not drawn.
+    - **Simulated paths.** Solid lines in the representative countries' fixed colours, each with a filled circle at its start, stepped yearly from the first observed state to the last year of the data.
+    - **No data.** No observed paths and no data points. The text points to figure 2 for where countries actually went.
 - **At most five figures** in a two-variable report. Log-likelihood and evidence plots against the number of terms go in `Appendix.md`, unless the choice of model size is itself a finding.
 - **Higher dimensions may need more figures.** With three or more variables, a single plane cannot show the state. The trajectory and phase-portrait figures may then be repeated for each pair of variables, or for chosen slices. Agree which with the user. The five-figure limit is relaxed to what the agreed set needs.
 
@@ -219,7 +223,7 @@ Agree what is being asked, before looking at what the answer might be.
 - Brainstorm with the user. If they have no clear idea, suggest candidate questions — still without looking at the numbers, so suggestions come from what the variables *mean*, not from what they happen to show.
 - Assess feasibility: is the needed variable present, is coverage adequate, would the data structure undermine the answer, is the question answerable with this file at all.
 - Keep it at that level. Do not design specific visualisations or choose statistical tests yet — steps 3 and 4 exist for that. On this branch, step 2 ends with the proposal from `The Standard Analysis` agreed. That proposal names the model and the figures, which is allowed because they are fixed by the branch, not chosen after seeing the data.
-- **In the usual case, the user names the variables or the question, and the default sub-questions in `The Standard Analysis` are the starting point.** The bias rule above applies in full. The variables and sub-questions are fixed from what the variables mean before any relationship between them is looked at.
+- **In the usual case, the user names the variables or the question, and the default question in `The Standard Analysis` is the starting point.** There are one to four questions. The bias rule above applies in full. The variables and questions are fixed from what the variables mean before any relationship between them is looked at.
 - **In a replication, the research question is the original paper's.** Record it in the paper's terms, with the equations it reports, and list every departure from its method and data before anything is fitted. The bias rule above still applies to anything the paper did not ask. A question added because of what the replication shows is a new question, and is framed as one. All of this goes in `Appendix.md`. The questions written into the report's `Introduction` are stated as questions about the problem, with no reference to the paper's answers.
 - Record the outcome in the `Research Question` section of `Appendix.md`, which has three parts: `Discussion` — how the question was arrived at, what was considered and ruled out, and what the data can support; `Question` — the single main thing being asked, specific enough to have a definite answer, phrased as a question or as a hypothesis, whichever the user chose; `Sub-questions` — the separately answerable parts, each naming the variables involved and what would count as an answer either way.
 - Write it before anything is tested, so it is on the record that the question preceded the result.
@@ -231,7 +235,7 @@ Agree what is being asked, before looking at what the answer might be.
 - **The `Introduction` has a fixed shape.** In order:
   1. **Background** — one or two paragraphs setting the scene: what is already known about the problem, what is unresolved, and why it is worth asking about, with references. This comes first, because a reader needs the problem before they need the method. Written in step 6, since it needs the literature rather than the data.
   2. **Framing the problem** — two or three paragraphs: what the variables are and how they are measured, whether the question is one of association or of cause, and what approach is taken. Written in step 2, from the framing already agreed.
-  3. **The sub-questions**, as a numbered list.
+  3. **The sub-questions**, as a numbered list. On this branch: the question, or the one to four questions numbered if there is more than one.
 - **Do not open with a sentence about the report.** *"This report examines whether X is associated with Y"* describes the document rather than the problem, and tells a reader nothing they will not get from the sub-questions a few lines later. Open on the question itself — what is unresolved, and why anyone should care that it is.
 - **Put the background placeholder in the opening position**, so that the gap sits where the background will go. Use exactly: `*Background and prior literature to be added later.*` Step 6 replaces it.
 
