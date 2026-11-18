@@ -1,0 +1,48 @@
+Outcome: dD   changes: 3423   countries: 183
+sigma (fixed, sd of dD): 0.07194   lambda: 0.07194 (on RMS-scaled terms)
+
+Best model per size:
+ m    log-lik  log-evidence  P(size)      R2  terms
+ 1    4159.68       4155.61   0.0000  0.0041  D^2
+ 2    4194.02       4186.94   0.0000  0.0242  DG, D^2
+ 3    4209.91       4199.41   0.1882  0.0334  D/G, DG, D^2
+ 4    4216.31       4200.69   0.6816  0.0372  D, D/G, D^2, 1/G^2
+ 5    4217.00       4198.24   0.0584  0.0376  D, 1/G, D/G, D^2, G^2
+ 6    4217.14       4197.00   0.0170  0.0377  D, G, D/G, D^2, G^2, 1/G^2
+ 7    4220.22       4196.89   0.0152  0.0395  1, D, G, 1/G, DG, D^2, G^2
+ 8    4221.41       4195.90   0.0057  0.0402  1, D, G, 1/G, DG, D^2, G^2, 1/G^2
+ 9    4221.41       4197.69   0.0340  0.0402  1, D, G, 1/G, D/G, DG, D^2, G^2, 1/G^2
+
+Selected: size 4, P = 0.6816; next best size 3, P = 0.1882; log Bayes factor selected vs next = 1.29
+
+Selected model, posterior mean and 95% credible interval (original scale):
+  D      +0.26653  [+0.20851, +0.32455]
+  D/G    -0.14365  [-0.17401, -0.11328]
+  D^2    -0.11760  [-0.15047, -0.08474]
+  1/G^2  +0.00303  [+0.00141, +0.00464]
+
+Checks (appendix only unless they change the answer)
+  lambda x0.1: selected size 9: 1, D, G, 1/G, D/G, DG, D^2, G^2, 1/G^2
+  lambda x10: selected size 4: D, D/G, D^2, 1/G^2
+  sigma from residuals (0.07062 vs 0.07194): selected size 4: D, D/G, D^2, 1/G^2
+  within-country lag-1 residual correlation: -0.141 over 3201 pairs
+  country resampling (500 draws, seed 20261118); selected term sets:
+     184  D, D/G, D^2, 1/G^2
+      52  G, D/G, DG, D^2, G^2
+      46  D/G, DG, D^2
+      43  D/G, DG, D^2, 1/G^2
+      32  D, 1/G, D/G, D^2
+      26  D, D/G, D^2
+  selected model's coefficients across resamples (2.5-97.5 percentile) vs posterior interval width:
+    D      [+0.20637, +0.38654]  width 0.18017 vs posterior 0.11604
+    D/G    [-0.20204, -0.11621]  width 0.08582 vs posterior 0.06073
+    D^2    [-0.18177, -0.08247]  width 0.09930 vs posterior 0.06573
+    1/G^2  [+0.00167, +0.00447]  width 0.00280 vs posterior 0.00323
+D 327 of 500
+D/G 488 of 500
+D^2 500 of 500
+1/G^2 253 of 500
+DG 233 of 500
+G^2 113 of 500
+D/G and D^2 together 488
+sizes {'1': 0.0, '2': 0.0, '3': 0.1882, '4': 0.6816, '5': 0.0584, '6': 0.017, '7': 0.0152, '8': 0.0057, '9': 0.034}

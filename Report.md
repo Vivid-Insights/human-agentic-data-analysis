@@ -20,7 +20,17 @@ Rather than relating the level of one variable to the level of the other, we mod
 
 ## Methods
 
-*Written in step 4, one sub-heading per sub-question, in step with `Results`.*
+### Data
+
+GDP per capita is World Bank indicator NY.GDP.PCAP.KD, in constant 2015 US dollars (World Bank, 2026). Democracy is the citizen rights index of Welzel (2013), taken from the January 2015 release of the Quality of Government dataset (Teorell et al., 2015), where values coded −99 are missing. The two are joined by country and year for 1981 to 2006. A yearly change is the difference between consecutive years in which a country has both variables, so a country with gaps contributes fewer changes rather than none. This gives 3,423 yearly changes from 183 countries. In the model, GDP enters as $G = \ln(\text{GDP per capita})/12$, which runs from 0.43 to 0.99. Coefficients on terms in $G$ are on this scale.
+
+### Model
+
+The yearly change in each variable is modelled as a sum of terms in the current levels of both, $\Delta D = f_D(D, G) + \varepsilon$ and $\Delta G = f_G(D, G) + \varepsilon$, where $\varepsilon$ is normally distributed noise. Following Ranganathan, Spaiser and Sumpter (2013), the terms are drawn from a fixed set: $1, D, G, 1/G, D/G, DG, D^2, G^2$ and $1/G^2$. Terms with democracy in the denominator are left out, because democracy is exactly zero in 108 country-years. All countries and years are pooled.
+
+### Model selection and uncertainty
+
+For each equation we fitted all 512 combinations of terms by least squares and kept the best-fitting combination of each size. We compared sizes by their Bayesian evidence, the probability of the observed changes averaged over the prior (Ranganathan et al., 2014). The noise standard deviation is fixed at the standard deviation of the observed changes. The prior on the coefficients is normal: each term is first divided by its root-mean-square value, and the prior standard deviation is again the standard deviation of the observed changes, so that a term at its typical size is expected to move the variable by about one typical yearly change. The evidence and the posterior distribution of the coefficients then have closed forms. We report the size with the highest evidence, its posterior probability with every size equally likely beforehand, and 95% credible intervals for its coefficients. To see how much the result depends on particular countries, we refitted on 500 samples of the countries drawn with replacement.
 
 ## Results
 
@@ -40,6 +50,14 @@ Figure 3 summarises all 3,423 observed yearly changes on the same axes as Figure
 
 <small><b>Figure 3.</b> Observed yearly changes in democracy and GDP per capita (constant 2015 US dollars, logarithmic scale), averaged within cells of a grid. Each cell spans a factor of about 1.6 in GDP per capita and 0.1 in democracy. Each arrow starts at the average position of the country-years in its cell, marked by a dot, and points along their average yearly change. Arrows are drawn at 3⅓ times the yearly change, and the 33 longest are shortened to 0.47 cm, with their direction unchanged. Cells with fewer than 10 yearly changes have no arrow; the 83 cells with arrows hold 3,289 of the 3,423 changes. Faint lines are the paths of the six countries in Figures 1 and 2.</small>
 
+### Sub-question 1: the yearly change in democracy
+
+The selected model for the yearly change in democracy has four terms:
+
+$$\Delta D = 0.267\,D - 0.144\,\frac{D}{G} - 0.118\,D^2 + 0.0030\,\frac{1}{G^2}$$
+
+The 95% credible intervals are 0.209 to 0.325 for $D$, −0.174 to −0.113 for $D/G$, −0.150 to −0.085 for $D^2$, and 0.0014 to 0.0046 for $1/G^2$. The posterior probability of four terms is 0.68. The next most probable size is three terms, $D/G$, $DG$ and $D^2$, at 0.19. The model is fitted to 3,423 yearly changes from 183 countries, and it accounts for 3.7% of their variance. When the countries are resampled, $D^2$ is selected in all 500 samples and $D/G$ in 488, while the full four-term model is selected in 184. Across the resamples, the ranges of the coefficients on $D$, $D/G$ and $D^2$ are about one and a half times as wide as their credible intervals.
+
 ## Discussion
 
 *Written in step 5, organised by theme rather than by sub-question.*
@@ -58,6 +76,12 @@ This report was written with the help of agentic AI at every stage: importing an
 
 ## References
 
+Ranganathan, S., Spaiser, V., Mann, R. P. and Sumpter, D. J. T. (2014). [Bayesian dynamical systems modelling in the social sciences](https://doi.org/10.1371/journal.pone.0086468). *PLOS ONE*, 9(1), e86468.
+
 Ranganathan, S., Spaiser, V. and Sumpter, D. J. T. (2013). [A Bayesian approach to modeling dynamical systems in the social sciences](https://doi.org/10.5220/0004480901250131). In *Proceedings of the 3rd International Conference on Simulation and Modeling Methodologies, Technologies and Applications (SIMULTECH 2013)*, pp. 125–131. SCITEPRESS.
 
+Teorell, J., Dahlberg, S., Holmberg, S., Rothstein, B., Hartmann, F. and Svensson, R. (2015). [The Quality of Government Standard Dataset, version Jan15](https://www.qogdata.pol.gu.se/dataarchive/qog_std_ts_jan15.csv). University of Gothenburg: The Quality of Government Institute.
+
 Welzel, C. (2013). *Freedom Rising: Human Empowerment and the Quest for Emancipation*. Cambridge University Press. [Open-access PDF](https://cambridge.org/de/files/8613/8054/8416/FreedomRising_OA.pdf).
+
+World Bank (2026). [GDP per capita (constant 2015 US$), NY.GDP.PCAP.KD](https://api.worldbank.org/v2/en/indicator/NY.GDP.PCAP.KD?downloadformat=csv). World Development Indicators, release last updated 11 November 2026.

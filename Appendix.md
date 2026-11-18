@@ -180,6 +180,39 @@ Made by `Code/05_fig_data_phase_portrait.py`. Counts from `Code/outputs/05_phase
 - **Shared axis range.** Figures 2 and 3 now share a fixed GDP range, \$150 to \$170,000 (`USD_XLIM` in `sds_common.py`), so the two can be laid over each other. The first draft of Figure 3 was cut at the grid edges, and with its longer legend label the \$50k and \$100k ticks collided.
 - **Not used in the report.** Over all changes, the mean yearly change is 0.0023 in democracy and 0.00141 in $G$, which is 1.70% growth in GDP per capita a year.
 
+### Sub-question 1: the yearly change in democracy (step 4)
+
+Fitted by `Code/06_fit_change_model.py D`. Full output in `Code/outputs/06_fit_D.txt` and `06_fit_D.json`.
+
+- **Setup, as agreed.** 3,423 changes from 183 countries. $\sigma$ is fixed at $\text{sd}(\Delta D) = 0.07194$. The prior is normal on RMS-scaled coefficients, with $\lambda = 0.07194$.
+- **Best model of each size:**
+
+| Size | Log-likelihood | Log-evidence | P(size) | $R^2$ | Terms |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 4159.68 | 4155.61 | 0.0000 | 0.0041 | $D^2$ |
+| 2 | 4194.02 | 4186.94 | 0.0000 | 0.0242 | $DG, D^2$ |
+| 3 | 4209.91 | 4199.41 | 0.1882 | 0.0334 | $D/G, DG, D^2$ |
+| 4 | 4216.31 | 4200.69 | 0.6816 | 0.0372 | $D, D/G, D^2, 1/G^2$ |
+| 5 | 4217.00 | 4198.24 | 0.0584 | 0.0376 | $D, 1/G, D/G, D^2, G^2$ |
+| 6 | 4217.14 | 4197.00 | 0.0170 | 0.0377 | $D, G, D/G, D^2, G^2, 1/G^2$ |
+| 7 | 4220.22 | 4196.89 | 0.0152 | 0.0395 | $1, D, G, 1/G, DG, D^2, G^2$ |
+| 8 | 4221.41 | 4195.90 | 0.0057 | 0.0402 | all but $D/G$ |
+| 9 | 4221.41 | 4197.69 | 0.0340 | 0.0402 | all nine |
+
+- **Selected model.** Four terms, with log Bayes factor 1.29 over the best three-term model. Posterior means and 95% intervals: $D$ +0.26653 [+0.20851, +0.32455]; $D/G$ −0.14365 [−0.17401, −0.11328]; $D^2$ −0.11760 [−0.15047, −0.08474]; $1/G^2$ +0.00303 [+0.00141, +0.00464].
+- **Prior sensitivity.** With $\lambda \times 10$ the selection is unchanged. With $\lambda \times 0.1$ the nine-term model is selected. A prior that narrow expects each term to move democracy by at most about 0.007 a year, so it shrinks every coefficient hard and barely penalises extra terms. Reported here only; the agreed $\lambda$ stands.
+- **Noise variance.** Estimating $\sigma$ from the residuals (0.07062 against 0.07194) selects the same four terms.
+- **Within-country residual correlation, lag 1:** −0.141 over 3,201 pairs. The negative sign means a year with a larger-than-predicted change tends to be followed by a smaller one, as measurement noise in a level would produce. It is not the positive persistence that would make the posterior intervals too narrow.
+- **Country resampling** (500 draws, seed 20261118).
+  - The four-term model is selected in 184 of 500 draws. $D^2$ is selected in 500, $D/G$ in 488, $D$ in 327, $1/G^2$ in 253, $DG$ in 233 and $G^2$ in 113.
+  - The 2.5–97.5 percentile ranges of the selected model's coefficients are 1.55, 1.41 and 1.51 times the posterior interval widths for $D$, $D/G$ and $D^2$, and 0.87 times for $1/G^2$.
+  - Because it changes how the uncertainty should be read, this check is reported in one sentence in `Results` and named in `Methods`.
+- **Comparison with Ranganathan, Spaiser and Sumpter (2013)** (`Code/outputs/06_fit_D_paper_model.txt`; replication only, not in the report).
+  - **Not reproduced on the agreed criterion.** The paper's model has $G^2$ and $D/G$; the selected model shares $D/G$, with the same negative sign, but not $G^2$.
+  - **The paper's model on our data.** Imposed on our data, it gives $G^2$ +0.0383 [+0.0293, +0.0473] and $D/G$ −0.0297 [−0.0362, −0.0231]. The paper's coefficients converted to our scale (+0.0432 and −0.0336) lie inside both intervals.
+  - **How it ranks.** Its log-evidence is 4184.02, against 4200.69 for the selected model, a log Bayes factor of 16.7. It is also below our best two-term model ($DG$, $D^2$, 4186.94).
+  - **So** the paper's equation describes our data with almost the same coefficients, but our search, with its larger data and different vintage, prefers a model with more terms in democracy.
+
 ## Analysis Log
 
 *A numbered row per step taken, added as the work happens. What was done, what it changed, and where the output is. Superseded decisions stay, marked as such — a reader cannot judge a choice without seeing the alternatives.*
@@ -205,6 +238,7 @@ Made by `Code/05_fig_data_phase_portrait.py`. Counts from `Code/outputs/05_phase
 | 17 | Step 3. At the user's request, made the arrows in Figure 3 longer, with a cap: 5 years, capped at 0.7 cm on the page with direction kept; 33 of 83 capped. Caption and reading paragraph updated. | `Code/05_fig_data_phase_portrait.py`; `Report.md` |
 | 18 | Step 3. Arrows set to two thirds of that length (3⅓ years, capped at 0.47 cm; 33 of 83 capped), and the arrow format locked in the contract for both phase portraits. | `instructions.md`; `Code/05_fig_data_phase_portrait.py`; `Report.md` |
 | 19 | Step 3 closed by the user on 2026-11-18. Figures 1–3 are in the report in the locked format. Offered and declined: a grid-sensitivity check of Figure 3, and data ranges in the captions. Figure 4, the model phase portrait, is deferred to step 4. | — |
+| 20 | Step 4, sub-question 1. Agreed: $\sigma$ fixed at sd($\Delta D$) and a normal prior with $\lambda$ = sd($\Delta D$) on RMS-scaled terms. Selected four terms: $D$, $D/G$, $D^2$, $1/G^2$, P(size) = 0.68. Checks run: prior ×0.1 and ×10, $\sigma$ from residuals, lag-1 residual correlation, 500 country resamples. Comparison with the paper in the appendix only. Wrote `Methods` (`Data`, `Model`, `Model selection and uncertainty`) and the sub-question 1 paragraph in `Results`. | `Code/06_fit_change_model.py`; `Code/outputs/06_fit_D.*`; `Report.md` |
 
 ## Code Summary
 
@@ -216,6 +250,7 @@ Made by `Code/05_fig_data_phase_portrait.py`. Counts from `Code/outputs/05_phase
 | `Code/03_fig_trajectories_time.py` | Figure 1: democracy and GDP per capita (dollars, log axis) against year for the six countries. Light and dark. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig1_trajectories_time.png`, `…/dark/…` |
 | `Code/04_fig_trajectories_plane.py` | Figure 2: the six countries' paths in the GDP–democracy plane (dollars, log axis), over all countries in 2006. Light and dark. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig2_trajectories_plane.png`, `…/dark/…` |
 | `Code/05_fig_data_phase_portrait.py` | Figure 3: cell-average observed yearly changes as arrows on the GDP–democracy plane, with the six countries' paths faint. Parameters: `LENGTH = 2/3`, giving `K = 5 × 2/3 = 3⅓` (arrow years) and `CAP_CM = 0.7 × 2/3 ≈ 0.467` (maximum arrow length on the page, direction kept), `MIN_N = 10` (minimum changes per cell), $G$ bins of 0.04 from 0.42 to 1.00, $D$ bins of 0.1. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig3_data_phase_portrait.png`, `…/dark/…`; `Code/outputs/05_phase_cells.csv`; `Code/outputs/05_phase_portrait_counts.txt` |
+| `Code/06_fit_change_model.py` | Fits the change model for one outcome (`D` or `G`, given as the argument). Runs all 512 term subsets, finds the best of each size by least squares, computes closed-form evidence and the Gaussian posterior with $\sigma$ = sd($\Delta x$) and $\lambda$ = sd($\Delta x$) on RMS-scaled terms, then runs the checks: $\lambda$ ×0.1 and ×10, $\sigma$ from residuals, lag-1 residual correlation, and 500 country resamples. Seed 20261118. Run with `cd Code && uv run python 06_fit_change_model.py D`. | `Code/outputs/panel.csv` | `Code/outputs/06_fit_<outcome>.txt`, `.json` |
 
 Run order: `01_describe_data.py` (description only), then `02_build_panel.py`, then the figure scripts in any order. The scripts in `Code/` import `sds_common.py` from their own directory, so they are run without Python's isolated mode (`-I`). No downloaded file is on the import path.
 
