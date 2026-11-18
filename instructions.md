@@ -87,6 +87,7 @@ Get the data in and establish what will be used.
 - Put source files in `Attachments/`. Never modify them.
 - Record provenance: where the file came from, when, and a checksum. Say why this file and not another, if that was a choice.
 - **Ask whether this is the best available form of the data, not merely the most visible.** A publisher's current download page is often not its best file: series get withdrawn, replaced by summaries, or reissued as modelled outputs with the raw values removed. Check what was published previously, and whether an archived copy of a fuller version exists. Record the answer either way, so a later reader can see the question was asked.
+- **Scan for missing-value codes before summarising anything.** Look for sentinel values such as −99, −999, −9 or 9999, and for values outside the documented range. Count them, by year and by unit, and set them to missing. A single summary statistic computed with them left in is wrong, and it is wrong silently.
 - **Describe the file before judging it.** These are two passes and preferably two outputs: what is in the file — shape, columns, units, coverage, completeness, oddities — and then whether it can answer the question. The describing pass draws no conclusions by design. Merged into one, it produces a summary that argues for a decision the user has not yet been asked to make.
 - Write the `Data Summary` section of `Appendix.md`: shape, columns and what they mean, coverage, completeness, and anything unexpected.
 - **Do not touch `Report.md` at this stage.**
