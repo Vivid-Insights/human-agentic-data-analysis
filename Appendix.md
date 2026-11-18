@@ -73,7 +73,78 @@ From `Code/01_describe_data.py`; full output in `Code/outputs/01_describe_data.t
 
 ## Research Question
 
-*Written in step 2, before anything is tested. Three parts: `Discussion` — how the question was arrived at and what was ruled out; `Question` — the single main thing being asked; `Sub-questions` — the separately answerable parts, each naming its variables and what would count as an answer either way.*
+Written in step 2, on 18 November 2026, before anything was fitted or plotted. Nothing in this section was computed from the data. The only arithmetic is a change of scale applied to the paper's published coefficients.
+
+### Discussion
+
+This analysis is a replication, and it checks the method this branch is built on. The question is taken from the introduction of Ranganathan, Spaiser and Sumpter (2013), as the user asked. That introduction makes three moves.
+
+- Social scientists usually relate variables through regression, and read the results statically: the level of one variable against the level of another.
+- Social systems are dynamic, so it is more natural to model how each variable changes as a function of the current state of all of them, and to let the data choose the form of that function from a pool of candidates instead of fixing it from theory.
+- The test case is the relationship between a country's income and its level of democracy. The paper says political scientists have debated it for 50 years, citing Lipset (1959), Barro (1996, 1999), Boix and Stokes (2003) and Krieckhaus (2003). These are given as the paper cites them; we have not yet opened them, which is step 6's work. The paper reads Barro (1996) as concluding that GDP per capita raises democracy while democracy has no direct effect on growth, and more recent work as suggesting the relationship is non-linear and dynamic.
+
+The question here is therefore the paper's own. Its framing of the background is recorded here and taken up in step 6. The step 6 background will cite the original works, not the 2013 paper's summary of them.
+
+Feasibility, from the `Data Summary`:
+
+- Both variables are present for 1981–2006: 3,679 country-years in 184 countries before the panel rule.
+- Both are yearly, so the year-to-year changes are not interpolated.
+- The democracy index is the one the paper used. GDP comes from a later World Bank release, in constant 2015 dollars, so coefficients involving GDP are not expected to match exactly.
+- One structural limit: pooling all countries assumes they share one set of dynamics. The paper names this "mean-field" assumption itself, so it is part of what is being replicated, not a reason to change the question.
+
+Considered and set aside:
+
+- Lagged GDP and the three-variable models of Ranganathan et al. (2014). These are extensions of the 2013 model, not part of it.
+- The PLOS ONE version of the same application (74 countries, a 17-term library). The user chose the 2013 paper.
+
+### Question
+
+When the yearly changes in democracy and in GDP per capita are each modelled as a polynomial function of the current levels of both, as in Ranganathan, Spaiser and Sumpter (2013), are the equations selected the same as those the paper reports, and do they imply the same dynamics?
+
+### The paper's answers, on our scale
+
+The paper uses $G_p$, the natural log of GDP per capita. We use $G = G_p/12$, so $G_p = 12G$ and $\Delta G_p = 12\,\Delta G$. Substituting into the paper's two equations gives:
+
+| Equation | As published, in $G_p$ | On our scale, in $G$ |
+| --- | --- | --- |
+| Change in democracy | $\Delta D = 0.0003\,G_p^2 - 0.4031\,D/G_p$ | $\Delta D = 0.0432\,G^2 - 0.0336\,D/G$ |
+| Change in GDP | $\Delta G_p = 0.0246\,D + 0.0017\,G_p - 0.0002\,G_p^2$ | $\Delta G = 0.00205\,D + 0.0017\,G - 0.0024\,G^2$ |
+
+This conversion rests on the paper having used natural logs without rescaling. That is inferred from its axes, which run from about 5 to 12, but it is not stated. Every term in both equations is in our 9-term library: $G^2$, $D/G$, $D$ and $G$. So removing the inverse-$D$ terms does not take the paper's models out of reach.
+
+### Sub-questions
+
+These are the branch's three default sub-questions. In a replication, "an answer either way" means reproducing the paper or not.
+
+1. **How does the yearly change in democracy depend on the current levels of democracy and GDP?**
+   - Variables: $\Delta D$ against $D$ and $G$.
+   - The paper is reproduced if the selected model has the same terms ($G^2$ and $D/G$) with the same signs (positive, negative). It is not reproduced if different terms are selected, or the same terms with a different sign.
+   - The coefficients are compared with the converted values above, and we report whether each lies inside our 95% credible interval. The vintage difference means this comparison is reported, not used to decide the answer.
+   - The posterior probability of the paper's model size against the selected one is also reported.
+2. **How does the yearly change in GDP depend on the current levels of democracy and GDP?**
+   - Variables: $\Delta G$ against $D$ and $G$.
+   - The paper is reproduced if the selected model has the terms $D$, $G$ and $G^2$, with signs positive, positive, negative. It is not reproduced otherwise.
+   - Whether democracy enters at all is the point of substance in the debate the paper addresses. If it does not, we report how firmly it is excluded: the evidence for the best model that includes $D$ against the selected one.
+   - Coefficients are compared as in sub-question 1.
+3. **What do the two equations imply together?**
+   - Variables: the fitted vector field over the observed range of $D$ and $G$, and trajectories integrated from each country's first observed state.
+   - The paper is reproduced if the fitted system has an attracting curve running from low $D$, low $G$ to high $D$, high $G$, onto which trajectories converge, with countries high in democracy and low in GDP losing democracy until they reach it. It is not reproduced if there is no such curve within the observed range, or if trajectories do not converge onto it.
+   - This is judged from the phase portrait, with the curves where each change is zero computed from the fitted equations, not read off the figure.
+
+### Standard analysis proposal
+
+The eight parts of `The Standard Analysis` for this replication. Departures from the 2013 paper are marked.
+
+| Part | This analysis |
+| --- | --- |
+| Variables | $D$: Welzel's citizen rights index `wel_citrig`, 0–1, an expert-coded index. $G$: World Bank `NY.GDP.PCAP.KD`, constant 2015 US$, a national-accounts estimate. Departure: GDP vintage and base year. |
+| Transformations | $G = \ln(\text{GDP per capita})/12$. $D$ unchanged. Departure: the paper does not rescale; its coefficients are converted above. |
+| The system | $\Delta D(t) = f_D(D(t), G(t))$ and $\Delta G(t) = f_G(D(t), G(t))$, pooled over countries, using every pair of consecutive years present in 1981–2006. Departure: years start in 1981, not 1980. |
+| Term library | 9 terms, the paper's 13 without the four with $D$ in the denominator: $1, D, G, 1/G, D/G, DG, D^2, G^2, 1/G^2$. That gives 512 models per equation. Departure: 9 terms, not 13. |
+| Search | Every model of every size; best by likelihood within each size; sizes compared by evidence. As in the paper. |
+| Prior | Normal, $N(0, \lambda^2 I)$, with closed-form evidence (Ranganathan et al., 2014). $\lambda$ set and stated in step 4. Noise variance as in Ranganathan et al. (2014). Departure: the paper used a uniform prior with Monte Carlo integration. |
+| Checks | Within-country correlation of residuals; correlation of errors between the two equations (the paper's seemingly unrelated regressions check); refits on resampled countries. Departure: the resampling refits are an addition. |
+| Figures | The four standard figures. The paper has three: a one-year scatter, the means over time, and the model phase portrait. Departure: the data phase portrait is added. |
 
 ## Analysis
 
@@ -92,6 +163,7 @@ From `Code/01_describe_data.py`; full output in `Code/outputs/01_describe_data.t
 | 5 | Step 1. Zeros in democracy. The user first proposed replacing $D$ by $D+\tfrac12$ in denominators, then chose to remove the four inverse-$D$ terms instead. The library is now 9 terms, 512 models per equation. Before deciding, checked all six papers: none says how zeros were handled, and no selected democracy equation in any of them has an inverse-$D$ term. Rescaling settled as $\ln(\text{GDP per capita})/12$, from Spaiser et al. (2014, File S1). | `Appendix.md` `Data Summary`, decisions table |
 | 6 | Step 1. Contract changes from what this step taught: scan for missing-value codes; join and aggregate checks; fixed-constant scaling; zero checks with inverse-term removal; flag interpolated series; default panel rule. Applied here: the panel rule, dropping the unmatched units, and accepting the coverage dips. | `instructions.md` (`The Standard Analysis`, step 1) |
 | 7 | Step 1 closed by the user on 2026-11-18. Everything in its checklist is settled. The prior's $\lambda$ is left to step 4. | — |
+| 8 | Step 2. Framed the question from the introduction of Ranganathan, Spaiser and Sumpter (2013), as the user asked. Recorded the question, the paper's equations converted to $G = \ln(\text{GDP})/12$, three sub-questions with what counts as reproducing the paper, and the standard analysis proposal with its departures. Wrote the framing and sub-questions into the report's `Introduction`. Nothing was computed from the data. | `Appendix.md` `Research Question`; `Report.md` `Introduction` |
 
 ## Code Summary
 
