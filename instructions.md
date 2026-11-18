@@ -69,9 +69,9 @@ When the user prefixes a message with **FRAMEWORK**, they are changing this docu
 
 `socio-dynamical-systems` is a second template, branched from `main`, for analyses that read in World Bank data, fit a dynamical system to describe change in it, and write a short summarising report with a fixed set of methods. Analyses of that kind branch from `socio-dynamical-systems`, not from `main`.
 
-- **Changes specific to this framework stay on this branch.** Its instruction set, its methods and anything that only makes sense for World Bank dynamical-systems work are never promoted to `main`.
-- **General improvements are still promoted to `main`**, under the rules below. A change counts as general if it would apply equally to an analysis branched from `main`.
-- **Ask before changing `main`.** Say which commit you propose to promote and why it is general rather than framework-specific, and wait for the user's agreement before cherry-picking or pushing.
+- **Every change stays on this branch. Nothing is promoted to `main`, and `main` is not touched at all.** That includes changes that would apply equally to a general analysis. There is no cherry-picking, no committing and no pushing to `main` from work on this branch.
+- **The promotion rules below do not apply here.** They govern analyses branched from `main`, and are kept only because this branch started as a copy of it.
+- **If a change here looks useful for `main`, say so and leave it there.** Whether to carry it across is the user's decision, made outside this branch.
 
 ### Promoting template changes to `main`
 
