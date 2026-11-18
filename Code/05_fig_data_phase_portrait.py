@@ -23,8 +23,9 @@ from matplotlib.lines import Line2D
 from sds_common import (CM, D_LABEL, G_SCALE, GDP_LABEL, OUT, REP, REP_COLOUR,
                         YEARS, USD_XLIM, dollar_axis, load_panel, save, style)
 
-K = 5          # arrow = average yearly change x K years
-CAP_CM = 0.7   # maximum drawn arrow length, cm on the page (~ one grid cell); longer
+LENGTH = 2 / 3  # user: two thirds of the 5-year, 0.7 cm version (locked format)
+K = 5 * LENGTH  # arrow = average yearly change x K years (3 1/3)
+CAP_CM = 0.7 * LENGTH  # maximum drawn arrow length, cm on the page (~ one grid cell); longer
                # arrows are shortened to this length with their direction unchanged
 MIN_N = 10     # minimum observed changes for a cell to get an arrow
 G_EDGES = np.arange(0.42, 1.00 + 1e-9, 0.04)   # G = ln(GDP)/12; 0.04 in G = x1.62 in GDP
@@ -48,7 +49,7 @@ counts = [
     f"grid: {len(G_EDGES)-1} G bins of 0.04 x {len(D_EDGES)-1} D bins of 0.1",
     f"occupied cells: {len(cells)}; cells with >= {MIN_N} changes (arrows): {len(shown)}",
     f"changes in cells with arrows: {int(shown.n.sum())} of {len(ch)}",
-    f"arrow scale K = {K} years",
+    f"arrow scale K = {K:.4f} years",
     f"mean yearly dD over all changes: {ch.dD.mean():.4f}; mean yearly dG: {ch.dG.mean():.5f}"
     f" (= {100*(np.exp(G_SCALE*ch.dG.mean())-1):.2f}% GDP growth per year)",
 ]
@@ -72,7 +73,7 @@ for theme_name in ("light", "dark"):
     ax.set_ylabel(D_LABEL)
     handles, labels = ax.get_legend_handles_labels()
     handles = [Line2D([0], [0], color=arrow_col, lw=1.1)] + handles
-    labels = [f"Mean change,\n{K} years (capped)"] + labels
+    labels = ["Mean change,\n3⅓ years (capped)"] + labels
     ax.legend(handles, labels, loc="upper left", bbox_to_anchor=(1.02, 1.0),
               frameon=False, handlelength=1.4, borderaxespad=0.0)
     fig.tight_layout()
@@ -99,7 +100,7 @@ for theme_name in ("light", "dark"):
         ax.scatter([x0], [y0], s=6, color=arrow_col, zorder=5, lw=0)
     if theme_name == "light":
         with open(OUT / "05_phase_portrait_counts.txt", "a") as fh:
-            fh.write(f"arrow cap: {CAP_CM} cm on the page; arrows shortened to the cap: "
+            fh.write(f"arrow cap: {CAP_CM:.3f} cm on the page; arrows shortened to the cap: "
                      f"{int(n_capped)} of {len(shown)}\n")
         print(f"capped: {int(n_capped)} of {len(shown)}")
     path = save(fig, "fig3_data_phase_portrait", theme_name)
