@@ -10,7 +10,7 @@
 
 *Background and prior literature to be added later.*
 
-We look at how democracy and national income change together, using two country-level variables between 1981 and 2006. The first is GDP per capita, from the World Bank, in constant 2015 US dollars. We take its natural logarithm and divide by 12, so that it runs from about 0.4 to 1. The second is the citizen rights index of Welzel (2013). It combines Freedom House ratings of political rights and civil liberties with Cingranelli–Richards scores of how far rights are respected in practice, and runs from 0, no citizen rights, to 1. It's one way of measuring democracy, and it is built from expert codings, not measured directly.
+We look at how democracy and national income change together, using two country-level variables between 1981 and 2006. The first is GDP per capita, from the World Bank, in constant 2015 US dollars. It runs from about \$160 to \$140,000 per person. For the model we take its natural logarithm and divide by 12, so that it runs from about 0.4 to 1. Figures show it in dollars on a logarithmic scale. The second is the citizen rights index of Welzel (2013). It combines Freedom House ratings of political rights and civil liberties with Cingranelli–Richards scores of how far rights are respected in practice, and runs from 0, no citizen rights, to 1. It's one way of measuring democracy, and it is built from expert codings, not measured directly.
 
 Rather than relating the level of one variable to the level of the other, we model the yearly change in each as a function of the current levels of both. The two equations together describe a dynamical system. Following Ranganathan, Spaiser and Sumpter (2013), each change is written as a sum of terms from a fixed set of polynomials in the two variables. The data choose which terms enter: the best-fitting model is found for each number of terms, and models with different numbers of terms are compared by their Bayesian evidence. All countries are pooled, so we assume that every country follows the same dynamics from wherever it starts. The questions we look at are of association rather than cause. A term in the equation for the change in democracy says how that change varies with income, not that income drives it.
 
@@ -24,15 +24,15 @@ Rather than relating the level of one variable to the level of the other, we mod
 
 ## Results
 
-Figures 1 and 2 show the same data in two ways. Figure 1 plots each variable against time. Figure 2 plots the two variables against each other, so that a country's path through the figure is the sequence of states it passed through between 1981 and 2006. In Figure 2, a line moving up is a country becoming more democratic, and a line moving right is a country becoming richer. The thick line in both figures is the mean of the 84 countries that have both variables in every year from 1981 to 2006.
+Figures 1 and 2 show the same data in two ways. Figure 1 plots each variable against time. Figure 2 plots the two variables against each other, so that a country's path through the figure is the sequence of states it passed through between 1981 and 2006. In Figure 2, a line moving up is a country becoming more democratic, and a line moving right is a country becoming richer. GDP is on a logarithmic scale, so equal distances are equal proportional changes: moving from \$1,000 to \$2,000 is the same distance as moving from \$10,000 to \$20,000. The thick line in both figures is the mean of the 84 countries that have both variables in every year from 1981 to 2006. For GDP it is the mean of the logarithm, which is the geometric mean in dollars.
 
 ![Figure 1](Code/outputs/figures/fig1_trajectories_time.png)
 
-<small><b>Figure 1.</b> Democracy, <em>D</em> (left), and log GDP per capita divided by 12, <em>G</em> (right), from 1981 to 2006. Thin lines are six countries: Italy, Sweden, India, Chile, Albania and Nigeria. The thick line is the mean of the 84 countries with both variables in all 26 years. Albania has no observations for 1985–1989, shown as a gap.</small>
+<small><b>Figure 1.</b> Democracy, <em>D</em> (left), and GDP per capita in constant 2015 US dollars on a logarithmic scale (right), from 1981 to 2006. Thin lines are six countries: Italy, Sweden, India, Chile, Albania and Nigeria. The thick line is the mean of the 84 countries with both variables in all 26 years. Albania has no observations for 1985–1989, shown as a gap.</small>
 
 ![Figure 2](Code/outputs/figures/fig2_trajectories_plane.png)
 
-<small><b>Figure 2.</b> Democracy, <em>D</em>, against log GDP per capita divided by 12, <em>G</em>. Grey points are the 181 countries with both variables in 2006. Coloured lines are the paths of the six countries in Figure 1 from 1981 to 2006, with a filled circle at 1981. The thick line is the path of the mean of the 84 countries with both variables in all 26 years, with a filled circle at 1981.</small>
+<small><b>Figure 2.</b> Democracy, <em>D</em>, against GDP per capita in constant 2015 US dollars on a logarithmic scale. Grey points are the 181 countries with both variables in 2006. Coloured lines are the paths of the six countries in Figure 1 from 1981 to 2006, with a filled circle at 1981. The thick line is the path of the mean of the 84 countries with both variables in all 26 years, with a filled circle at 1981.</small>
 
 ## Discussion
 

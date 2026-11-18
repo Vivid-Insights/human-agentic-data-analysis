@@ -63,5 +63,21 @@ def save(fig, name: str, theme_name: str) -> Path:
     return path
 
 
+GDP_LABEL = "GDP per capita (2015 US$)"
+D_LABEL = "Democracy (index, 0 to 1)"
+GDP_TICKS = [500, 1000, 2000, 5000, 10000, 20000, 50000, 100000]
+
+
+def dollar_axis(ax, which: str = "x") -> None:
+    """Log axis labelled in dollars. Position is linear in ln(GDP), i.e. in G."""
+    from matplotlib.ticker import FixedLocator, FuncFormatter, NullLocator
+    axis = ax.xaxis if which == "x" else ax.yaxis
+    (ax.set_xscale if which == "x" else ax.set_yscale)("log")
+    axis.set_major_locator(FixedLocator(GDP_TICKS))
+    axis.set_major_formatter(FuncFormatter(
+        lambda v, _: f"${v/1000:g}k" if v >= 1000 else f"${v:g}"))
+    axis.set_minor_locator(NullLocator())
+
+
 def load_panel() -> pd.DataFrame:
     return pd.read_csv(PANEL)
