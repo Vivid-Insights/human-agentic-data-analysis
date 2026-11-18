@@ -31,3 +31,7 @@ Sample Report/Code/outputs/*.csv
 # Literature PDFs: licensed material, not redistributable. Citations live in the
 # documents; the files stay local.
 Attachments/literature/
+
+# QoG archive: large, third-party republication. See Attachments/SOURCE.md.
+Attachments/qog_std_ts_jan15.csv
+Attachments/qog_std_jan15_codebook.pdf

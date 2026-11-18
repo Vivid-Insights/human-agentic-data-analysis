@@ -1,0 +1,143 @@
+=== World Bank NY.GDP.PCAP.KD ===
+rows (economies incl. aggregates): 266; year columns 1960-2025
+of which countries (Region not blank): 217; aggregates: 48
+country-years 1980-2006: 5859; non-missing: 5026
+countries with any value 1980-2006: 204; with all 27 years: 159
+non-missing countries per year, 1980-2006:
+year
+1980    159
+1981    161
+1982    163
+1983    163
+1984    166
+1985    167
+1986    169
+1987    172
+1988    173
+1989    174
+1990    192
+1991    192
+1992    193
+1993    193
+1994    194
+1995    195
+1996    195
+1997    197
+1998    197
+1999    197
+2000    199
+2001    199
+2002    203
+2003    203
+2004    203
+2005    203
+2006    204
+gdppc 1980-2006 summary (constant 2015 US$):
+count      5026.000000
+mean      11526.940201
+std       17742.314243
+min         164.700417
+25%        1290.254240
+50%        3644.604826
+75%       14845.163162
+max      140615.112737
+values <= 0: 0
+
+=== QoG Jan 2015: wel_citrig ===
+rows in file: 14559; years 1946-2014; units: 211
+non-missing wel_citrig: 5385 country-years, 194 units, years 1981-2010
+wel_citrig summary:
+count    5385.000000
+mean      -15.317848
+std        36.284043
+min       -99.000000
+25%         0.032242
+50%         0.212054
+75%         0.642361
+max         1.000000
+values outside [0,1]: 852; distinct such values: [np.float64(-99.0)]
+  -99 by year: {1981: 40, 1982: 35, 1983: 36, 1984: 36, 1985: 37, 1986: 37, 1987: 38, 1988: 36, 1989: 37, 1990: 38, 1991: 39, 1992: 42, 1993: 41, 1994: 41, 1995: 40, 1996: 37, 1997: 38, 1998: 40, 1999: 38, 2000: 59, 2001: 3, 2002: 34, 2003: 5, 2004: 5, 2005: 3, 2006: 5, 2007: 3, 2008: 3, 2009: 4, 2010: 2}
+  units with any -99: 83
+after treating -99 as missing: 4533 country-years, 191 units
+count    4533.000000
+mean        0.410631
+std         0.334780
+min         0.000000
+25%         0.108383
+50%         0.316468
+75%         0.734127
+max         1.000000
+(ccodealp, year) pairs appearing more than once in QoG: 621
+                            min   max  count
+ccodealp cname                              
+CYP      Cyprus (1975-)    1981  2010     30
+DEU      Germany, West     1981  1990     10
+ETH      Ethiopia (-1992)  1981  1992     12
+         Ethiopia (1993-)  1993  2010     18
+FRA      France (1963-)    1981  2010     30
+MYS      Malaysia (1966-)  1981  2010     30
+PAK      Pakistan (1971-)  1981  2010     30
+SDN      Sudan (-2011)     1981  2010     30
+VNM      Vietnam           1981  2010     30
+YEM      Yemen             1990  2010     21
+
+1980-2006: 3785 country-years, 190 units
+exact zeros 1980-2006: 141 country-years in 22 units
+values in (0, 0.01): 83
+smallest positive values: [np.float64(0.0022321428571429), np.float64(0.0029761904761905), np.float64(0.0044642857142857), np.float64(0.0052083333333333), np.float64(0.0066964285714286), np.float64(0.0069444444444444), np.float64(0.0074404761904762), np.float64(0.0089285714285714)]
+zeros by country (count, years):
+  AFG Afghanistan: 16 [1981-2004]
+  AGO Angola: 1 [1984-1984]
+  ALB Albania: 3 [1981-1983]
+  BGR Bulgaria: 5 [1981-1988]
+  CHN China: 6 [1989-1995]
+  CUB Cuba: 7 [1999-2006]
+  ETH Ethiopia (-1992): 4 [1981-1985]
+  HTI Haiti: 1 [1992-1992]
+  IRQ Iraq: 19 [1981-2002]
+  KHM Cambodia: 2 [1988-1989]
+  LAO Laos: 1 [1985-1985]
+  MMR Myanmar: 11 [1988-2006]
+  PRK Korea, North: 17 [1982-2006]
+  SAU Saudi Arabia: 12 [1989-2006]
+  SDN Sudan (-2011): 13 [1989-2003]
+  SOM Somalia: 2 [1988-1989]
+  SYR Syria: 5 [1981-1992]
+  TCD Chad: 1 [1984-1984]
+  TJK Tajikistan: 3 [1993-1995]
+  TKM Turkmenistan: 2 [2003-2005]
+  UZB Uzbekistan: 2 [2004-2005]
+  VNM Vietnam: 8 [1981-1999]
+non-missing wel_citrig units per year, 1980-2006:
+year
+1981    120
+1982    127
+1983    126
+1984    128
+1985    127
+1986    127
+1987    128
+1988    130
+1989    129
+1990    130
+1991    128
+1992    142
+1993    146
+1994    146
+1995    148
+1996    151
+1997    150
+1998    148
+1999    150
+2000    129
+2001    185
+2002    154
+2003    183
+2004    183
+2005    185
+2006    185
+
+=== overlap on ISO3 code, 1980-2006, both non-missing ===
+country-years: 3679; countries: 184
+QoG codes with wel_citrig not among WB countries: ['CSK', 'TWN']
+QoG rows with blank ccodealp but wel_citrig: 0
