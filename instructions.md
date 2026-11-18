@@ -95,6 +95,10 @@ Get the data in and establish what will be used.
 - Put source files in `Attachments/`. Never modify them.
 - Record provenance: where the file came from, when, and a checksum. Say why this file and not another, if that was a choice.
 - **Ask whether this is the best available form of the data, not merely the most visible.** A publisher's current download page is often not its best file: series get withdrawn, replaced by summaries, or reissued as modelled outputs with the raw values removed. Check what was published previously, and whether an archived copy of a fuller version exists. Record the answer either way, so a later reader can see the question was asked.
+- **Check Our World in Data first.** [Our World in Data](https://ourworldindata.org) republishes the World Bank and most standard country-level series in one consistent format, with documented sources and versions. For each variable, look there before going to the original publisher, and record whether it is there.
+  - **Prefer it when it carries the series the analysis needs.** "The series" means the right measure, the right vintage and the right years, not just something with a similar name.
+  - **Go to the original publisher, or an archived copy, when it does not.** Common reasons are that the measure is missing, Our World in Data has replaced it with a different one, or its version does not cover the years needed. A replication needs the series the original paper used, and Our World in Data's current version of a revised series may not be it.
+  - **Record which source was used for each variable, and why.**
 - **Describe the file before judging it.** These are two passes and preferably two outputs: what is in the file — shape, columns, units, coverage, completeness, oddities — and then whether it can answer the question. The describing pass draws no conclusions by design. Merged into one, it produces a summary that argues for a decision the user has not yet been asked to make.
 - Write the `Data Summary` section of `Appendix.md`: shape, columns and what they mean, coverage, completeness, and anything unexpected.
 - **Do not touch `Report.md` at this stage.**
