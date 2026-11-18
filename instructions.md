@@ -132,21 +132,26 @@ Every report on this branch is a short article in the same format, so that repor
 - **Length.** About 2,000 words from `Abstract` to `Limitations`, not counting captions, equations and references. The `Abstract` is one paragraph of at most 200 words. The `Introduction` background is at most two paragraphs.
 - **`Methods` has fixed sub-headings:** `Data` (sources, indicator codes, years, countries, any transformation such as logs or rescaling), `Model` (the change equations and the term library), `Model selection and uncertainty` (the procedure in `Statistical Framework`, stated briefly, with the prior). It then has one sub-heading per sub-question only where that sub-question needs a choice of its own. The general method is described once, not repeated per sub-question.
 - **`Results` has one sub-heading per sub-question.** Where a sub-question is answered by a fitted model, report the selected equation with credible intervals on its coefficients, the posterior probability of the chosen model size against its nearest rival, and the number of countries and country-years.
-- **Every variable is shown in units a reader can interpret.** A log-transformed or rescaled variable is a convenience for fitting, not a unit.
+- **Every variable is shown in units a reader can interpret, always, wherever units are available.** This covers figures, captions, text, tables and the abstract. If a source documents a unit, the reader sees that unit. A log-transformed or rescaled variable is a convenience for fitting, not a unit.
   - In figures, plot a logged variable on a logarithmic axis labelled in its original units. For GDP per capita, that is constant US dollars of the stated base year, with ticks such as \$1,000, \$10,000 and \$100,000. The axis is never labelled "log GDP ÷ 12". A point's position is the same either way, since the axis is linear in the log, so the figure loses nothing.
   - An index keeps its own scale, labelled with its range, for example "index, 0 to 1".
   - In the text, give levels and thresholds in original units, such as "about \$5,000 per person". The model's scale is used where a coefficient is reported, with the conversion stated once in `Methods`.
   - This applies even when a source paper reported its variables without units.
-- **Standard figures.** These are the relatively standard set for two variables. Use them as the default, adapted where the question needs it, and add others only where a sub-question needs them. In this order:
-  1. **Trajectories over time.** One panel per variable, against year. Each panel has the representative countries as thin lines and the mean as a thick line.
-  2. **Trajectories in the plane of the two variables.** All countries in the last year as faint points. The representative countries' paths over the whole period as lines, with their starting points marked. The mean's path as a thick line. The axes are the same as in the phase portraits.
+- **Standard figures.** These are the standard set for two variables. Add others only where a sub-question needs them. In this order:
+  1. **Trajectories over time.** One panel per variable, against year, with the representative countries as lines. There is no mean line.
+  2. **Trajectories in the plane of the two variables.** All countries in the last year as faint points. The representative countries' paths over the whole period as lines, with their starting points marked by a filled circle. There is no mean path. The axes are the same as in the phase portraits.
   3. **The data phase portrait:** observed changes against state.
   4. **The fitted model's phase portrait:** its vector field, with trajectories integrated from observed starting points beside the observed ones.
 - **Representative countries.** Six by default.
   - Fix them before the trajectory figures are drawn, from metadata and coverage, not from how their paths look. Aim for good coverage and starting points spread across the range of both variables. In a replication, use the paper's own choice. Record the reasons in `Appendix.md`.
   - Use the same countries, in the same colours, in every figure.
   - Leave years with missing data as gaps, not joined lines.
-- **The mean is over a fixed set of countries:** those with both variables in every year of the period, with the count in the caption. A mean over whichever countries are present each year changes as countries enter and leave the data, and that change would be mistaken for movement.
+- **The figure format is locked.** Figures 1 and 2 of the first analysis on this branch (democracy and GDP) are the reference: `Code/03_fig_trajectories_time.py`, `Code/04_fig_trajectories_plane.py`, and the shared style in `Code/sds_common.py`. Later figures follow the same format, and only the user changes it.
+  - **Style:** the user's graph style inside the workspace themes. Sizes are in centimetres. Text is 11 pt, legends 10 pt. Output is 300 dpi, with light and dark versions on opaque backgrounds and a fixed canvas, checked after saving. There are no top or right spines.
+  - **Colours:** the six-colour palette, one fixed colour per representative country, in the order the countries are listed.
+  - **Axes:** the outcome variables on their own scales, with units as above. A logged money variable is on a dollar log axis with ticks written \$1k, \$10k. Each axis label names the variable and its unit, for example "GDP per capita (2015 US\$)" or "Democracy (index, 0 to 1)".
+  - **Legend:** outside or below the axes, never over data, with no frame.
+  - **Nothing else on the figure.** No title or note inside the frame; the caption carries what is shown.
 - **At most five figures** in a two-variable report. Log-likelihood and evidence plots against the number of terms go in `Appendix.md`, unless the choice of model size is itself a finding.
 - **Higher dimensions may need more figures.** With three or more variables, a single plane cannot show the state. The trajectory and phase-portrait figures may then be repeated for each pair of variables, or for chosen slices. Agree which with the user. The five-figure limit is relaxed to what the agreed set needs.
 
