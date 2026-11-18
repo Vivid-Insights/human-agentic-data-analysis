@@ -105,7 +105,7 @@ The usual analysis on this branch is new. It asks how a chosen set of variables 
   5. **The search.** Every model of every size, best by likelihood within each size, then compared across sizes by evidence.
   6. **The prior.** Normal, $N(0, \lambda^2 I)$ on the coefficients, with $\lambda$ stated.
   7. **The checks.** Within-country correlation of residuals, correlation of errors between the equations, and refits on resampled countries.
-  8. **The figures.** The four standard figures in `Report Format`.
+  8. **The figures.** The standard figures in `Report Format`, with the six representative countries named.
 - **Two variables is the default.** A third variable uses the three-variable library, searched only up to 5 terms (Ranganathan et al., 2014), and needs the user's agreement because the search is far larger. Lagged variables, as in Ranganathan et al. (2014), are an extension, not part of the default, and also need agreement.
 - **The user agrees the proposal, or changes parts of it.** What they change is recorded as a departure from the standard analysis. Nothing outside this section and `Statistical Framework` is introduced without their agreement.
 - **When the analysis is a replication, it is the same analysis with the paper's choices filled in.** The variables, years and library are the paper's. Departures, such as a different data vintage or a reduced library, are recorded before anything is fitted.
@@ -132,12 +132,18 @@ Every report on this branch is a short article in the same format, so that repor
 - **Length.** About 2,000 words from `Abstract` to `Limitations`, not counting captions, equations and references. The `Abstract` is one paragraph of at most 200 words. The `Introduction` background is at most two paragraphs.
 - **`Methods` has fixed sub-headings:** `Data` (sources, indicator codes, years, countries, any transformation such as logs or rescaling), `Model` (the change equations and the term library), `Model selection and uncertainty` (the procedure in `Statistical Framework`, stated briefly, with the prior). It then has one sub-heading per sub-question only where that sub-question needs a choice of its own. The general method is described once, not repeated per sub-question.
 - **`Results` has one sub-heading per sub-question.** Where a sub-question is answered by a fitted model, report the selected equation with credible intervals on its coefficients, the posterior probability of the chosen model size against its nearest rival, and the number of countries and country-years.
-- **Standard figures.** A report normally has these four, in this order, with others only where a sub-question needs them:
-  1. the two variables against each other in a single year
-  2. the mean of each variable over time
-  3. the data phase portrait: observed changes against state
-  4. the fitted model's phase portrait: its vector field, with trajectories integrated from observed starting points beside the observed ones
-- **At most five figures** in the report. Log-likelihood and evidence plots against the number of terms go in `Appendix.md`, unless the choice of model size is itself a finding.
+- **Standard figures.** These are the relatively standard set for two variables. Use them as the default, adapted where the question needs it, and add others only where a sub-question needs them. In this order:
+  1. **Trajectories over time.** One panel per variable, against year. Each panel has the representative countries as thin lines and the mean as a thick line.
+  2. **Trajectories in the plane of the two variables.** All countries in the last year as faint points. The representative countries' paths over the whole period as lines, with their starting points marked. The mean's path as a thick line. The axes are the same as in the phase portraits.
+  3. **The data phase portrait:** observed changes against state.
+  4. **The fitted model's phase portrait:** its vector field, with trajectories integrated from observed starting points beside the observed ones.
+- **Representative countries.** Six by default.
+  - Fix them before the trajectory figures are drawn, from metadata and coverage, not from how their paths look. Aim for good coverage and starting points spread across the range of both variables. In a replication, use the paper's own choice. Record the reasons in `Appendix.md`.
+  - Use the same countries, in the same colours, in every figure.
+  - Leave years with missing data as gaps, not joined lines.
+- **The mean is over a fixed set of countries:** those with both variables in every year of the period, with the count in the caption. A mean over whichever countries are present each year changes as countries enter and leave the data, and that change would be mistaken for movement.
+- **At most five figures** in a two-variable report. Log-likelihood and evidence plots against the number of terms go in `Appendix.md`, unless the choice of model size is itself a finding.
+- **Higher dimensions may need more figures.** With three or more variables, a single plane cannot show the state. The trajectory and phase-portrait figures may then be repeated for each pair of variables, or for chosen slices. Agree which with the user. The five-figure limit is relaxed to what the agreed set needs.
 
 ## The Eight Steps
 
