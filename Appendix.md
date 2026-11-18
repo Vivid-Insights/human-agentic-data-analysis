@@ -14,7 +14,7 @@ This analysis replicates Ranganathan, Spaiser and Sumpter (2013), which models t
 | Democracy | Welzel's citizen rights index `wel_citrig` (Welzel, 2013), as republished in the Quality of Government Standard Time-Series dataset, January 2015 release (Teorell et al., 2015) | `qog_std_ts_jan15.csv`, with the codebook `qog_std_jan15_codebook.pdf` | 2026-11-18 | `07ab1722…ef466758` (CSV); `59e23c5c…fa22c8` (codebook) |
 
 - **Why these sources.** The contract makes the World Bank the standard source, and both papers took GDP per capita from it. The World Bank doesn't publish a democracy index, so that came from elsewhere.
-- **The democracy index is the papers' own.** Ranganathan et al. (2014) describe it as Welzel's (2013) index: Freedom House political rights and civil liberties, weighted by two Cingranelli–Richards human-rights indices. `wel_citrig` is that index (codebook §4.85.5).
+- **The democracy index is the papers' own.** Ranganathan et al. (2014) describe it as Welzel's (2013) index: Freedom House political rights and civil liberties, weighted by two Cingranelli–Richards human-rights indices. `wel_citrig` is that index (codebook §4.85.5). Spaiser et al. (2014, File S1, §S12.2) give the construction: Freedom House political rights plus CIRI empowerment rights give political participation; Freedom House civil liberties plus CIRI personal integrity rights give personal autonomy; the two are multiplied. That matches the codebook's definition, CitRig = PAR × PPR.
 - **The democracy file is an archived republication, not the publisher's live file.** Quality of Government dropped Welzel's variables from later releases; the January 2026 time-series file has no `wel_` columns. The January 2015 release is the latest that carries them.
 - **Our World in Data was checked and has neither series in usable form.** A search for "Welzel" returns nothing. Its World Bank GDP series is the purchasing-power-adjusted one, which starts in 1990.
 - **The World Bank vintage differs from the papers'.** They used an edition current around 2012–13 (Ranganathan et al. 2014 cite WDI accessed September 2013). Constant-price series have since been rebased to 2015 dollars and revised. Coefficients involving GDP are therefore not expected to match the papers exactly.
@@ -62,11 +62,10 @@ From `Code/01_describe_data.py`; full output in `Code/outputs/01_describe_data.t
 | Years | 1981–2006 | 1981 is the first year of `wel_citrig`. 2006 is the papers' last year. One-year changes therefore run from 1981→1982 to 2005→2006. |
 | Countries | Every country with both variables, before any panel-completeness rule | The user's choice ("use countries you have"). The 2013 paper used 189 countries and the 2014 paper 74, and neither lists them. Whether a country needs consecutive years to contribute a change is settled when the changes are built. |
 | −99 in `wel_citrig` | Set to missing (840 values in 1981–2006) | It's a documented missing-data code, not an index value. Left in, it would be read as a democracy level of −99. |
-| GDP transform | Natural log of GDP per capita, then rescaled | The user's choice. The 2013 paper's axes (about 5 to 12) fit natural logs of dollars. Ranganathan et al. (2014) evidently rescaled GDP, since their coefficients only make sense for GDP of order 1. **Open:** how to rescale. See the note below. |
-| Zeros in `wel_citrig` | **Open.** Reported above, not yet decided | Terms such as $1/D$, $G/D$ and $1/D^2$ in the 13-term library are undefined at $D=0$. Neither paper says how this was handled. |
+| GDP transform | $G = \ln(\text{GDP per capita}) / 12$ | The user chose a natural log, then rescaling. Dividing by 12 is the series' own procedure, stated in Spaiser et al. (2014, File S1, §S12.4) and Ranganathan et al. (2015b). In our data $G$ runs from 0.43 to 0.99. Min–max scaling was rejected because it would put the poorest country-year at $G=0$, where the $1/G$-type terms are undefined. |
+| Zeros in `wel_citrig` | **Open.** Reported above, not yet decided | Terms such as $1/D$, $G/D$ and $1/D^2$ in the 13-term library are undefined at $D=0$. None of the six papers checked says how zeros were handled: the 2013 and 2014 method papers, the two 2015 papers by Ranganathan, Bali Swain and Sumpter, the democracy-traps paper (2015b), and Spaiser et al. (2014) including File S1. All of them keep inverse terms in the library. |
 | Missing values | Left missing, not imputed | Nothing is interpolated. A country-year missing either variable contributes no observation. |
 
-The rescaling method is open because the choice interacts with the $1/G$-type terms. Min–max scaling of log GDP to $[0,1]$ would put the poorest country-year at exactly 0 and make those terms undefined. Dividing log GDP by its maximum keeps every value strictly positive, at about 0.43–1.
 
 ## Research Question
 
@@ -98,6 +97,10 @@ The rescaling method is open because the choice interacts with the $1/G$-type te
 Ranganathan, S., Spaiser, V., Mann, R. P. and Sumpter, D. J. T. (2014). [Bayesian dynamical systems modelling in the social sciences](https://doi.org/10.1371/journal.pone.0086468). *PLOS ONE*, 9(1), e86468.
 
 Ranganathan, S., Spaiser, V. and Sumpter, D. J. T. (2013). [A Bayesian approach to modeling dynamical systems in the social sciences](https://doi.org/10.5220/0004480901250131). In *Proceedings of the 3rd International Conference on Simulation and Modeling Methodologies, Technologies and Applications (SIMULTECH 2013)*, pp. 125–131. SCITEPRESS.
+
+Ranganathan, S., Nicolis, S. C., Spaiser, V. and Sumpter, D. J. T. (2015b). [Understanding democracy and development traps using a data-driven approach](https://doi.org/10.1089/big.2014.0066). *Big Data*, 3(1), 22–33.
+
+Spaiser, V., Ranganathan, S., Mann, R. P. and Sumpter, D. J. T. (2014). [The dynamics of democracy, development and cultural values](https://doi.org/10.1371/journal.pone.0097856). *PLOS ONE*, 9(6), e97856. Supporting information: [File S1](https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0097856.s001).
 
 Teorell, J., Dahlberg, S., Holmberg, S., Rothstein, B., Hartmann, F. and Svensson, R. (2015). [The Quality of Government Standard Dataset, version Jan15](https://www.qogdata.pol.gu.se/dataarchive/qog_std_ts_jan15.csv). University of Gothenburg: The Quality of Government Institute. [Codebook](https://www.qogdata.pol.gu.se/dataarchive/qog_std_jan15.pdf).
 
