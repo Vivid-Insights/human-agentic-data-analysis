@@ -291,6 +291,22 @@ Computed by `Code/08_joint_dynamics.py`; drawn by `Code/09_fig_model_phase_portr
   - **Reproduced on the agreed criterion.** The fitted curve rises from low–low to high–high, attracts everywhere in range, and lies below countries that are high in democracy and low in GDP, so their democracy falls towards it. The simulated paths converge on it: 168 of 183 end closer.
   - **One difference.** In our fit GDP grows everywhere in range, so movement along the curve never stops. The paper's $\Delta G$ has a $-G^2$ term that limits growth at high GDP.
 
+### Prior check: uniform against normal (step 4, at the user's request)
+
+Run by `Code/10_uniform_prior_check.py`; output in `Code/outputs/10_uniform_prior_check.txt`. The best model of each size does not depend on the prior, so only the comparison across sizes changes. The evidence uses a uniform prior $U(-a, a)$ on each RMS-scaled coefficient, as in Ranganathan, Spaiser and Sumpter (2013), with $\sigma$ fixed as before. The integral is closed-form, with the share of the likelihood inside the box estimated by Monte Carlo (200,000 draws, seed 20261118). Neither paper states the range, so three widths were tried: $a = \sqrt3\,\lambda$, which gives the same variance as the agreed normal prior, then 10 and 100 times that.
+
+| Equation | Normal (agreed) | Uniform, $a = \sqrt3\lambda$ | Uniform, ×10 | Uniform, ×100 |
+| --- | --- | --- | --- | --- |
+| $\Delta D$ | 4 terms ($D, D/G, D^2, 1/G^2$), P 0.68 | same 4, P 0.46 (3 terms 0.42) | same 4, P 0.69 | **3 terms ($D/G, DG, D^2$), P 0.81** (4 terms 0.19) |
+| $\Delta G$ | 2 terms ($D, 1/G^2$), P 0.75 | same 2, P 0.74 | same 2, P 0.97 | same 2, P 0.996 |
+
+- **GDP equation.** Insensitive to the prior: the same two terms win under every prior, more firmly the wider the box.
+- **Democracy equation.** It depends on the width.
+  - At the variance-matched width, only 5% of the four-term model's likelihood lies inside the box. Its coefficient on $D$, about 0.14 on the scaled axis, is beyond the box's edge of 0.125. So the three-term model comes close (0.42 against 0.46).
+  - At 100 times the width, the $-m\log 2a$ penalty for each extra term dominates, and the three-term model $D/G, DG, D^2$ is selected. It was the runner-up under the agreed normal prior (P 0.19).
+  - $D/G$ and $D^2$ are in the selected model under every prior.
+- **What the alternative would change.** The three-term model has no $1/G^2$ term, so $\Delta D = 0$ whenever $D = 0$. A country at zero democracy would stay there, which the selected four-term model does not imply. Not yet computed: the nullcline and simulated paths under the three-term model.
+
 ## Analysis Log
 
 *A numbered row per step taken, added as the work happens. What was done, what it changed, and where the output is. Superseded decisions stay, marked as such — a reader cannot judge a choice without seeing the alternatives.*
@@ -322,6 +338,7 @@ Computed by `Code/08_joint_dynamics.py`; drawn by `Code/09_fig_model_phase_portr
 | 23 | Step 4. Figure 4 simplified at the user's request: observed paths removed, the curve named "democracy nullcline" and drawn lighter. The text and caption were updated, and now point to Figure 2 for the observed paths. | `Code/09_fig_model_phase_portrait.py`; `Report.md` |
 | 24 | Step 4. At the user's request, the three `Results` sub-sections were combined into one, "The fitted model and its dynamics", and simplified to fitting the model and looking at the dynamics. Removed from the report: the share of variance explained, the term sets of the next most probable sizes, and per-term resampling counts. All stay in this appendix under the sub-question headings. The `Methods` sub-heading "Sub-question 3" was renamed "Dynamics". The `Introduction` still lists three sub-questions. | `Report.md` |
 | 25 | Step 4. At the user's request, the `Introduction` now asks one question in place of three sub-questions. The contract now allows one to four questions, with one as the default, and locks the model phase portrait: model only, light grey "<Variable> nullcline" with its band, simulated paths, no data. The background grid was removed from all figures, and Figures 1–4 were redrawn and checked (sizes unchanged; 33 and 14 arrows capped, as before). | `instructions.md`; `Code/sds_common.py`; Figures 1–4; `Report.md` |
+| 26 | Step 4. At the user's request, a check of a uniform prior against the agreed normal prior, at three widths. The GDP equation is unchanged under all of them. The democracy equation is unchanged at the variance-matched and 10× widths, but at 100× it switches to the runner-up three-term model ($D/G$, $DG$, $D^2$), which has no $1/G^2$ term. The answer can change, so this goes to the user to decide how to report. | `Code/10_uniform_prior_check.py`; `Code/outputs/10_uniform_prior_check.txt` |
 
 ## Code Summary
 
@@ -337,6 +354,7 @@ Computed by `Code/08_joint_dynamics.py`; drawn by `Code/09_fig_model_phase_portr
 | `Code/07_joint_checks.py` | The checks that need both equations: how firmly democracy enters $\Delta G$ (best model without a democracy term, by evidence); the residual correlation between the two selected models and the iterated SUR re-estimate; the 2013 paper's $\Delta G$ model on our data (replication only). Run after both `06_…` fits. | `Code/outputs/panel.csv`, `06_fit_D.json`, `06_fit_G.json` | `Code/outputs/07_joint_checks.txt` |
 | `Code/08_joint_dynamics.py` | Sub-question 3 computations. Democracy's zero-change curve: grid root plus an exact quadratic check, and its stability. Whether $\Delta G$ is zero anywhere in range. A 95% band from 1,000 posterior draws and from 500 country resamples. Yearly simulation from each country's first state to 2006. Distance to the curve at the start and end, simulated and observed. The model field at the Figure 3 cells. Seed 20261118. | `Code/outputs/panel.csv`, `06_fit_D.json`, `06_fit_G.json`, `05_phase_cells.csv` | `Code/outputs/08_dynamics.txt`, `08_nullcline.csv`, `08_simulated_paths.csv`, `08_model_field.csv` |
 | `Code/09_fig_model_phase_portrait.py` | Figure 4 from the `08_…` exports only, in the locked format: model arrows, the zero-change curve with its band (only where it is between 0 and 1), simulated paths solid, observed paths faint. Light and dark. | `08_model_field.csv`, `08_nullcline.csv`, `08_simulated_paths.csv`, `panel.csv` | `Code/outputs/figures/fig4_model_phase_portrait.png`, `…/dark/…`; `09_model_portrait_counts.txt` |
+| `Code/10_uniform_prior_check.py` | Sensitivity of the comparison across sizes to a uniform prior $U(-a,a)$ on RMS-scaled coefficients, at $a = \sqrt3\lambda$, ×10 and ×100. Closed-form integral with a Monte Carlo share in the box (200,000 draws, seed 20261118). | `Code/outputs/panel.csv`, `06_fit_D.json`, `06_fit_G.json` | `Code/outputs/10_uniform_prior_check.txt` |
 
 Run order: `01_describe_data.py` (description only), then `02_build_panel.py`, then the figure scripts in any order. The scripts in `Code/` import `sds_common.py` from their own directory, so they are run without Python's isolated mode (`-I`). No downloaded file is on the import path.
 
