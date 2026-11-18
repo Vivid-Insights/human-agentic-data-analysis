@@ -214,6 +214,45 @@ Fitted by `Code/06_fit_change_model.py D`. Full output in `Code/outputs/06_fit_D
   - **So** the paper's equation describes our data with almost the same coefficients, but our search, with its larger data and different vintage, prefers a model with more terms in democracy.
 - **Re-derived independently** (`Code/outputs/06_fit_D_rederive.txt`). The selected model's log-evidence, computed directly from the full 3,423 × 3,423 covariance matrix, is 4200.6944. The script's shortcut gives the same value. The posterior means are 0.93 to 1.01 times the least-squares estimates (OLS: +0.28789, −0.15404, −0.12707, +0.00299), the expected shrinkage from a prior as wide as the noise.
 
+### Sub-question 2: the yearly change in GDP per capita (step 4)
+
+Fitted by `Code/06_fit_change_model.py G`. Joint checks by `Code/07_joint_checks.py`. Output in `Code/outputs/06_fit_G.txt`, `06_fit_G.json` and `07_joint_checks.txt`.
+
+- **Setup, as agreed for sub-question 1.** $\sigma = \lambda = \text{sd}(\Delta G) = 0.00492$, on RMS-scaled terms.
+- **Best model of each size:**
+
+| Size | Log-likelihood | Log-evidence | P(size) | $R^2$ | Terms |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 13335.58 | 13331.47 | 0.0000 | 0.0020 | $D/G$ |
+| 2 | 13351.22 | 13343.28 | 0.7476 | 0.0112 | $D, 1/G^2$ |
+| 3 | 13352.04 | 13341.90 | 0.1891 | 0.0116 | $G, DG, G^2$ |
+| 4 | 13352.47 | 13340.20 | 0.0344 | 0.0119 | $G, DG, D^2, G^2$ |
+| 5 | 13358.12 | 13339.76 | 0.0223 | 0.0152 | $1, G, 1/G, DG, G^2$ |
+| 6 | 13358.55 | 13338.10 | 0.0042 | 0.0154 | $1, G, 1/G, DG, D^2, G^2$ |
+| 7 | 13359.27 | 13337.26 | 0.0018 | 0.0159 | $1, D, G, 1/G, D/G, DG, G^2$ |
+| 8 | 13359.66 | 13335.63 | 0.0004 | 0.0161 | all but $1/G^2$ |
+| 9 | 13359.79 | 13334.85 | 0.0002 | 0.0162 | all nine |
+
+- **Selected model.** Two terms, with log Bayes factor 1.37 over the best three-term model. $D$ +0.00185 [+0.00146, +0.00224]; $1/G^2$ +0.00027 [+0.00019, +0.00035].
+  - In GDP units, $D$ from 0 to 1 is $e^{12 \times 0.00185} - 1 = 2.24\%$ a year (interval 1.77% to 2.72%).
+- **Democracy's inclusion.** The best model without any democracy term is $G$ alone, with log-evidence 13328.34, a log Bayes factor of 14.94 against the selected model.
+- **Prior sensitivity.** $\lambda \times 0.1$ and $\times 10$ both select the same two terms.
+- **Noise variance.** $\sigma$ from the residuals (0.00490) selects the same model.
+- **Within-country residual correlation, lag 1:** +0.256 over 3,201 pairs.
+  - This is the positive persistence that makes posterior intervals from an independent likelihood too narrow: a country growing faster than predicted one year tends to do so the next.
+  - Country resampling keeps each country's years together, so its ranges absorb this persistence. That is why the resampling result is in `Results`.
+- **Country resampling** (500 draws, seed 20261118).
+  - The exact two-term set is selected in 54 of 500 draws; the most frequent set is $G, DG, G^2$, in 60. Some term containing $D$ is selected in 492.
+  - Term frequencies: $1/G^2$ 183, $G^2$ 174, $G$ 171, $D$ 169, $DG$ 169, $D/G$ 152, $D^2$ 117, $1/G$ 100, $1$ 75.
+  - Coefficient ranges against posterior widths: 1.04 times for $D$, 1.56 times for $1/G^2$.
+  - Selection among the GDP terms is unstable, as warned: $G$, $1/G$, $G^2$ and $1/G^2$ are nearly interchangeable over the observed range. The presence of democracy is not unstable.
+- **Errors between the two equations.** The correlation of the two selected models' residuals is +0.011. Iterated seemingly unrelated regressions converged in 3 iterations and changed no coefficient by more than 0.1%. This check changed nothing, so it is not in the report.
+- **Comparison with Ranganathan, Spaiser and Sumpter (2013)** (replication only, not in the report).
+  - **Not reproduced on the agreed criterion.** The paper's model has $D$, $G$ and $G^2$; ours has $D$ and $1/G^2$. The democracy term matches.
+  - **The paper's model on our data.** Imposed on our data, it gives $D$ +0.00194 [+0.00130, +0.00257], $G$ +0.00393 [+0.00248, +0.00537] and $G^2$ −0.00430 [−0.00645, −0.00215]. The converted published values are $D$ +0.00205, inside its interval, and $G$ +0.0017 and $G^2$ −0.0024, both outside theirs.
+  - **How it ranks.** Its log-evidence is 13341.48 against 13343.28 for the selected model, a log Bayes factor of only 1.80.
+  - **So** the paper's GDP model is a close competitor on our data, and its democracy coefficient is reproduced almost exactly. The GDP terms differ, as expected given how interchangeable they are.
+
 ## Analysis Log
 
 *A numbered row per step taken, added as the work happens. What was done, what it changed, and where the output is. Superseded decisions stay, marked as such — a reader cannot judge a choice without seeing the alternatives.*
@@ -240,6 +279,7 @@ Fitted by `Code/06_fit_change_model.py D`. Full output in `Code/outputs/06_fit_D
 | 18 | Step 3. Arrows set to two thirds of that length (3⅓ years, capped at 0.47 cm; 33 of 83 capped), and the arrow format locked in the contract for both phase portraits. | `instructions.md`; `Code/05_fig_data_phase_portrait.py`; `Report.md` |
 | 19 | Step 3 closed by the user on 2026-11-18. Figures 1–3 are in the report in the locked format. Offered and declined: a grid-sensitivity check of Figure 3, and data ranges in the captions. Figure 4, the model phase portrait, is deferred to step 4. | — |
 | 20 | Step 4, sub-question 1. Agreed: $\sigma$ fixed at sd($\Delta D$) and a normal prior with $\lambda$ = sd($\Delta D$) on RMS-scaled terms. Selected four terms: $D$, $D/G$, $D^2$, $1/G^2$, P(size) = 0.68. Checks run: prior ×0.1 and ×10, $\sigma$ from residuals, lag-1 residual correlation, 500 country resamples. Comparison with the paper in the appendix only. Wrote `Methods` (`Data`, `Model`, `Model selection and uncertainty`) and the sub-question 1 paragraph in `Results`. | `Code/06_fit_change_model.py`; `Code/outputs/06_fit_D.*`; `Report.md` |
+| 21 | Step 4, sub-question 2. Same method on $\Delta G$. Selected two terms: $D$, $1/G^2$, P(size) = 0.75. Democracy is included with a log Bayes factor of 14.9 over the best model without it. Lag-1 residual correlation +0.26, absorbed by the country resampling, which is reported. Cross-equation correlation +0.011; SUR changes nothing (appendix only). Comparison with the paper in the appendix only. Added the sub-question 2 paragraph to `Results`, and to `Methods` one sentence converting changes in $G$ to GDP growth. | `Code/06_fit_change_model.py`; `Code/07_joint_checks.py`; `Report.md` |
 
 ## Code Summary
 
@@ -252,6 +292,7 @@ Fitted by `Code/06_fit_change_model.py D`. Full output in `Code/outputs/06_fit_D
 | `Code/04_fig_trajectories_plane.py` | Figure 2: the six countries' paths in the GDP–democracy plane (dollars, log axis), over all countries in 2006. Light and dark. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig2_trajectories_plane.png`, `…/dark/…` |
 | `Code/05_fig_data_phase_portrait.py` | Figure 3: cell-average observed yearly changes as arrows on the GDP–democracy plane, with the six countries' paths faint. Parameters: `LENGTH = 2/3`, giving `K = 5 × 2/3 = 3⅓` (arrow years) and `CAP_CM = 0.7 × 2/3 ≈ 0.467` (maximum arrow length on the page, direction kept), `MIN_N = 10` (minimum changes per cell), $G$ bins of 0.04 from 0.42 to 1.00, $D$ bins of 0.1. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig3_data_phase_portrait.png`, `…/dark/…`; `Code/outputs/05_phase_cells.csv`; `Code/outputs/05_phase_portrait_counts.txt` |
 | `Code/06_fit_change_model.py` | Fits the change model for one outcome (`D` or `G`, given as the argument). Runs all 512 term subsets, finds the best of each size by least squares, computes closed-form evidence and the Gaussian posterior with $\sigma$ = sd($\Delta x$) and $\lambda$ = sd($\Delta x$) on RMS-scaled terms, then runs the checks: $\lambda$ ×0.1 and ×10, $\sigma$ from residuals, lag-1 residual correlation, and 500 country resamples. Seed 20261118. Run with `cd Code && uv run python 06_fit_change_model.py D`. | `Code/outputs/panel.csv` | `Code/outputs/06_fit_<outcome>.txt`, `.json` |
+| `Code/07_joint_checks.py` | The checks that need both equations: how firmly democracy enters $\Delta G$ (best model without a democracy term, by evidence); the residual correlation between the two selected models and the iterated SUR re-estimate; the 2013 paper's $\Delta G$ model on our data (replication only). Run after both `06_…` fits. | `Code/outputs/panel.csv`, `06_fit_D.json`, `06_fit_G.json` | `Code/outputs/07_joint_checks.txt` |
 
 Run order: `01_describe_data.py` (description only), then `02_build_panel.py`, then the figure scripts in any order. The scripts in `Code/` import `sds_common.py` from their own directory, so they are run without Python's isolated mode (`-I`). No downloaded file is on the import path.
 

@@ -22,7 +22,7 @@ Rather than relating the level of one variable to the level of the other, we mod
 
 ### Data
 
-GDP per capita is World Bank indicator NY.GDP.PCAP.KD, in constant 2015 US dollars (World Bank, 2026). Democracy is the citizen rights index of Welzel (2013), taken from the January 2015 release of the Quality of Government dataset (Teorell et al., 2015), where values coded −99 are missing. The two are joined by country and year for 1981 to 2006. A yearly change is the difference between consecutive years in which a country has both variables, so a country with gaps contributes fewer changes rather than none. This gives 3,423 yearly changes from 183 countries. In the model, GDP enters as $G = \ln(\text{GDP per capita})/12$, which runs from 0.43 to 0.99. Coefficients on terms in $G$ are on this scale.
+GDP per capita is World Bank indicator NY.GDP.PCAP.KD, in constant 2015 US dollars (World Bank, 2026). Democracy is the citizen rights index of Welzel (2013), taken from the January 2015 release of the Quality of Government dataset (Teorell et al., 2015), where values coded −99 are missing. The two are joined by country and year for 1981 to 2006. A yearly change is the difference between consecutive years in which a country has both variables, so a country with gaps contributes fewer changes rather than none. This gives 3,423 yearly changes from 183 countries. In the model, GDP enters as $G = \ln(\text{GDP per capita})/12$, which runs from 0.43 to 0.99. Coefficients are on this scale. A yearly change of $x$ in $G$ is growth in GDP per capita of $e^{12x} - 1$, about $12x$ for small changes, so a change of 0.001 in $G$ is growth of about 1.2%.
 
 ### Model
 
@@ -57,6 +57,14 @@ The selected model for the yearly change in democracy has four terms:
 $$\Delta D = 0.267\,D - 0.144\,\frac{D}{G} - 0.118\,D^2 + 0.0030\,\frac{1}{G^2}$$
 
 The 95% credible intervals are 0.209 to 0.325 for $D$, −0.174 to −0.113 for $D/G$, −0.150 to −0.085 for $D^2$, and 0.0014 to 0.0046 for $1/G^2$. The posterior probability of four terms is 0.68. The next most probable size is three terms, $D/G$, $DG$ and $D^2$, at 0.19. The model is fitted to 3,423 yearly changes from 183 countries, and it accounts for 3.7% of their variance. When the countries are resampled, $D^2$ is selected in all 500 samples and $D/G$ in 488, while the full four-term model is selected in 184. Across the resamples, the ranges of the coefficients on $D$, $D/G$ and $D^2$ are about one and a half times as wide as their credible intervals.
+
+### Sub-question 2: the yearly change in GDP per capita
+
+The selected model for the yearly change in GDP per capita has two terms:
+
+$$\Delta G = 0.00185\,D + 0.00027\,\frac{1}{G^2}$$
+
+The 95% credible intervals are 0.00146 to 0.00224 for $D$ and 0.00019 to 0.00035 for $1/G^2$. In units of GDP, the coefficient on $D$ means that a country at democracy 1 grows about 2.2% a year faster than an otherwise identical country at democracy 0 (1.8% to 2.7%). The posterior probability of two terms is 0.75. The next most probable size is three terms, $G$, $DG$ and $G^2$, at 0.19. The best model with no democracy term, $G$ alone, has a log-evidence 14.9 lower than the selected model. The model is fitted to the same 3,423 yearly changes from 183 countries and accounts for 1.1% of their variance. When the countries are resampled, a term containing democracy is selected in 492 of 500 samples, while these exact two terms are selected in 54. Across the resamples, the range of the coefficient on $D$ is about as wide as its credible interval, and that on $1/G^2$ about one and a half times as wide.
 
 ## Discussion
 
