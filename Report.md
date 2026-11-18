@@ -14,9 +14,7 @@ We look at how democracy and national income change together, using two country-
 
 Rather than relating the level of one variable to the level of the other, we model the yearly change in each as a function of the current levels of both. The two equations together describe a dynamical system. Following Ranganathan, Spaiser and Sumpter (2013), each change is written as a sum of terms from a fixed set of polynomials in the two variables. The data choose which terms enter: the best-fitting model is found for each number of terms, and models with different numbers of terms are compared by their Bayesian evidence. All countries are pooled, so we assume that every country follows the same dynamics from wherever it starts. The questions we look at are of association rather than cause. A term in the equation for the change in democracy says how that change varies with income, not that income drives it.
 
-1. How does the yearly change in democracy depend on the current levels of democracy and GDP per capita?
-2. How does the yearly change in GDP per capita depend on the current levels of democracy and GDP per capita?
-3. What do the two equations imply together: where does change stop, which way do countries move, and do their trajectories converge onto a common path?
+Our question is: what model best describes the yearly changes in democracy and GDP per capita, and what dynamics does it imply?
 
 ## Methods
 

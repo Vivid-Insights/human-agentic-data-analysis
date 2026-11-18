@@ -114,6 +114,8 @@ This conversion rests on the paper having used natural logs without rescaling. T
 
 ### Sub-questions
 
+*Superseded in step 4 (log row 25): at the user's request the report now asks a single question, "What model best describes the yearly changes in democracy and GDP per capita, and what dynamics does it imply?" The three sub-questions below are kept as the record of what was framed in step 2. Their reproduction criteria still apply to the comparison with the 2013 paper, which this appendix records under each sub-question heading in `Analysis`.*
+
 These are the branch's three default sub-questions. In a replication, "an answer either way" means reproducing the paper or not.
 
 1. **How does the yearly change in democracy depend on the current levels of democracy and GDP?**
@@ -319,6 +321,7 @@ Computed by `Code/08_joint_dynamics.py`; drawn by `Code/09_fig_model_phase_portr
 | 22 | Step 4, sub-question 3. Agreed: zero-change curves from posterior means; a 95% band from 1,000 posterior draws, with the resampled band in the appendix; yearly stepping from first observed states; a distance-to-curve convergence measure. Democracy's zero-change curve rises with GDP and attracts everywhere; GDP grows everywhere in range; 168 of 183 simulated and 104 of 183 observed countries end closer to the curve. Figure 4 made in the locked format, with the zero-change curve, its band and the simulated paths added; the curve is clipped to the range of the index after the first render. Added a `Methods` sub-heading and a `Results` paragraph with a reading paragraph. | `Code/08_joint_dynamics.py`, `Code/09_fig_model_phase_portrait.py`; `Report.md` |
 | 23 | Step 4. Figure 4 simplified at the user's request: observed paths removed, the curve named "democracy nullcline" and drawn lighter. The text and caption were updated, and now point to Figure 2 for the observed paths. | `Code/09_fig_model_phase_portrait.py`; `Report.md` |
 | 24 | Step 4. At the user's request, the three `Results` sub-sections were combined into one, "The fitted model and its dynamics", and simplified to fitting the model and looking at the dynamics. Removed from the report: the share of variance explained, the term sets of the next most probable sizes, and per-term resampling counts. All stay in this appendix under the sub-question headings. The `Methods` sub-heading "Sub-question 3" was renamed "Dynamics". The `Introduction` still lists three sub-questions. | `Report.md` |
+| 25 | Step 4. At the user's request, the `Introduction` now asks one question in place of three sub-questions. The contract now allows one to four questions, with one as the default, and locks the model phase portrait: model only, light grey "<Variable> nullcline" with its band, simulated paths, no data. The background grid was removed from all figures, and Figures 1–4 were redrawn and checked (sizes unchanged; 33 and 14 arrows capped, as before). | `instructions.md`; `Code/sds_common.py`; Figures 1–4; `Report.md` |
 
 ## Code Summary
 

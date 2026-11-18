@@ -42,6 +42,7 @@ def style(theme_name: str):
         "xtick.labelsize": 11, "ytick.labelsize": 11,
         "legend.fontsize": 10, "legend.frameon": False,
         "lines.linewidth": 1.5, "savefig.dpi": DPI, "figure.dpi": 100,
+        "axes.grid": False,  # locked: no background grid (instructions.md)
         "xtick.major.size": 3, "ytick.major.size": 3,
         "xtick.minor.size": 1.5,
     })
