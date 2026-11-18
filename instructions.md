@@ -86,13 +86,28 @@ When the user prefixes a message with **FRAMEWORK**, they are changing this docu
 
 ## Statistical Framework
 
-Analyses on this branch use likelihood and Bayesian inference, following Ranganathan, Spaiser and Sumpter (2013). This is fixed. Other inference frameworks are not substituted for it, either quietly or as a "check". Examples are null-hypothesis significance tests and p-values as the basis for a claim, selection by information criteria alone, and cross-validated machine-learning fits. Bringing any of them in needs the user's explicit agreement.
+Analyses on this branch use likelihood and Bayesian inference, following Ranganathan, Spaiser and Sumpter (2013) and, where that paper leaves a detail unstated, Ranganathan, Spaiser, Mann and Sumpter (2014, PLOS ONE). This is fixed. Other inference frameworks are not substituted for it, either quietly or as a "check". Examples are null-hypothesis significance tests and p-values as the basis for a claim, selection by information criteria alone, and cross-validated machine-learning fits. Bringing any of them in needs the user's explicit agreement.
 
 - **Models are fitted by maximum likelihood.** Under the Gaussian error model this is least squares, and the log-likelihood is what ranks models of the same size.
 - **Models of different size are compared by marginal likelihood (the evidence).** Report the posterior probability of each candidate model size, as well as which one wins, so the reader can see how firmly the data choose it.
 - **Uncertainty in a coefficient is its posterior credible interval**, from the same prior and likelihood used for the evidence. State the prior, its range, and how the integral was computed (for example, the number of Monte Carlo draws).
 - **The likelihood treats each observation as independent, and that is checked, not assumed.** In panel data each unit appears many times, so test whether residuals are correlated within units, both from one year to the next and across the equations of the system. Then refit on resampled whole units to see how far the intervals widen and how often the same terms are selected. The check is recorded in `Appendix.md`. It enters the report only if it changes what is reported.
 - **This section replaces step 4's rule on standard errors** for analyses on this branch. The within-unit check above is its counterpart.
+
+## Report Format
+
+Every report on this branch is a short article in the same format, so that reports on different questions can be read side by side. All eight steps are kept; what is shorter is the report, not the process. Everything that does not fit goes in `Appendix.md`.
+
+- **Fixed sections, in this order:** Title, `Abstract`, `Introduction`, `Methods`, `Results`, `Discussion`, `Limitations`, `Disclaimer`, `Appendix`, `References`. This is the template order. No section is added, and none is dropped.
+- **Length.** About 2,000 words from `Abstract` to `Limitations`, not counting captions, equations and references. The `Abstract` is one paragraph of at most 200 words. The `Introduction` background is at most two paragraphs.
+- **`Methods` has fixed sub-headings:** `Data` (sources, indicator codes, years, countries, any transformation such as logs or rescaling), `Model` (the change equations and the term library), `Model selection and uncertainty` (the procedure in `Statistical Framework`, stated briefly, with the prior). It then has one sub-heading per sub-question only where that sub-question needs a choice of its own. The general method is described once, not repeated per sub-question.
+- **`Results` has one sub-heading per sub-question.** Where a sub-question is answered by a fitted model, report the selected equation with credible intervals on its coefficients, the posterior probability of the chosen model size against its nearest rival, and the number of countries and country-years.
+- **Standard figures.** A report normally has these four, in this order, with others only where a sub-question needs them:
+  1. the two variables against each other in a single year
+  2. the mean of each variable over time
+  3. the data phase portrait: observed changes against state
+  4. the fitted model's phase portrait: its vector field, with trajectories integrated from observed starting points beside the observed ones
+- **At most five figures** in the report. Log-likelihood and evidence plots against the number of terms go in `Appendix.md`, unless the choice of model size is itself a finding.
 
 ## The Eight Steps
 
@@ -195,7 +210,7 @@ Answer each sub-question with a number and an interval. One sub-question at a ti
 - **Re-derive the number that carries the claim, independently, wherever that is cheap.** Solve the equation from the coefficients rather than reading the value out of a generated table. Two routes to the same figure catch both arithmetic slips and stale output; one route catches neither.
 - **Every number in the report comes from the generated output.** Never from memory, never read off a figure, never carried over from an earlier version of the analysis.
 - **Write the finding as a short paragraph in `Results`.** One paragraph per sub-question, added as soon as the numbers exist.
-- **Keep `Methods` in step with `Results`, using the same sub-headings in the same order.** When a sub-question gets a paragraph in `Results`, it gets one in `Methods` at the same time. The two sections are written in parallel, so a reader can move between what was done and what was found without hunting.
+- **Keep `Methods` in step with `Results`, using the same sub-headings in the same order.** When a sub-question gets a paragraph in `Results`, it gets one in `Methods` at the same time. The two sections are written in parallel, so a reader can move between what was done and what was found without hunting. On this branch, `Report Format` fixes the first `Methods` sub-headings instead. A sub-question gets its own `Methods` sub-heading only where it needs a choice of its own, and that sub-heading uses the same name as in `Results`.
 - `Methods` says what was done and why that choice; `Results` says what came out. Sample definition, model, and the choices a reader needs to reproduce or challenge the number belong in `Methods`, not in the result paragraph.
 - **`Methods` describes only what `Results` reports.** If a diagnostic, statistic or robustness check does not appear in `Results`, it does not appear in `Methods` either — it goes in `Appendix.md`. Naming a test in `Methods` and never reporting its outcome leaves the reader hunting for a result that is not there.
 - **Keep the report clean.** It should read as an argument, not a technical log. Diagnostic values, alternative specifications, and anything computed but not used belong in the appendix, however much work they took. A test may produce a page of statistics; the report takes the one number that answers the question.
