@@ -4,7 +4,7 @@
 
 ## Abstract
 
-*Written last, in step 6, after every other section is final.*
+Richer countries tend to be more democratic, but whether rising income brings democracy, or democracy brings growth, remains disputed (Barro, 1996; Acemoglu et al., 2008; Acemoglu et al., 2019). We ask what model best describes the yearly changes in democracy and in GDP per capita across countries, and what dynamics it implies. Using World Bank data on income and an expert-coded index of citizen rights for 1981 to 2006, we model each yearly change as a function of the current levels of both, and let Bayesian model selection choose the form of each equation. Democracy moves towards a level that rises with income: it tends to fall in poor countries with high democracy and to rise in richer countries with little. Countries with more democracy grew faster, and so did poorer countries, but these are associations, and the model explains only a small part of the year-to-year variation in growth. Income grows throughout the observed range, so the model has no point at which both stop changing. Instead, countries converge on a path along which democracy rises with income.
 
 ## Introduction
 
