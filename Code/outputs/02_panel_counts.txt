@@ -1,0 +1,17 @@
+years: 1981-2006
+-99 values set to missing in wel_citrig, 1981-2006: 840
+country-years with both variables: 3679
+countries: 184
+consecutive-year changes: 3423
+countries contributing at least one change: 183
+balanced countries (both variables all 26 years): 84
+countries with both variables in 2006: 181
+G range: 0.425-0.988
+D range: 0.000-1.000
+D exact zeros: 108
+rep ITA Italy: 26 years, changes 25, years present 1981-2006
+rep SWE Sweden: 26 years, changes 25, years present 1981-2006
+rep IND India: 26 years, changes 25, years present 1981-2006
+rep CHL Chile: 26 years, changes 25, years present 1981-2006
+rep ALB Albania: 21 years, changes 19, years present 1981-2006
+rep NGA Nigeria: 26 years, changes 25, years present 1981-2006

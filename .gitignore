@@ -35,3 +35,6 @@ Attachments/literature/
 # QoG archive: large, third-party republication. See Attachments/SOURCE.md.
 Attachments/qog_std_ts_jan15.csv
 Attachments/qog_std_jan15_codebook.pdf
+
+# Row-level panel built from the QoG file (same terms as the source)
+Code/outputs/panel.csv

@@ -148,7 +148,23 @@ The eight parts of `The Standard Analysis` for this replication. Departures from
 
 ## Analysis
 
-*The workings, one sub-heading per sub-question, added as steps 3 and 4 proceed. Diagnostics, alternative specifications, checks that changed nothing, and anything computed but not reported.*
+### The analysis panel
+
+Built by `Code/02_build_panel.py` from the step 1 decisions. Counts from `Code/outputs/02_panel_counts.txt`.
+
+- 3,679 country-years with both variables, in 184 countries, 1981–2006. These match the step 1 overlap.
+- 3,423 consecutive-year changes, from 183 countries. These are the observations the model will be fitted to.
+- 84 countries have both variables in all 26 years. They define the mean in Figures 1 and 2.
+- 181 countries have both variables in 2006. They are the grey points in Figure 2.
+- $G$ runs from 0.425 to 0.988, and $D$ from 0 to 1.
+- 108 of the 141 exact zeros in democracy survive the join. The other 33 are in country-years with no World Bank GDP, among them North Korea, Iraq and Somalia.
+- Representative countries: Italy, Sweden, India, Chile and Nigeria have all 26 years (25 changes each). Albania has 21 years, 1981–1984 and 1990–2006, giving 19 changes.
+
+### Figures 1 and 2 (step 3)
+
+- **Style.** David's graph style inside the workspace themes: sizes in cm, 11 pt text with 10 pt legends, 300 dpi, no top or right spines, minor ticks every year on time axes. The six-colour palette from that style gives one fixed colour per representative country, set in `Code/sds_common.py`. The mean is drawn in the theme's ink, not a series colour. Each figure has light and dark versions, with opaque backgrounds and fixed canvas sizes. They render at 2124 × 1002 and 2007 × 1239 pixels, checked after saving.
+- **Changes after the first render.** The GDP axis was relabelled from "GDP per capita" to "Log GDP per capita ÷ 12", so the axis says what $G$ is. Figure 2's legend was moved outside the axes, because inside it covered India's starting point and the mean's path.
+- **Orientation.** GDP across and democracy up, as proposed and agreed, so the phase portraits can share these axes. The 2013 paper's phase portrait has democracy across and GDP up.
 
 ## Analysis Log
 
@@ -168,12 +184,19 @@ The eight parts of `The Standard Analysis` for this replication. Departures from
 | 10 | Step 2. A new contract rule says the report never mentions replication, because the finished report is to serve as a template. The opening sentence about replication was removed. The paper is now cited once, as the source of the method ("Following Ranganathan, Spaiser and Sumpter (2013)…"). The comparison with the paper's equations goes in `Analysis` in this appendix once results exist, not in the report's `Discussion`. Superseded: the plan in row 9's follow-up to put that comparison in `Discussion`. | `Report.md` `Introduction`; `instructions.md` |
 | 11 | Step 2 closed by the user on 2026-11-18 ("Looks good"). Agreed with it: the reproduction criteria in `Research Question` (same terms and same signs decide; coefficients compared via 95% intervals, for information only), and two additions to the paper's method (resampling countries, and the data phase portrait). The log-base assumption behind the converted coefficients stands as recorded in `Research Question`. | — |
 | 12 | Step 3 started. The user questioned the mean-over-time figure, which answers none of the sub-questions. A contract change replaced the first two standard figures (a one-year scatter and the mean over time) with trajectories of six representative countries plus the mean, over time and in the $(G, D)$ plane. Higher-dimensional analyses may have more figures. Counted from the data for this choice: 84 countries have both variables in all 26 years; of the paper's six, Albania has 21 years and the others all 26. | `instructions.md` `Report Format`; `Research Question` proposal |
+| 13 | Step 3. Built the analysis panel: 3,679 country-years, 3,423 changes. Drew Figures 1 (trajectories over time) and 2 (trajectories in the $(G, D)$ plane) and added them to `Results` with captions and a paragraph saying how to read them. They sit above the sub-question sub-headings, because they describe the data for all three sub-questions. | `Code/02_build_panel.py`, `Code/03_fig_trajectories_time.py`, `Code/04_fig_trajectories_plane.py`; `Report.md` `Results` |
 
 ## Code Summary
 
 | File | What it does | Reads | Writes |
 | --- | --- | --- | --- |
 | `Code/01_describe_data.py` | Describes the two source files: shape, coverage per year, ranges, the −99 code, zeros, duplicate codes, and the overlap. It changes no data and draws no conclusions. Run with `cd Code && uv run python 01_describe_data.py`. | `Attachments/worldbank/API_NY.GDP.PCAP.KD_DS2_en_csv_v2_71952.csv` and its country metadata; `Attachments/qog_std_ts_jan15.csv` (columns `ccode`, `cname`, `year`, `ccodealp`, `wel_citrig`) | `Code/outputs/01_describe_data.txt` |
+| `Code/sds_common.py` | Shared constants and style: years, the GDP scale (12), the six representative countries and their fixed colours, figure sizing and saving. Imported by the scripts below. | — | — |
+| `Code/02_build_panel.py` | Applies the step 1 decisions and builds the panel: countries only, −99 set to missing, join on ISO3, $G = \ln(\text{GDP})/12$, 1981–2006, consecutive-year changes, and the balanced-country flag. Fits nothing. Run with `cd Code && uv run python 02_build_panel.py`. | Both source files, as above | `Code/outputs/panel.csv` (gitignored: row-level QoG data); `Code/outputs/02_panel_counts.txt` |
+| `Code/03_fig_trajectories_time.py` | Figure 1: $D$ and $G$ against year for the six countries, plus the mean of the balanced countries. Light and dark. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig1_trajectories_time.png`, `…/dark/…` |
+| `Code/04_fig_trajectories_plane.py` | Figure 2: the six countries' paths and the mean's path in the $(G, D)$ plane, over all countries in 2006. Light and dark. | `Code/outputs/panel.csv` | `Code/outputs/figures/fig2_trajectories_plane.png`, `…/dark/…` |
+
+Run order: `01_describe_data.py` (description only), then `02_build_panel.py`, then the figure scripts in any order. The scripts in `Code/` import `sds_common.py` from their own directory, so they are run without Python's isolated mode (`-I`). No downloaded file is on the import path.
 
 ## References
 
