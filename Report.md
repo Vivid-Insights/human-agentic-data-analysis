@@ -95,7 +95,53 @@ This report was written with the help of agentic AI at every stage: importing an
 
 ## Appendix
 
-*A pointer to [Appendix.md](Appendix.md), where the data, the decisions and the full workings are recorded.*
+<small><b>Table A1.</b> Selected models, fitted to 1981–2006. Coefficients are posterior means with 95% credible intervals; $G$ is the natural log of GDP per capita divided by 12. "Selected in" counts how often a term is chosen when the countries are resampled 500 times. "Without democracy" is how much lower the log-evidence is for the best GDP model with no democracy term.</small>
+
+| Measure | Equation | Term | Coefficient (95% interval) | Selected in | Model size: posterior probability (next size) | Countries, changes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Welzel | $\Delta D$ | $D$ | 0.267 (0.209 to 0.325) | 327 | 4 terms: 0.68 (3 terms: 0.19) | 183, 3,423 |
+| | | $D/G$ | −0.144 (−0.174 to −0.113) | 488 | | |
+| | | $D^2$ | −0.118 (−0.150 to −0.085) | 500 | | |
+| | | $1/G^2$ | 0.0030 (0.0014 to 0.0046) | 253 | | |
+| | $\Delta G$ | $D$ | 0.00185 (0.00146 to 0.00224) | 169 | 2 terms: 0.75 (3 terms: 0.19) | |
+| | | $1/G^2$ | 0.00027 (0.00019 to 0.00035) | 183 | without democracy: 14.9 lower | |
+| V-Dem | $\Delta D$ | $1$ | 0.0075 (0.0042 to 0.0108) | 226 | 3 terms: 0.72 (4 terms: 0.14) | 171, 3,955 |
+| | | $DG$ | 0.063 (0.030 to 0.095) | 332 | | |
+| | | $D^2$ | −0.071 (−0.099 to −0.042) | 466 | | |
+| | $\Delta G$ | $D^2$ | 0.00226 (0.00173 to 0.00279) | 245 | 2 terms: 0.67 (1 term: 0.26) | |
+| | | $1/G^2$ | 0.00025 (0.00016 to 0.00033) | 124 | without democracy: 13.0 lower | |
+
+A democracy term is selected in the GDP equation in 492 of 500 resamples with either measure.
+
+<small><b>Table A2.</b> What the 1981–2006 models imply. The nullcline is the level of democracy at which democracy stops changing, at stated levels of GDP per capita (constant 2015 US dollars). Growth is predicted yearly GDP growth over the observed range of the data. Extra growth compares democracy 1 with 0 for Welzel's index, and 0.9 with 0.013 for V-Dem's, whose values do not reach the ends of the scale. Convergence counts the countries ending closer to the nullcline in 2006 than at their first observed year, with the median distance from it at the start and the end.</small>
+
+| | Welzel | V-Dem |
+| --- | --- | --- |
+| Nullcline at \$500 | 0.27 | 0.63 |
+| Nullcline at \$2,000 | 0.47 | 0.71 |
+| Nullcline at \$5,000 | 0.63 | 0.77 |
+| Nullcline at \$10,000 | 0.73 | 0.81 |
+| Nullcline at \$50,000 | 0.95 | 0.91 |
+| Predicted yearly growth, observed range | 0.3% to 4.1% | 0.3% to 4.4% |
+| Extra growth, top against bottom of the index | 2.2% (1.8% to 2.7%) | 2.2% (1.7% to 2.8%) |
+| Convergence, simulated | 168 of 183 (0.23 to 0.08) | 158 of 171 (0.48 to 0.22) |
+| Convergence, observed | 104 of 183 (0.23 to 0.15) | 119 of 171 (0.48 to 0.17) |
+
+<small><b>Table A3.</b> Prediction of 2007–2024 by the V-Dem model fitted to 1981–2006. Year by year: mean log predictive density per change (higher is better) for 3,088 changes from 174 countries, against a model in which every country changes by the 1981–2006 average amount, and against the same terms refitted to 2007–2024. In 2024: errors for the 168 countries observed in both 2006 and 2024, stepped forward from 2006.</small>
+
+| | Democracy | GDP per capita |
+| --- | --- | --- |
+| Log predictive density: model | 1.839 | 3.905 |
+| Log predictive density: average change | 1.840 | 3.909 |
+| Log predictive density: refitted to 2007–2024 | 1.902 | 3.957 |
+| Changes where the model beats the average | 43% | 44% |
+| Variance explained, 2007–2024 | none (−7.1%) | none (−1.2%) |
+| Median error in 2024: model | 0.15 | 27% |
+| Median error in 2024: average change | 0.17 | 22% |
+| Countries where the model is closer | 106 of 168 | 74 of 168 |
+| Median distance to the democracy nullcline | observed 0.17 in 2006, 0.26 in 2024; model 0.08 in 2024 | |
+
+The full workings, the data decisions and every check are in [Appendix.md](Appendix.md).
 
 ## References
 
