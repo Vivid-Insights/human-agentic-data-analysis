@@ -107,6 +107,7 @@ Every report is a short article in the same format, so reports on different vari
     - whether simulated and observed countries converge.
 
     Use few numbers, and only those a reader needs, in the variables' own units: "about 2% a year faster", "from about a quarter of the scale in the poorest countries to near the top in the richest".
+  - **`Results` points to the tables.** Each `Results` section refers to the `Appendix` table that holds its numbers, for example "(Table A1)", wherever it states what a model says. A reader can then go from a claim to its numbers in one step.
   - **The report's own `Appendix`** holds the details in compact tables, so that a reader of an exported report has them: for each equation the selected terms, coefficients with 95% credible intervals, the posterior probability of the chosen size against its rival, the number of countries and yearly changes, and how often the terms are selected across resamples; the nullclines at stated levels of the other variable, in its units; convergence counts; and any prediction scores. It ends with a pointer to `Appendix.md` for the full workings.
   - **`Methods` is brief:** what was done and why, not the settings. Priors, $\lambda$, seeds and checks are in `Appendix.md`.
 - **Units, always, wherever available,** in figures, captions, text, tables and the abstract. A log or a rescaling is for fitting, not a unit.
