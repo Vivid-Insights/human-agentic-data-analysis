@@ -1,4 +1,4 @@
-# How democracy and national income change together
+# Did the rise of democracy predict its future?
 
 ## Abstract
 
@@ -10,11 +10,7 @@ Richer countries tend to be more democratic (Acemoglu et al., 2008), but what li
 
 Most studies estimate one direction of the relationship at a time, with a form fixed in advance. Ranganathan, Spaiser and Sumpter (2013) instead model the yearly change in each variable as a function of the current levels of both, and let the data choose the form, so that relationships in both directions, including non-linear ones, can appear in one model (Spaiser et al., 2014). Applied to democracy and GDP per capita for 1980–2006, the approach described countries converging on a path along which democracy and income rise together (Ranganathan, Spaiser & Sumpter, 2013). Such a model must also allow for poorer countries growing faster (Barro, 1991).
 
-We look again at that description in three steps. First we refit the model to the data it was built on: GDP per capita and the citizen rights index of Welzel (2013) for 1981–2006, the last decades of democratic expansion. Then we replace that index with V-Dem's electoral democracy index (Coppedge et al., 2025), which, like Welzel's, runs from 0 to 1 and is built from expert codings, and which continues to 2024. Finally we ask whether the model, as it could have been fitted with data up to 2006, predicts what happened from 2007 to 2024, the years of democratic recession (Diamond, 2015). The questions are about association, not cause.
-
-1. Does the original description of how democracy and income change together hold when the model is refitted to the same data?
-2. Does it hold with a different measure of democracy?
-3. Does the model fitted to data up to 2006 predict the changes from 2007 to 2024?
+We look again at that description in three steps. First we refit the model to the data it was built on: GDP per capita and the citizen rights index of Welzel (2013) for 1981–2006, the last decades of democratic expansion. Then we replace that index with V-Dem's electoral democracy index (Coppedge et al., 2025), which, like Welzel's, runs from 0 to 1 and is built from expert codings, and which continues to 2024. Finally we ask whether the model, as it could have been fitted with data up to 2006, predicts what happened from 2007 to 2024, the years of democratic recession (Diamond, 2015). 
 
 ## Methods
 
