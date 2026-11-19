@@ -53,7 +53,7 @@ Figure 1 shows six countries over time, and Figure 2 their paths through the pla
 
 <small><b>Figure 3.</b> Observed yearly changes in democracy and GDP per capita (constant 2015 US dollars, logarithmic scale), averaged within cells of a grid. Each cell spans a factor of about 1.6 in GDP per capita and 0.1 in democracy. Each arrow starts at the average position of the country-years in its cell, marked by a dot, and points along their average yearly change. Arrows are drawn at 3⅓ times the yearly change, and the 33 longest are shortened to 0.47 cm, with their direction unchanged. Cells with fewer than 10 yearly changes have no arrow; the 83 cells with arrows hold 3,289 of the 3,423 changes. Faint lines are the paths of the six countries in Figures 1 and 2.</small>
 
-### Question 1: the fitted model and its dynamics
+### What does the model say?
 
 With Welzel's index the selected model is
 
@@ -69,9 +69,11 @@ Figure 4 is read like Figure 3, but the arrows now show the change the model pre
 
 <small><b>Figure 4.</b> Yearly changes in democracy and GDP per capita (constant 2015 US dollars, logarithmic scale) predicted by the selected models. Arrows show the predicted change at the positions of the arrows in Figure 3, drawn at 3⅓ times the yearly change; 14 of the 83 are shortened to 0.47 cm with their direction unchanged. The grey line is the democracy nullcline, where the predicted yearly change in democracy is zero, drawn where it lies between 0 and 1 and within the observed range of GDP, with its 95% band from 1,000 posterior draws. Dashed coloured lines, each from a dot, are the six countries' paths simulated year by year from their 1981 states to 2006.</small>
 
-### Question 2: a second measure, and prediction
+### Does another measure of democracy give the same picture?
 
 With V-Dem's index the equations take a different form, but they say the same things. Democracy again moves towards a level that rises with income, though less steeply. Democracy again goes with faster growth, by about the same amount, and poorer countries again grow faster.
+
+### Did the model predict the future?
 
 The model fitted to 1981–2006 does not predict what happened next. Year by year, it predicts the changes from 2007 to 2024 slightly worse than assuming every country changes by the average amount. Refitted to those years, the same relationships are less than half as strong. The model expected countries to move towards the democracy nullcline, but many moved away from it, as India did (Figure 5).
 
