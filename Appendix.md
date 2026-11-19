@@ -384,14 +384,32 @@ Run by `Code/10_uniform_prior_check.py`; output in `Code/outputs/10_uniform_prio
 
 ### Which countries followed the prediction (after step 7, at the user's request)
 
-Computed by `Code/15_prediction_groups.py` from the exported 2024 predictions, with no refit. Full list, 168 countries, in `Code/outputs/15_prediction_groups.csv`: 2006, predicted and observed 2024 V-Dem democracy, error, group, and predicted and observed GDP growth. Summary in `15_prediction_groups.txt`.
+Computed by `Code/15_prediction_groups.py` from the exported 2024 predictions, with no refit. The full list of 168 countries is in `Code/outputs/15_prediction_groups.csv`: 2006, predicted and observed 2024 V-Dem democracy, predicted and observed change, their ratio, the error, the group, and predicted and observed GDP growth. Summary in `15_prediction_groups.txt`.
 
-- **The rule, agreed before computing.** Within 0.10 of the predicted 2024 democracy score counts as "followed". Otherwise a country is "missed, same direction" if it moved the way the model predicted, and "missed, opposite direction" if not. GDP is listed but not used for grouping.
-- **The groups.** 67 followed, 28 missed in the same direction, 73 missed in the opposite direction.
-  - Every opposite-direction case was predicted to rise and fell.
-  - The model predicted a rise for 153 of the 168 countries; democracy fell in 111.
-  - Even among those that followed, 50 of 67 ended below their prediction.
-- **Display note.** Errors are shown to two decimals in the report, so a country at −0.10 may be just inside (Cyprus, followed) or just outside (Romania, missed) the 0.10 tolerance. The CSV has three decimals.
+- **Current rule (version 3), agreed with the user.**
+  - Where the predicted change from 2006 to 2024 is smaller than 0.02 either way, the model predicts stability. A country "stayed, as predicted" if it moved by less than 0.05; otherwise it "rose" or "fell, despite predicted stability".
+  - Otherwise the ratio of observed to predicted change sets the group: opposite direction (below 0), much less than predicted (0 to 0.5), roughly as predicted (0.5 to 2), much more than predicted (above 2).
+- **Result.**
+
+| Group | Countries |
+| --- | --- |
+| Roughly as predicted | 25 |
+| Stayed, as predicted | 10 |
+| Much less than predicted | 31 |
+| Much more than predicted | 7 |
+| Opposite direction | 85 |
+| Fell, despite predicted stability | 10 |
+| Rose, despite predicted stability | 0 |
+
+  - All 85 opposite-direction cases were predicted to rise and fell. The model predicted a rise for 153 of the 168 countries; democracy fell in 111.
+  - Nigeria's ratio is 0.50 (+0.172 predicted, +0.086 observed), exactly on the boundary of "roughly as predicted". The report does not depend on which side it falls.
+- **How the rule was reached: revised twice, after seeing results.**
+  - **Version 1,** agreed before computing; superseded. "Followed" meant within 0.10 of the predicted 2024 value, and misses were split by the sign of the change from 2006. Result: 67 followed, 28 missed in the same direction, 73 missed in the opposite direction.
+    - The user pointed out that India counted as "same direction" only trivially: predicted −0.03, observed −0.32, straight through the nullcline.
+    - The user also pointed out that Italy counted as "followed" despite moving the wrong way: predicted +0.04, observed −0.05.
+    - The flaw: an absolute tolerance treats a small predicted change as followed whatever happens.
+  - **Version 2,** proposed and never run; superseded. A grouping against the nullcline (followed, overshot, moved away, fell short).
+  - **Version 3,** the current rule, at the user's request ("relative difference"). Its thresholds (0.02 for "stable", 0.05 for "moved", and a factor of 2) were chosen after seeing the changes of Nigeria, Italy, India and Sweden. That is recorded here as a limitation of the grouping: it is descriptive, not a test.
 
 ## Analysis Log
 
@@ -453,6 +471,7 @@ Computed by `Code/15_prediction_groups.py` from the exported 2024 predictions, w
 | 52 | Step 7, read-through: the whole report read once, in order. Descriptive counts re-derived from the outputs and all correct (3,423 changes, 183 countries; 181 in 2006; Albania missing 1985–1989; 83 cells, 3,289 changes; V-Dem 3,955 and 3,088). Every figure, table and reference is cited, and every citation has a reference. Ten faults listed for the user; none fixed in this step. Main ones: the abstract's "original model" is not the model tested; "the third question" in `Methods` no longer points to anything; figures 1–4 do not say which democracy index they use; "the data it was built on" overstates (the GDP data is a 2026 release); the association caveat is missing from the `Abstract` and `Introduction`; the report is 1,552 words against 1,300. | — |
 | 53 | Step 7 fixes, all as suggested and agreed by the user: (1) "The original model" → "The model" in the `Abstract`; (2) "For the third question" → "To test prediction"; (3) captions of Figures 1–4 name Welzel's citizen rights index (axis labels unchanged, locked format); (4) "the data it was built on" → "the democracy index it was built on"; (5) association caveat restored in the `Abstract` and `Introduction`; (6) the `Abstract` states the picture; (7) the Barro (1991) sentence cut, and its now uncited reference removed; (8) `Model` says why nine terms; (9) the `Discussion`'s second paragraph shortened; (10) trailing space removed and the `Abstract`'s tense made consistent. Words: 1,552 → 1,562, because the fixes added more than the cuts removed. | `Report.md` |
 | 54 | At the user's request, countries were grouped by whether they followed the 2024 prediction (rule agreed before computing): 67 followed, 28 missed in the same direction, 73 missed in the opposite direction, every one of them predicted to rise and in fact falling. Added three sentences to "Did the model predict the future?" and Table A4 listing the countries by group. On checking, "most of North America" became "the United States, Canada", because Mexico is in the opposite group. | `Code/15_prediction_groups.py`; `Report.md` |
+| 55 | Grouping revised twice at the user's prompting: India was "same direction" only trivially, and Italy was "followed" despite moving the wrong way. A nullcline-based version 2 was proposed and not run; the ratio-based version 3 was adopted. Now 25 roughly as predicted, 10 stayed as predicted, 31 much less, 7 much more, 85 opposite (all predicted rise, fell), and 10 fell despite predicted stability. The three report sentences and Table A4 were rewritten; Italy, the US, the UK and Japan are now named among the falls, with "mostly small". Thresholds were chosen after seeing four countries, as recorded under `Analysis`. Superseded: version 1, row 54. | `Code/15_prediction_groups.py`; `Report.md` |
 
 ## Code Summary
 
