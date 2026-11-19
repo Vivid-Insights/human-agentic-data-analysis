@@ -66,11 +66,11 @@ The usual analysis asks how a chosen set of variables drive each other's change,
 Inference is by likelihood and Bayesian evidence, following Ranganathan, Spaiser and Sumpter (2013), with unstated details from Ranganathan, Spaiser, Mann and Sumpter (2014). This is fixed. P-values, selection by information criteria alone and machine-learning fits are not used, not even as a check, without the user's explicit agreement.
 
 - **Within a size, models are ranked by likelihood.** Under Gaussian noise this is least squares.
-- **Across sizes, models are compared by evidence.** Report the posterior probability of each size, not only the winner, with every size equally likely beforehand.
+- **Across sizes, models are compared by evidence.** Compute the posterior probability of each size, not only the winner, with every size equally likely beforehand. It goes in the report's `Appendix` tables, not its text.
 - **The prior is normal, always,** and the same in every analysis.
   - Each term is divided by its root-mean-square value. The rescaled coefficients are independent normals centred on zero, with standard deviation $\lambda = \text{sd}(\Delta x)$.
   - The noise standard deviation $\sigma$ is fixed at the same $\text{sd}(\Delta x)$ (Ranganathan et al., 2014).
-  - The evidence is closed-form, $\Delta x \sim N(0, \sigma^2 I + \lambda^2 X X^\top)$, computed through $m \times m$ matrices. The posterior is Gaussian. Coefficients and 95% credible intervals are reported on the original scale.
+  - The evidence is closed-form, $\Delta x \sim N(0, \sigma^2 I + \lambda^2 X X^\top)$, computed through $m \times m$ matrices. The posterior is Gaussian. Coefficients and 95% credible intervals are on the original scale, and go in the report's `Appendix` tables.
   - Record the selection with $\lambda$ ten times smaller and larger, and with $\sigma$ from the residuals, in `Appendix.md`.
   - A uniform prior was tested in the first analysis (`Code/10_uniform_prior_check.py`). Its evidence depends on an arbitrary range, and the selected democracy model changed at the widest range tried. That is why the prior is fixed.
 - **Independence is checked, not assumed.** Each country appears many times.
@@ -89,7 +89,7 @@ Inference is by likelihood and Bayesian evidence, following Ranganathan, Spaiser
 Every report is a short article in the same format, so reports on different variables can be read side by side.
 
 - **Sections, in order:** Title, `Abstract`, `Introduction`, `Methods`, `Results`, `Discussion`, `Limitations`, `Disclaimer`, `Appendix`, `References`.
-- **Length.** About 2,000 words from `Abstract` to `Limitations`, excluding captions, equations and references. The `Abstract` is one paragraph of at most 200 words, and the background at most two paragraphs.
+- **Length.** About 1,300 words from `Abstract` to `Limitations`, excluding captions, equations, tables and references. The `Abstract` is one paragraph of at most 200 words, and the background at most two paragraphs.
 - **`Introduction`.**
   1. The background placeholder, `*Background and prior literature to be added later.*`, replaced in step 6.
   2. Two or three paragraphs on the variables and how they are measured, that the question is one of association, and the approach.
@@ -97,14 +97,17 @@ Every report is a short article in the same format, so reports on different vari
 
   It never anticipates a result: would the sentence change if the numbers came out differently? Do not open with a sentence about the report.
 - **`Methods`** has the sub-headings `Data`, `Model`, `Model selection and uncertainty` and `Dynamics`. The method is described once. Choices get a reason. A weakness of one model goes beside that model. `Methods` describes only what `Results` reports.
-- **`Results`** opens with the figures of the data and how to read them, then one section per question. With one question that section is "The fitted model and its dynamics", which gives:
-  - the selected equations, with credible intervals
-  - the posterior probability of each chosen size against its rival
-  - the number of countries and yearly changes
-  - whether each variable enters the other's equation, and how firmly
-  - the nullclines in the variables' units
-  - where change stops, or that it does not within range
-  - convergence as numbers.
+- **Explain in words what the model says; put the details in the `Appendix`.** This is the approach of this branch.
+  - **`Results`** opens with the figures of the data and how to read them, then one section per question. With one question that section is "The fitted model and its dynamics". It gives the selected equations, then says in words what they mean, for example:
+    - which way each variable moves and towards what
+    - where change stops, or that it does not
+    - whether each variable enters the other's equation
+    - which parts of the model are stable across resampled countries
+    - whether simulated and observed countries converge.
+
+    Use few numbers, and only those a reader needs, in the variables' own units: "about 2% a year faster", "from about a quarter of the scale in the poorest countries to near the top in the richest".
+  - **The report's own `Appendix`** holds the details in compact tables, so that a reader of an exported report has them: for each equation the selected terms, coefficients with 95% credible intervals, the posterior probability of the chosen size against its rival, the number of countries and yearly changes, and how often the terms are selected across resamples; the nullclines at stated levels of the other variable, in its units; convergence counts; and any prediction scores. It ends with a pointer to `Appendix.md` for the full workings.
+  - **`Methods` is brief:** what was done and why, not the settings. Priors, $\lambda$, seeds and checks are in `Appendix.md`.
 - **Units, always, wherever available,** in figures, captions, text, tables and the abstract. A log or a rescaling is for fitting, not a unit.
   - Plot a logged variable on a log axis labelled in its original units: constant US dollars of the stated base year, with ticks such as \$1k and \$10k.
   - Label an index with its range, for example "index, 0 to 1".
@@ -181,7 +184,7 @@ Each step is begun only when the user asks for it.
 - **Then the joint checks and the dynamics,** as in `Statistical framework`. Draw figure 4 from exported results only.
 - **Re-derive the number that carries each claim by a second route:** for example, the evidence from the full $n \times n$ covariance matrix, or a nullcline both exactly and on a grid.
 - **Where a variable is left out of an equation, say how firmly,** from the evidence of the best model including it.
-- **`Methods` and `Results` are written as the numbers arrive.** Results state the estimate, interval and sample, then stop. No interpretation, and no words that grade the evidence (striking, reassuring, worrying). Statements of what the analysis can and cannot establish do belong.
+- **`Methods`, `Results` and the report's `Appendix` tables are written as the numbers arrive.** `Results` says in words what the model says and stops; the numbers go in the `Appendix` tables. No interpretation, and no words that grade the evidence (striking, reassuring, worrying). Statements of what the analysis can and cannot establish do belong.
 - **Appendix only:** a check that changed nothing; diagnostics; alternative specifications; and, in a replication, the comparison with the paper.
 
 ### Step 5: Discussion and limitations
