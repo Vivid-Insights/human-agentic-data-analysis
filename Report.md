@@ -2,15 +2,15 @@
 
 ## Abstract
 
-Richer countries tend to be more democratic, but whether rising income brings democracy, or democracy brings growth, remains disputed (Barro, 1996; Acemoglu et al., 2008; Acemoglu et al., 2019). We model the yearly changes in democracy and GDP per capita as functions of the current levels of both, let Bayesian model selection choose the equations, and fit them to 1981–2006. Democracy moves towards a level that rises with income, and more democratic countries and poorer countries grew faster. A second measure of democracy gives different equations but the same picture. The model does not predict 2007–2024, though. It does no better than assuming every country changes by the average amount, and countries moved away from the level of democracy it predicts. It describes one period, not a lasting relationship.
+Richer countries tend to be more democratic, but whether rising income brings democracy, or democracy brings growth, remains disputed (Barro, 1996; Acemoglu et al., 2008; Acemoglu et al., 2019). We model the yearly changes in democracy and GDP per capita as functions of the current levels of both, let Bayesian model selection choose the equations, and fit them to 1981–2006. Democracy moves towards a level that rises with income, and more democratic countries and poorer countries grew faster. A second measure of democracy gives different equations but the same picture. The model does not predict 2007–2024, though. It does no better than assuming every country changes by the average amount, and countries moved away from the level of democracy it predicts. It describes the last decades of democratic expansion, not the democratic recession that followed (Diamond, 2015).
 
 ## Introduction
 
-Richer countries tend to be more democratic (Acemoglu et al., 2008), but what lies behind this is disputed. Rising living standards predict rising democracy (Barro, 1999), yet the link disappears when each country is compared only with itself over time (Acemoglu et al., 2008). Whether democracy raises growth is also contested: Barro (1996) found a weakly negative effect and Acemoglu et al. (2019) a sizeable positive one. How democracy is measured matters too, because indices define and combine its parts differently (Munck & Verkuilen, 2002).
+Richer countries tend to be more democratic (Acemoglu et al., 2008), but what lies behind this is disputed. Rising living standards predict rising democracy (Barro, 1999), yet the link disappears when each country is compared only with itself over time (Acemoglu et al., 2008). Whether democracy raises growth is also contested: Barro (1996) found a weakly negative effect and Acemoglu et al. (2019) a sizeable positive one. How democracy is measured matters too, because indices define and combine its parts differently (Munck & Verkuilen, 2002). The world these studies describe has also changed. Average freedom in the world improved in 25 of the 32 years from 1974 to 2005, but around 2006 that expansion came to a halt, and the world has since been in what Diamond (2015) calls a mild but protracted democratic recession. A third wave of autocratisation is now under way, mostly through gradual erosion within democracies rather than coups (Bermeo, 2016; Lührmann & Lindberg, 2019).
 
 Most studies estimate one direction of the relationship at a time, with a form fixed in advance. Ranganathan, Spaiser and Sumpter (2013) instead model the yearly change in each variable as a function of the current levels of both, and let the data choose the form, so that relationships in both directions, including non-linear ones, can appear in one model (Spaiser et al., 2014). Such a model must also allow for poorer countries growing faster (Barro, 1991).
 
-We apply this approach to GDP per capita and two expert-coded democracy indices, each running from 0 to 1: the citizen rights index of Welzel (2013) and V-Dem's electoral democracy index (Coppedge et al., 2025). We fit the model to 1981–2006 and test it on 2007–2024. The questions are about association, not cause.
+We apply this approach to GDP per capita and two expert-coded democracy indices, each running from 0 to 1: the citizen rights index of Welzel (2013) and V-Dem's electoral democracy index (Coppedge et al., 2025). We fit the model to 1981–2006, the last decades of democratic expansion, and test it on 2007–2024, the years of democratic recession. The questions are about association, not cause.
 
 1. What model best describes the yearly changes in democracy and GDP per capita, and what dynamics does it imply?
 2. Do the results hold with a different measure of democracy, and does the model fitted to 1981–2006 predict the changes from 2007 to 2024?
@@ -83,9 +83,9 @@ The model fitted to 1981–2006 does not predict what happened next. Year by yea
 
 ## Discussion
 
-Across both measures, democracy and growth go together: more democratic countries grew faster, and poorer ones did too. These are associations, not evidence that democracy causes growth, and the model explains only a small part of the variation in growth from one year to the next. Democracy also moved towards a level that rises with income, a pattern that holds across both measures even though the form of the equations does not.
+From 1981 to 2006, democracy and GDP grew together: more democratic countries grew faster, and poorer ones did too. These are associations, not evidence that democracy causes growth, and the model explains only a small part of the variation in growth from one year to the next. Democracy also moved towards a level that rises with income, a pattern that holds across both measures even though the form of the equations does not.
 
-The relationships did not carry over in time. After 2006 the model predicts no better than average changes, the relationships it describes became weaker, and countries moved away from the level of democracy it gives for their income. What we can say is that the model describes how democracy and income moved together between 1981 and 2006, not a relationship that held in the years since.
+The relationships did not carry over in time. After 2006 the model predicts no better than average changes, the relationships it describes became weaker, and countries moved away from the level of democracy it gives for their income. The break falls where the literature places the end of democratic expansion (Diamond, 2015). The model was fitted to years in which democracy spread and countries moved towards the level of democracy their income would suggest. In the years since, which Lührmann and Lindberg (2019) describe as a third wave of autocratisation, many moved away from it. Our data cannot say why. What we can say is that the model describes how democracy and income moved together between 1981 and 2006, not a relationship that held in the years since.
 
 ## Limitations
 
@@ -157,7 +157,13 @@ Barro, R. J. (1996). [Democracy and growth](https://doi.org/10.1007/BF00163340).
 
 Barro, R. J. (1999). [Determinants of democracy](https://doi.org/10.1086/250107). *Journal of Political Economy*, 107(S6), S158–S183.
 
+Bermeo, N. (2016). [On democratic backsliding](https://doi.org/10.1353/jod.2016.0012). *Journal of Democracy*, 27(1), 5–19.
+
 Coppedge, M., Gerring, J., Knutsen, C. H., Lindberg, S. I., Teorell, J., Altman, D., et al. (2025). [V-Dem Country-Year Dataset v15](https://doi.org/10.23696/vdemds25). Varieties of Democracy (V-Dem) Project.
+
+Diamond, L. (2015). [Facing up to the democratic recession](https://doi.org/10.1353/jod.2015.0009). *Journal of Democracy*, 26(1), 141–155.
+
+Lührmann, A. and Lindberg, S. I. (2019). [A third wave of autocratization is here: what is new about it?](https://doi.org/10.1080/13510347.2019.1582029) *Democratization*, 26(7), 1095–1113.
 
 Munck, G. L. and Verkuilen, J. (2002). [Conceptualizing and measuring democracy: evaluating alternative indices](https://doi.org/10.1177/001041400203500101). *Comparative Political Studies*, 35(1), 5–34.
 
