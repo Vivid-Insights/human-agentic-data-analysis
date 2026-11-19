@@ -2,24 +2,25 @@
 
 ## Abstract
 
-Richer countries tend to be more democratic, but whether rising income brings democracy, or democracy brings growth, remains disputed (Barro, 1996; Acemoglu et al., 2008; Acemoglu et al., 2019). We model the yearly changes in democracy and GDP per capita as functions of the current levels of both, let Bayesian model selection choose the equations, and fit them to 1981–2006. Democracy moves towards a level that rises with income, and more democratic countries and poorer countries grew faster. A second measure of democracy gives different equations but the same picture. The model does not predict 2007–2024, though. It does no better than assuming every country changes by the average amount, and countries moved away from the level of democracy it predicts. It describes the last decades of democratic expansion, not the democratic recession that followed (Diamond, 2015).
+Richer countries tend to be more democratic, but whether rising income brings democracy, or democracy brings growth, remains disputed (Barro, 1996; Acemoglu et al., 2008; Acemoglu et al., 2019). Using data up to 2006, Ranganathan, Spaiser and Sumpter (2013) modelled the yearly changes in democracy and income as functions of the current levels of both, and found countries converging on a path along which democracy rises with income. We look again at that description. Refitted to the same democracy index for 1981–2006, the model gives the same picture: democracy moves towards a level that rises with income, and more democratic and poorer countries grew faster. Replacing the index with V-Dem's electoral democracy index changes the equations but not the picture. We then asked whether the description, as it stood in 2006, predicts 2007–2024. It does not. It does no better than assuming every country changes by the average amount, and countries moved away from the level of democracy it predicts. It describes the last decades of democratic expansion, not the democratic recession that followed (Diamond, 2015).
 
 ## Introduction
 
 Richer countries tend to be more democratic (Acemoglu et al., 2008), but what lies behind this is disputed. Rising living standards predict rising democracy (Barro, 1999), yet the link disappears when each country is compared only with itself over time (Acemoglu et al., 2008). Whether democracy raises growth is also contested: Barro (1996) found a weakly negative effect and Acemoglu et al. (2019) a sizeable positive one. How democracy is measured matters too, because indices define and combine its parts differently (Munck & Verkuilen, 2002). The world these studies describe has also changed. Average freedom in the world improved in 25 of the 32 years from 1974 to 2005, but around 2006 that expansion came to a halt, and the world has since been in what Diamond (2015) calls a mild but protracted democratic recession. A third wave of autocratisation is now under way, mostly through gradual erosion within democracies rather than coups (Bermeo, 2016; Lührmann & Lindberg, 2019).
 
-Most studies estimate one direction of the relationship at a time, with a form fixed in advance. Ranganathan, Spaiser and Sumpter (2013) instead model the yearly change in each variable as a function of the current levels of both, and let the data choose the form, so that relationships in both directions, including non-linear ones, can appear in one model (Spaiser et al., 2014). Such a model must also allow for poorer countries growing faster (Barro, 1991).
+Most studies estimate one direction of the relationship at a time, with a form fixed in advance. Ranganathan, Spaiser and Sumpter (2013) instead model the yearly change in each variable as a function of the current levels of both, and let the data choose the form, so that relationships in both directions, including non-linear ones, can appear in one model (Spaiser et al., 2014). Applied to democracy and GDP per capita for 1980–2006, the approach described countries converging on a path along which democracy and income rise together (Ranganathan, Spaiser & Sumpter, 2013). Such a model must also allow for poorer countries growing faster (Barro, 1991).
 
-We apply this approach to GDP per capita and two expert-coded democracy indices, each running from 0 to 1: the citizen rights index of Welzel (2013) and V-Dem's electoral democracy index (Coppedge et al., 2025). We fit the model to 1981–2006, the last decades of democratic expansion, and test it on 2007–2024, the years of democratic recession. The questions are about association, not cause.
+We look again at that description in three steps. First we refit the model to the data it was built on: GDP per capita and the citizen rights index of Welzel (2013) for 1981–2006, the last decades of democratic expansion. Then we replace that index with V-Dem's electoral democracy index (Coppedge et al., 2025), which, like Welzel's, runs from 0 to 1 and is built from expert codings, and which continues to 2024. Finally we ask whether the model, as it could have been fitted with data up to 2006, predicts what happened from 2007 to 2024, the years of democratic recession. The questions are about association, not cause.
 
-1. What model best describes the yearly changes in democracy and GDP per capita, and what dynamics does it imply?
-2. Do the results hold with a different measure of democracy, and does the model fitted to 1981–2006 predict the changes from 2007 to 2024?
+1. Does the original description of how democracy and income change together hold when the model is refitted to the same data?
+2. Does it hold with a different measure of democracy?
+3. Does the model fitted to data up to 2006 predict the changes from 2007 to 2024?
 
 ## Methods
 
 ### Data
 
-GDP per capita is from the World Bank (2026; indicator NY.GDP.PCAP.KD), in constant 2015 US dollars. Welzel's index is taken from the Quality of Government dataset (Teorell et al., 2015), and V-Dem's from its version 15 (indicator v2x_polyarchy). A yearly change is the difference between consecutive years in which a country has both variables. For 1981–2006 this gives about 3,400 changes from 183 countries with Welzel's index, and about 4,000 from 171 countries with V-Dem's. For 2007–2024 there are about 3,100 V-Dem changes. In the model GDP enters as its natural logarithm divided by 12, written $G$; a yearly change of $x$ in $G$ is growth of about $12x$.
+GDP per capita is from the World Bank (2026; indicator NY.GDP.PCAP.KD), in constant 2015 US dollars. Welzel's index, the one used in the original study, is taken from the Quality of Government dataset (Teorell et al., 2015), and V-Dem's from its version 15 (indicator v2x_polyarchy). A yearly change is the difference between consecutive years in which a country has both variables. For 1981–2006 this gives about 3,400 changes from 183 countries with Welzel's index, and about 4,000 from 171 countries with V-Dem's. For 2007–2024 there are about 3,100 V-Dem changes. In the model GDP enters as its natural logarithm divided by 12, written $G$; a yearly change of $x$ in $G$ is growth of about $12x$.
 
 ### Model
 
@@ -35,7 +36,7 @@ From the fitted equations we found, for each level of income, the level of democ
 
 ### Prediction
 
-For the second question we fitted the model with V-Dem's index to 1981–2006. We then compared its predictions for 2007–2024, both year by year and for each country's state in 2024, with those of a model that assumes every country changes by the average amount.
+For the third question we fitted the model with V-Dem's index to 1981–2006. We then compared its predictions for 2007–2024, both year by year and for each country's state in 2024, with those of a model that assumes every country changes by the average amount.
 
 ## Results
 
@@ -53,15 +54,15 @@ Figure 1 shows six countries over time, and Figure 2 their paths through the pla
 
 <small><b>Figure 3.</b> Observed yearly changes in democracy and GDP per capita (constant 2015 US dollars, logarithmic scale), averaged within cells of a grid. Each cell spans a factor of about 1.6 in GDP per capita and 0.1 in democracy. Each arrow starts at the average position of the country-years in its cell, marked by a dot, and points along their average yearly change. Arrows are drawn at 3⅓ times the yearly change, and the 33 longest are shortened to 0.47 cm, with their direction unchanged. Cells with fewer than 10 yearly changes have no arrow; the 83 cells with arrows hold 3,289 of the 3,423 changes. Faint lines are the paths of the six countries in Figures 1 and 2.</small>
 
-### What does the model say?
+### Does the original description hold?
 
-With Welzel's index the selected model is
+Refitted to Welzel's index for 1981–2006, the selected model is
 
 $$\Delta D = 0.267\,D - 0.144\,\frac{D}{G} - 0.118\,D^2 + 0.0030\,\frac{1}{G^2}$$
 
 $$\Delta G = 0.00185\,D + 0.00027\,\frac{1}{G^2}$$
 
-In words, democracy moves towards a level set by income. Where a country is more democratic than its income would suggest, democracy tends to fall; where it is less, democracy tends to rise. That level, the democracy nullcline, rises steadily with income, from about a quarter of the scale in the poorest countries to near the top in the richest (Figure 4). Income grows everywhere, faster in poorer countries and faster in more democratic ones. A fully democratic country grows about 2% a year faster than one with no democracy at the same income. The evidence favours these models over smaller and larger ones. When the countries are resampled, democracy stays in the growth equation, and $D/G$ and $D^2$ stay in the democracy equation, in almost every sample; the other terms vary. Stepped forward from 1981, almost every country converges on the nullcline. The countries' actual paths converge too, but more weakly.
+In words, democracy moves towards a level set by income. Where a country is more democratic than its income would suggest, democracy tends to fall; where it is less, democracy tends to rise. That level, the democracy nullcline, rises steadily with income, from about a quarter of the scale in the poorest countries to near the top in the richest (Figure 4). Income grows everywhere, faster in poorer countries and faster in more democratic ones. A fully democratic country grows about 2% a year faster than one with no democracy at the same income. The evidence favours these models over smaller and larger ones. When the countries are resampled, democracy stays in the growth equation, and $D/G$ and $D^2$ stay in the democracy equation, in almost every sample; the other terms vary. Stepped forward from 1981, almost every country converges on the nullcline. The countries' actual paths converge too, but more weakly. This is the original description: countries converging on a path along which democracy rises with income, although the selected equations differ in form from those first reported.
 
 Figure 4 is read like Figure 3, but the arrows now show the change the model predicts. The grey line is the democracy nullcline, and the dashed coloured lines are where the model takes the six countries from 1981.
 
@@ -69,7 +70,7 @@ Figure 4 is read like Figure 3, but the arrows now show the change the model pre
 
 <small><b>Figure 4.</b> Yearly changes in democracy and GDP per capita (constant 2015 US dollars, logarithmic scale) predicted by the selected models. Arrows show the predicted change at the positions of the arrows in Figure 3, drawn at 3⅓ times the yearly change; 14 of the 83 are shortened to 0.47 cm with their direction unchanged. The grey line is the democracy nullcline, where the predicted yearly change in democracy is zero, drawn where it lies between 0 and 1 and within the observed range of GDP, with its 95% band from 1,000 posterior draws. Dashed coloured lines, each from a dot, are the six countries' paths simulated year by year from their 1981 states to 2006.</small>
 
-### Does another measure of democracy give the same picture?
+### Does it hold with another measure of democracy?
 
 With V-Dem's index the equations take a different form, but they say the same things. Democracy again moves towards a level that rises with income, though less steeply. Democracy again goes with faster growth, by about the same amount, and poorer countries again grow faster.
 
