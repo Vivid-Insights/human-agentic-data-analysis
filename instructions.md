@@ -41,7 +41,14 @@ A message beginning **FRAMEWORK** changes this document.
 
 The user names a question or just a set of variables, and the agent proposes the analysis without asking which model to use. The model is always the same kind: the yearly change in each variable is a polynomial function of the current levels of all of them, pooled over countries and years, selected and fitted as in `Statistical framework`. What changes between analyses is the variables and the data decisions.
 
-The usual analysis asks how a chosen set of variables drive each other's change, using variables not modelled this way before. Replicating a published model is the exception, used to check the method against a known result. The first analysis on this branch replicated Ranganathan, Spaiser and Sumpter (2013) on democracy and GDP per capita.
+**What is fixed and what can vary.** The project is always about fitting dynamical systems to socioeconomic variables: the model, its selection and its dynamics, as below and in `Statistical framework`. The questions asked of the model, and the discussion, can vary. Within that, any of these is a valid question:
+- what the fitted model says about how the variables drive each other's change (the default)
+- refitting a published model to its own data, as a starting point
+- whether the picture holds when one variable is measured a different way, for example two democracy indices
+- whether a model fitted up to a chosen year predicts what happened after it (a hold-out split)
+- which countries followed the prediction and which did not.
+
+The first analysis on this branch did the last four together. It refitted Ranganathan, Spaiser and Sumpter (2013) on democracy and GDP per capita, compared Welzel's index with V-Dem's, split at 2006, and grouped countries by how they followed the prediction for 2024.
 
 - **One to four questions.** One is the default. For two variables $X$ and $Y$: *"What model best describes the yearly changes in $X$ and $Y$, and what dynamics does it imply?"*
   - Add a question only where the user wants a separate answer, for example whether $Y$ enters the equation for $X$ at all.
@@ -57,10 +64,20 @@ The usual analysis asks how a chosen set of variables drive each other's change,
   8. **The figures.** The standard figures in `Report format`, with the six representative countries named.
 - **Two variables is the default.** A third variable uses the 33-term three-variable library, searched up to five terms (Ranganathan et al., 2014). Lagged variables are an extension. Both need the user's agreement.
 - **The user agrees the proposal or changes parts of it.** Changes are recorded as departures. Nothing outside this section and `Statistical framework` comes in without agreement.
-- **Replications.** The variables, years and library are the paper's, and every departure (data vintage, library, prior) is recorded before anything is fitted.
-  - **The report never mentions replication.** It reads as a standalone investigation, because finished reports serve as templates and must show the usual case. The paper is cited only as the source of the method.
-  - The paper's equations, what counts as reproducing them, and the comparison all go in `Appendix.md`. Convert the published equations to this analysis's scale before fitting, so the comparison is defined in advance.
-  - **One exception, made by the user.** The first analysis on this branch (democracy and GDP) was reframed at the end as "replicate, change the data, then test prediction", so its report does discuss the replication. It is not the template example for how a new analysis is framed. For figures and format it remains the reference.
+- **Refitting a published model.** The variables, years and library are the paper's where possible, and every departure (data vintage, library, prior) is recorded in `Appendix.md` before anything is fitted. Convert the published equations to this analysis's scale before fitting, so the comparison is defined in advance.
+  - The report says plainly that the model is refitted, and whether the original description holds, in words. The detailed comparison with the published equations stays in `Appendix.md`.
+  - *Superseded:* an earlier rule kept replication out of the report entirely.
+- **Comparing measures of one variable.** Use the same library and method for each measure, so that differences come from the measure. Report in words whether the picture holds; show both in the `Appendix` tables.
+- **Hold-out prediction.** Fit up to a chosen year and test on the years after it, without refitting.
+  - **Year by year:** the posterior predictive density of each observed change, against an average-change model fitted to the same years, and against the same terms refitted to the test years as the best they could do.
+  - **Whole period:** step each country forward from its state in the split year, and compare with where it ended, against the average-change projection.
+  - **Choosing the split year:** a reason from the subject is better than one from the data. The first analysis split at 2006, the year the literature places the end of democratic expansion (Diamond, 2015).
+- **Which countries followed.** Group countries by the ratio of observed to predicted change.
+  - **Stable:** where the predicted change is below 0.02, a country "stayed" if it moved by less than 0.05.
+  - **Otherwise, by the ratio:** opposite direction below 0; much less 0 to 0.5; roughly as predicted 0.5 to 2; much more above 2.
+  - **Why not an absolute tolerance:** it calls a country "followed" whenever the predicted change was small, whatever it then did.
+  - **Fix the rule before looking at countries.** Name examples from every region in the `Discussion`, and list all countries in an `Appendix` table.
+- **Post-hoc looks,** such as one region, are agreed with a criterion before computing, labelled post hoc, and kept in `Appendix.md` unless the user decides otherwise.
 
 ## Statistical framework
 
@@ -90,7 +107,7 @@ Inference is by likelihood and Bayesian evidence, following Ranganathan, Spaiser
 Every report is a short article in the same format, so reports on different variables can be read side by side.
 
 - **Sections, in order:** Title, `Abstract`, `Introduction`, `Methods`, `Results`, `Discussion`, `Limitations`, `Disclaimer`, `Appendix`, `References`.
-- **Length.** About 1,300 words from `Abstract` to `Limitations`, excluding captions, equations, tables and references. The `Abstract` is one paragraph of at most 200 words, and the background at most two paragraphs.
+- **Length.** About 1,800 words from `Abstract` to `Limitations`, excluding captions, equations, tables and references; the report's own `Appendix` is not counted. The `Abstract` is one paragraph of at most 200 words, and the background at most two paragraphs.
 - **`Introduction`.**
   1. The background placeholder, `*Background and prior literature to be added later.*`, replaced in step 6.
   2. Two or three paragraphs on the variables and how they are measured, that the question is one of association, and the approach.
@@ -98,7 +115,7 @@ Every report is a short article in the same format, so reports on different vari
 
   It never anticipates a result: would the sentence change if the numbers came out differently? Do not open with a sentence about the report.
 - **`Methods`** has the sub-headings `Data`, `Model`, `Model selection and uncertainty` and `Dynamics`. The method is described once. Choices get a reason. A weakness of one model goes beside that model. `Methods` describes only what `Results` reports.
-- **Explain in words what the model says; put the details in the `Appendix`.** This is the approach of this branch.
+- **Explain in words what the model says; put the details in the `Appendix`.** This is the approach of this branch. The first analysis's report, *Did the rise of democracy predict its future?*, is the reference for the level of language. The text is non-technical; the equations appear once; numbers are few and in the variables' own units; the full models, intervals, evidence, resampling counts and prediction scores are in the `Appendix` tables, and the `Results` refer to them.
   - **`Results`** opens with the figures of the data and how to read them, then one section per question. Each section heading says in plain words what the section asks, for example "What does the model say?" or "Did the model predict the future?". A heading never refers to "Question 2" or any other number. A question with two parts may take one section per part. The section answering the default question gives the selected equations, then says in words what they mean, for example:
     - which way each variable moves and towards what
     - where change stops, or that it does not
