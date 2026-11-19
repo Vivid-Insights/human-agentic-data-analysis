@@ -135,7 +135,7 @@ Every report is a short article in the same format, so reports on different vari
   - **Model phase portrait.** The model only:
     - model arrows at the same cells
     - each nullcline as a light grey line named "<Variable> nullcline", with a lighter 95% band, drawn only within the observed range and the variable's own scale
-    - simulated paths, solid, in the countries' colours.
+    - simulated paths, dashed, in the countries' colours. The dash marks a prediction, in every figure: observed paths are solid, model paths dashed.
 
     No data: the text points to figure 2 for where countries actually went. A nullcline that does not exist in range is reported in the text.
 - **Captions** say what is shown, not what it means. Use `<small><b>Figure n.</b> …</small>`, with HTML (not Markdown) inside. A phase-portrait caption states the arrow length, how many arrows were capped, the minimum per cell, and how many changes are covered. Text before each figure says how to read it.
