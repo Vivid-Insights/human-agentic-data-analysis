@@ -58,7 +58,7 @@ $$\Delta D = 0.267\,D - 0.144\,\frac{D}{G} - 0.118\,D^2 + 0.0030\,\frac{1}{G^2}$
 
 $$\Delta G = 0.00185\,D + 0.00027\,\frac{1}{G^2}$$
 
-In words, democracy moves towards a level set by income. Where a country is more democratic than its income would suggest, democracy tends to fall; where it is less, democracy tends to rise. That level, the democracy nullcline, rises steadily with income, from about a quarter of the scale in the poorest countries to near the top in the richest (Figure 4). Income grows everywhere, faster in poorer countries and faster in more democratic ones. A fully democratic country grows about 2% a year faster than one with no democracy at the same income. The evidence favours these models over smaller and larger ones. When the countries are resampled, democracy stays in the growth equation, and $D/G$ and $D^2$ stay in the democracy equation, in almost every sample; the other terms vary. Stepped forward from 1981, almost every country converges on the nullcline. The countries' actual paths converge too, but more weakly. This is the original description: countries converging on a path along which democracy rises with income, although the selected equations differ in form from those first reported.
+In words (details in Tables A1 and A2), democracy moves towards a level set by income. Where a country is more democratic than its income would suggest, democracy tends to fall; where it is less, democracy tends to rise. That level, the democracy nullcline, rises steadily with income, from about a quarter of the scale in the poorest countries to near the top in the richest (Figure 4). Income grows everywhere, faster in poorer countries and faster in more democratic ones. A fully democratic country grows about 2% a year faster than one with no democracy at the same income. The evidence favours these models over smaller and larger ones. When the countries are resampled, democracy stays in the growth equation, and $D/G$ and $D^2$ stay in the democracy equation, in almost every sample; the other terms vary. Stepped forward from 1981, almost every country converges on the nullcline. The countries' actual paths converge too, but more weakly. This is the original description: countries converging on a path along which democracy rises with income, although the selected equations differ in form from those first reported.
 
 Figure 4 is read like Figure 3, but the arrows now show the change the model predicts. The grey line is the democracy nullcline, and the dashed coloured lines are where the model takes the six countries from 1981.
 
@@ -68,11 +68,11 @@ Figure 4 is read like Figure 3, but the arrows now show the change the model pre
 
 ### Does it hold with another measure of democracy?
 
-With V-Dem's index the equations take a different form, but they say the same things. Democracy again moves towards a level that rises with income, though less steeply. Democracy again goes with faster growth, by about the same amount, and poorer countries again grow faster.
+With V-Dem's index the equations take a different form (Table A1), but they say the same things (Table A2). Democracy again moves towards a level that rises with income, though less steeply. Democracy again goes with faster growth, by about the same amount, and poorer countries again grow faster.
 
 ### Did the model predict the future?
 
-The model fitted to 1981–2006 does not predict what happened next. Year by year, it predicts the changes from 2007 to 2024 slightly worse than assuming every country changes by the average amount. Refitted to those years, the same relationships are less than half as strong. The model expected countries to move towards the democracy nullcline, but many moved away from it, as India did (Figure 5).
+The model fitted to 1981–2006 does not predict what happened next (Table A3). Year by year, it predicts the changes from 2007 to 2024 slightly worse than assuming every country changes by the average amount. Refitted to those years, the same relationships are less than half as strong. The model expected countries to move towards the democracy nullcline, but many moved away from it, as India did (Figure 5).
 
 ![Figure 5](Code/outputs/figures/fig5_prediction.png)
 
