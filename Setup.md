@@ -63,6 +63,8 @@ uv add <package>                 # add a dependency, updating uv.lock
 | seaborn | 0.13.2 |
 | pyarrow | 25.0.1 |
 | openpyxl | 3.1.5 |
+| pandoc (export, outside the environment) | 3.10.2 |
+| tectonic (PDF engine, outside the environment) | 0.17.0 |
 
 Plus `xlrd` for legacy `.xls`, `tabulate` for Markdown tables, and JupyterLab with `ipykernel`. Verified by `uv run python check_env.py` on 2026-09-01.
 
@@ -116,6 +118,9 @@ Three things to check in the output rather than trust:
 - **Captions.** They are wrapped in `<small>` and `<b>` so Obsidian renders them correctly. Converting keeps the words and drops the tags, so the caption arrives at body size and stops reading as a legend.
 - **Unusual characters.** A default LaTeX font has no Greek letters or superscript signs. They are dropped silently, the exit code is zero, and a p-value written `1 × 10⁻¹³` can come out as `1 × 1013` — a different number rather than a visible gap. Search the PDF for every non-ASCII character the source contains.
 - **Figures drifting away from their captions.** Pandoc turns a lone image into a LaTeX `figure`, which is a float: LaTeX moves it to wherever it fits on the page, while the caption below it is an ordinary paragraph and stays where it was. The two then land pages apart, and the conversion reports nothing. Emit the graphic directly instead — `\begin{center}\includegraphics[width=0.95\linewidth]{…}\end{center}` — and add `\usepackage{graphicx}` through `header-includes`, since pandoc only loads it when it is managing the images itself. Then check which page each image and each caption actually landed on.
+- **Percent signs in captions.** A caption converted to raw LaTeX turns `95%` into the start of a comment, and the rest of the line disappears without any warning. Escape `%`, `&` and `#` in raw LaTeX.
+- **Table captions left at the foot of a page.** A caption written above a table is an ordinary paragraph, and the table, a `longtable`, breaks pages on its own terms. Make it pandoc's table caption (`Table: …`) instead, so it sits inside the table's head.
+- **Vulgar fractions.** Latin Modern has no `⅓`, so `3⅓` becomes `3`. Write it as math.
 
 Reading the output back needs a library for the target format; `pypdf` is in the environment for PDF. Record whatever you install in the version table above, so the export can be reproduced.
 

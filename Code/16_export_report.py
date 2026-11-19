@@ -24,7 +24,8 @@ specific to this report. Each is handled here and then verified:
    caption arrives in body text at body size. Converted to real LaTeX here.
 2. Characters the font cannot render are dropped in silence. Latin Modern has
    no superscript minus or digits, so `10⁻⁷` becomes `10` -- a different
-   number, not a visible gap. Converted to proper math here, and the build
+   number, not a visible gap -- and no vulgar fractions, so `3⅓` becomes `3`.
+   Both are converted to proper math here, and the build
    fails if tectonic reports any missing character at all.
 3. Links to other vault documents survive as dead links. Stripped here.
 4. The reference list converts as ordinary paragraphs, which is what is wanted.
@@ -61,6 +62,21 @@ def superscripts_to_math(text: str) -> str:
     return out
 
 
+FRACTIONS = {"½": (1, 2), "⅓": (1, 3), "⅔": (2, 3), "¼": (1, 4), "¾": (3, 4)}
+
+
+def fractions_to_math(text: str) -> str:
+    """`3⅓` -> `$3\\tfrac{1}{3}$`; Latin Modern has no vulgar-fraction glyphs."""
+
+    def repl(m: re.Match) -> str:
+        num, den = FRACTIONS[m.group(2)]
+        return f"${m.group(1)}\\tfrac{{{num}}}{{{den}}}$"
+
+    out, n = re.subn(r"(\d*)([" + "".join(FRACTIONS) + "])", repl, text)
+    print(f"  vulgar fractions converted to math    : {n}")
+    return out
+
+
 def captions_to_latex(text: str) -> str:
     """<small><b>Figure 1.</b> body</small> -> real small bold LaTeX.
 
@@ -69,7 +85,19 @@ def captions_to_latex(text: str) -> str:
 
     def repl(m: re.Match) -> str:
         label, body = m.group(1).strip(), m.group(2).strip()
+        if label.startswith("Table"):
+            # A caption written above a longtable is an ordinary paragraph, and
+            # longtable's own page breaking can strand it at the foot of a page.
+            # As pandoc's table caption (`Table: ...`) it goes inside the table's
+            # first head and always stays with it. Its body is still Markdown.
+            body = body.replace("<em>", "*").replace("</em>", "*")
+            return f"Table: **{label}** {' '.join(body.split())}"
         body = body.replace("<em>", r"\emph{").replace("</em>", "}")
+        # The caption is raw LaTeX, so `95%` would start a comment and silently
+        # drop the rest of the line; `&` and `#` would break the build.
+        body = re.sub(r"(?<!\\)([%&#])", r"\\\1", body)
+        # Straight double quotes become two closing quotes in LaTeX.
+        body = re.sub(r'"([^"]*)"', r"``\1''", body)
         return (
             "\\begin{quote}\n\\small\\textbf{"
             + label
@@ -102,6 +130,18 @@ def figures_to_latex(text: str) -> str:
         text,
     )
     print(f"  figures pinned beside their captions  : {n}")
+    # A minipage cannot break across pages, so a figure and the caption that
+    # follows it always land on the same page.
+    out, k = re.subn(
+        r"(\\begin\{center\}\n\\includegraphics.*?\\end\{center\})\s*"
+        r"(\\begin\{quote\}\n\\small\\textbf\{Figure.*?\\end\{quote\})",
+        r"\\par\\noindent\\begin{minipage}{\\linewidth}\n\1\n\2\n\\end{minipage}\\par",
+        out,
+        flags=re.S,
+    )
+    print(f"  figures kept on one page with caption : {k}")
+    if k != n:
+        raise SystemExit("a figure is not followed by its caption; check Report.md")
     return out
 
 
@@ -133,6 +173,7 @@ def main() -> None:
     body = captions_to_latex(body)
     body = figures_to_latex(body)
     body = superscripts_to_math(body)
+    body = fractions_to_math(body)
     body = strip_vault_links(body)
     INTERMEDIATE.write_text(body, encoding="utf-8")
 
@@ -150,7 +191,12 @@ def main() -> None:
         # graphicx is only pulled in automatically when pandoc manages the
         # images itself; the figures are emitted as raw LaTeX above, so it
         # has to be requested explicitly.
-        "-V", r"header-includes=\usepackage{graphicx}",
+        # The table captions are pandoc table captions (see captions_to_latex);
+        # they carry their own "Table A1." label, so LaTeX's numbering is
+        # removed and they are set small, full width, like the figure captions.
+        "-V", r"header-includes=\usepackage{graphicx}\usepackage{caption}"
+              r"\captionsetup[table]{labelformat=empty,font=small,"
+              r"justification=justified,width=0.9\linewidth}",
     ]
     print("\nrunning, from", ROOT)
     print(" ", " ".join(cmd))
