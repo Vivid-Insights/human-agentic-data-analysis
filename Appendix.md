@@ -382,6 +382,17 @@ Run by `Code/10_uniform_prior_check.py`; output in `Code/outputs/10_uniform_prio
   - `06` now writes term frequencies itself, and `08` the point where the nullcline passes 1 and the observed range. Both had earlier been added to the outputs by hand, and a re-run had dropped them.
   - The "observed range" in the main analysis is now the data's (\$165–\$132,253), not the calculation grid's (\$169–\$130,590).
 
+### Which countries followed the prediction (after step 7, at the user's request)
+
+Computed by `Code/15_prediction_groups.py` from the exported 2024 predictions, with no refit. Full list, 168 countries, in `Code/outputs/15_prediction_groups.csv`: 2006, predicted and observed 2024 V-Dem democracy, error, group, and predicted and observed GDP growth. Summary in `15_prediction_groups.txt`.
+
+- **The rule, agreed before computing.** Within 0.10 of the predicted 2024 democracy score counts as "followed". Otherwise a country is "missed, same direction" if it moved the way the model predicted, and "missed, opposite direction" if not. GDP is listed but not used for grouping.
+- **The groups.** 67 followed, 28 missed in the same direction, 73 missed in the opposite direction.
+  - Every opposite-direction case was predicted to rise and fell.
+  - The model predicted a rise for 153 of the 168 countries; democracy fell in 111.
+  - Even among those that followed, 50 of 67 ended below their prediction.
+- **Display note.** Errors are shown to two decimals in the report, so a country at −0.10 may be just inside (Cyprus, followed) or just outside (Romania, missed) the 0.10 tolerance. The CSV has three decimals.
+
 ## Analysis Log
 
 *A numbered row per step taken, added as the work happens. What was done, what it changed, and where the output is. Superseded decisions stay, marked as such — a reader cannot judge a choice without seeing the alternatives.*
@@ -441,6 +452,7 @@ Run by `Code/10_uniform_prior_check.py`; output in `Code/outputs/10_uniform_prio
 | 51 | A contract change says `Results` sections refer to the `Appendix` tables that hold their numbers. Added: "(details in Tables A1 and A2)" in the first section, "(Table A1)" and "(Table A2)" in the second, and "(Table A3)" in the third. | `instructions.md`; `Report.md` |
 | 52 | Step 7, read-through: the whole report read once, in order. Descriptive counts re-derived from the outputs and all correct (3,423 changes, 183 countries; 181 in 2006; Albania missing 1985–1989; 83 cells, 3,289 changes; V-Dem 3,955 and 3,088). Every figure, table and reference is cited, and every citation has a reference. Ten faults listed for the user; none fixed in this step. Main ones: the abstract's "original model" is not the model tested; "the third question" in `Methods` no longer points to anything; figures 1–4 do not say which democracy index they use; "the data it was built on" overstates (the GDP data is a 2026 release); the association caveat is missing from the `Abstract` and `Introduction`; the report is 1,552 words against 1,300. | — |
 | 53 | Step 7 fixes, all as suggested and agreed by the user: (1) "The original model" → "The model" in the `Abstract`; (2) "For the third question" → "To test prediction"; (3) captions of Figures 1–4 name Welzel's citizen rights index (axis labels unchanged, locked format); (4) "the data it was built on" → "the democracy index it was built on"; (5) association caveat restored in the `Abstract` and `Introduction`; (6) the `Abstract` states the picture; (7) the Barro (1991) sentence cut, and its now uncited reference removed; (8) `Model` says why nine terms; (9) the `Discussion`'s second paragraph shortened; (10) trailing space removed and the `Abstract`'s tense made consistent. Words: 1,552 → 1,562, because the fixes added more than the cuts removed. | `Report.md` |
+| 54 | At the user's request, countries were grouped by whether they followed the 2024 prediction (rule agreed before computing): 67 followed, 28 missed in the same direction, 73 missed in the opposite direction, every one of them predicted to rise and in fact falling. Added three sentences to "Did the model predict the future?" and Table A4 listing the countries by group. On checking, "most of North America" became "the United States, Canada", because Mexico is in the opposite group. | `Code/15_prediction_groups.py`; `Report.md` |
 
 ## Code Summary
 
@@ -461,6 +473,7 @@ Run by `Code/10_uniform_prior_check.py`; output in `Code/outputs/10_uniform_prio
 | `Code/12_build_panel_vdem.py` | The V-Dem panel for 1981–2024, built with the main panel's rules; `period` marks fit (changes ending by 2006) and test (2007–2024). | as above | `Code/outputs/panel_vdem.csv` (gitignored), `12_panel_vdem_counts.txt` |
 | `Code/13_predict.py` | The prediction test: year-by-year predictive density against the average-change model and a refit on 2007–2024; 18-year projections from 2006 against observed 2024; distance to the nullcline. | `panel_vdem.csv`, `06_fit_*_vdem.json` | `13_predict.txt`, `13_predicted_paths.csv`, `13_predicted_2024.csv` |
 | `Code/14_fig_prediction.py` | Figure 5: the six countries' observed and predicted paths for 2006–2024, with the 1981–2006 V-Dem nullcline. | `13_predicted_paths.csv`, `08_nullcline_vdem.csv` | `figures/fig5_prediction.png`, `…/dark/…` |
+| `Code/15_prediction_groups.py` | Groups the 168 countries by how closely their 2024 V-Dem democracy followed the prediction (tolerance 0.10; same or opposite direction). | `13_predicted_2024.csv`, `panel_vdem.csv` | `15_prediction_groups.csv`, `15_prediction_groups.txt` |
 
 The scripts `06_fit_change_model.py`, `07_joint_checks.py` and `08_joint_dynamics.py` take an optional `vdem` argument (`06` takes it after the outcome), which writes `…_vdem` outputs. Run order for question 2: `11`, `12`, `06 D vdem`, `06 G vdem`, `07 vdem`, `08 vdem`, `13`, `14`.
 

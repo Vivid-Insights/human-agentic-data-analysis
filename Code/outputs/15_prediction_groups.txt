@@ -1,0 +1,20 @@
+Countries: 168; tolerance 0.1 on V-Dem democracy in 2024
+
+followed: 67
+  Cyprus (-0.10); Thailand (-0.10); Zambia (-0.10); Croatia (-0.10); Fiji (-0.09); Italy (-0.09); Nigeria (-0.09); Guatemala (-0.09); Luxembourg (-0.08); Netherlands (-0.08); Slovak Republic (-0.08); United States (-0.08); Trinidad and Tobago (-0.07); United Kingdom (-0.07); Kenya (-0.07); Iceland (-0.07); Germany (-0.07); Angola (-0.07); Senegal (-0.07); Japan (-0.07); Austria (-0.07); Panama (-0.06); Finland (-0.06); Australia (-0.06); Barbados (-0.06); Norway (-0.06); Spain (-0.06); Malta (-0.06); Montenegro (-0.05); Canada (-0.05); Malaysia (-0.05); Switzerland (-0.05); South Africa (-0.05); Portugal (-0.04); Sweden (-0.04); New Zealand (-0.04); Ghana (-0.04); Liberia (-0.03); France (-0.03); Suriname (-0.03); Lithuania (-0.03); Ireland (-0.03); Brazil (-0.03); Dominican Republic (-0.02); Belgium (-0.02); Denmark (-0.02); Sao Tome and Principe (-0.01); Chile (-0.00); Uruguay (-0.00); Tunisia (-0.00); Colombia (+0.00); Czechia (+0.00); Maldives (+0.00); Lesotho (+0.00); Cabo Verde (+0.01); Latvia (+0.01); Costa Rica (+0.02); Jamaica (+0.02); Malawi (+0.03); Moldova (+0.03); Estonia (+0.03); Solomon Islands (+0.06); Seychelles (+0.06); Armenia (+0.07); Sri Lanka (+0.09); Timor-Leste (+0.10); Vanuatu (+0.10)
+
+missed, same direction: 28
+  democracy rose: 24; fell or unchanged: 4
+  predicted to rise but fell: 0; predicted to fall but rose: 0
+  India (-0.30); Oman (-0.28); Singapore (-0.27); Kazakhstan (-0.24); Morocco (-0.22); Jordan (-0.21); Qatar (-0.21); Viet Nam (-0.20); Zimbabwe (-0.19); Rwanda (-0.19); Cuba (-0.18); Uzbekistan (-0.17); Lao PDR (-0.17); United Arab Emirates (-0.16); Ethiopia (-0.15); Turkmenistan (-0.15); Togo (-0.15); Peru (-0.14); Mauritania (-0.14); Greece (-0.13); Libya (-0.12); Poland (-0.11); Romania (-0.10); Congo, Dem. Rep. (-0.10); Honduras (-0.10); Gambia, The (+0.19); Bhutan (+0.23); Nepal (+0.24)
+
+missed, opposite direction: 73
+  democracy rose: 0; fell or unchanged: 73
+  predicted to rise but fell: 73; predicted to fall but rose: 0
+  Nicaragua (-0.50); Hong Kong SAR, China (-0.50); Turkiye (-0.47); Mali (-0.45); Burkina Faso (-0.45); Venezuela, RB (-0.44); West Bank and Gaza (-0.43); Afghanistan (-0.43); Serbia (-0.41); Russian Federation (-0.40); Bahrain (-0.40); Hungary (-0.40); Niger (-0.37); Gabon (-0.36); Bangladesh (-0.36); Kuwait (-0.35); Burundi (-0.34); El Salvador (-0.34); Haiti (-0.33); Cambodia (-0.32); Belarus (-0.32); Comoros (-0.31); Algeria (-0.30); Lebanon (-0.30); Guinea (-0.29); Sudan (-0.29); Azerbaijan (-0.29); Mauritius (-0.29); Ukraine (-0.29); Guinea-Bissau (-0.28); Equatorial Guinea (-0.28); Chad (-0.27); Mexico (-0.27); Egypt, Arab Rep. (-0.27); Iran, Islamic Rep. (-0.26); Mozambique (-0.26); China (-0.26); Tajikistan (-0.25); Iraq (-0.25); Indonesia (-0.24); Eswatini (-0.24); Congo, Rep. (-0.23); Uganda (-0.23); Cameroon (-0.23); Pakistan (-0.22); Saudi Arabia (-0.22); Mongolia (-0.22); Myanmar (-0.21); Guyana (-0.21); Bosnia and Herzegovina (-0.20); Somalia, Fed. Rep. (-0.19); Central African Republic (-0.19); Georgia (-0.19); Sierra Leone (-0.18); Philippines (-0.18); Papua New Guinea (-0.18); Kyrgyz Republic (-0.18); Botswana (-0.17); Benin (-0.17); Albania (-0.17); Tanzania (-0.16); Cote d'Ivoire (-0.15); Madagascar (-0.15); Bolivia (-0.15); Israel (-0.14); Korea, Rep. (-0.14); Slovenia (-0.14); North Macedonia (-0.14); Paraguay (-0.13); Bulgaria (-0.11); Argentina (-0.11); Namibia (-0.10); Ecuador (-0.10)
+predicted rise: 153 of 168
+observed fall: 111
+followed with observed below predicted: 50 of 67
+exact boundary |err| within 0.0995-0.1005: Empty DataFrame
+Columns: [name, group, error]
+Index: []
