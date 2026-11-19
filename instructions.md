@@ -98,7 +98,7 @@ Every report is a short article in the same format, so reports on different vari
   It never anticipates a result: would the sentence change if the numbers came out differently? Do not open with a sentence about the report.
 - **`Methods`** has the sub-headings `Data`, `Model`, `Model selection and uncertainty` and `Dynamics`. The method is described once. Choices get a reason. A weakness of one model goes beside that model. `Methods` describes only what `Results` reports.
 - **Explain in words what the model says; put the details in the `Appendix`.** This is the approach of this branch.
-  - **`Results`** opens with the figures of the data and how to read them, then one section per question. With one question that section is "The fitted model and its dynamics". It gives the selected equations, then says in words what they mean, for example:
+  - **`Results`** opens with the figures of the data and how to read them, then one section per question. Each section heading says in plain words what the section asks, for example "What does the model say?" or "Did the model predict the future?". A heading never refers to "Question 2" or any other number. A question with two parts may take one section per part. The section answering the default question gives the selected equations, then says in words what they mean, for example:
     - which way each variable moves and towards what
     - where change stops, or that it does not
     - whether each variable enters the other's equation
