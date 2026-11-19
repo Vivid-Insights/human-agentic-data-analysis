@@ -37,7 +37,7 @@ for theme_name in ("light", "dark"):
     for iso in REP:
         c = REP_COLOUR[iso]
         s = sim[sim.iso3 == iso]
-        ax.plot(usd(s.G.values), s.D.values, color=c, lw=1.8, zorder=6)
+        ax.plot(usd(s.G.values), s.D.values, color=c, lw=1.8, ls=(0, (3, 2)), zorder=6)  # dashed: a prediction, as in Figure 5
         ax.scatter(usd(s.G.values[0]), s.D.values[0], s=28, color=c, zorder=7,
                    edgecolors=t.surface, linewidths=0.6)
     dollar_axis(ax, "x")
@@ -49,7 +49,7 @@ for theme_name in ("light", "dark"):
                (Patch(color=t.muted, alpha=0.15, lw=0), Line2D([0], [0], color=t.muted, lw=2.0))]
     labels = [ARROW_LEGEND.replace("Mean change", "Model change"),
               "Democracy nullcline\n(95% band)"]
-    handles += [Line2D([0], [0], color=REP_COLOUR[i], lw=1.8) for i in REP]
+    handles += [Line2D([0], [0], color=REP_COLOUR[i], lw=1.8, ls=(0, (3, 2))) for i in REP]
     labels += list(REP.values())
     ax.legend(handles, labels, loc="upper left", bbox_to_anchor=(1.02, 1.0),
               frameon=False, handlelength=1.4, borderaxespad=0.0, labelspacing=0.35)
