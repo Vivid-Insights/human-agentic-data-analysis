@@ -60,6 +60,7 @@ The usual analysis asks how a chosen set of variables drive each other's change,
 - **Replications.** The variables, years and library are the paper's, and every departure (data vintage, library, prior) is recorded before anything is fitted.
   - **The report never mentions replication.** It reads as a standalone investigation, because finished reports serve as templates and must show the usual case. The paper is cited only as the source of the method.
   - The paper's equations, what counts as reproducing them, and the comparison all go in `Appendix.md`. Convert the published equations to this analysis's scale before fitting, so the comparison is defined in advance.
+  - **One exception, made by the user.** The first analysis on this branch (democracy and GDP) was reframed at the end as "replicate, change the data, then test prediction", so its report does discuss the replication. It is not the template example for how a new analysis is framed. For figures and format it remains the reference.
 
 ## Statistical framework
 
