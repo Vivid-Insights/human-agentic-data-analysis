@@ -107,6 +107,7 @@ How the entries sit on the levels in section 0. "→" marks a move between level
 | 2.55 A hypothesis from a table, tested | 1, 2 | A pattern the user noticed in a list is turned into a test with a criterion fixed in advance, and it does not hold. |
 | 2.56 The brief, restated | 4 → 3 | The user restates what the project is: a fixed method, flexible questions. What the analysis actually did becomes the standard. |
 | 2.57 Making it reusable | 3 | The analysis becomes the template's sample, the contract gains a way in, and the code a map for adapting it. |
+| 2.58 A confusing table | 1 | Table A4's labels described the method; they now say whether each country followed and what it did. |
 | These notes | 5 | Watching all of the above. |
 
 ### 2.1 Creating the branch
@@ -891,6 +892,20 @@ Commits `c5a36b8` (sample and templates) and `a8e75d3` (contract and README).
 - **A way in.** A new "Starting a new analysis" section covers branching from the template, starting from blank documents in `Templates/`, and copying the sample's scripts. A table says, script by script, what to change for new variables. It also flags where the code relies on something specific: the exact nullcline root needs the change to be quadratic in that variable.
 - **General rules where there had been democracy-specific ones:** a grid of about 14 by 10 cells over the observed range; log axes in original units for money, linear for indices; the sample's six countries as the default for comparability; the prediction figure and Tables A1–A4 as standard pieces.
 - **For the video.** This is the step that turns one good analysis into a tool. The specialised agent's knowledge now lives in three places a newcomer can use: the contract (what to do), the templates (where to write it) and the sample (what good looks like, and code to start from).
+
+### 2.58 A confusing table, and the plan for the end
+
+> 1, yes 2, yes
+>
+> Much less and much more than predicted class is a bit confusing in the table for countries following or not following the model
+
+Commits `bcaa5da` (contract) and `a882613` (content).
+
+- **The two yeses.** After export, the root documents and code go back to the blank templates, so the branch is ready for a new analysis with the finished one kept in `Sample Report/`. These notes are copied into `Sample Report/Analysis Steps.md` as the sample's walkthrough, and the contract's workspace table now lists it.
+- **The table problem.** Labels such as "much less than predicted" describe a ratio, but they don't tell a reader whether the country followed the model, or which way it moved. Table A4 now has a first column, "Followed the model?", and each row says in words what happened: "Rose, but by less than half the predicted rise"; "Fell, where the model predicted a rise". The "much more" row hid two different things, so it was split into the 4 countries that rose more than twice as much as predicted and the 3 that fell more than twice as much.
+- **Nothing in the analysis moved.** The rule and the counts are the same, so only wording changed. The caption's new sentence about the empty cases (no country rose where the model predicted little change or a fall, and none fell by less than half a predicted fall) was checked against the data before it went in.
+- **The user's own edit.** An uncommitted change to the abstract was found on disk. It was checked, found correct, kept, and committed with this change, and the commit message says so.
+- **For the video.** The user read the table as a reader would and found the labels described the method, not the countries. The fix kept the rule and changed only the words a reader sees.
 
 ## 3. The specialised agent at the end of the session
 
