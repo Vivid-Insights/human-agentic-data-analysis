@@ -12,6 +12,7 @@ This branch, `socio-dynamical-systems`, is for one kind of analysis: country-lev
 | `Appendix.md` | The running record: `Data Summary`, `Research Question`, `Analysis` (the workings), `Analysis Log` (a numbered row per step), `Code Summary`, `References`. |
 | `Setup.md` | Installing and running the workspace. |
 | `Sample Report/` | The finished reference analysis: democracy and GDP per capita, 1981–2024 (`Democracy.md`, `Democracy Appendix.md`, its own `Code/` and `Attachments/`). It reproduces exactly when its scripts are re-run. It is the model for the writing, the figures and the code of every new analysis. Never edited as part of a new analysis. |
+| `Sample Report/Analysis Steps.md` | The walkthrough of how the sample and this branch's contract were built, with the user's prompts quoted. For showing someone how the method works; not part of a new analysis. |
 | `Templates/` | Blank `Report.md` and `Appendix.md` in this branch's format, copied to the root to start a new analysis. |
 
 ## Working step by step
