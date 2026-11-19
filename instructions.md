@@ -94,7 +94,7 @@ Every report is a short article in the same format, so reports on different vari
 - **`Introduction`.**
   1. The background placeholder, `*Background and prior literature to be added later.*`, replaced in step 6.
   2. Two or three paragraphs on the variables and how they are measured, that the question is one of association, and the approach.
-  3. The question, or the questions numbered.
+  3. No list of questions. The questions are stated in the framing prose, for example as the steps the analysis takes, and asked again by the `Results` headings.
 
   It never anticipates a result: would the sentence change if the numbers came out differently? Do not open with a sentence about the report.
 - **`Methods`** has the sub-headings `Data`, `Model`, `Model selection and uncertainty` and `Dynamics`. The method is described once. Choices get a reason. A weakness of one model goes beside that model. `Methods` describes only what `Results` reports.
@@ -166,7 +166,7 @@ Each step is begun only when the user asks for it.
 - **Fix the variables and questions from what the variables mean,** before looking at any relationship between them. No statistics, plots or "just to check" calculations. A question chosen after seeing the data is not tested by it.
 - **Agree the proposal** from `The standard analysis`, including the questions and what would count as an answer either way.
 - **Record it in `Research Question`:** `Discussion` (how the question was reached, what was set aside, feasibility from the `Data Summary`), `Question`, and the proposal with any departures.
-- **Then write the `Introduction`'s framing paragraphs and the question into `Report.md`** without asking first, and tell the user it is there.
+- **Then write the `Introduction`'s framing paragraphs, which state the questions in prose, into `Report.md`** without asking first, and tell the user it is there.
 - In a replication, the question is the paper's. Its equations, converted to this scale, and the criteria for reproducing them go in the appendix only.
 
 ### Step 3: Figures of the data
