@@ -2,15 +2,15 @@
 
 ## Abstract
 
-Richer countries tend to be more democratic, but whether rising income brings democracy, or democracy brings growth, remains disputed (Barro, 1996; Acemoglu et al., 2008; Acemoglu et al., 2019). Using data up to 2006, Ranganathan, Spaiser and Sumpter (2013) modelled the yearly changes in democracy and income as functions of the current levels of both, and found countries converging on a path along which democracy rises with income. We look again at that description. We replicate that work and also replace the index with V-Dem's electoral democracy index, which changes the exact equations but not the picture. We then asked whether the description, as it stood in 2006, predicts 2007–2024. It does not. It does no better than assuming every country changes by the average amount, and countries moved away from the level of democracy it predicts. The original model describes the last decades of democratic expansion, not the democratic recession that followed.
+Richer countries tend to be more democratic, but whether rising income brings democracy, or democracy brings growth, remains disputed (Barro, 1996; Acemoglu et al., 2008; Acemoglu et al., 2019). Using data up to 2006, Ranganathan, Spaiser and Sumpter (2013) modelled the yearly changes in democracy and income as functions of the current levels of both, and found countries converging on a path along which democracy rises with income. We look again at that description. We replicate that work and also replace the index with V-Dem's electoral democracy index, which changes the exact equations but not the picture of democracy converging on a level that rises with income, and of faster growth in more democratic and in poorer countries. These are associations, not evidence of cause. We then ask whether the description, as it stood in 2006, predicts 2007–2024. It does not. It does no better than assuming every country changes by the average amount, and countries moved away from the level of democracy it predicts. The model describes the last decades of democratic expansion, not the democratic recession that followed.
 
 ## Introduction
 
 Richer countries tend to be more democratic (Acemoglu et al., 2008), but what lies behind this is disputed. Rising living standards predict rising democracy (Barro, 1999), yet the link disappears when each country is compared only with itself over time (Acemoglu et al., 2008). Whether democracy raises growth is also contested: Barro (1996) found a weakly negative effect and Acemoglu et al. (2019) a sizeable positive one. How democracy is measured matters too, because indices define and combine its parts differently (Munck & Verkuilen, 2002). The world these studies describe has also changed. Average freedom in the world improved in 25 of the 32 years from 1974 to 2005, but around 2006 that expansion came to a halt, and the world has since been in what Diamond (2015) calls a mild but protracted democratic recession. A third wave of autocratisation is now under way, mostly through gradual erosion within democracies rather than coups (Bermeo, 2016; Lührmann & Lindberg, 2019).
 
-Most studies estimate one direction of the relationship at a time, with a form fixed in advance. Ranganathan, Spaiser and Sumpter (2013) instead model the yearly change in each variable as a function of the current levels of both, and let the data choose the form, so that relationships in both directions, including non-linear ones, can appear in one model (Spaiser et al., 2014). Applied to democracy and GDP per capita for 1980–2006, the approach described countries converging on a path along which democracy and income rise together (Ranganathan, Spaiser & Sumpter, 2013). Such a model must also allow for poorer countries growing faster (Barro, 1991).
+Most studies estimate one direction of the relationship at a time, with a form fixed in advance. Ranganathan, Spaiser and Sumpter (2013) instead model the yearly change in each variable as a function of the current levels of both, and let the data choose the form, so that relationships in both directions, including non-linear ones, can appear in one model (Spaiser et al., 2014). Applied to democracy and GDP per capita for 1980–2006, the approach described countries converging on a path along which democracy and income rise together (Ranganathan, Spaiser & Sumpter, 2013).
 
-We look again at that description in three steps. First we refit the model to the data it was built on: GDP per capita and the citizen rights index of Welzel (2013) for 1981–2006, the last decades of democratic expansion. Then we replace that index with V-Dem's electoral democracy index (Coppedge et al., 2025), which, like Welzel's, runs from 0 to 1 and is built from expert codings, and which continues to 2024. Finally we ask whether the model, as it could have been fitted with data up to 2006, predicts what happened from 2007 to 2024, the years of democratic recession (Diamond, 2015). 
+We look again at that description in three steps. First we refit the model to the democracy index it was built on: the citizen rights index of Welzel (2013), with GDP per capita, for 1981–2006, the last decades of democratic expansion. Then we replace that index with V-Dem's electoral democracy index (Coppedge et al., 2025), which, like Welzel's, runs from 0 to 1 and is built from expert codings, and which continues to 2024. Finally we ask whether the model, as it could have been fitted with data up to 2006, predicts what happened from 2007 to 2024, the years of democratic recession (Diamond, 2015). The questions are about association, not cause.
 
 ## Methods
 
@@ -20,7 +20,7 @@ GDP per capita is from the World Bank (2026; indicator NY.GDP.PCAP.KD), in const
 
 ### Model
 
-Each yearly change is a sum of terms drawn from nine polynomials in democracy $D$ and $G$: $1, D, G, 1/G, D/G, DG, D^2, G^2$ and $1/G^2$. All countries are pooled, so a country's expected change depends only on where it is, not on which country it is.
+Each yearly change is a sum of terms drawn from nine polynomials in democracy $D$ and $G$: $1, D, G, 1/G, D/G, DG, D^2, G^2$ and $1/G^2$. These are the original study's thirteen, without the four that divide by democracy, which is zero in some country-years. All countries are pooled, so a country's expected change depends only on where it is, not on which country it is.
 
 ### Model selection and uncertainty
 
@@ -32,7 +32,7 @@ From the fitted equations we found, for each level of income, the level of democ
 
 ### Prediction
 
-For the third question we fitted the model with V-Dem's index to 1981–2006. We then compared its predictions for 2007–2024, both year by year and for each country's state in 2024, with those of a model that assumes every country changes by the average amount.
+To test prediction, we fitted the model with V-Dem's index to 1981–2006. We then compared its predictions for 2007–2024, both year by year and for each country's state in 2024, with those of a model that assumes every country changes by the average amount.
 
 ## Results
 
@@ -40,15 +40,15 @@ Figure 1 shows six countries over time, and Figure 2 their paths through the pla
 
 ![Figure 1](Code/outputs/figures/fig1_trajectories_time.png)
 
-<small><b>Figure 1.</b> Democracy, <em>D</em> (left), and GDP per capita in constant 2015 US dollars on a logarithmic scale (right), from 1981 to 2006. Lines are six countries: Italy, Sweden, India, Chile, Albania and Nigeria. Albania has no observations for 1985–1989, shown as a gap.</small>
+<small><b>Figure 1.</b> Democracy, <em>D</em>, measured by Welzel's citizen rights index (left), and GDP per capita in constant 2015 US dollars on a logarithmic scale (right), from 1981 to 2006. Lines are six countries: Italy, Sweden, India, Chile, Albania and Nigeria. Albania has no observations for 1985–1989, shown as a gap.</small>
 
 ![Figure 2](Code/outputs/figures/fig2_trajectories_plane.png)
 
-<small><b>Figure 2.</b> Democracy, <em>D</em>, against GDP per capita in constant 2015 US dollars on a logarithmic scale. Grey points are the 181 countries with both variables in 2006. Coloured lines are the paths of the six countries in Figure 1 from 1981 to 2006, with a filled circle at 1981.</small>
+<small><b>Figure 2.</b> Democracy, <em>D</em>, measured by Welzel's citizen rights index, against GDP per capita in constant 2015 US dollars on a logarithmic scale. Grey points are the 181 countries with both variables in 2006. Coloured lines are the paths of the six countries in Figure 1 from 1981 to 2006, with a filled circle at 1981.</small>
 
 ![Figure 3](Code/outputs/figures/fig3_data_phase_portrait.png)
 
-<small><b>Figure 3.</b> Observed yearly changes in democracy and GDP per capita (constant 2015 US dollars, logarithmic scale), averaged within cells of a grid. Each cell spans a factor of about 1.6 in GDP per capita and 0.1 in democracy. Each arrow starts at the average position of the country-years in its cell, marked by a dot, and points along their average yearly change. Arrows are drawn at 3⅓ times the yearly change, and the 33 longest are shortened to 0.47 cm, with their direction unchanged. Cells with fewer than 10 yearly changes have no arrow; the 83 cells with arrows hold 3,289 of the 3,423 changes. Faint lines are the paths of the six countries in Figures 1 and 2.</small>
+<small><b>Figure 3.</b> Observed yearly changes in democracy (Welzel's citizen rights index) and GDP per capita (constant 2015 US dollars, logarithmic scale), averaged within cells of a grid. Each cell spans a factor of about 1.6 in GDP per capita and 0.1 in democracy. Each arrow starts at the average position of the country-years in its cell, marked by a dot, and points along their average yearly change. Arrows are drawn at 3⅓ times the yearly change, and the 33 longest are shortened to 0.47 cm, with their direction unchanged. Cells with fewer than 10 yearly changes have no arrow; the 83 cells with arrows hold 3,289 of the 3,423 changes. Faint lines are the paths of the six countries in Figures 1 and 2.</small>
 
 ### Does the original description hold?
 
@@ -64,7 +64,7 @@ Figure 4 is read like Figure 3, but the arrows now show the change the model pre
 
 ![Figure 4](Code/outputs/figures/fig4_model_phase_portrait.png)
 
-<small><b>Figure 4.</b> Yearly changes in democracy and GDP per capita (constant 2015 US dollars, logarithmic scale) predicted by the selected models. Arrows show the predicted change at the positions of the arrows in Figure 3, drawn at 3⅓ times the yearly change; 14 of the 83 are shortened to 0.47 cm with their direction unchanged. The grey line is the democracy nullcline, where the predicted yearly change in democracy is zero, drawn where it lies between 0 and 1 and within the observed range of GDP, with its 95% band from 1,000 posterior draws. Dashed coloured lines, each from a dot, are the six countries' paths simulated year by year from their 1981 states to 2006.</small>
+<small><b>Figure 4.</b> Yearly changes in democracy (Welzel's citizen rights index) and GDP per capita (constant 2015 US dollars, logarithmic scale) predicted by the selected models. Arrows show the predicted change at the positions of the arrows in Figure 3, drawn at 3⅓ times the yearly change; 14 of the 83 are shortened to 0.47 cm with their direction unchanged. The grey line is the democracy nullcline, where the predicted yearly change in democracy is zero, drawn where it lies between 0 and 1 and within the observed range of GDP, with its 95% band from 1,000 posterior draws. Dashed coloured lines, each from a dot, are the six countries' paths simulated year by year from their 1981 states to 2006.</small>
 
 ### Does it hold with another measure of democracy?
 
@@ -82,7 +82,7 @@ The model fitted to 1981–2006 does not predict what happened next (Table A3). 
 
 From 1981 to 2006, democracy and GDP grew together: more democratic countries grew faster, and poorer ones did too. These are associations, not evidence that democracy causes growth, and the model explains only a small part of the variation in growth from one year to the next. Democracy also moved towards a level that rises with income, a pattern that holds across both measures even though the form of the equations does not.
 
-The relationships did not carry over in time. After 2006 the model predicts no better than average changes, the relationships it describes became weaker, and countries moved away from the level of democracy it gives for their income. The break falls where the literature places the end of democratic expansion (Diamond, 2015). The model was fitted to years in which democracy spread and countries moved towards the level of democracy their income would suggest. In the years since, which Lührmann and Lindberg (2019) describe as a third wave of autocratisation, many moved away from it. Our data cannot say why. What we can say is that the model describes how democracy and income moved together between 1981 and 2006, not a relationship that held in the years since.
+The relationships did not carry over in time. After 2006 the model predicts no better than average changes, the relationships it describes became weaker, and countries moved away from the level of democracy it gives for their income. The break falls where the literature places the end of democratic expansion (Diamond, 2015) and the start of a third wave of autocratisation (Lührmann & Lindberg, 2019). Our data cannot say why. What we can say is that the model describes how democracy and income moved together between 1981 and 2006, not a relationship that held in the years since.
 
 ## Limitations
 
@@ -147,8 +147,6 @@ The full workings, the data decisions and every check are in [Appendix.md](Appen
 Acemoglu, D., Johnson, S., Robinson, J. A. and Yared, P. (2008). [Income and democracy](https://doi.org/10.1257/aer.98.3.808). *American Economic Review*, 98(3), 808–842.
 
 Acemoglu, D., Naidu, S., Restrepo, P. and Robinson, J. A. (2019). [Democracy does cause growth](https://doi.org/10.1086/700936). *Journal of Political Economy*, 127(1), 47–100.
-
-Barro, R. J. (1991). [Economic growth in a cross section of countries](https://doi.org/10.2307/2937943). *Quarterly Journal of Economics*, 106(2), 407–443.
 
 Barro, R. J. (1996). [Democracy and growth](https://doi.org/10.1007/BF00163340). *Journal of Economic Growth*, 1(1), 1–27.
 
