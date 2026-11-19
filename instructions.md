@@ -11,7 +11,8 @@ This branch, `socio-dynamical-systems`, is for one kind of analysis: country-lev
 | `Report.md` | The short article, built up step by step. |
 | `Appendix.md` | The running record: `Data Summary`, `Research Question`, `Analysis` (the workings), `Analysis Log` (a numbered row per step), `Code Summary`, `References`. |
 | `Setup.md` | Installing and running the workspace. |
-| `Sample Report/` | An earlier finished analysis of another kind, kept to show what complete documents look like. Never edited. |
+| `Sample Report/` | The finished reference analysis: democracy and GDP per capita, 1981–2024 (`Democracy.md`, `Democracy Appendix.md`, its own `Code/` and `Attachments/`). It reproduces exactly when its scripts are re-run. It is the model for the writing, the figures and the code of every new analysis. Never edited as part of a new analysis. |
+| `Templates/` | Blank `Report.md` and `Appendix.md` in this branch's format, copied to the root to start a new analysis. |
 
 ## Working step by step
 
@@ -19,7 +20,7 @@ The work goes one step at a time, with the user directing each step.
 
 - **One step per request.** Do the step, say what changed and what was found, then stop. Do not run ahead into analysis, figures, findings or prose that were not asked for, even when the next step is obvious.
 - **Announce every step.** Say which step is starting and what it involves. When its work is done, do not propose the next one. Ask whether anything is missing from this one, and make the question concrete: list what the step covered, what is settled, what was never discussed, and what the comparison with the sample turned up. Wait for an answer, not an absence of objection. A user who answers one item has not closed the others.
-- **From step 3 onwards, compare with a finished example before asking.** Compare the shape, not the content, of the matching part of `Sample Report/Happiness.md`: how captions explain the figure, how much of `Methods` is choices rather than procedure, where a limitation sits. Once this branch has a finished analysis of its own, compare with that instead. Say what the comparison found, including when it found nothing. A difference is not a fault; propose and let the user decide.
+- **From step 3 onwards, compare with a finished example before asking.** Compare the shape, not the content, of the matching part of `Sample Report/Democracy.md`: how captions explain the figure, how much of `Methods` is choices rather than procedure, where a limitation sits, how the `Results` say in words what the model says and point to the `Appendix` tables. Say what the comparison found, including when it found nothing. A difference is not a fault; propose and let the user decide.
 - **Stop and ask** when a step turns out bigger than it looked, when the data forces a choice, or when a request is ambiguous.
 - **Where a document is yours to write, write it, then say so.** Do not ask first. Tell the user what changed and that they can edit it or ask for changes.
 - **Never undo the user's changes.** Re-read a file from disk immediately before editing it. Never revert, reformat or tidy their text. If what you need conflicts with what they wrote, keep theirs and raise the conflict. Stage named files, never everything, and check a commit if a file changed under you.
@@ -37,6 +38,30 @@ A message beginning **FRAMEWORK** changes this document.
 - If it conflicts with something already here, say so rather than leaving the contract contradicting itself.
 - **Everything stays on this branch.** Nothing is promoted to `main`, and `main` is not touched. One rule (scanning for missing-value codes) went to `main` before this rule was made, and stays there. If a change looks useful for `main`, say so; carrying it across is the user's decision.
 
+## Starting a new analysis
+
+This branch is a template. A new analysis is done on a branch made from it, never on this branch itself.
+
+1. **Branch.** `git checkout socio-dynamical-systems && git checkout -b <analysis-name>`.
+2. **Start the documents from the templates.** Copy `Templates/Report.md` and `Templates/Appendix.md` to the root as `Report.md` and `Appendix.md`, replacing whatever is there. The `Disclaimer` in the template stays as written.
+3. **Start the code from the sample.** Copy the scripts needed from `Sample Report/Code/` into `Code/`, then adapt them as in the table below. Keep the numbering and the split into one script per step. Do not copy the sample's outputs.
+4. **Then follow the eight steps,** beginning with step 1 for the new variables.
+
+What to change when adapting the sample's code:
+
+| Script | What it does | What to change for new variables |
+| --- | --- | --- |
+| `sds_common.py` | Shared settings, locked figure style, phase-portrait arrows | Variable names and axis labels (with units), the scaling constants, the years, the fixed axis ranges, the six representative countries. Keep the style, palette and arrow settings as they are. |
+| `01_describe_data.py`, `02_build_panel.py` | Describe the sources; build the panel of levels and yearly changes | Source files, columns and indicator codes; missing-value codes; the join; the scaling. Keep the panel rule and the counts file. |
+| `03_…`, `04_…`, `05_…` | Figures 1–3 of the data | Labels and axis types: a dollar log axis for money, a linear axis for an index. The cell grid for the data phase portrait (rule in `Report format`). |
+| `06_fit_change_model.py` | Every term subset, evidence, posterior, and the checks, for one outcome | The `design()` function and `TERMS`: the library written in the new variables, without terms that divide by a variable that reaches zero. The method itself is not changed. |
+| `07_joint_checks.py`, `08_joint_dynamics.py` | Whether each variable enters the other's equation, residual correlation between the equations, nullclines, stability, bands, stepping forward, convergence | Variable names, and which variable's nullcline is solved for. The closed-form root in `08` relies on the change being quadratic in that variable; check this still holds for the new library, or use the grid root alone. |
+| `09_fig_model_phase_portrait.py` | Figure 4 | Labels, and which nullclines to draw |
+| `13_predict.py`, `14_fig_prediction.py`, `15_prediction_groups.py` | Hold-out prediction, figure 5, grouping countries | Only if the analysis has a prediction question. The split year and the panel file. |
+| `10_…`, `11_…`, `12_…`, `17_…` | Checks and data specific to the democracy analysis | Usually not needed. They are kept in the sample as examples. |
+
+The sample's scripts run from inside `Sample Report/Code/` with the root environment: `uv run --project ../../Code python <script>.py`. Pass arguments as separate words. In zsh, a variable holding "script.py D" is not split, so loop over the arguments explicitly.
+
 ## The standard analysis
 
 The user names a question or just a set of variables, and the agent proposes the analysis without asking which model to use. The model is always the same kind: the yearly change in each variable is a polynomial function of the current levels of all of them, pooled over countries and years, selected and fitted as in `Statistical framework`. What changes between analyses is the variables and the data decisions.
@@ -48,14 +73,14 @@ The user names a question or just a set of variables, and the agent proposes the
 - whether a model fitted up to a chosen year predicts what happened after it (a hold-out split)
 - which countries followed the prediction and which did not.
 
-The first analysis on this branch did the last four together. It refitted Ranganathan, Spaiser and Sumpter (2013) on democracy and GDP per capita, compared Welzel's index with V-Dem's, split at 2006, and grouped countries by how they followed the prediction for 2024.
+The sample analysis (`Sample Report/`) did the last four together. It refitted Ranganathan, Spaiser and Sumpter (2013) on democracy and GDP per capita, compared Welzel's index with V-Dem's, split at 2006, and grouped countries by how they followed the prediction for 2024.
 
 - **One to four questions.** One is the default. For two variables $X$ and $Y$: *"What model best describes the yearly changes in $X$ and $Y$, and what dynamics does it imply?"*
   - Add a question only where the user wants a separate answer, for example whether $Y$ enters the equation for $X$ at all.
   - Each question says what would count as an answer either way, such as whether the other variable enters each selected equation, and whether nullclines or fixed points exist within the observed range.
 - **The proposal, made straight away and recorded in `Research Question` once agreed:**
   1. **Variables.** Each with its World Bank indicator code or other source, its unit, and whether it is a measurement, an estimate or a constructed index.
-  2. **Transformations.** Logs for variables spanning orders of magnitude, such as GDP. Rescaling to roughly 0–1 by a fixed constant (see step 1).
+  2. **Transformations.** Logs for variables spanning orders of magnitude, such as GDP per capita or child mortality. Rescaling to roughly 0–1 by a fixed constant (see step 1). Indices already on 0 to 1 stay as they are.
   3. **The system.** One equation per variable, $\Delta x_i(t) = x_i(t+1) - x_i(t) = f_i(x_1(t), \dots, x_N(t))$, pooled over countries and years.
   4. **The term library.** For two variables, the 13 terms of Ranganathan, Spaiser and Sumpter (2013): $1, 1/X, 1/Y, X, Y, 1/(XY), Y/X, X/Y, XY, X^2, Y^2, 1/X^2, 1/Y^2$. Remove every term with a variable in the denominator if that variable reaches zero, and say which.
   5. **The search.** Every subset; the best of each size by likelihood; sizes compared by evidence.
@@ -71,7 +96,7 @@ The first analysis on this branch did the last four together. It refitted Rangan
 - **Hold-out prediction.** Fit up to a chosen year and test on the years after it, without refitting.
   - **Year by year:** the posterior predictive density of each observed change, against an average-change model fitted to the same years, and against the same terms refitted to the test years as the best they could do.
   - **Whole period:** step each country forward from its state in the split year, and compare with where it ended, against the average-change projection.
-  - **Choosing the split year:** a reason from the subject is better than one from the data. The first analysis split at 2006, the year the literature places the end of democratic expansion (Diamond, 2015).
+  - **Choosing the split year:** a reason from the subject is better than one from the data. The sample split at 2006, the year the literature places the end of democratic expansion (Diamond, 2015).
 - **Which countries followed.** Group countries by the ratio of observed to predicted change.
   - **Stable:** where the predicted change is below 0.02, a country "stayed" if it moved by less than 0.05.
   - **Otherwise, by the ratio:** opposite direction below 0; much less 0 to 0.5; roughly as predicted 0.5 to 2; much more above 2.
@@ -90,7 +115,7 @@ Inference is by likelihood and Bayesian evidence, following Ranganathan, Spaiser
   - The noise standard deviation $\sigma$ is fixed at the same $\text{sd}(\Delta x)$ (Ranganathan et al., 2014).
   - The evidence is closed-form, $\Delta x \sim N(0, \sigma^2 I + \lambda^2 X X^\top)$, computed through $m \times m$ matrices. The posterior is Gaussian. Coefficients and 95% credible intervals are on the original scale, and go in the report's `Appendix` tables.
   - Record the selection with $\lambda$ ten times smaller and larger, and with $\sigma$ from the residuals, in `Appendix.md`.
-  - A uniform prior was tested in the first analysis (`Code/10_uniform_prior_check.py`). Its evidence depends on an arbitrary range, and the selected democracy model changed at the widest range tried. That is why the prior is fixed.
+  - A uniform prior was tested in the sample analysis (`Sample Report/Code/10_uniform_prior_check.py`). Its evidence depends on an arbitrary range, and the selected democracy model changed at the widest range tried. That is why the prior is fixed.
 - **Independence is checked, not assumed.** Each country appears many times.
   - Test the lag-1 correlation of residuals within countries, and the correlation of residuals between the equations. For the latter, an iterated seemingly-unrelated-regressions re-estimate shows whether it matters.
   - Refit on 500 resamples of whole countries, with a fixed seed, to see how often the same terms are selected and how far the coefficient ranges exceed the credible intervals.
@@ -115,7 +140,7 @@ Every report is a short article in the same format, so reports on different vari
 
   It never anticipates a result: would the sentence change if the numbers came out differently? Do not open with a sentence about the report.
 - **`Methods`** has the sub-headings `Data`, `Model`, `Model selection and uncertainty` and `Dynamics`. The method is described once. Choices get a reason. A weakness of one model goes beside that model. `Methods` describes only what `Results` reports.
-- **Explain in words what the model says; put the details in the `Appendix`.** This is the approach of this branch. The first analysis's report, *Did the rise of democracy predict its future?*, is the reference for the level of language. The text is non-technical; the equations appear once; numbers are few and in the variables' own units; the full models, intervals, evidence, resampling counts and prediction scores are in the `Appendix` tables, and the `Results` refer to them.
+- **Explain in words what the model says; put the details in the `Appendix`.** This is the approach of this branch. The sample's report, *Did the rise of democracy predict its future?* (`Sample Report/Democracy.md`), is the reference for the level of language. The text is non-technical; the equations appear once; numbers are few and in the variables' own units; the full models, intervals, evidence, resampling counts and prediction scores are in the `Appendix` tables, and the `Results` refer to them.
   - **`Results`** opens with the figures of the data and how to read them, then one section per question. Each section heading says in plain words what the section asks, for example "What does the model say?" or "Did the model predict the future?". A heading never refers to "Question 2" or any other number. A question with two parts may take one section per part. The section answering the default question gives the selected equations, then says in words what they mean, for example:
     - which way each variable moves and towards what
     - where change stops, or that it does not
@@ -125,7 +150,7 @@ Every report is a short article in the same format, so reports on different vari
 
     Use few numbers, and only those a reader needs, in the variables' own units: "about 2% a year faster", "from about a quarter of the scale in the poorest countries to near the top in the richest".
   - **`Results` points to the tables.** Each `Results` section refers to the `Appendix` table that holds its numbers, for example "(Table A1)", wherever it states what a model says. A reader can then go from a claim to its numbers in one step.
-  - **The report's own `Appendix`** holds the details in compact tables, so that a reader of an exported report has them: for each equation the selected terms, coefficients with 95% credible intervals, the posterior probability of the chosen size against its rival, the number of countries and yearly changes, and how often the terms are selected across resamples; the nullclines at stated levels of the other variable, in its units; convergence counts; and any prediction scores. It ends with a pointer to `Appendix.md` for the full workings.
+  - **The report's own `Appendix`** holds the details in compact tables, numbered as in the sample (A1 the selected models, A2 what they imply, A3 prediction scores, A4 countries by how they followed), so that a reader of an exported report has them: for each equation the selected terms, coefficients with 95% credible intervals, the posterior probability of the chosen size against its rival, the number of countries and yearly changes, and how often the terms are selected across resamples; the nullclines at stated levels of the other variable, in its units; convergence counts; and any prediction scores. It ends with a pointer to `Appendix.md` for the full workings.
   - **`Methods` is brief:** what was done and why, not the settings. Priors, $\lambda$, seeds and checks are in `Appendix.md`.
 - **Units, always, wherever available,** in figures, captions, text, tables and the abstract. A log or a rescaling is for fitting, not a unit.
   - Plot a logged variable on a log axis labelled in its original units: constant US dollars of the stated base year, with ticks such as \$1k and \$10k.
@@ -136,17 +161,18 @@ Every report is a short article in the same format, so reports on different vari
   2. **Trajectories in the plane.** All countries in the last year as faint points, and the representative countries' paths with a filled circle at the start. No mean. Same axes as the phase portraits.
   3. **The data phase portrait.**
   4. **The model phase portrait.**
+  5. **With a hold-out question, the prediction figure:** the representative countries from the split year, observed paths solid and predicted paths dashed, with the nullcline fitted before the split.
 
   At most five figures. Evidence and likelihood plots go in the appendix. With three or more variables, the figures may be repeated per pair of variables or per slice, as agreed with the user.
-- **Representative countries.** Six, fixed before plotting from metadata and coverage, not from how their paths look. A replication uses the paper's. Each keeps one colour in every figure, and missing years are left as gaps.
-- **The figure format is locked,** with the first analysis as the reference: `Code/03_…`, `04_…`, `05_…` and `09_…`, and `Code/sds_common.py`. Only the user changes it.
+- **Representative countries.** Six, fixed before plotting from metadata and coverage, not from how their paths look. A replication uses the paper's. By default, start from the sample's six (Italy, Sweden, India, Chile, Albania, Nigeria), so that reports can be compared, and replace any with poor coverage of the new variables, saying why. Each keeps one colour in every figure, and missing years are left as gaps.
+- **The figure format is locked,** with the sample as the reference: `Sample Report/Code/03_…`, `04_…`, `05_…`, `09_…` and `14_…`, and `sds_common.py`. Only the user changes it.
   - **Style.** Sizes in cm, text 11 pt, legends 10 pt, 300 dpi. Light and dark versions on opaque backgrounds, with a fixed canvas checked after saving. No top or right spines and no background grid.
   - **Colours.** The six-colour palette, one colour per country, in list order.
-  - **Axes.** Each axis label names the variable and its unit, for example "GDP per capita (2015 US\$)" or "Democracy (index, 0 to 1)". Figures 2–4 share one fixed range.
+  - **Axes.** Each axis label names the variable and its unit, for example "GDP per capita (2015 US\$)" or "Democracy (index, 0 to 1)". Money and other logged variables are on a log axis in original units; indices on a linear axis. Figures 2–5 share one fixed range. Captions name the source of each variable when more than one measure is used.
   - **Legend.** Off the data, with no frame.
   - **Nothing else in the frame.** The caption carries what is shown.
   - **Phase-portrait arrows.**
-    - Changes are averaged over a grid of about 14 by 10 cells over the state (0.04 in log GDP ÷ 12; 0.1 in a 0-to-1 index), and a cell needs at least 10 changes.
+    - Changes are averaged over a grid of about 14 by 10 cells covering the observed range of the state: about 14 cells across the horizontal variable and 10 up the vertical one. In the sample that is 0.04 in log GDP ÷ 12 and 0.1 in a 0-to-1 index. A cell needs at least 10 changes.
     - Each arrow starts at the cell's mean state, marked with a dot, and points along its mean change, drawn at 3⅓ times the yearly change.
     - Any arrow longer than 0.47 cm on the page is shortened to that, with one factor on both components so the direction is exact. Arrows are in the theme's ink.
     - Legend: "Mean change, 3⅓ years (capped)", or "Model change …", on two lines.
@@ -168,6 +194,12 @@ Each step is begun only when the user asks for it.
 - **The World Bank is the standard source.** Take each variable it publishes from the World Development Indicators by indicator code, recording the code, units, base year and download date (which fixes the vintage).
   - Go elsewhere only for a variable the World Bank does not publish. Use the original publisher, or an archived copy if it has been withdrawn, and say why.
   - Use the current release, except in a replication, which may need the paper's vintage, by agreement.
+  - **Sources used in the sample, as examples:**
+    - World Bank WDI `NY.GDP.PCAP.KD` for GDP per capita
+    - Welzel's citizen rights index from the archived Quality of Government January 2015 release: −99 means missing; it covers 1981–2010
+    - V-Dem's `v2x_polyarchy` (version 15, 1789–2024): no missing codes or zeros.
+
+    `Sample Report/Attachments/SOURCE.md` gives the download commands and checksums.
 - **Record provenance.** Give the source, date and SHA-256 checksum for every file. Ask whether a fuller or earlier version exists, and record the answer.
 - **Describe before judging.** First what the files contain (shape, coverage by year, ranges, oddities), with no conclusions; then whether they can answer the question.
 - **Scan for missing-value codes** such as −99, −999 or 9999, and for values outside the documented range. Count them by year and country, and set them to missing.
@@ -198,7 +230,7 @@ Each step is begun only when the user asks for it.
 ### Step 4: Fit the model and compute the dynamics
 
 - **Confirm before fitting.** Restate the library, prior and departures, and run only once the user agrees.
-- **One script fits any outcome** (`Code/06_fit_change_model.py`), and its checks run alongside: the prior ×0.1 and ×10, $\sigma$ from the residuals, lag-1 residual correlation, and country resampling.
+- **One script fits any outcome** (`Code/06_fit_change_model.py`, adapted from the sample's), and its checks run alongside: the prior ×0.1 and ×10, $\sigma$ from the residuals, lag-1 residual correlation, and country resampling.
 - **Check that each modelled change is measured,** not interpolated or modelled by the source, before interpreting a coefficient on it.
 - **Then the joint checks and the dynamics,** as in `Statistical framework`. Draw figure 4 from exported results only.
 - **Re-derive the number that carries each claim by a second route:** for example, the evidence from the full $n \times n$ covariance matrix, or a nullcline both exactly and on a grid.

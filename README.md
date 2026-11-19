@@ -17,7 +17,7 @@ This folder is built to stop that. The agent does one step per request and then 
 3. Open a Claudian conversation and ask for step 1: import and describe the data.
 4. Work through the eight steps, one request at a time.
 
-If you want to see where this ends up before you start, read [Sample Report/Happiness.md](Sample%20Report/Happiness.md).
+If you want to see where this ends up before you start, read [Sample Report/Democracy.md](Sample%20Report/Democracy.md).
 
 ## The eight steps
 
@@ -60,9 +60,9 @@ Two documents, two readers.
 
 ## The sample
 
-[Sample Report/](Sample%20Report/) holds one finished analysis: whether people in healthier countries rate their lives more highly, worked through all eight steps on World Happiness Report data. It has its own `Code/` and `Attachments/`, so it is complete and touches nothing else. The WHR data file itself is not redistributed here; `Sample Report/Attachments/SOURCE.md` says how to download it if you want to re-run the code.
+[Sample Report/](Sample%20Report/) holds one finished analysis, worked through all eight steps: a dynamical model of democracy and GDP per capita, refitted to 1981–2006, checked with a second democracy measure, and tested on how well it predicted 2007–2024. It has its own `Code/` and `Attachments/`, and its scripts reproduce its outputs exactly. The large third-party data files are not redistributed here; `Sample Report/Attachments/SOURCE.md` says how to download them.
 
-It is there to look at, not to copy. The templates' headings are a sensible default and not a requirement — a different question may want a different structure entirely. Where the sample and the contract disagree, the contract is right; the sample was written while the rules were still being worked out.
+It is the reference for a new analysis: its report sets the level of language and the format, its figures the locked figure style, and its scripts are copied and adapted for new variables (see "Starting a new analysis" in `instructions.md`). Its numbers, prose and conclusions are never copied. Blank documents to start from are in `Templates/`.
 
 ## Changing the contract
 
@@ -78,4 +78,4 @@ Commit as you go. The agent stages named files rather than everything, so an unf
 
 This template — the contract, the documents, the code and the sample report — is licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). See [LICENSE](LICENSE).
 
-Third-party material is not covered: the World Happiness Report and Gallup data the sample analyses, and the articles it cites, remain under their owners' terms and are not included in the repository.
+Third-party material is not covered: the data the sample analyses (World Bank, Quality of Government, V-Dem) and the articles it cites remain under their owners' terms. The large data files and the articles are not included in the repository.
