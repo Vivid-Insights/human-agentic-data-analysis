@@ -1,0 +1,3 @@
+log-evidence, direct n x n: 4200.6944   via Woodbury (script): 4200.6944
+OLS coefficients:       [ 0.28789 -0.15404 -0.12707  0.00299]
+posterior means (json): [ 0.26653 -0.14365 -0.1176   0.00303]

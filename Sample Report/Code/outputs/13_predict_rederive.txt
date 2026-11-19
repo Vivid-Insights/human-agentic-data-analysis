@@ -1,0 +1,2 @@
+dD: Monte Carlo mean log predictive density 1.8390; average-change baseline 1.8402
+dG: Monte Carlo mean log predictive density 3.9050; average-change baseline 3.9088

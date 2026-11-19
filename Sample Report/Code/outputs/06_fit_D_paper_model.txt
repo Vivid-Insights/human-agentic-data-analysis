@@ -1,0 +1,5 @@
+Paper's 2013 model for dD (terms G^2, D/G) fitted on our data:
+  G^2   +0.03830 [+0.02932, +0.04728]
+  D/G   -0.02966 [-0.03621, -0.02311]
+  paper's coefficients converted to our scale: G^2 +0.0432, D/G -0.0336
+  log-evidence 4184.02 vs selected model 4200.69: log Bayes factor 16.68 in favour of the selected model

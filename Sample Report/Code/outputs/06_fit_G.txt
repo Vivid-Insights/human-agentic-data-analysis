@@ -1,0 +1,47 @@
+Outcome: dG   changes: 3423   countries: 183
+sigma (fixed, sd of dG): 0.00492   lambda: 0.00492 (on RMS-scaled terms)
+
+Best model per size:
+ m    log-lik  log-evidence  P(size)      R2  terms
+ 1   13335.58      13331.47   0.0000  0.0020  D/G
+ 2   13351.22      13343.28   0.7476  0.0112  D, 1/G^2
+ 3   13352.04      13341.90   0.1891  0.0116  G, DG, G^2
+ 4   13352.47      13340.20   0.0344  0.0119  G, DG, D^2, G^2
+ 5   13358.12      13339.76   0.0223  0.0152  1, G, 1/G, DG, G^2
+ 6   13358.55      13338.10   0.0042  0.0154  1, G, 1/G, DG, D^2, G^2
+ 7   13359.27      13337.26   0.0018  0.0159  1, D, G, 1/G, D/G, DG, G^2
+ 8   13359.66      13335.63   0.0004  0.0161  1, D, G, 1/G, D/G, DG, D^2, G^2
+ 9   13359.79      13334.85   0.0002  0.0162  1, D, G, 1/G, D/G, DG, D^2, G^2, 1/G^2
+
+Selected: size 2, P = 0.7476; next best size 3, P = 0.1891; log Bayes factor selected vs next = 1.37
+
+Selected model, posterior mean and 95% credible interval (original scale):
+  D      +0.00185  [+0.00146, +0.00224]
+  1/G^2  +0.00027  [+0.00019, +0.00035]
+
+Checks (appendix only unless they change the answer)
+  lambda x0.1: selected size 2: D, 1/G^2
+  lambda x10: selected size 2: D, 1/G^2
+  sigma from residuals (0.00490 vs 0.00492): selected size 2: D, 1/G^2
+  within-country lag-1 residual correlation: +0.256 over 3201 pairs
+  country resampling (500 draws, seed 20261118); selected term sets:
+      60  G, DG, G^2
+      54  D, 1/G^2
+      37  D/G, 1/G^2
+      32  DG, 1/G^2
+      28  D, G, D/G, G^2
+      25  1/G, D/G
+  term frequency across resamples (of 500):
+    1      75
+    D      169
+    G      171
+    1/G    100
+    D/G    152
+    DG     169
+    D^2    117
+    G^2    174
+    1/G^2  183
+    any term containing D: 492
+  selected model's coefficients across resamples (2.5-97.5 percentile) vs posterior interval width:
+    D      [+0.00146, +0.00226]  width 0.00081 vs posterior 0.00078
+    1/G^2  [+0.00015, +0.00040]  width 0.00025 vs posterior 0.00016

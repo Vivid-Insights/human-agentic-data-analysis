@@ -1,0 +1,169 @@
+iso3,name,group,D_2006,D_2024_predicted,D_2024_observed,pred_change,obs_change,ratio,error,gdp_growth_pred_pct,gdp_growth_obs_pct
+HUN,Hungary,"fell, despite predicted stability",0.831,0.834,0.436,0.003,-0.395,-151.119,-0.398,52.248,40.979
+BOL,Bolivia,"fell, despite predicted stability",0.721,0.726,0.576,0.005,-0.145,-28.448,-0.15,45.99,37.102
+BEN,Benin,"fell, despite predicted stability",0.661,0.669,0.501,0.008,-0.16,-19.369,-0.168,45.265,47.097
+DEU,Germany,"fell, despite predicted stability",0.906,0.91,0.839,0.004,-0.067,-16.079,-0.071,59.462,17.535
+IDN,Indonesia,"fell, despite predicted stability",0.707,0.722,0.483,0.015,-0.224,-15.141,-0.239,45.094,94.643
+SVK,Slovak Republic,"fell, despite predicted stability",0.822,0.834,0.752,0.012,-0.07,-6.059,-0.082,51.631,59.098
+PRT,Portugal,"fell, despite predicted stability",0.893,0.875,0.831,-0.018,-0.062,3.489,-0.044,57.357,16.051
+PER,Peru,"fell, despite predicted stability",0.793,0.775,0.634,-0.018,-0.159,8.841,-0.141,49.741,64.549
+GRC,Greece,"fell, despite predicted stability",0.889,0.882,0.75,-0.007,-0.139,20.924,-0.132,57.291,-7.432
+SEN,Senegal,"fell, despite predicted stability",0.688,0.687,0.617,-0.001,-0.071,84.228,-0.07,45.971,35.649
+KGZ,Kyrgyz Republic,much less than predicted,0.333,0.509,0.333,0.176,0.0,0.0,-0.176,28.755,70.054
+SWZ,Eswatini,much less than predicted,0.13,0.366,0.13,0.236,0.0,0.0,-0.236,16.199,36.936
+MAR,Morocco,much less than predicted,0.256,0.486,0.263,0.23,0.007,0.03,-0.223,21.124,41.211
+RWA,Rwanda,much less than predicted,0.196,0.39,0.202,0.194,0.006,0.031,-0.188,27.009,121.407
+OMN,Oman,much less than predicted,0.159,0.449,0.174,0.29,0.015,0.052,-0.275,13.041,-13.68
+ZWE,Zimbabwe,much less than predicted,0.256,0.46,0.27,0.204,0.014,0.069,-0.19,24.496,36.464
+ZMB,Zambia,much less than predicted,0.501,0.607,0.51,0.106,0.009,0.085,-0.097,36.099,38.699
+BEL,Belgium,much less than predicted,0.884,0.906,0.886,0.022,0.002,0.089,-0.02,57.798,14.347
+SGP,Singapore,much less than predicted,0.387,0.688,0.414,0.301,0.027,0.09,-0.274,23.495,54.281
+TGO,Togo,much less than predicted,0.339,0.506,0.355,0.167,0.016,0.096,-0.151,30.172,55.226
+KAZ,Kazakhstan,much less than predicted,0.244,0.509,0.272,0.265,0.028,0.106,-0.237,18.005,59.358
+CHE,Switzerland,much less than predicted,0.888,0.943,0.894,0.055,0.006,0.109,-0.049,59.705,15.624
+VNM,Viet Nam,much less than predicted,0.148,0.374,0.174,0.226,0.026,0.115,-0.2,18.538,136.075
+ETH,Ethiopia,much less than predicted,0.241,0.417,0.263,0.176,0.022,0.125,-0.154,31.944,182.243
+ROU,Romania,much less than predicted,0.614,0.734,0.629,0.12,0.015,0.125,-0.105,37.761,81.188
+CAN,Canada,much less than predicted,0.834,0.894,0.842,0.06,0.008,0.133,-0.052,53.96,8.155
+HND,Honduras,much less than predicted,0.521,0.644,0.541,0.123,0.02,0.163,-0.103,34.451,25.226
+JOR,Jordan,much less than predicted,0.232,0.483,0.273,0.251,0.041,0.163,-0.21,18.505,-3.384
+QAT,Qatar,much less than predicted,0.041,0.296,0.087,0.255,0.046,0.18,-0.209,7.802,-8.292
+LAO,Lao PDR,much less than predicted,0.091,0.303,0.134,0.212,0.043,0.203,-0.169,18.314,121.57
+IRL,Ireland,much less than predicted,0.887,0.921,0.895,0.034,0.008,0.238,-0.026,58.592,82.89
+UZB,Uzbekistan,much less than predicted,0.16,0.388,0.215,0.228,0.055,0.241,-0.173,18.684,147.689
+CUB,Cuba,much less than predicted,0.114,0.362,0.178,0.248,0.064,0.258,-0.184,13.752,27.278
+BRB,Barbados,much less than predicted,0.765,0.846,0.786,0.081,0.021,0.259,-0.06,48.033,-7.323
+GTM,Guatemala,much less than predicted,0.562,0.682,0.597,0.12,0.035,0.291,-0.085,35.59,34.711
+TKM,Turkmenistan,much less than predicted,0.079,0.303,0.149,0.224,0.07,0.313,-0.154,14.747,187.899
+KEN,Kenya,much less than predicted,0.514,0.623,0.549,0.109,0.035,0.323,-0.074,35.675,47.116
+ARE,United Arab Emirates,much less than predicted,0.024,0.259,0.103,0.235,0.079,0.335,-0.156,7.617,-26.531
+MRT,Mauritania,much less than predicted,0.249,0.468,0.333,0.219,0.084,0.384,-0.135,22.27,3.15
+COD,"Congo, Dem. Rep.",much less than predicted,0.256,0.431,0.327,0.175,0.071,0.405,-0.104,31.309,54.585
+LBY,Libya,much less than predicted,0.072,0.32,0.196,0.248,0.124,0.499,-0.124,10.877,-41.594
+BTN,Bhutan,much more than predicted,0.11,0.332,0.561,0.222,0.451,2.033,0.229,17.414,118.516
+VUT,Vanuatu,much more than predicted,0.608,0.698,0.796,0.09,0.188,2.077,0.098,38.422,3.029
+GHA,Ghana,much more than predicted,0.736,0.705,0.669,-0.031,-0.067,2.183,-0.036,48.677,83.335
+NPL,Nepal,much more than predicted,0.23,0.425,0.669,0.195,0.439,2.246,0.244,26.367,91.093
+TLS,Timor-Leste,much more than predicted,0.58,0.638,0.733,0.058,0.153,2.619,0.095,40.681,28.036
+POL,Poland,much more than predicted,0.875,0.835,0.729,-0.04,-0.146,3.633,-0.106,55.32,96.993
+IND,India,much more than predicted,0.722,0.694,0.398,-0.028,-0.324,11.712,-0.296,48.425,134.751
+MLI,Mali,opposite direction,0.625,0.651,0.199,0.026,-0.426,-16.091,-0.452,43.762,14.201
+NER,Niger,opposite direction,0.576,0.609,0.24,0.033,-0.336,-10.277,-0.369,45.014,41.658
+MNG,Mongolia,opposite direction,0.686,0.714,0.496,0.028,-0.19,-6.816,-0.218,43.832,109.382
+BFA,Burkina Faso,opposite direction,0.546,0.604,0.156,0.058,-0.39,-6.72,-0.448,41.926,48.621
+MUS,Mauritius,opposite direction,0.739,0.78,0.492,0.041,-0.247,-6.022,-0.288,45.803,74.764
+KOR,"Korea, Rep.",opposite direction,0.846,0.87,0.729,0.024,-0.117,-4.913,-0.141,53.993,59.952
+NIC,Nicaragua,opposite direction,0.56,0.653,0.153,0.093,-0.407,-4.376,-0.5,37.259,39.282
+SRB,Serbia,opposite direction,0.637,0.73,0.315,0.093,-0.322,-3.478,-0.415,39.48,71.044
+TUR,Turkiye,opposite direction,0.646,0.753,0.288,0.107,-0.358,-3.334,-0.465,39.663,90.568
+SVN,Slovenia,opposite direction,0.824,0.857,0.716,0.033,-0.108,-3.31,-0.141,52.18,29.594
+ARG,Argentina,opposite direction,0.789,0.821,0.712,0.032,-0.077,-2.392,-0.109,49.249,7.616
+BDI,Burundi,opposite direction,0.415,0.52,0.175,0.105,-0.24,-2.295,-0.345,41.214,5.329
+BWA,Botswana,opposite direction,0.71,0.763,0.594,0.053,-0.116,-2.17,-0.169,43.971,18.54
+AFG,Afghanistan,opposite direction,0.373,0.508,0.081,0.135,-0.292,-2.163,-0.427,35.934,1.8
+PSE,West Bank and Gaza,opposite direction,0.506,0.645,0.214,0.139,-0.292,-2.102,-0.431,33.081,-11.104
+UKR,Ukraine,opposite direction,0.58,0.675,0.389,0.095,-0.191,-2.02,-0.286,37.455,-3.136
+SLV,El Salvador,opposite direction,0.561,0.681,0.339,0.12,-0.222,-1.855,-0.342,35.581,38.585
+MOZ,Mozambique,opposite direction,0.469,0.563,0.304,0.094,-0.165,-1.763,-0.259,39.398,44.049
+MEX,Mexico,opposite direction,0.671,0.772,0.505,0.101,-0.166,-1.651,-0.267,41.203,4.791
+BGD,Bangladesh,opposite direction,0.424,0.561,0.201,0.137,-0.223,-1.634,-0.36,33.305,149.067
+CYP,Cyprus,opposite direction,0.834,0.872,0.774,0.038,-0.06,-1.563,-0.098,53.256,24.103
+SLE,Sierra Leone,opposite direction,0.552,0.625,0.44,0.073,-0.112,-1.53,-0.185,39.354,32.27
+GNB,Guinea-Bissau,opposite direction,0.449,0.565,0.28,0.116,-0.169,-1.463,-0.285,36.032,31.587
+ITA,Italy,opposite direction,0.855,0.891,0.803,0.036,-0.052,-1.459,-0.088,55.245,1.875
+BIH,Bosnia and Herzegovina,opposite direction,0.626,0.709,0.508,0.083,-0.118,-1.416,-0.201,39.339,97.293
+VEN,"Venezuela, RB",opposite direction,0.453,0.637,0.197,0.184,-0.256,-1.395,-0.44,29.155,-64.176
+HRV,Croatia,opposite direction,0.775,0.818,0.723,0.043,-0.052,-1.221,-0.095,48.27,47.504
+COM,Comoros,opposite direction,0.446,0.588,0.282,0.142,-0.164,-1.156,-0.306,32.283,14.282
+BGR,Bulgaria,opposite direction,0.706,0.76,0.646,0.054,-0.06,-1.106,-0.114,43.74,79.88
+ECU,Ecuador,opposite direction,0.703,0.752,0.651,0.049,-0.052,-1.072,-0.101,43.7,27.337
+NLD,Netherlands,opposite direction,0.863,0.906,0.822,0.043,-0.041,-0.964,-0.084,56.333,16.728
+FIN,Finland,opposite direction,0.876,0.91,0.847,0.034,-0.029,-0.863,-0.063,57.378,2.282
+GBR,United Kingdom,opposite direction,0.867,0.907,0.833,0.04,-0.034,-0.854,-0.074,56.655,9.002
+JPN,Japan,opposite direction,0.852,0.89,0.82,0.038,-0.032,-0.847,-0.07,55.012,12.089
+HTI,Haiti,opposite direction,0.368,0.545,0.218,0.177,-0.15,-0.845,-0.327,28.282,-11.521
+GUY,Guyana,opposite direction,0.582,0.698,0.491,0.116,-0.091,-0.782,-0.207,36.438,710.32
+KHM,Cambodia,opposite direction,0.322,0.506,0.186,0.184,-0.136,-0.741,-0.32,27.656,130.56
+MDG,Madagascar,opposite direction,0.48,0.571,0.417,0.091,-0.063,-0.693,-0.154,39.265,-1.643
+HKG,"Hong Kong SAR, China",opposite direction,0.369,0.665,0.169,0.296,-0.2,-0.675,-0.496,22.537,29.823
+GEO,Georgia,opposite direction,0.553,0.667,0.48,0.114,-0.073,-0.64,-0.187,35.669,158.585
+RUS,Russian Federation,opposite direction,0.323,0.576,0.172,0.253,-0.151,-0.596,-0.404,21.48,39.532
+AUT,Austria,opposite direction,0.863,0.904,0.839,0.041,-0.024,-0.592,-0.065,56.257,9.114
+NAM,Namibia,opposite direction,0.661,0.728,0.623,0.067,-0.038,-0.571,-0.105,41.298,5.147
+PNG,Papua New Guinea,opposite direction,0.526,0.644,0.461,0.118,-0.065,-0.553,-0.183,34.926,34.026
+GIN,Guinea,opposite direction,0.265,0.454,0.161,0.189,-0.104,-0.551,-0.293,27.415,62.04
+USA,United States,opposite direction,0.867,0.917,0.84,0.05,-0.027,-0.545,-0.077,57.053,24.741
+ISL,Iceland,opposite direction,0.869,0.916,0.844,0.047,-0.025,-0.533,-0.072,57.164,12.9
+ISR,Israel,opposite direction,0.763,0.857,0.715,0.094,-0.048,-0.513,-0.142,48.142,36.391
+GAB,Gabon,opposite direction,0.351,0.591,0.229,0.24,-0.122,-0.509,-0.362,23.106,-1.563
+AUS,Australia,opposite direction,0.877,0.918,0.857,0.041,-0.02,-0.492,-0.061,57.783,18.969
+LBN,Lebanon,opposite direction,0.444,0.649,0.348,0.205,-0.096,-0.467,-0.301,27.921,-19.49
+TZA,Tanzania,opposite direction,0.466,0.579,0.415,0.113,-0.051,-0.453,-0.164,35.911,59.087
+TCD,Chad,opposite direction,0.281,0.476,0.204,0.195,-0.077,-0.396,-0.272,26.116,-6.367
+ALB,Albania,opposite direction,0.553,0.672,0.507,0.119,-0.046,-0.387,-0.165,35.39,126.276
+MKD,North Macedonia,opposite direction,0.598,0.703,0.563,0.105,-0.035,-0.333,-0.14,37.466,71.432
+UGA,Uganda,opposite direction,0.328,0.498,0.272,0.17,-0.056,-0.329,-0.226,29.952,51.643
+SDN,Sudan,opposite direction,0.207,0.426,0.135,0.219,-0.072,-0.329,-0.291,21.514,-56.711
+FRA,France,opposite direction,0.874,0.899,0.866,0.025,-0.008,-0.324,-0.033,56.821,11.328
+DZA,Algeria,opposite direction,0.333,0.562,0.259,0.229,-0.074,-0.323,-0.303,23.092,11.359
+BHR,Bahrain,opposite direction,0.221,0.523,0.124,0.302,-0.097,-0.322,-0.399,15.417,12.086
+NOR,Norway,opposite direction,0.897,0.942,0.884,0.045,-0.013,-0.288,-0.058,60.295,10.683
+TJK,Tajikistan,opposite direction,0.23,0.427,0.174,0.197,-0.056,-0.285,-0.253,26.056,130.503
+SUR,Suriname,opposite direction,0.774,0.796,0.768,0.022,-0.006,-0.269,-0.028,48.142,-4.646
+BLR,Belarus,opposite direction,0.227,0.477,0.161,0.25,-0.066,-0.264,-0.316,18.467,58.78
+IRQ,Iraq,opposite direction,0.403,0.601,0.351,0.198,-0.052,-0.263,-0.25,26.957,20.401
+CAF,Central African Republic,opposite direction,0.34,0.494,0.302,0.154,-0.038,-0.247,-0.192,33.093,-11.235
+PHL,Philippines,opposite direction,0.47,0.62,0.435,0.15,-0.035,-0.233,-0.185,31.656,86.036
+PAK,Pakistan,opposite direction,0.355,0.536,0.313,0.181,-0.042,-0.232,-0.223,27.883,31.444
+PAN,Panama,opposite direction,0.738,0.79,0.726,0.052,-0.012,-0.232,-0.064,45.678,100.079
+AZE,Azerbaijan,opposite direction,0.219,0.464,0.175,0.245,-0.044,-0.18,-0.289,18.629,65.204
+CMR,Cameroon,opposite direction,0.317,0.511,0.286,0.194,-0.031,-0.159,-0.225,26.086,15.924
+PRY,Paraguay,opposite direction,0.594,0.706,0.579,0.112,-0.015,-0.134,-0.127,37.053,53.374
+TTO,Trinidad and Tobago,opposite direction,0.763,0.829,0.755,0.066,-0.008,-0.121,-0.074,47.6,-4.164
+EGY,"Egypt, Arab Rep.",opposite direction,0.213,0.451,0.186,0.238,-0.027,-0.113,-0.265,19.117,49.825
+KWT,Kuwait,opposite direction,0.327,0.64,0.292,0.313,-0.035,-0.112,-0.348,20.179,-41.319
+CHN,China,opposite direction,0.094,0.328,0.073,0.234,-0.021,-0.09,-0.255,14.214,237.836
+MMR,Myanmar,opposite direction,0.095,0.295,0.083,0.2,-0.012,-0.06,-0.212,22.519,97.664
+LUX,Luxembourg,opposite direction,0.871,0.951,0.867,0.08,-0.004,-0.05,-0.084,58.974,-1.393
+SOM,"Somalia, Fed. Rep.",opposite direction,0.178,0.363,0.169,0.185,-0.009,-0.049,-0.194,30.683,64.259
+IRN,"Iran, Islamic Rep.",opposite direction,0.174,0.427,0.167,0.253,-0.007,-0.028,-0.26,16.198,22.09
+SAU,Saudi Arabia,opposite direction,0.019,0.237,0.015,0.218,-0.004,-0.018,-0.222,8.834,16.222
+MLT,Malta,opposite direction,0.786,0.841,0.785,0.055,-0.001,-0.018,-0.056,49.311,86.706
+GNQ,Equatorial Guinea,opposite direction,0.183,0.459,0.178,0.276,-0.005,-0.018,-0.281,14.926,-53.498
+COG,"Congo, Rep.",opposite direction,0.257,0.483,0.254,0.226,-0.003,-0.013,-0.229,21.519,-24.901
+CIV,Cote d'Ivoire,opposite direction,0.433,0.586,0.432,0.153,-0.001,-0.007,-0.154,31.025,66.623
+NGA,Nigeria,roughly as predicted,0.416,0.588,0.502,0.172,0.086,0.501,-0.086,29.146,19.262
+FJI,Fiji,roughly as predicted,0.397,0.605,0.516,0.208,0.119,0.573,-0.089,26.204,38.176
+THA,Thailand,roughly as predicted,0.236,0.487,0.389,0.251,0.153,0.611,-0.098,18.69,45.371
+MNE,Montenegro,roughly as predicted,0.496,0.669,0.615,0.173,0.119,0.687,-0.054,31.086,58.544
+AGO,Angola,roughly as predicted,0.169,0.411,0.34,0.242,0.171,0.708,-0.071,17.214,-8.694
+DOM,Dominican Republic,roughly as predicted,0.637,0.729,0.705,0.092,0.068,0.742,-0.024,39.505,86.931
+CRI,Costa Rica,roughly as predicted,0.905,0.843,0.859,-0.062,-0.046,0.743,0.016,57.531,64.328
+STP,Sao Tome and Principe,roughly as predicted,0.657,0.678,0.673,0.021,0.016,0.777,-0.005,44.008,18.684
+MYS,Malaysia,roughly as predicted,0.313,0.567,0.517,0.254,0.204,0.804,-0.05,21.102,59.091
+CPV,Cabo Verde,roughly as predicted,0.778,0.752,0.757,-0.026,-0.021,0.817,0.005,49.28,65.375
+CZE,Czechia,roughly as predicted,0.9,0.868,0.87,-0.032,-0.03,0.939,0.002,57.651,26.956
+TUN,Tunisia,roughly as predicted,0.191,0.436,0.434,0.245,0.243,0.991,-0.002,17.66,16.306
+COL,Colombia,roughly as predicted,0.573,0.7,0.701,0.127,0.128,1.007,0.001,35.702,46.256
+MDV,Maldives,roughly as predicted,0.299,0.561,0.564,0.262,0.265,1.013,0.003,20.218,36.865
+CHL,Chile,roughly as predicted,0.893,0.847,0.844,-0.046,-0.049,1.057,-0.003,56.733,37.745
+URY,Uruguay,roughly as predicted,0.892,0.85,0.848,-0.042,-0.044,1.058,-0.002,56.722,64.363
+LSO,Lesotho,roughly as predicted,0.621,0.654,0.658,0.033,0.037,1.11,0.004,42.996,13.297
+MDA,Moldova,roughly as predicted,0.433,0.599,0.632,0.166,0.199,1.202,0.033,29.889,91.137
+SYC,Seychelles,roughly as predicted,0.452,0.677,0.741,0.225,0.289,1.282,0.064,27.739,37.233
+MWI,Malawi,roughly as predicted,0.441,0.549,0.58,0.108,0.139,1.292,0.031,38.08,32.084
+ARM,Armenia,roughly as predicted,0.339,0.549,0.623,0.21,0.284,1.353,0.074,24.661,110.796
+SLB,Solomon Islands,roughly as predicted,0.458,0.608,0.665,0.15,0.207,1.382,0.057,31.521,0.538
+LKA,Sri Lanka,roughly as predicted,0.378,0.573,0.664,0.195,0.286,1.469,0.091,26.639,73.048
+BRA,Brazil,roughly as predicted,0.874,0.826,0.801,-0.048,-0.073,1.529,-0.025,55.185,25.514
+GMB,"Gambia, The",roughly as predicted,0.253,0.444,0.634,0.191,0.381,1.991,0.19,27.037,19.223
+LTU,Lithuania,"stayed, as predicted",0.823,0.826,0.799,0.003,-0.024,-6.936,-0.027,51.621,81.573
+ESP,Spain,"stayed, as predicted",0.873,0.885,0.829,0.012,-0.044,-3.714,-0.056,56.274,8.722
+ZAF,South Africa,"stayed, as predicted",0.768,0.781,0.734,0.013,-0.034,-2.556,-0.047,47.832,1.141
+SWE,Sweden,"stayed, as predicted",0.911,0.924,0.881,0.013,-0.03,-2.346,-0.043,60.391,12.974
+EST,Estonia,"stayed, as predicted",0.872,0.861,0.895,-0.011,0.023,-2.022,0.034,55.538,23.676
+NZL,New Zealand,"stayed, as predicted",0.881,0.901,0.863,0.02,-0.018,-0.913,-0.038,57.374,16.176
+DNK,Denmark,"stayed, as predicted",0.923,0.933,0.916,0.01,-0.007,-0.725,-0.017,61.638,12.912
+LVA,Latvia,"stayed, as predicted",0.811,0.827,0.838,0.016,0.027,1.724,0.011,50.8,42.31
+JAM,Jamaica,"stayed, as predicted",0.763,0.78,0.803,0.017,0.04,2.39,0.023,47.496,7.774
+LBR,Liberia,"stayed, as predicted",0.65,0.647,0.613,-0.003,-0.037,11.091,-0.034,47.207,20.625

@@ -1,0 +1,30 @@
+rows: 27913; countries: 202; years 1789-2024
+1981-2024: 7618 rows, 181 countries; v2x_polyarchy non-missing 7617
+v2x_polyarchy 1981-2024 summary:
+count    7617.000000
+mean        0.469457
+std         0.278220
+min         0.013000
+25%         0.206000
+50%         0.445000
+75%         0.736000
+max         0.923000
+outside [0,1]: 0; exact zeros: 0; below 0.01: 0
+distinct negative values (possible codes): []
+countries with a value, by year (every 5 years):
+year
+1981    157
+1986    157
+1991    173
+1996    175
+2001    177
+2006    177
+2011    179
+2016    179
+2021    179
+2024    179
+duplicate (code, year): 0
+overlap with World Bank GDP, 1981-2024: 7217 country-years, 174 countries
+  1981-2006: 4126 country-years, 171 countries
+  2007-2024: 3091 country-years, 174 countries
+V-Dem codes with values but not World Bank countries: ['DDR', 'PSG', 'SML', 'TWN', 'YMD', 'ZZB']

@@ -1,217 +1,94 @@
-"""Describe the dataset. Description only - no analysis, no interpretation.
+"""Step 1: describe the two source files. Draws no conclusions.
 
-Run:      cd Code && uv run python 01_describe_data.py
-Reads:    Attachments/DataForTable2.1.xls
-Produces: Code/outputs/data_summary.md
-
-Step 1 of the analysis: establish what the file contains, so the Data Summary in
-Appendix.md is generated rather than hand-typed. Reports structure, units, coverage,
-completeness and out-of-range values. Draws no conclusions and tests nothing.
+Reads
+  Attachments/worldbank/API_NY.GDP.PCAP.KD_DS2_en_csv_v2_71952.csv
+  Attachments/worldbank/Metadata_Country_API_NY.GDP.PCAP.KD_DS2_en_csv_v2_71952.csv
+  Attachments/qog_std_ts_jan15.csv  (columns ccode, cname, year, ccodealp, wel_citrig)
+Prints a description to stdout and writes Code/outputs/01_describe_data.txt.
 """
-
-from __future__ import annotations
-
-import hashlib
 from pathlib import Path
-
-import numpy as np
+import io
+import contextlib
 import pandas as pd
 
-CODE_DIR = Path(__file__).resolve().parent
-ROOT = CODE_DIR.parent
-SOURCE = ROOT / "Attachments" / "DataForTable2.1.xls"
-OUTPUTS = CODE_DIR / "outputs"
+ROOT = Path(__file__).resolve().parent.parent
+ATT = ROOT / "Attachments"
+OUT = ROOT / "Code" / "outputs"
+OUT.mkdir(parents=True, exist_ok=True)
 
-# Recorded in Attachments/SOURCE.md at retrieval time.
-EXPECTED_SHA256 = "dd5d9c737f86a05eec5ddaef644c37e3528fca125d9716ec51eb48697fff8349"
+WB = ATT / "worldbank" / "API_NY.GDP.PCAP.KD_DS2_en_csv_v2_71952.csv"
+WB_META = ATT / "worldbank" / "Metadata_Country_API_NY.GDP.PCAP.KD_DS2_en_csv_v2_71952.csv"
+QOG = ATT / "qog_std_ts_jan15.csv"
 
-COUNTRY, YEAR, LADDER = "Country name", "year", "Life Ladder"
-GDP = "Log GDP per capita"
-HLE = "Healthy life expectancy at birth"
+buf = io.StringIO()
+with contextlib.redirect_stdout(buf):
+    # ---------------- World Bank ----------------
+    wb = pd.read_csv(WB, skiprows=4)
+    wb = wb.loc[:, ~wb.columns.str.startswith("Unnamed")]
+    meta = pd.read_csv(WB_META)
+    years = [c for c in wb.columns if c.isdigit()]
+    print("=== World Bank NY.GDP.PCAP.KD ===")
+    print(f"rows (economies incl. aggregates): {len(wb)}; year columns {years[0]}-{years[-1]}")
+    is_country = meta["Region"].notna()
+    countries = set(meta.loc[is_country, "Country Code"])
+    print(f"of which countries (Region not blank): {len(countries)}; aggregates: {(~is_country).sum()}")
+    long = wb.melt(id_vars=["Country Name", "Country Code"], value_vars=years,
+                   var_name="year", value_name="gdppc")
+    long["year"] = long["year"].astype(int)
+    long = long[long["Country Code"].isin(countries)]
+    w = long[(long.year >= 1980) & (long.year <= 2006)]
+    print(f"country-years 1980-2006: {len(w)}; non-missing: {w.gdppc.notna().sum()}")
+    per_c = w.groupby("Country Code").gdppc.count()
+    print(f"countries with any value 1980-2006: {(per_c > 0).sum()}; with all 27 years: {(per_c == 27).sum()}")
+    print("non-missing countries per year, 1980-2006:")
+    print(w.groupby("year").gdppc.count().to_string())
+    print("gdppc 1980-2006 summary (constant 2015 US$):")
+    print(w.gdppc.describe().to_string())
+    print(f"values <= 0: {(w.gdppc <= 0).sum()}")
 
-# Units per the WHR 2024 statistical appendix. Kept here so the generated summary
-# states units rather than leaving a reader to guess from the column name.
-UNITS = {
-    LADDER: "0-10 ladder, single year",
-    GDP: "log of PPP constant-2017 int$",
-    "Social support": "proportion 0-1",
-    HLE: "years",
-    "Freedom to make life choices": "proportion 0-1",
-    "Generosity": "unitless residual",
-    "Perceptions of corruption": "proportion 0-1",
-    "Positive affect": "proportion 0-1",
-    "Negative affect": "proportion 0-1",
-}
+    # ---------------- QoG / Welzel ----------------
+    q = pd.read_csv(QOG, usecols=["ccode", "cname", "year", "ccodealp", "wel_citrig"],
+                    encoding="latin-1", low_memory=False)
+    print("\n=== QoG Jan 2015: wel_citrig ===")
+    print(f"rows in file: {len(q)}; years {q.year.min()}-{q.year.max()}; units: {q.ccode.nunique()}")
+    d = q[q.wel_citrig.notna()]
+    print(f"non-missing wel_citrig: {len(d)} country-years, {d.ccode.nunique()} units, years {d.year.min()}-{d.year.max()}")
+    print("wel_citrig summary:")
+    print(d.wel_citrig.describe().to_string())
+    out = d[(d.wel_citrig < 0) | (d.wel_citrig > 1)]
+    print(f"values outside [0,1]: {len(out)}; distinct such values: {sorted(out.wel_citrig.unique())}")
+    print(f"  -99 by year: {out.groupby('year').size().to_dict()}")
+    print(f"  units with any -99: {out.ccode.nunique()}")
+    d = d[(d.wel_citrig >= 0) & (d.wel_citrig <= 1)]
+    print(f"after treating -99 as missing: {len(d)} country-years, {d.ccode.nunique()} units")
+    print(d.wel_citrig.describe().to_string())
+    dup = q.dropna(subset=["ccodealp"]).groupby(["ccodealp", "year"]).size()
+    dup = dup[dup > 1]
+    print(f"(ccodealp, year) pairs appearing more than once in QoG: {len(dup)}")
+    if len(dup):
+        dd = q.set_index(["ccodealp", "year"]).loc[dup.index].reset_index()
+        print(dd[dd.wel_citrig.notna()].groupby(["ccodealp", "cname"]).year.agg(["min", "max", "count"]).to_string())
+    dw = d[(d.year >= 1980) & (d.year <= 2006)]
+    z = dw[dw.wel_citrig == 0]
+    print(f"\n1980-2006: {len(dw)} country-years, {dw.ccode.nunique()} units")
+    print(f"exact zeros 1980-2006: {len(z)} country-years in {z.ccode.nunique()} units")
+    print(f"values in (0, 0.01): {((dw.wel_citrig > 0) & (dw.wel_citrig < 0.01)).sum()}")
+    print("smallest positive values:", sorted(dw.loc[dw.wel_citrig > 0, "wel_citrig"].unique())[:8])
+    print("zeros by country (count, years):")
+    for (cc, name), g in z.groupby(["ccodealp", "cname"]):
+        print(f"  {cc} {name}: {len(g)} [{g.year.min()}-{g.year.max()}]")
+    print("non-missing wel_citrig units per year, 1980-2006:")
+    print(dw.groupby("year").wel_citrig.count().to_string())
 
-# Ranges a value must fall in to be plausible, for flagging only. A value outside
-# these is reported, never altered.
-PLAUSIBLE = {
-    LADDER: (0, 10),
-    "Social support": (0, 1),
-    HLE: (40, 90),          # no country has healthy life expectancy below ~40 years
-    "Freedom to make life choices": (0, 1),
-    "Perceptions of corruption": (0, 1),
-    "Positive affect": (0, 1),
-    "Negative affect": (0, 1),
-}
+    # ---------------- overlap ----------------
+    both = dw.merge(w.rename(columns={"Country Code": "ccodealp"}), on=["ccodealp", "year"], how="inner")
+    both = both[both.gdppc.notna()]
+    print("\n=== overlap on ISO3 code, 1980-2006, both non-missing ===")
+    print(f"country-years: {len(both)}; countries: {both.ccodealp.nunique()}")
+    unmatched_q = sorted(set(dw.ccodealp.dropna()) - countries)
+    print(f"QoG codes with wel_citrig not among WB countries: {unmatched_q}")
+    print(f"QoG rows with blank ccodealp but wel_citrig: {dw.ccodealp.isna().sum()}")
 
-lines: list[str] = []
-
-
-def out(text: str = "") -> None:
-    lines.append(text)
-
-
-def table(df: pd.DataFrame) -> None:
-    out()
-    out(df.to_markdown(index=False))
-    out()
-
-
-def sha256(path: Path) -> str:
-    h = hashlib.sha256()
-    with open(path, "rb") as fh:
-        for chunk in iter(lambda: fh.read(1 << 20), b""):
-            h.update(chunk)
-    return h.hexdigest()
-
-
-def main() -> int:
-    if not SOURCE.exists():
-        raise FileNotFoundError(f"{SOURCE} not found. See Attachments/SOURCE.md.")
-    OUTPUTS.mkdir(exist_ok=True)
-
-    xl = pd.ExcelFile(SOURCE)
-    df = xl.parse(xl.sheet_names[0])
-
-    out("# Data Summary — DataForTable2.1.xls")
-    out()
-    out("Generated by `Code/01_describe_data.py`. Description only; nothing is "
-        "cleaned, altered or analysed.")
-
-    # ---------------------------------------------------------------- file
-    out()
-    out("## File")
-    out()
-    digest = sha256(SOURCE)
-    ok = digest == EXPECTED_SHA256
-    out(f"- Path: `Attachments/{SOURCE.name}`")
-    out(f"- Size: {SOURCE.stat().st_size:,} bytes")
-    out(f"- SHA-256: `{digest}`")
-    out(f"- Matches the checksum recorded at retrieval: "
-        f"**{'yes' if ok else 'NO — the file has changed'}**")
-    out(f"- Sheets: {len(xl.sheet_names)} — "
-        f"{', '.join(repr(s) for s in xl.sheet_names)}")
-    out(f"- Rows × columns: {df.shape[0]:,} × {df.shape[1]}")
-
-    # ---------------------------------------------------------------- columns
-    out()
-    out("## Columns and units")
-    out()
-    rows = []
-    for c in df.columns:
-        r = {"column": c, "unit": UNITS.get(c, "—"),
-             "type": str(df[c].dtype),
-             "non-null": int(df[c].notna().sum()),
-             "missing": int(df[c].isna().sum())}
-        if pd.api.types.is_numeric_dtype(df[c]):
-            r["min"] = round(float(df[c].min()), 3)
-            r["max"] = round(float(df[c].max()), 3)
-        else:
-            r["min"] = r["max"] = ""
-        rows.append(r)
-    table(pd.DataFrame(rows))
-
-    out(f"`{GDP}` is a natural log. Exponentiated, the observed range is "
-        f"**${np.exp(df[GDP].min()):,.0f}–${np.exp(df[GDP].max()):,.0f}** per capita "
-        "(PPP, constant 2017 international dollars).")
-    out()
-    out("`Generosity` is not a measure of giving: per WHR's definition it is the "
-        "*residual* of regressing charity donation on GDP per capita, so it is already "
-        "income-adjusted and can be negative.")
-
-    # ---------------------------------------------------------------- coverage
-    out()
-    out("## Coverage")
-    out()
-    years = sorted(int(y) for y in df[YEAR].unique())
-    out(f"- Years: {len(years)} distinct, {years[0]}–{years[-1]}.")
-    gaps = sorted(set(range(years[0], years[-1] + 1)) - set(years))
-    out(f"- Gaps in that range: {gaps if gaps else 'none'}.")
-    out(f"- Countries: {df[COUNTRY].nunique()}.")
-    out(f"- Values are **annual**, not multi-year averages, so observations in "
-        "different years are independent.")
-    out(f"- A fully rectangular table would hold "
-        f"{df[COUNTRY].nunique() * len(years):,} rows; this file has {len(df):,} "
-        f"({len(df) / (df[COUNTRY].nunique() * len(years)):.0%}).")
-    out(f"- Duplicate ({COUNTRY}, {YEAR}) pairs: "
-        f"{int(df.duplicated([COUNTRY, YEAR]).sum())}.")
-
-    per_year = (df.groupby(YEAR)
-                  .agg(countries=(COUNTRY, "nunique"),
-                       complete_rows=(LADDER, "size"))
-                  .reset_index())
-    per_year["complete_rows"] = (
-        df.assign(ok=df.notna().all(axis=1)).groupby(YEAR)["ok"].sum().to_numpy())
-    per_year.columns = ["Year", "Countries", "Rows with no missing value"]
-    table(per_year)
-
-    obs = df.groupby(COUNTRY)[YEAR].nunique()
-    out(f"- Years observed per country: min {int(obs.min())}, "
-        f"median {int(obs.median())}, max {int(obs.max())}.")
-    out(f"- Observed in all {len(years)} years: {int((obs == len(years)).sum())} "
-        f"countries; in fewer: {int((obs < len(years)).sum())}.")
-
-    # ------------------------------------------------------------ completeness
-    out()
-    out("## Completeness")
-    out()
-    n_complete = int(df.notna().all(axis=1).sum())
-    out(f"- {n_complete:,} of {len(df):,} rows ({n_complete / len(df):.0%}) have every "
-        "column present.")
-    miss = df.isna().sum()
-    miss = miss[miss > 0].sort_values(ascending=False)
-    if not miss.empty:
-        table(pd.DataFrame({"column": miss.index, "missing rows": miss.to_numpy()}))
-    out("Missing values are absent, not zero-filled — a zero in these columns would "
-        "read as a real measurement.")
-
-    # ------------------------------------------------------------ plausibility
-    out()
-    out("## Values outside plausible ranges")
-    out()
-    out("Flagged for attention, not altered. Bounds are stated in the script.")
-    out()
-    found = False
-    for col, (lo, hi) in PLAUSIBLE.items():
-        bad = df[(df[col] < lo) | (df[col] > hi)]
-        if not bad.empty:
-            found = True
-            out(f"**`{col}`** — expected {lo}–{hi}, {len(bad)} row(s) outside:")
-            table(bad[[COUNTRY, YEAR, col]].sort_values(col).round(3))
-    if not found:
-        out("None.")
-
-    out("Two further points on data quality, both properties of the source:")
-    out()
-    ven = df[df[COUNTRY] == "Venezuela"].nsmallest(1, GDP)
-    if not ven.empty:
-        r = ven.iloc[0]
-        out(f"- `{GDP}` reaches {r[GDP]:.3f} for Venezuela in {int(r[YEAR])}, an "
-            f"implied ${np.exp(r[GDP]):,.0f} per capita. The WHR 2024 appendix notes "
-            "Venezuela is one of six countries whose GDP comes from the Penn World "
-            "Table rather than the World Development Indicators. Treat Venezuelan GDP "
-            "as unreliable.")
-    out(f"- `{HLE}` is interpolated and extrapolated by WHR to cover years the WHO "
-        "series does not reach, so early values for some countries are model output "
-        "rather than measurement.")
-
-    path = OUTPUTS / "data_summary.md"
-    path.write_text("\n".join(lines) + "\n")
-    print("\n".join(lines))
-    print(f"\nWrote {path}")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+text = buf.getvalue()
+print(text)
+(OUT / "01_describe_data.txt").write_text(text)

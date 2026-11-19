@@ -1,0 +1,11 @@
+V-Dem panel 1981-2024: 7217 country-years, 174 countries
+fit changes (to 2006): 3955 from 171 countries
+test changes (2006->2007 to 2023->2024): 3088 from 174 countries
+D range 0.013-0.923; G range 0.425-0.970
+countries with both variables in 2006 and 2024: 168
+rep ITA Italy: years 1981-2024 (44)
+rep SWE Sweden: years 1981-2024 (44)
+rep IND India: years 1981-2024 (44)
+rep CHL Chile: years 1981-2024 (44)
+rep ALB Albania: years 1981-2024 (44)
+rep NGA Nigeria: years 1981-2024 (44)

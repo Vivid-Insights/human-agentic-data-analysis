@@ -23,10 +23,6 @@ __pycache__/
 # Downloaded articles: licensed material, cited but not redistributed
 Sample Report/Attachments/literature/
 
-# WHR/Gallup data: redistribution terms unclear, so the sample's source file and
-# its row-level derivatives are not committed. See Sample Report/Attachments/SOURCE.md.
-Sample Report/Attachments/DataForTable2.1.xls
-Sample Report/Code/outputs/*.csv
 
 # Literature PDFs: licensed material, not redistributable. Citations live in the
 # documents; the files stay local.
@@ -42,3 +38,10 @@ Code/outputs/panel.csv
 # V-Dem: 204 MB; see Attachments/SOURCE.md
 Attachments/vdem/
 Code/outputs/panel_vdem.csv
+
+# Sample Report (democracy and GDP): large third-party data and row-level panels, as at the root.
+Sample Report/Attachments/qog_std_ts_jan15.csv
+Sample Report/Attachments/qog_std_jan15_codebook.pdf
+Sample Report/Attachments/vdem/
+Sample Report/Code/outputs/panel.csv
+Sample Report/Code/outputs/panel_vdem.csv

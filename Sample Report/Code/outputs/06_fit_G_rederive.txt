@@ -1,0 +1,2 @@
+log-evidence, direct n x n: 13343.2756   via Woodbury (script): 13343.2756
+OLS: [0.001851 0.000274]  posterior: [0.001851 0.000274]

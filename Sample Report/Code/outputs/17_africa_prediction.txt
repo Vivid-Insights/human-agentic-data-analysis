@@ -1,0 +1,25 @@
+Africa: 53 codes in the definition; in the test 53 countries, 927 changes; rest 121 countries, 2161 changes
+
+dD: model minus average-change baseline, mean log predictive density per change
+  Africa  +0.0020  (95% country-resampled interval -0.0072 to +0.0125); model better on 36% of changes
+  rest    -0.0024  (95% country-resampled interval -0.0083 to +0.0032); model better on 46% of changes
+
+dG: model minus average-change baseline, mean log predictive density per change
+  Africa  +0.0045  (95% country-resampled interval -0.0006 to +0.0109); model better on 50% of changes
+  rest    -0.0072  (95% country-resampled interval -0.0119 to -0.0024); model better on 42% of changes
+
+Table A4 groups (version 3), share of countries:
+  Africa  n=51: followed (roughly or stayed) 11 = 22%; opposite direction 26; much less than predicted 11; roughly as predicted 9; fell, despite predicted stability 2; stayed, as predicted 2; much more than predicted 1
+  rest    n=117: followed (roughly or stayed) 24 = 21%; opposite direction 59; much less than predicted 20; roughly as predicted 16; fell, despite predicted stability 8; stayed, as predicted 8; much more than predicted 6
+
+2024 democracy error, median (model vs average-change baseline):
+  Africa  n=51: model 0.185, baseline 0.172; model closer for 25 of 51
+  rest    n=117: model 0.114, baseline 0.170; model closer for 81 of 117
+
+African countries by group:
+  fell, despite predicted stability: Benin, Senegal
+  much less than predicted: Congo, Dem. Rep., Eswatini, Ethiopia, Kenya, Libya, Mauritania, Morocco, Rwanda, Togo, Zambia, Zimbabwe
+  much more than predicted: Ghana
+  opposite direction: Algeria, Botswana, Burkina Faso, Burundi, Cameroon, Central African Republic, Chad, Comoros, Congo, Rep., Cote d'Ivoire, Egypt, Arab Rep., Equatorial Guinea, Gabon, Guinea, Guinea-Bissau, Madagascar, Mali, Mauritius, Mozambique, Namibia, Niger, Sierra Leone, Somalia, Fed. Rep., Sudan, Tanzania, Uganda
+  roughly as predicted: Angola, Cabo Verde, Gambia, The, Lesotho, Malawi, Nigeria, Sao Tome and Principe, Seychelles, Tunisia
+  stayed, as predicted: Liberia, South Africa
