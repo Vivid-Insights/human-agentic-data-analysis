@@ -411,6 +411,27 @@ Computed by `Code/15_prediction_groups.py` from the exported 2024 predictions, w
   - **Version 2,** proposed and never run; superseded. A grouping against the nullcline (followed, overshot, moved away, fell short).
   - **Version 3,** the current rule, at the user's request ("relative difference"). Its thresholds (0.02 for "stable", 0.05 for "moved", and a factor of 2) were chosen after seeing the changes of Nigeria, Italy, India and Sweden. That is recorded here as a limitation of the grouping: it is descriptive, not a test.
 
+### Did Africa follow the model? (after step 7, at the user's request; post hoc)
+
+Computed by `Code/17_africa_prediction.py`, output in `Code/outputs/17_africa_prediction.txt`. It uses the same 1981–2006 V-Dem model and average-change baseline as the prediction test; nothing is refitted. The intervals come from 2,000 country resamples, seed 20261118.
+
+- **Definition and criterion, agreed before computing.**
+  - Africa is the World Bank's Sub-Saharan Africa region plus Algeria, Egypt, Libya, Morocco and Tunisia: 53 countries with 927 test changes, against 121 countries with 2,161 changes elsewhere.
+  - "Africa followed the model" requires two things: (1) the model beats the baseline year by year for African countries, with the resampled 95% interval above zero; and (2) the share "roughly as predicted" or "stayed, as predicted" is clearly higher in Africa than in the rest of the world.
+- **Post hoc.** The hypothesis was prompted by seeing African countries among those that followed in Table A4.
+- **Result: neither condition holds.**
+  - Democracy, model minus baseline, mean log predictive density per change: Africa +0.0020 (−0.0072 to +0.0125), with the model better on 36% of changes; rest −0.0024 (−0.0083 to +0.0032).
+  - Followed: Africa 11 of 51 (22%), rest 24 of 117 (21%).
+  - Median 2024 democracy error: Africa, model 0.185 against baseline 0.172 (model closer for 25 of 51); rest, model 0.114 against 0.170 (81 of 117).
+- **Observation outside the hypothesis.** For GDP, model minus baseline is +0.0045 for Africa (−0.0006 to +0.0109) and −0.0072 for the rest (−0.0119 to −0.0024). The model predicts African growth no worse than the baseline, and growth elsewhere worse.
+- **African countries by group.**
+  - Roughly as predicted: Angola, Cabo Verde, The Gambia, Lesotho, Malawi, Nigeria, São Tomé and Príncipe, Seychelles, Tunisia.
+  - Stayed: Liberia, South Africa.
+  - Much less: 11.
+  - Much more: Ghana.
+  - Opposite: 26.
+  - Fell despite predicted stability: Benin, Senegal.
+
 ## Analysis Log
 
 *A numbered row per step taken, added as the work happens. What was done, what it changed, and where the output is. Superseded decisions stay, marked as such — a reader cannot judge a choice without seeing the alternatives.*
@@ -472,6 +493,7 @@ Computed by `Code/15_prediction_groups.py` from the exported 2024 predictions, w
 | 53 | Step 7 fixes, all as suggested and agreed by the user: (1) "The original model" → "The model" in the `Abstract`; (2) "For the third question" → "To test prediction"; (3) captions of Figures 1–4 name Welzel's citizen rights index (axis labels unchanged, locked format); (4) "the data it was built on" → "the democracy index it was built on"; (5) association caveat restored in the `Abstract` and `Introduction`; (6) the `Abstract` states the picture; (7) the Barro (1991) sentence cut, and its now uncited reference removed; (8) `Model` says why nine terms; (9) the `Discussion`'s second paragraph shortened; (10) trailing space removed and the `Abstract`'s tense made consistent. Words: 1,552 → 1,562, because the fixes added more than the cuts removed. | `Report.md` |
 | 54 | At the user's request, countries were grouped by whether they followed the 2024 prediction (rule agreed before computing): 67 followed, 28 missed in the same direction, 73 missed in the opposite direction, every one of them predicted to rise and in fact falling. Added three sentences to "Did the model predict the future?" and Table A4 listing the countries by group. On checking, "most of North America" became "the United States, Canada", because Mexico is in the opposite group. | `Code/15_prediction_groups.py`; `Report.md` |
 | 55 | Grouping revised twice at the user's prompting: India was "same direction" only trivially, and Italy was "followed" despite moving the wrong way. A nullcline-based version 2 was proposed and not run; the ratio-based version 3 was adopted. Now 25 roughly as predicted, 10 stayed as predicted, 31 much less, 7 much more, 85 opposite (all predicted rise, fell), and 10 fell despite predicted stability. The three report sentences and Table A4 were rewritten; Italy, the US, the UK and Japan are now named among the falls, with "mostly small". Thresholds were chosen after seeing four countries, as recorded under `Analysis`. Superseded: version 1, row 54. | `Code/15_prediction_groups.py`; `Report.md` |
+| 56 | At the user's request, a post-hoc test of whether African countries followed the model. The definition and criterion were agreed before computing. Result: no on both conditions (democracy prediction no better than the baseline, interval spans zero; 22% followed, against 21% elsewhere). Observation: GDP growth in Africa is predicted no worse than the baseline, while elsewhere it is predicted worse. In the appendix only, pending the user's decision on the report. | `Code/17_africa_prediction.py` |
 
 ## Code Summary
 
@@ -493,6 +515,7 @@ Computed by `Code/15_prediction_groups.py` from the exported 2024 predictions, w
 | `Code/13_predict.py` | The prediction test: year-by-year predictive density against the average-change model and a refit on 2007–2024; 18-year projections from 2006 against observed 2024; distance to the nullcline. | `panel_vdem.csv`, `06_fit_*_vdem.json` | `13_predict.txt`, `13_predicted_paths.csv`, `13_predicted_2024.csv` |
 | `Code/14_fig_prediction.py` | Figure 5: the six countries' observed and predicted paths for 2006–2024, with the 1981–2006 V-Dem nullcline. | `13_predicted_paths.csv`, `08_nullcline_vdem.csv` | `figures/fig5_prediction.png`, `…/dark/…` |
 | `Code/15_prediction_groups.py` | Groups the 168 countries by how closely their 2024 V-Dem democracy followed the prediction (tolerance 0.10; same or opposite direction). | `13_predicted_2024.csv`, `panel_vdem.csv` | `15_prediction_groups.csv`, `15_prediction_groups.txt` |
+| `Code/17_africa_prediction.py` | Post-hoc test for Africa (World Bank Sub-Saharan Africa plus five North African countries): model against baseline year by year with country-resampled intervals (2,000, seed 20261118), group shares, and 2024 errors, Africa against the rest. | `panel_vdem.csv`, `06_fit_*_vdem.json`, `15_prediction_groups.csv`, `13_predicted_2024.csv`, World Bank metadata | `17_africa_prediction.txt` |
 
 The scripts `06_fit_change_model.py`, `07_joint_checks.py` and `08_joint_dynamics.py` take an optional `vdem` argument (`06` takes it after the outcome), which writes `…_vdem` outputs. Run order for question 2: `11`, `12`, `06 D vdem`, `06 G vdem`, `07 vdem`, `08 vdem`, `13`, `14`.
 
